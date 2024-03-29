@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+  curved_navigation_bar_with_label:
+    dependency: "direct main"
+    description:
+      name: curved_navigation_bar_with_label
+      sha256: "8535749430690991f55ecf6d5987059048bb3ee00f5779dda2c34eb4199c12dc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.4"
   fake_async:
     dependency: transitive
     description:
@@ -75,6 +83,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      sha256: "275ff26905134bcb59417cf60ad979136f1f8257f2f449914b2c3e05bbb4cd6f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.7.0"
   lints:
     dependency: transitive
     description:
