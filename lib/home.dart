@@ -21,28 +21,47 @@ class _HomeState extends State<Home> {
         child: Scaffold(
           appBar: PreferredSize(
               preferredSize: const Size.fromHeight(200),
-              child: Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                  colors: [ColorAssets.bduColor, ColorAssets.lightSecondary],
-                  stops: [0.3, 1.0],
-                )),
-                child: SafeArea(
-                    child: Center(
-                  child: ListTile(
-                    leading: IconButton(
-                      icon: Icon(
-                        FontAwesomeIcons.bars,
-                        color: ColorAssets.white,
-                        size: 30,
+              child: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 25),
+                    child: ListTile(
+                                  leading: IconButton(
+                    icon: Icon(
+                      FontAwesomeIcons.bars,
+                      color: ColorAssets.bduColor,
+                      size: 30,
+                    ),
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                                  ),
+                                ),
+                  ))),
+
+          body: Stack(
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Container(
+                    height: 150,
+                    width: 300,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                        colors: [
+                          ColorAssets.bduColor,
+                          ColorAssets.lightSecondary
+                        ],
                       ),
-                      onPressed: () {
-                        Scaffold.of(context).openDrawer();
-                      },
                     ),
                   ),
-                )),
-              )),
+                ),
+              )
+            ],
+          ),
+          
           bottomNavigationBar: CurvedNavigationBar(
             backgroundColor: ColorAssets.bduColor,
             items: [
