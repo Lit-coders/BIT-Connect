@@ -37,6 +37,7 @@ dependencies:
   font_awesome_flutter: ">= 10.7.0"
   curved_navigation_bar: ^1.0.3
   curved_navigation_bar_with_label: ^2.1.4
+  flutter_onboarding: ^1.0.0
 
 dev_dependencies:
   flutter_test:
