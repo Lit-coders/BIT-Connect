@@ -1,6 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'constants/colorAssets.dart';
+import '../utils/constants/colorAssets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'bottomNavBar.dart';
 import 'drawer.dart';
@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
                     leading: IconButton(
                       icon: Icon(
                         FontAwesomeIcons.bars,
-                        color: ColorAssets.primaryColor,
+                        color: ColorAssets.bduColor,
                         size: 30,
                       ),
                       onPressed: () {
@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
                         borderRadius: BorderRadius.circular(10),
                         gradient: LinearGradient(
                           colors: [
-                            ColorAssets.primaryColor,
+                            ColorAssets.bduColor,
                             ColorAssets.secondaryColor
                           ],
                         ),
@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
             ),
             bottomNavigationBar: CurvedNavigationBar(
               backgroundColor: Colors.white,
-              color: ColorAssets.primaryColor,
+              color: ColorAssets.bduColor,
               items: <Widget>[
                 Icon(
                   Icons.home,

@@ -1,4 +1,3 @@
-import 'package:bit_connect/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_onboarding/flutter_onboarding.dart';
@@ -22,7 +21,7 @@ class OnbordingScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         image: Padding(
-          padding: const EdgeInsets.only(top:8.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: Image.asset(
             'assets/studentsreading.png',
             fit: BoxFit.contain,
@@ -77,22 +76,28 @@ class OnbordingScreen extends StatelessWidget {
     ];
   }
 
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: FlutterOnBoarding(
-          pages: pages(context),
-          onDone: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Home(),
+      home: Navigator(
+        // Add Navigator widget here
+        onGenerateRoute: (routeSettings) {
+          return MaterialPageRoute(
+            builder: (context) => Scaffold(
+              body: FlutterOnBoarding(
+                pages: pages(context),
+                onDone: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const OnbordingScreen(),
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
