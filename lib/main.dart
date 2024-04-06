@@ -5,5 +5,5 @@ import 'package:flutter/material.dart';
 
 
 void main() {
-  runApp( Onbording());
+  runApp( Home());
 }
