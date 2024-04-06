@@ -1,4 +1,5 @@
 import 'package:bit_connect/utils/constants/padConstants.dart';
+import 'package:bit_connect/utils/gridforhome.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import '../utils/constants/colorAssets.dart';
@@ -60,21 +61,28 @@ class _HomeState extends State<Home> {
                     horizontal: PaddingConstant.horizontalPadding,
                   ),
                   child: Row(
-
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment:CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Welcome to BiT",
+                            "Welcome to BiT,",
                             textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w800,
+                              color: Colors.amber,
+                              fontSize: 20
+                            ),
                           ),
                           Text(
                             "LitCoders",
                             textAlign: TextAlign.start,
-                            style: TextStyle(fontSize: 40),
+                            style: TextStyle(fontSize: 40,
+                            fontFamily: AutofillHints.addressCity,
+                            fontWeight: FontWeight.w800
+                            ),
                           ),
                         ],
                       ),
@@ -90,27 +98,27 @@ class _HomeState extends State<Home> {
                     Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: PaddingConstant.horizontalPadding),
-                        child: Text("App Services")),
+                        child: Text("App Services", style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),)),
                   ],
                 ),
 
                 Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: PaddingConstant.horizontalPadding),
-                      child: GridView.builder(
-                                        itemCount: myOptions.length,
-                                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2),
-                                        itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          color: Colors.blue,
-                        ),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: PaddingConstant.horizontalPadding),
+                  child: GridView.builder(
+                    itemCount: myOptions.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
+                    itemBuilder: (context, index) {
+                      return HomePageOptions(
+                        name: myOptions[index][0],
+                        iconPath: myOptions[index][1],
                       );
-                                        },
-                                      ),
-                    ))
+                    },
+                  ),
+                ))
 
                 //the 4 menus
               ],
