@@ -1,7 +1,9 @@
+import 'package:bit_connect/utils/constants/padConstants.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import '../utils/constants/colorAssets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../utils/constants/padConstants.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -22,8 +24,9 @@ class _HomeState extends State<Home> {
               children: [
                 //custom appbar
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: PaddingConstant.horizontalPadding,
+                      vertical: PaddingConstant.verticalPadding),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -34,21 +37,52 @@ class _HomeState extends State<Home> {
                       ),
                       Image.asset(
                         'assets/icons/person.png',
-                        height: 45,
+                        height: PaddingConstant.horizontalPadding,
                         color: ColorAssets.bduColor,
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
 
                 //Welcome
-Text("Welcome to BiT"),
-Text("LitCoders"),
+                const Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: PaddingConstant.horizontalPadding,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Welcome to BiT",
+                        textAlign: TextAlign.start,
+                      ),
+                      Text(
+                        "LitCoders",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(fontSize: 40),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: PaddingConstant.horizontalPadding),
+                    child: Text("App Services")),
 
-
+                Expanded(
+                    child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  itemBuilder: (context, index) {
+                    return Container();
+                  },
+                ))
 
                 //the 4 menus
               ],
@@ -56,7 +90,7 @@ Text("LitCoders"),
           ),
           bottomNavigationBar: CurvedNavigationBar(
             height: 50,
-            backgroundColor: Colors.white,
+            backgroundColor: ColorAssets.white,
             color: ColorAssets.bduColor,
             items: <Widget>[
               Icon(

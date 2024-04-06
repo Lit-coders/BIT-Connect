@@ -1,4 +1,5 @@
+import 'package:flutter/material.dart';
 class PaddingConstant {
-  final double horizontalPadding = 40;
-  final double verticalPadding = 25;
+  static const double horizontalPadding = 40;
+  static const double verticalPadding = 20;
 }
