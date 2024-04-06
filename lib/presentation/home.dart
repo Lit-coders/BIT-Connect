@@ -1,11 +1,13 @@
 import 'package:bit_connect/utils/constants/padConstants.dart';
 import 'package:bit_connect/utils/gridforhome.dart';
+import 'package:carousel_slider/carousel_options.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import '../utils/constants/colorAssets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../utils/constants/padConstants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -56,38 +58,54 @@ class _HomeState extends State<Home> {
                 ),
 
                 //Welcome
-                const Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: PaddingConstant.horizontalPadding,
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: 200.0,
+                    enableInfiniteScroll: true,
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 3),
+                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                    pauseAutoPlayOnTouch: true,
+                    enlargeCenterPage: true,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Welcome to BiT,",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w800,
-                              color: Colors.amber,
-                              fontSize: 20
-                            ),
+                  items: [
+                    ["Welcome to BiT,", "LitCoders"],
+                    ["Second Slide Title", "Second Slide Content"],
+                    // Add more slides as needed
+                  ].map((slide) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                          decoration: const BoxDecoration(color: Colors.amber),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                slide[0],
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.amber,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(
+                                slide[1],
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                            ],
                           ),
-                          Text(
-                            "LitCoders",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(fontSize: 40,
-                            fontFamily: AutofillHints.addressCity,
-                            fontWeight: FontWeight.w800
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        );
+                      },
+                    );
+                  }).toList(),
                 ),
                 const SizedBox(
                   height: 20,
@@ -98,7 +116,11 @@ class _HomeState extends State<Home> {
                     Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: PaddingConstant.horizontalPadding),
-                        child: Text("App Services", style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),)),
+                        child: Text(
+                          "App Services",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 18),
+                        )),
                   ],
                 ),
 
@@ -109,10 +131,9 @@ class _HomeState extends State<Home> {
                   child: GridView.builder(
                     itemCount: myOptions.length,
                     gridDelegate:
-                         const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            
-                            ),
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
                     itemBuilder: (context, index) {
                       return HomePageOptions(
                         name: myOptions[index][0],
