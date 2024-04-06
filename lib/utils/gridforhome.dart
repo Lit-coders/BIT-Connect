@@ -12,10 +12,10 @@ class HomePageOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(30.0),
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.blue[50], 
+            color: const Color.fromARGB(255, 255, 248, 225), 
 
             borderRadius: BorderRadius.circular(10)),
         child: Column(
@@ -24,8 +24,8 @@ class HomePageOptions extends StatelessWidget {
             //icon
             Image.asset(
               iconPath,
-              height: 50,
-              color: ColorAssets.bduColor,
+              height: 35,
+              color: ColorAssets.secondaryYellow,
             ),
             //name
             Padding(
