@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
                       ),
                       Image.asset(
                         'assets/icons/person.png',
-                        height: PaddingConstant.horizontalPadding,
+                        height: PaddingConstant.forPersonIcon,
                         color: ColorAssets.bduColor,
                       ),
                     ],
@@ -59,17 +59,24 @@ class _HomeState extends State<Home> {
                   padding: EdgeInsets.symmetric(
                     horizontal: PaddingConstant.horizontalPadding,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Row(
+
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        "Welcome to BiT",
-                        textAlign: TextAlign.start,
-                      ),
-                      Text(
-                        "LitCoders",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(fontSize: 40),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment:CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Welcome to BiT",
+                            textAlign: TextAlign.start,
+                          ),
+                          Text(
+                            "LitCoders",
+                            textAlign: TextAlign.start,
+                            style: TextStyle(fontSize: 40),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -77,25 +84,33 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   height: 20,
                 ),
-                const Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: PaddingConstant.horizontalPadding),
-                    child: Text("App Services")),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: PaddingConstant.horizontalPadding),
+                        child: Text("App Services")),
+                  ],
+                ),
 
                 Expanded(
-                    child: GridView.builder(
-                  itemCount: myOptions.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        color: Colors.blue,
-                      ),
-                    );
-                  },
-                ))
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: PaddingConstant.horizontalPadding),
+                      child: GridView.builder(
+                                        itemCount: myOptions.length,
+                                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2),
+                                        itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          color: Colors.blue,
+                        ),
+                      );
+                                        },
+                                      ),
+                    ))
 
                 //the 4 menus
               ],
