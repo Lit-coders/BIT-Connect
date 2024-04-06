@@ -1,5 +1,5 @@
 import 'package:bit_connect/presentation/home.dart';
-import 'package:bit_connect/presentation/state/onboarding/content_model.dart';
+import 'package:bit_connect/presentation/onboarding/content_model.dart';
 import 'package:bit_connect/utils/constants/colorAssets.dart';
 import 'package:flutter/material.dart';
 
