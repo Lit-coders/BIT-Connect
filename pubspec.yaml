@@ -40,6 +40,7 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   curved_navigation_bar_with_label: ^2.1.4
   flutter_onboarding: ^1.0.0
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

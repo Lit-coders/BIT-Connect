@@ -13,20 +13,30 @@ class HomePageOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(12.0),
-      
       child: Container(
-        
-       decoration: BoxDecoration(color:Colors.blue[50],borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(
+            color: Colors.blue[50], 
+
+            borderRadius: BorderRadius.circular(10)),
         child: Column(
-          
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //icon
-            Image.asset(iconPath,height: 50,color: ColorAssets.bduColor,),
+            Image.asset(
+              iconPath,
+              height: 50,
+              color: ColorAssets.bduColor,
+            ),
             //name
             Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Text(name,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16, color: Colors.blue[700]),),
+              child: Text(
+                name,
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: Colors.blue[700]),
+              ),
             )
           ],
         ),

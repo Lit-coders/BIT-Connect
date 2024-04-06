@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../utils/constants/colorAssets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../utils/constants/padConstants.dart';
-
+import 'package:carousel_slider/carousel_slider.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -109,8 +109,10 @@ class _HomeState extends State<Home> {
                   child: GridView.builder(
                     itemCount: myOptions.length,
                     gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2),
+                         const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            
+                            ),
                     itemBuilder: (context, index) {
                       return HomePageOptions(
                         name: myOptions[index][0],
