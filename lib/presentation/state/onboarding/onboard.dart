@@ -2,8 +2,6 @@ import 'package:bit_connect/presentation/home.dart';
 import 'package:bit_connect/presentation/state/onboarding/content_model.dart';
 import 'package:bit_connect/utils/constants/colorAssets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 
 class Onbording extends StatefulWidget {
   @override
@@ -30,6 +28,9 @@ class _OnbordingState extends State<Onbording> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      routes: {
+        '/home': (context) => Home(), // Define home page route
+      },
       home: Scaffold(
         body: Container(
           child: Column(
@@ -95,8 +96,13 @@ class _OnbordingState extends State<Onbording> {
                 width: double.infinity,
                 child: TextButton(
                   child: Text(
-                      currentIndex == contents.length - 1 ? "Continue" : "Next",style: TextStyle(fontSize: 18, color: ColorAssets.bduColor, ),),
-                  onPressed: () {
+                    currentIndex == contents.length - 1 ? "Continue" : "Next",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: ColorAssets.bduColor,
+                    ),
+                  ),
+                onPressed: () {
                     if (currentIndex == contents.length - 1) {
                       Navigator.pushReplacement(
                         context,
@@ -104,20 +110,16 @@ class _OnbordingState extends State<Onbording> {
                           builder: (_) => Home(),
                         ),
                       );
+                    } else {
+                      _controller.nextPage(
+                        duration: Duration(milliseconds: 100),
+                        curve: Curves.bounceIn,
+                      );
                     }
-                    _controller.nextPage(
-                      duration: Duration(milliseconds: 100),
-                      curve: Curves.bounceIn,
-                    );
                   },
-                  
-                  // textColor: Colors.white,
-                  // shape: RoundedRectangleBorder(
-                  //   borderRadius: BorderRadius.circular(20),
-                  
-                  ),
                 ),
-              // )  
+              ),
+              // )
             ],
           ),
         ),
