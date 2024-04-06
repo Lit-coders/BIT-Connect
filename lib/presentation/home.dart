@@ -7,6 +7,7 @@ import '../utils/constants/colorAssets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../utils/constants/padConstants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'dart:ui';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -40,10 +41,14 @@ class _HomeState extends State<Home> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.asset(
-                        'assets/icons/menu.png',
-                        height: 45,
-                        color: ColorAssets.bduColor,
+                      TextButton(
+                        onPressed: () {  },
+                        child: Image.asset(
+                          'assets/icons/menu.png',
+                          height: 45,
+                          color: ColorAssets.bduColor,
+                          
+                        ),
                       ),
                       Image.asset(
                         'assets/icons/person.png',
@@ -64,40 +69,50 @@ class _HomeState extends State<Home> {
                     enableInfiniteScroll: true,
                     autoPlay: true,
                     autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                    autoPlayAnimationDuration: const Duration(milliseconds: 1000),
                     pauseAutoPlayOnTouch: true,
                     enlargeCenterPage: true,
                   ),
                   items: [
-                    ["Welcome to BiT,", "LitCoders"],
-                    ["Second Slide Title", "Second Slide Content"],
+                    ["Welcome to BiT,", "Hey, LitCoders"],
+                    ["News Poli", "Hot News"],
                     // Add more slides as needed
                   ].map((slide) {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
                           width: MediaQuery.of(context).size.width,
-                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                          decoration: const BoxDecoration(color: Colors.amber),
+                          margin:  EdgeInsets.symmetric(horizontal: 10.0),
+                          decoration:  BoxDecoration(color: Colors.purple[700],
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                slide[0],
-                                textAlign: TextAlign.start,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.amber,
-                                  fontSize: 20,
+                              Padding(
+                                padding: const EdgeInsets.only(left: 30),
+                                child: Text(
+                                  slide[1],
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
+                                    fontSize: 35,
+                                    fontWeight: FontWeight.w600,
+                                    color: ColorAssets.white
+                                  ),
                                 ),
                               ),
-                              Text(
-                                slide[1],
-                                textAlign: TextAlign.start,
-                                style: const TextStyle(
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.w800,
+                              Padding(
+                                padding: const EdgeInsets.only(left: 30),
+                                child: Text(
+                                  slide[0],
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
                                 ),
                               ),
                             ],
