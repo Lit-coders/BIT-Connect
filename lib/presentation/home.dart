@@ -13,6 +13,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  //The 4 home Screen options
+  List myOptions = [
+    ["About BiT", "assets/icons/abt.png"],
+    ["Cafe", "assets/icons/cafe.png"],
+    ["Lounge", "assets/icons/lounge.png"],
+    ["Calculator", "assets/icons/calc.png"]
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -77,10 +84,16 @@ class _HomeState extends State<Home> {
 
                 Expanded(
                     child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  itemCount: myOptions.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
                   itemBuilder: (context, index) {
-                    return Container();
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        color: Colors.blue,
+                      ),
+                    );
                   },
                 ))
 
@@ -92,7 +105,7 @@ class _HomeState extends State<Home> {
             height: 50,
             backgroundColor: ColorAssets.white,
             color: ColorAssets.bduColor,
-            items: <Widget>[
+            items: const <Widget>[
               Icon(
                 Icons.home,
                 size: 30,
