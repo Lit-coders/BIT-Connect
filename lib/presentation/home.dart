@@ -42,10 +42,13 @@ class _HomeState extends State<Home> {
                 ),
                 SizedBox(
                   height: 20,
-                )
-                //Welcome
+                ),
 
-                
+                //Welcome
+Text("Welcome to BiT"),
+Text("LitCoders"),
+
+
 
                 //the 4 menus
               ],
