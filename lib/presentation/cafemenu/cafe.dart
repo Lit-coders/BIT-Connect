@@ -19,6 +19,7 @@ class _CafeMenuState extends State<CafeMenu> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
+        
         length: 7,
         child: Scaffold(
           key: _scaffoldKey,
@@ -56,7 +57,21 @@ class _CafeMenuState extends State<CafeMenu> {
               Tab(text: 'Sat'),
               Tab(text: 'Sun')
             ]),
+            
           ),
+           body: const TabBarView(
+          children: <Widget>[
+            Center(
+              child: Text("It's cloudy here"),
+            ),
+            Center(
+              child: Text("It's rainy here"),
+            ),
+            Center(
+              child: Text("It's sunny here"),
+            ),
+          ],
+        ),
           drawer: Drawer(
             child: ListView(
               padding: EdgeInsets.zero,
