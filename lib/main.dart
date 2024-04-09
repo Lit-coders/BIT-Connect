@@ -1,10 +1,10 @@
-
-import 'package:bit_connect/presentation/cafemenu/cafe.dart';
-import 'package:bit_connect/presentation/home.dart';
-import 'package:bit_connect/presentation/onboarding/onboard.dart';
+import 'package:bit_connect/presentation/auth/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-
-void main() {
-  runApp( CafeMenu());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const Auth());
 }
