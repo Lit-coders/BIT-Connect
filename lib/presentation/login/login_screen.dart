@@ -31,19 +31,23 @@ class Login extends StatelessWidget {
                     key: _formKey,
                     child: Column(
                       children: [
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              InputField(
-                                width: getWidth(context) * 5 / 6 - 45,
-                                hintText: 'Scan Your ID',
-                                readOnly: true,
-                              ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              Container(
+                        Row(
+                          children: [
+                            InputField(
+                              onChange: (value) {
+                                print(value);
+                              },
+                              width: getWidth(context) * 5 / 6 - 45,
+                              hintText: 'Scan Your ID',
+                              isReadOnly: true,
+                              isObscured: false,
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            GestureDetector(
+                              onTap: () => print("Scannig ID ..."),
+                              child: Container(
                                 width: getWidth(context) * 1 / 6 - 10,
                                 margin: const EdgeInsets.only(bottom: 15),
                                 decoration: BoxDecoration(
@@ -59,19 +63,27 @@ class Login extends StatelessWidget {
                                     "assets/icons/barcode.png",
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         ),
                         InputField(
+                          onChange: (value) {
+                            print(value);
+                          },
                           width: getWidth(context),
                           hintText: 'Enter Password',
-                          readOnly: false,
+                          isReadOnly: false,
+                          isObscured: true,
                         ),
                         InputField(
+                          onChange: (value) {
+                            print(value);
+                          },
                           width: getWidth(context),
                           hintText: 'Confirm Password',
-                          readOnly: false,
+                          isReadOnly: false,
+                          isObscured: true,
                         ),
                       ],
                     ),
