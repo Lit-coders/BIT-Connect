@@ -44,9 +44,10 @@ class _SignUpState extends State<SignUP> {
     if (!mounted) return;
 
     setState(() {
-      _id = barcodeScanRes;
-      _idController.value =
-          TextEditingValue(text: "BDU${barcodeScanRes ?? _idController.text}");
+      if (barcodeScanRes != "-1") {
+        _id = barcodeScanRes;
+        _idController.value = TextEditingValue(text: "BDU$barcodeScanRes");
+      }
     });
     print("scanned result: $barcodeScanRes id: $_id");
     print("id holder: ${_idController.text}");
