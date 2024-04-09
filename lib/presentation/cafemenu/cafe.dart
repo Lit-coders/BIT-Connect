@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:bit_connect/utils/constants/colorAssets.dart';
 import 'package:bit_connect/utils/constants/padConstants.dart';
-import 'package:curved_navigation_bar_with_label/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class CafeMenu extends StatefulWidget {
@@ -15,19 +13,19 @@ class CafeMenu extends StatefulWidget {
 class _CafeMenuState extends State<CafeMenu> {
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
         length: 7,
         child: Scaffold(
-          key: _scaffoldKey,
+          key: scaffoldKey,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
             leading: TextButton(
               onPressed: () {
-                _scaffoldKey.currentState?.openDrawer();
+                scaffoldKey.currentState?.openDrawer();
               },
               child: Image.asset(
                 'assets/icons/menu.png',
@@ -48,9 +46,11 @@ class _CafeMenuState extends State<CafeMenu> {
               ),
             ],
             bottom: const TabBar(
+              indicatorWeight: 10,
+              isScrollable: true,
+              indicatorColor: ColorAssets.secondaryYellow,
               tabs: [
                 Tab(
-                  
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -158,17 +158,28 @@ class _CafeMenuState extends State<CafeMenu> {
               ],
             ),
           ),
+          body: TabBarView(
+            children: <Widget>[
+              _buildListViewMenu('M'),
+              _buildListViewMenu('T'),
+              _buildListViewMenu('W'),
+              _buildListViewMenu('T'),
+              _buildListViewMenu('F'),
+              _buildListViewMenu('S'),
+              _buildListViewMenu('S')
+            ],
+          ),
           drawer: Drawer(
             child: ListView(
               padding: EdgeInsets.zero,
               children: <Widget>[
                 DrawerHeader(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: ColorAssets.bduColor,
                   ),
                   child: Container(
                     alignment: Alignment.centerLeft,
-                    child: Text(
+                    child: const Text(
                       'BiT Connect',
                       style: TextStyle(
                         color: Colors.white,
@@ -179,8 +190,8 @@ class _CafeMenuState extends State<CafeMenu> {
                   ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.home),
-                  title: Text(
+                  leading: const Icon(Icons.home),
+                  title: const Text(
                     'Home',
                     style: TextStyle(
                       fontSize: 18,
@@ -192,8 +203,8 @@ class _CafeMenuState extends State<CafeMenu> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.category_sharp),
-                  title: Text(
+                  leading: const Icon(Icons.category_sharp),
+                  title: const Text(
                     'Cafe',
                     style: TextStyle(
                       fontSize: 18,
@@ -205,8 +216,8 @@ class _CafeMenuState extends State<CafeMenu> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.favorite),
-                  title: Text(
+                  leading: const Icon(Icons.favorite),
+                  title: const Text(
                     'Lounge',
                     style: TextStyle(
                       fontSize: 18,
@@ -218,8 +229,8 @@ class _CafeMenuState extends State<CafeMenu> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.book_rounded),
-                  title: Text(
+                  leading: const Icon(Icons.book_rounded),
+                  title: const Text(
                     'Location',
                     style: TextStyle(
                       fontSize: 18,
@@ -231,8 +242,8 @@ class _CafeMenuState extends State<CafeMenu> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.info_outlined),
-                  title: Text(
+                  leading: const Icon(Icons.info_outlined),
+                  title: const Text(
                     'Departments',
                     style: TextStyle(
                       fontSize: 18,
@@ -252,7 +263,7 @@ class _CafeMenuState extends State<CafeMenu> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      title: Text(
+                      title: const Text(
                         'Logout',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -271,9 +282,15 @@ class _CafeMenuState extends State<CafeMenu> {
               ],
             ),
           ),
-         
         ),
       ),
     );
   }
+}
+
+ListView _buildListViewMenu(String s) {
+  return ListView.builder(
+      itemBuilder: (context, index) => ListTile(
+            title: Text('$s$index'),
+          ));
 }
