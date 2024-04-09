@@ -1,10 +1,12 @@
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class SignUP extends StatefulWidget {
   final VoidCallback toggleToLogin;
-  SignUP({super.key, required this.toggleToLogin});
+  const SignUP({super.key, required this.toggleToLogin});
 
   @override
   State<SignUP> createState() => _SignUpState();
@@ -12,6 +14,43 @@ class SignUP extends StatefulWidget {
 
 class _SignUpState extends State<SignUP> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  String? _id;
+  String? _password;
+  final _idController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _passConfirmController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _idController.text = "";
+  }
+
+  Future<void> handleScanningId() async {
+    String? barcodeScanRes;
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+        "#57ADF6",
+        "cancel",
+        true,
+        ScanMode.BARCODE,
+      );
+      debugPrint(barcodeScanRes);
+    } on PlatformException {
+      print("pllatform exception");
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _id = barcodeScanRes;
+      _idController.value =
+          TextEditingValue(text: "BDU${barcodeScanRes ?? _idController.text}");
+    });
+    print("scanned result: $barcodeScanRes id: $_id");
+    print("id holder: ${_idController.text}");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +80,9 @@ class _SignUpState extends State<SignUP> {
                           children: [
                             InputField(
                               onChange: (value) {
-                                print(value);
+                                print("scanned id from field : $value");
                               },
+                              controller: _idController,
                               width: getWidth(context) * 5 / 6 - 45,
                               hintText: 'Scan Your ID',
                               isReadOnly: true,
@@ -53,7 +93,11 @@ class _SignUpState extends State<SignUP> {
                               width: 15,
                             ),
                             GestureDetector(
-                              onTap: () => print("Scannig ID ..."),
+                              onTap: () {
+                                handleScanningId();
+                                print(
+                                    "placeholder's text: ${_idController.text}");
+                              },
                               child: Container(
                                 width: getWidth(context) * 1 / 6 - 10,
                                 margin: const EdgeInsets.only(bottom: 15),
@@ -78,6 +122,7 @@ class _SignUpState extends State<SignUP> {
                           onChange: (value) {
                             print(value);
                           },
+                          controller: _passwordController,
                           width: getWidth(context),
                           hintText: 'Enter Password',
                           isReadOnly: false,
@@ -88,6 +133,7 @@ class _SignUpState extends State<SignUP> {
                           onChange: (value) {
                             print(value);
                           },
+                          controller: _passConfirmController,
                           width: getWidth(context),
                           hintText: 'Confirm Password',
                           isReadOnly: false,
