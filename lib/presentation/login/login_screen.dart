@@ -1,3 +1,4 @@
+import 'package:bit_connect/presentation/login/components/input_field.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
 
@@ -29,30 +30,16 @@ class Login extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
-                            Container(
-                              width: getWidth(context) * 5 / 6 - 35,
-                              margin: const EdgeInsets.only(right: 5),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 15,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: const Color.fromARGB(100, 0, 0, 0),
-                                ),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              child: TextFormField(
-                                readOnly: true,
-                                decoration: const InputDecoration(
-                                  hintText: 'Scan Your ID',
-                                  border: InputBorder.none,
-                                ),
-                              ),
+                            InputField(
+                              width: getWidth(context) * 5 / 6 - 45,
+                              hintText: 'Scan Your ID',
+                            ),
+                            const SizedBox(
+                              width: 15,
                             ),
                             Container(
                               width: getWidth(context) * 1 / 6 - 10,
+                              margin: const EdgeInsets.only(bottom: 15),
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: const Color.fromARGB(100, 0, 0, 0),
@@ -70,24 +57,14 @@ class Login extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      InputField(
                         width: getWidth(context),
-                        child: TextFormField(
-                          readOnly: true,
-                          decoration: const InputDecoration(
-                            hintText: 'Enter Password',
-                          ),
-                        ),
+                        hintText: 'Enter Password',
                       ),
-                      SizedBox(
+                      InputField(
                         width: getWidth(context),
-                        child: TextFormField(
-                          readOnly: true,
-                          decoration: const InputDecoration(
-                            hintText: 'Confirm Password',
-                          ),
-                        ),
-                      )
+                        hintText: 'Confirm Password',
+                      ),
                     ],
                   ),
                 ),
