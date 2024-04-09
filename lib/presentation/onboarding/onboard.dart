@@ -4,8 +4,9 @@ import 'package:bit_connect/utils/constants/colorAssets.dart';
 import 'package:flutter/material.dart';
 
 class Onbording extends StatefulWidget {
+  const Onbording({super.key});
   @override
-  _OnbordingState createState() => _OnbordingState();
+  State<Onbording> createState() => _OnbordingState();
 }
 
 class _OnbordingState extends State<Onbording> {
@@ -44,11 +45,10 @@ class _OnbordingState extends State<Onbording> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/home': (context) => Home(), // Define home page route
+        '/home': (context) => const Home(), // Define home page route
       },
       home: Scaffold(
-        body: Container(
-          child: Column(
+        body: Column(
             children: [
               Expanded(
                 child: PageView.builder(
@@ -71,16 +71,16 @@ class _OnbordingState extends State<Onbording> {
                             Text(
                               contents[i].title,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 35,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             Text(
                               contents[i].discription,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 18,
                                 color: Colors.grey,
                               ),
@@ -133,7 +133,6 @@ class _OnbordingState extends State<Onbording> {
               // )
             ],
           ),
-        ),
       ),
     );
   }
