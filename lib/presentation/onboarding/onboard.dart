@@ -54,11 +54,7 @@ class _OnbordingState extends State<Onbording> {
                 child: PageView.builder(
                   controller: _controller,
                   itemCount: contents.length,
-                  onPageChanged: (int index) {
-                    setState(() {
-                      _currentIndex = index;
-                    });
-                  },
+                  onPageChanged: _onPageChanged,
                   itemBuilder: (_, i) {
                     return Padding(
                       padding: const EdgeInsets.all(40),
