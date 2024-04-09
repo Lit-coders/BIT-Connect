@@ -41,6 +41,7 @@ class Login extends StatelessWidget {
                               hintText: 'Scan Your ID',
                               isReadOnly: true,
                               isObscured: false,
+                              hasObscure: false,
                             ),
                             const SizedBox(
                               width: 15,
@@ -75,6 +76,7 @@ class Login extends StatelessWidget {
                           hintText: 'Enter Password',
                           isReadOnly: false,
                           isObscured: true,
+                          hasObscure: true,
                         ),
                         InputField(
                           onChange: (value) {
@@ -84,6 +86,7 @@ class Login extends StatelessWidget {
                           hintText: 'Confirm Password',
                           isReadOnly: false,
                           isObscured: true,
+                          hasObscure: true,
                         ),
                       ],
                     ),
