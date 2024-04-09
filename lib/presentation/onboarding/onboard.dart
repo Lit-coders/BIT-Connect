@@ -24,6 +24,14 @@ class _OnbordingState extends State<Onbording> {
     super.dispose();
   }
 
+    void _onDotTapped(int index) {
+    _controller.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -127,8 +135,10 @@ class _OnbordingState extends State<Onbording> {
     );
   }
 
-  Container buildDot(int index, BuildContext context) {
-    return Container(
+  GestureDetector buildDot(int index, BuildContext context) {
+    return GestureDetector(
+      onTap:() => _onDotTapped(index),
+      child:Container(
       height: 10,
       width: currentIndex == index ? 25 : 10,
       margin: EdgeInsets.only(right: 5),
@@ -136,6 +146,7 @@ class _OnbordingState extends State<Onbording> {
         borderRadius: BorderRadius.circular(20),
         color: ColorAssets.bduColor,
       ),
+      )
     );
   }
 }
