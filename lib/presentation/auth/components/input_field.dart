@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class InputField extends StatefulWidget {
+  final TextEditingController controller;
   final double width;
   final String hintText;
   final bool isReadOnly;
@@ -9,6 +10,7 @@ class InputField extends StatefulWidget {
   final Function(String) onChange;
   InputField({
     super.key,
+    required this.controller,
     required this.width,
     required this.hintText,
     required this.isReadOnly,
@@ -24,6 +26,7 @@ class InputField extends StatefulWidget {
 class _InputFieldState extends State<InputField> {
   Widget getField() {
     return TextFormField(
+      controller: widget.controller,
       onChanged: widget.onChange,
       readOnly: widget.isReadOnly,
       obscureText: widget.isObscured ?? false,
