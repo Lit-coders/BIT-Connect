@@ -29,6 +29,9 @@ class _InputFieldState extends State<InputField> {
       obscureText: widget.isObscured ?? false,
       decoration: InputDecoration(
         hintText: widget.hintText,
+        hintStyle: const TextStyle(
+          color: Color.fromARGB(90, 0, 0, 0),
+        ),
         border: InputBorder.none,
       ),
     );
