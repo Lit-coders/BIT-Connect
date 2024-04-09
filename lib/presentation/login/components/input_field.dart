@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 class InputField extends StatelessWidget {
   final double width;
   final String hintText;
-  const InputField({super.key, required this.width, required this.hintText});
+  final bool readOnly;
+  const InputField({
+    super.key,
+    required this.width,
+    required this.hintText,
+    required this.readOnly,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +29,7 @@ class InputField extends StatelessWidget {
         ),
       ),
       child: TextFormField(
-        readOnly: true,
+        readOnly: readOnly,
         decoration: InputDecoration(
           hintText: hintText,
           border: InputBorder.none,
