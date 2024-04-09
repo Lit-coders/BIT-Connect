@@ -12,6 +12,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  final _idController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class _LoginState extends State<Login> {
                           onChange: (value) {
                             print(value);
                           },
+                          controller: _idController,
                           width: getWidth(context),
                           hintText: 'Enter ID',
                           isReadOnly: false,
@@ -51,6 +54,7 @@ class _LoginState extends State<Login> {
                           onChange: (value) {
                             print(value);
                           },
+                          controller: _passwordController,
                           width: getWidth(context),
                           hintText: 'Enter Password',
                           isReadOnly: false,
