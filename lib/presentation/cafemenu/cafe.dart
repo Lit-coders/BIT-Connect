@@ -19,59 +19,46 @@ class _CafeMenuState extends State<CafeMenu> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
-        
         length: 7,
         child: Scaffold(
           key: _scaffoldKey,
           appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              leading: TextButton(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: TextButton(
+              onPressed: () {
+                _scaffoldKey.currentState?.openDrawer();
+              },
+              child: Image.asset(
+                'assets/icons/menu.png',
+                height: PaddingConstant.forPersonIcon,
+                color: ColorAssets.bduColor,
+              ),
+            ),
+            actions: [
+              IconButton(
                 onPressed: () {
-                  _scaffoldKey.currentState?.openDrawer();
+                  // Handle person button press
                 },
-                child: Image.asset(
-                  'assets/icons/menu.png',
+                icon: Image.asset(
+                  'assets/icons/person.png',
                   height: PaddingConstant.forPersonIcon,
                   color: ColorAssets.bduColor,
                 ),
               ),
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    // Handle person button press
-                  },
-                  icon: Image.asset(
-                    'assets/icons/person.png',
-                    height: PaddingConstant.forPersonIcon,
-                    color: ColorAssets.bduColor,
-                  ),
-                ),
+            ],
+            bottom: const TabBar(
+              tabs: [
+                Tab(text: 'Mon'),
+                Tab(text: 'Tue'),
+                Tab(text: 'Wed'),
+                Tab(text: 'Thu'),
+                Tab(text: 'Fri'),
+                Tab(text: 'Sat'),
+                Tab(text: 'Sun')
               ],
-              bottom: const TabBar(tabs: [
-              Tab(text: 'Mon'),
-              Tab(text: 'Tue'),
-              Tab(text: 'Wed'),
-              Tab(text: 'Thu'),
-              Tab(text: 'Fri'),
-              Tab(text: 'Sat'),
-              Tab(text: 'Sun')
-            ]),
-            
+            ),
           ),
-           body: const TabBarView(
-          children: <Widget>[
-            Center(
-              child: Text("It's cloudy here"),
-            ),
-            Center(
-              child: Text("It's rainy here"),
-            ),
-            Center(
-              child: Text("It's sunny here"),
-            ),
-          ],
-        ),
           drawer: Drawer(
             child: ListView(
               padding: EdgeInsets.zero,
@@ -85,9 +72,10 @@ class _CafeMenuState extends State<CafeMenu> {
                     child: Text(
                       'BiT Connect',
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontFamily: 'Pacifico'),
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontFamily: 'Pacifico',
+                      ),
                     ),
                   ),
                 ),
@@ -95,7 +83,10 @@ class _CafeMenuState extends State<CafeMenu> {
                   leading: Icon(Icons.home),
                   title: Text(
                     'Home',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   onTap: () {
                     // Implement action for item 1
@@ -105,7 +96,10 @@ class _CafeMenuState extends State<CafeMenu> {
                   leading: Icon(Icons.category_sharp),
                   title: Text(
                     'Cafe',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   onTap: () {
                     // Implement action for item 2
@@ -115,7 +109,10 @@ class _CafeMenuState extends State<CafeMenu> {
                   leading: Icon(Icons.favorite),
                   title: Text(
                     'Lounge',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   onTap: () {
                     // Implement action for item 2
@@ -125,7 +122,10 @@ class _CafeMenuState extends State<CafeMenu> {
                   leading: Icon(Icons.book_rounded),
                   title: Text(
                     'Location',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   onTap: () {
                     // Implement action for item 2
@@ -135,7 +135,10 @@ class _CafeMenuState extends State<CafeMenu> {
                   leading: Icon(Icons.info_outlined),
                   title: Text(
                     'Departments',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   onTap: () {
                     // Implement action for item 2
@@ -151,12 +154,13 @@ class _CafeMenuState extends State<CafeMenu> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       title: Text(
-                        textAlign: TextAlign.center,
                         'Logout',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
                       ),
                       onTap: () {
                         // Implement logout logic
@@ -165,8 +169,6 @@ class _CafeMenuState extends State<CafeMenu> {
                     ),
                   ),
                 ),
-
-                // Add more ListTile widgets for additional menu items
               ],
             ),
           ),
@@ -176,8 +178,9 @@ class _CafeMenuState extends State<CafeMenu> {
               children: [
                 SizedBox(width: 8),
                 Expanded(
-                  child: Stack(children: [
-                    Container(
+                  child: Stack(
+                    children: [
+                      Container(
                         width: 50,
                         height: 50,
                         decoration: BoxDecoration(
@@ -188,126 +191,141 @@ class _CafeMenuState extends State<CafeMenu> {
                           child: Text(
                             'M',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 22),
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 22,
+                            ),
                           ),
-                        ))
-                  ]),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(width: 8),
                 Expanded(
                   child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorAssets.bduColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'T',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 22),
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ColorAssets.bduColor,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'T',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 22,
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(width: 8),
                 Expanded(
                   child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorAssets.bduColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'W',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 22),
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ColorAssets.bduColor,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'W',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 22,
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(width: 8),
                 Expanded(
                   child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorAssets.bduColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'T',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 22),
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ColorAssets.bduColor,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'T',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 22,
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(width: 8),
                 Expanded(
                   child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorAssets.bduColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'F',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 22),
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ColorAssets.bduColor,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'F',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 22,
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(width: 8),
                 Expanded(
                   child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorAssets.bduColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'S',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 22),
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ColorAssets.bduColor,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'S',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 22,
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(width: 8),
                 Expanded(
                   child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorAssets.bduColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'S',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 22),
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ColorAssets.bduColor,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'S',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 22,
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
