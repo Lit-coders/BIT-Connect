@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 class InputField extends StatelessWidget {
   final double width;
   final String hintText;
-  final bool readOnly;
+  final bool isReadOnly;
+  final bool isObscured;
+  final Function(String) onChange;
   const InputField({
     super.key,
     required this.width,
     required this.hintText,
-    required this.readOnly,
+    required this.isReadOnly,
+    required this.isObscured,
+    required this.onChange,
   });
 
   @override
@@ -29,7 +33,9 @@ class InputField extends StatelessWidget {
         ),
       ),
       child: TextFormField(
-        readOnly: readOnly,
+        onChanged: onChange,
+        readOnly: isReadOnly,
+        obscureText: isObscured,
         decoration: InputDecoration(
           hintText: hintText,
           border: InputBorder.none,
