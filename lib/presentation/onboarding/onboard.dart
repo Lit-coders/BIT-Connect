@@ -62,12 +62,13 @@ class _OnbordingState extends State<Onbording> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 40),
+                              padding: const EdgeInsets.only(top:40),
                               child: Image.asset(
                                 contents[i].image,
                                 height: 250,
                               ),
                             ),
+                            const SizedBox(height:60),
                             Text(
                               contents[i].title,
                               textAlign: TextAlign.center,
@@ -99,16 +100,21 @@ class _OnbordingState extends State<Onbording> {
                     (index) => buildDot(index, context),
                   ),
                 ),
+               const  SizedBox(height:40),
             Container(
                 height: 60,
-                margin: const EdgeInsets.all(40),
+                margin: const EdgeInsets.only(bottom:100,left:40,right:40,top:20),
                 width: double.infinity,
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                  color: ColorAssets.bduColor,
+                ),
                 child: TextButton(
                   child: Text(
                     _currentIndex == contents.length - 1 ? "Continue" : "Next",
                     style: const TextStyle(
                       fontSize: 18,
-                      color: ColorAssets.bduColor,
+                      color: ColorAssets.white,
                     ),
                   ),
                 onPressed: () {
