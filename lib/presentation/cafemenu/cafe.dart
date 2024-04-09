@@ -287,10 +287,40 @@ class _CafeMenuState extends State<CafeMenu> {
     );
   }
 }
-
 ListView _buildListViewMenu(String s) {
+  final int itemCount = 3;
+
   return ListView.builder(
-      itemBuilder: (context, index) => ListTile(
-            title: Text('$s$index'),
-          ));
+    itemBuilder: (context, index) => ListTile(
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '$s $index', // Example text, replace with your description
+            style: TextStyle(
+              fontSize: 16, // Adjust font size as needed
+              fontWeight: FontWeight.bold, // Adjust font weight as needed
+            ),
+          ),
+          SizedBox(height: 5), // Adjust spacing between text and image
+          Image.asset(
+            'assets/images/menu_item_$index.png', // Replace with your image path
+            width: 100, // Adjust width as needed
+            height: 100, // Adjust height as needed
+            fit: BoxFit.cover, // Adjust fit as needed
+          ),
+          SizedBox(height: 5), // Adjust spacing between image and text
+          Text(
+            'Description of item $index', // Example description, replace with your actual descriptions
+            style: TextStyle(
+              fontSize: 14, // Adjust font size as needed
+            ),
+          ),
+        ],
+      ),
+      onTap: () {
+        // Handle item tap
+      },
+    ),
+  );
 }
