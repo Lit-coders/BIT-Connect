@@ -92,23 +92,21 @@ class _OnbordingState extends State<Onbording> {
                   },
                 ),
               ),
-              Container(
-                child: Row(
+             Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     contents.length,
                     (index) => buildDot(index, context),
                   ),
                 ),
-              ),
-              Container(
+            Container(
                 height: 60,
-                margin: EdgeInsets.all(40),
+                margin: const EdgeInsets.all(40),
                 width: double.infinity,
                 child: TextButton(
                   child: Text(
                     _currentIndex == contents.length - 1 ? "Continue" : "Next",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       color: ColorAssets.bduColor,
                     ),
@@ -118,12 +116,12 @@ class _OnbordingState extends State<Onbording> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => Home(),
+                          builder: (_) => const Home(),
                         ),
                       );
                     } else {
                       _controller.nextPage(
-                        duration: Duration(milliseconds: 100),
+                        duration: const Duration(milliseconds: 100),
                         curve: Curves.bounceIn,
                       );
                     }
@@ -143,7 +141,7 @@ class _OnbordingState extends State<Onbording> {
       child:Container(
       height: 10,
       width: _currentIndex == index ? 25 : 10,
-      margin: EdgeInsets.only(right: 5),
+      margin: const EdgeInsets.only(right: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: ColorAssets.bduColor,
