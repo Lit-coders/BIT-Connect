@@ -1,27 +1,27 @@
-class UnbordingContent {
+class OnboardingContent {
   String image;
   String title;
   String discription;
 
-  UnbordingContent({required this.image, required this.title, required this.discription});
+  OnboardingContent({required this.image, required this.title, required this.discription});
 }
 
-List<UnbordingContent> contents = [
-  UnbordingContent(
+List<OnboardingContent> contents = [
+  OnboardingContent(
       title: 'Experimenting',
       image: 'assets/desinging.png',
       discription:
           "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the "
           "industry's standard dummy text ever since the 1500s, "
           "when an unknown printer took a galley of type and scrambled it "),
-  UnbordingContent(
+  OnboardingContent(
       title: 'Oncampus Refreshment',
       image: 'assets/lunchtime.png',
       discription:
           "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the "
           "industry's standard dummy text ever since the 1500s, "
           "when an unknown printer took a galley of type and scrambled it "),
-  UnbordingContent(
+  OnboardingContent(
       title: 'Campus Life',
       image: 'assets/studentsreading.png',
       discription:
