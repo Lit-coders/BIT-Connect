@@ -29,18 +29,42 @@ class Login extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
-                            SizedBox(
-                              width: getWidth(context) * 5 / 6,
+                            Container(
+                              width: getWidth(context) * 5 / 6 - 35,
+                              margin: const EdgeInsets.only(right: 5),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 15,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: const Color.fromARGB(100, 0, 0, 0),
+                                ),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
                               child: TextFormField(
                                 readOnly: true,
                                 decoration: const InputDecoration(
                                   hintText: 'Scan Your ID',
+                                  border: InputBorder.none,
                                 ),
                               ),
                             ),
-                            const Image(
-                              image: AssetImage(
-                                "assets/icons/barcode.png",
+                            Container(
+                              width: getWidth(context) * 1 / 6 - 10,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: const Color.fromARGB(100, 0, 0, 0),
+                                ),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              child: const Image(
+                                image: AssetImage(
+                                  "assets/icons/barcode.png",
+                                ),
                               ),
                             )
                           ],
