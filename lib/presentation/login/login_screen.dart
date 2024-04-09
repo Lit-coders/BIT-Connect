@@ -1,3 +1,4 @@
+import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
@@ -5,10 +6,98 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.white,
         body: Center(
-          child: Text("login page."),
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: getHeight(context) * 1 / 3,
+                  child: const Image(
+                    image: AssetImage(
+                      "assets/logo.png",
+                    ),
+                  ),
+                ),
+                Form(
+                  child: Column(
+                    children: [
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: getWidth(context) * 5 / 6,
+                              child: TextFormField(
+                                readOnly: true,
+                                decoration: const InputDecoration(
+                                  hintText: 'Scan Your ID',
+                                ),
+                              ),
+                            ),
+                            const Image(
+                              image: AssetImage(
+                                "assets/icons/barcode.png",
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: getWidth(context),
+                        child: TextFormField(
+                          readOnly: true,
+                          decoration: const InputDecoration(
+                            hintText: 'Enter Password',
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: getWidth(context),
+                        child: TextFormField(
+                          readOnly: true,
+                          decoration: const InputDecoration(
+                            hintText: 'Confirm Password',
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  width: getWidth(context),
+                  color: Colors.blue,
+                  child: GestureDetector(
+                    onTap: () {
+                      print("attempt  to sign up");
+                    },
+                    child: const Text(
+                      'Sign Up',
+                    ),
+                  ),
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      const Text("already have an account?"),
+                      TextButton(
+                        onPressed: () {
+                          print("toggle to login");
+                        },
+                        child: const Text(
+                          "Login",
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
