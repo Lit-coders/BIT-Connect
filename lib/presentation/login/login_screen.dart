@@ -16,7 +16,7 @@ class Login extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: getHeight(context) * 1 / 3,
+                  height: getHeight(context) * 1 / 3 + 60,
                   child: const Image(
                     image: AssetImage(
                       "assets/logo.png",
@@ -68,15 +68,28 @@ class Login extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  width: getWidth(context),
-                  color: Colors.blue,
-                  child: GestureDetector(
-                    onTap: () {
-                      print("attempt  to sign up");
-                    },
-                    child: const Text(
-                      'Sign Up',
+                GestureDetector(
+                  onTap: () {
+                    print("attempt  to sign up");
+                  },
+                  child: Container(
+                    width: getWidth(context),
+                    padding: const EdgeInsets.all(10),
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 87, 172, 246),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -84,13 +97,26 @@ class Login extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      const Text("already have an account?"),
+                      const Text(
+                        "Already have an account?",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                        ),
+                      ),
                       TextButton(
                         onPressed: () {
-                          print("toggle to login");
+                          print(
+                            "toggle to login",
+                          );
                         },
                         child: const Text(
-                          "Login",
+                          "login",
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 87, 172, 246),
+                            decoration: TextDecoration.underline,
+                            decorationColor: Color.fromARGB(255, 87, 172, 246),
+                          ),
                         ),
                       )
                     ],
