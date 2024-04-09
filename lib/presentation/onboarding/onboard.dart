@@ -9,7 +9,7 @@ class Onbording extends StatefulWidget {
 }
 
 class _OnbordingState extends State<Onbording> {
-  int currentIndex = 0;
+  int _currentIndex = 0;
   late PageController _controller;
 
   @override
@@ -32,6 +32,13 @@ class _OnbordingState extends State<Onbording> {
     );
   }
 
+   void _onPageChanged(int index) {
+    setState(() {
+      _currentIndex = index;
+    }
+    );
+   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -49,7 +56,7 @@ class _OnbordingState extends State<Onbording> {
                   itemCount: contents.length,
                   onPageChanged: (int index) {
                     setState(() {
-                      currentIndex = index;
+                      _currentIndex = index;
                     });
                   },
                   itemBuilder: (_, i) {
@@ -104,14 +111,14 @@ class _OnbordingState extends State<Onbording> {
                 width: double.infinity,
                 child: TextButton(
                   child: Text(
-                    currentIndex == contents.length - 1 ? "Continue" : "Next",
+                    _currentIndex == contents.length - 1 ? "Continue" : "Next",
                     style: TextStyle(
                       fontSize: 18,
                       color: ColorAssets.bduColor,
                     ),
                   ),
                 onPressed: () {
-                    if (currentIndex == contents.length - 1) {
+                    if (_currentIndex == contents.length - 1) {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -140,7 +147,7 @@ class _OnbordingState extends State<Onbording> {
       onTap:() => _onDotTapped(index),
       child:Container(
       height: 10,
-      width: currentIndex == index ? 25 : 10,
+      width: _currentIndex == index ? 25 : 10,
       margin: EdgeInsets.only(right: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
