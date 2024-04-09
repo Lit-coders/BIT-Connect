@@ -1,24 +1,70 @@
 import 'package:flutter/material.dart';
 
-class InputField extends StatelessWidget {
+class InputField extends StatefulWidget {
   final double width;
   final String hintText;
   final bool isReadOnly;
-  final bool isObscured;
+  final bool hasObscure;
+  bool? isObscured;
   final Function(String) onChange;
-  const InputField({
+  InputField({
     super.key,
     required this.width,
     required this.hintText,
     required this.isReadOnly,
-    required this.isObscured,
+    required this.hasObscure,
     required this.onChange,
+    this.isObscured,
   });
+
+  @override
+  State<InputField> createState() => _InputFieldState();
+}
+
+class _InputFieldState extends State<InputField> {
+  Widget getField() {
+    return TextFormField(
+      onChanged: widget.onChange,
+      readOnly: widget.isReadOnly,
+      obscureText: widget.isObscured ?? false,
+      decoration: InputDecoration(
+        hintText: widget.hintText,
+        border: InputBorder.none,
+      ),
+    );
+  }
+
+  Widget getPWField() {
+    return Container(
+      child: Row(
+        children: [
+          SizedBox(
+            width: widget.width * 2 / 3,
+            child: getField(),
+          ),
+          IconButton(
+            onPressed: () {
+              setState(() {
+                widget.isObscured = !(widget.isObscured ?? false);
+              });
+            },
+            icon: Icon(
+              widget.isObscured ?? true
+                  ? Icons.visibility_off
+                  : Icons.visibility,
+              color: Colors.black45,
+              size: 23,
+            ),
+          )
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
+      width: widget.width,
       margin: const EdgeInsets.only(bottom: 15),
       padding: const EdgeInsets.symmetric(
         horizontal: 15,
@@ -32,15 +78,7 @@ class InputField extends StatelessWidget {
           Radius.circular(10),
         ),
       ),
-      child: TextFormField(
-        onChanged: onChange,
-        readOnly: isReadOnly,
-        obscureText: isObscured,
-        decoration: InputDecoration(
-          hintText: hintText,
-          border: InputBorder.none,
-        ),
-      ),
+      child: widget.hasObscure ? getPWField() : getField(),
     );
   }
 }
