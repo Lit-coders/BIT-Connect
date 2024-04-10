@@ -46,6 +46,15 @@ class _InputFieldState extends State<InputField> {
             color: Color.fromARGB(100, 0, 0, 0),
           ),
         ),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+          borderSide: BorderSide(
+            width: 2.0,
+            color: Color.fromARGB(255, 87, 172, 246),
+          ),
+        ),
         contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       ),
     );
