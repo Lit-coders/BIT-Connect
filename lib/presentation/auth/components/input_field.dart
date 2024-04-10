@@ -38,31 +38,42 @@ class _InputFieldState extends State<InputField> {
         hintStyle: const TextStyle(
           color: Color.fromARGB(90, 0, 0, 0),
         ),
-        border: InputBorder.none,
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+          borderSide: BorderSide(
+            color: Color.fromARGB(100, 0, 0, 0),
+          ),
+        ),
+        contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       ),
     );
   }
 
   Widget getPWField() {
-    return Container(
-      child: Row(
+    return SizedBox(
+      child: Stack(
         children: [
           SizedBox(
-            width: widget.width * 2 / 3,
+            width: widget.width,
             child: getField(),
           ),
-          IconButton(
-            onPressed: () {
-              setState(() {
-                widget.isObscured = !(widget.isObscured ?? false);
-              });
-            },
-            icon: Icon(
-              widget.isObscured ?? true
-                  ? Icons.visibility_off
-                  : Icons.visibility,
-              color: Colors.black45,
-              size: 23,
+          Align(
+            alignment: Alignment.topRight,
+            child: IconButton(
+              onPressed: () {
+                setState(() {
+                  widget.isObscured = !(widget.isObscured ?? false);
+                });
+              },
+              icon: Icon(
+                widget.isObscured ?? true
+                    ? Icons.visibility_off
+                    : Icons.visibility,
+                color: Colors.black45,
+                size: 23,
+              ),
             ),
           )
         ],
@@ -75,18 +86,6 @@ class _InputFieldState extends State<InputField> {
     return Container(
       width: widget.width,
       margin: const EdgeInsets.only(bottom: 15),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 15,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white10,
-        border: Border.all(
-          color: const Color.fromARGB(100, 0, 0, 0),
-        ),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(10),
-        ),
-      ),
       child: widget.hasObscure ? getPWField() : getField(),
     );
   }
