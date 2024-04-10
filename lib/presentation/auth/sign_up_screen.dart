@@ -48,8 +48,8 @@ class _SignUpState extends State<SignUP> {
   // handling form submitting
 
   void handleFormSubmitting() {
-    if (_passwordController.text != "" && _idController.text != "") {
-      signUp();
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
     }
   }
 
