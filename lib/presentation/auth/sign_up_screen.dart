@@ -52,7 +52,11 @@ class _SignUpState extends State<SignUP> {
           setState(() {
             _signUpError = "The ID is already in use. Please sign in instead.";
           });
-        } else {
+        } else if (error.code == 'network-request-failed') {
+          setState(() {
+            _signUpError =
+                "You have lost connection. \n Please check your internet connection.";
+          });
           print('An error occurred: ${error.message}');
         }
       } else {
@@ -151,6 +155,7 @@ class _SignUpState extends State<SignUP> {
                   child: Center(
                     child: Text(
                       _signUpError,
+                      textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.w500,
