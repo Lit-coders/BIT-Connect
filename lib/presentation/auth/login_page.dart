@@ -76,8 +76,12 @@ class _LoginState extends State<Login> {
   // validate id
 
   String? validateId(value) {
+    RegExp pattern = RegExp(r'\d{7}[A-Z]');
+
     if (value.isEmpty) {
       return "Enter You Id Please";
+    } else if (!pattern.hasMatch(value)) {
+      return "Invalid ID format, Please enter again";
     } else {
       return null;
     }
@@ -117,7 +121,7 @@ class _LoginState extends State<Login> {
                       _loginError,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        color: Colors.blue,
+                        color: Colors.red,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
