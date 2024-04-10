@@ -50,6 +50,7 @@ class _SignUpState extends State<SignUP> {
   void handleFormSubmitting() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+      signUp();
     }
   }
 
