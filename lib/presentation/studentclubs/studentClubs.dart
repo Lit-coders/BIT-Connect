@@ -96,7 +96,7 @@ class _StudentClubsState extends State<StudentClubs> {
               ),
               ListTile(
                 leading: Icon(Icons.book_rounded),
-                title: Text(
+                title: const Text(
                   'Location',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
@@ -105,8 +105,8 @@ class _StudentClubsState extends State<StudentClubs> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.info_outlined),
-                title: Text(
+                leading: const Icon(Icons.info_outlined),
+                title: const Text(
                   'Departments',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
@@ -143,39 +143,55 @@ class _StudentClubsState extends State<StudentClubs> {
             ],
           ),
         ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
+        body: Padding(
+          padding: const EdgeInsets.only(top: 16.0),
+          child: Column(
+            children: [
+              TextButton(
                 
-                 child: Container(
-                  
-                  alignment: Alignment.centerRight,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                        color: ColorAssets.bduColor,
-                        width: 4
-                        ), // Add border color
-                    // boxShadow:
-                  ),
-                  child: Material(
-                    elevation: 8,
-                    shadowColor: ColorAssets.bduColor.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(8),
-                    child: ListTile(
-                      contentPadding: EdgeInsets.all(8),
-                      title: const Text("RDL"),
-                      tileColor: ColorAssets.white,
-                      onTap: () {},
-                      leading: Image.asset('assets/stclubs/club1.png'),
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: _scaffoldKey
+                          .currentContext!, // Use the context from the parent Scaffold
+                      backgroundColor: ColorAssets.secondaryYellow,
+                      builder: (BuildContext context) {
+                        return SizedBox(
+                          height: 400,
+                          child: Container(
+                            child: Text('Trial'),
+                          ),
+                        );
+                      });
+                },
+
+                child: Center(
+                  child: Container(
+                    width: 350,
+                    alignment: Alignment.centerRight,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                          color: ColorAssets.bduColor,
+                          width: 4), // Add border color
+                      // boxShadow:
+                    ),
+                    child: Material(
+                      elevation: 8,
+                      shadowColor: ColorAssets.bduColor.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(8),
+                      child: ListTile(
+                        contentPadding: EdgeInsets.all(8),
+                        title: const Text("RDL"),
+                        tileColor: ColorAssets.white,
+                        onTap: () {},
+                        leading: Image.asset('assets/stclubs/club1.png'),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
