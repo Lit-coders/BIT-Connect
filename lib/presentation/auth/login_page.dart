@@ -26,26 +26,26 @@ class _LoginState extends State<Login> {
 
   // signing in
   Future signIn() async {
-    try {} catch (error) {
-      if (error is FirebaseAuthException) {
-        if (error.code == 'user-not-found') {
-          setState(() {
-            _loginError =
-                "User with ${_idController.text} doesn't exist. Please sign up instead.";
-          });
-        } else if (error.code == "wrong-password") {
-          setState(() {
-            _loginError = "You have entered wrong password, Please try again!";
-          });
-        } else if (error.code == 'network-request-failed') {
-          setState(() {
-            _loginError =
-                "You have lost connection. \n Please check your internet connection.";
-          });
-          print('An error occurred: ${error.message}');
-        }
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: "${_idController.text.toLowerCase()}@gmail.com",
+        password: _passwordController.text,
+      );
+    } on FirebaseAuthException catch (error) {
+      if (error.code == 'invalid-credential') {
+        setState(() {
+          _loginError =
+              "You have entered Invalid Credential. Please sign up instead.";
+        });
+      } else if (error.code == 'network-request-failed') {
+        setState(() {
+          _loginError =
+              "You have lost connection. \n Please check your internet connection.";
+        });
       } else {
-        print("error from sign up: $error");
+        setState(() {
+          _loginError = error.message ?? "";
+        });
       }
     }
   }
