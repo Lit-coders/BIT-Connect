@@ -30,6 +30,17 @@ class _LoginState extends State<Login> {
     super.dispose();
   }
 
+  // validate password
+  String? validatePassword(value) {
+    if (value.isEmpty) {
+      return "Password can't be empty!";
+    } else if (value.length < 6) {
+      return "Password length should be at least 6";
+    } else {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +65,9 @@ class _LoginState extends State<Login> {
                   child: Column(
                     children: [
                       InputField(
-                        onChange: (value) {
+                        validator: validateId,
+                        onSaved: (value) {
+                          _idController.text = value!;
                           print(value);
                         },
                         controller: _idController,
@@ -65,7 +78,8 @@ class _LoginState extends State<Login> {
                         hasObscure: false,
                       ),
                       InputField(
-                        onChange: (value) {
+                        validator: validatePassword,
+                        onSaved: (value) {
                           print(value);
                         },
                         controller: _passwordController,
