@@ -15,6 +15,7 @@ class _LoginState extends State<Login> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final _idController = TextEditingController();
   final _passwordController = TextEditingController();
+  String _loginError = "";
 
   @override
   void dispose() {
@@ -25,10 +26,28 @@ class _LoginState extends State<Login> {
 
   // signing in
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: "${_idController.text.toLowerCase()}@gmail.com",
-      password: _passwordController.text,
-    );
+    try {} catch (error) {
+      if (error is FirebaseAuthException) {
+        if (error.code == 'user-not-found') {
+          setState(() {
+            _loginError =
+                "User with ${_idController.text} doesn't exist. Please sign up instead.";
+          });
+        } else if (error.code == "wrong-password") {
+          setState(() {
+            _loginError = "You have entered wrong password, Please try again!";
+          });
+        } else if (error.code == 'network-request-failed') {
+          setState(() {
+            _loginError =
+                "You have lost connection. \n Please check your internet connection.";
+          });
+          print('An error occurred: ${error.message}');
+        }
+      } else {
+        print("error from sign up: $error");
+      }
+    }
   }
 
   // handle form submitting
@@ -72,10 +91,23 @@ class _LoginState extends State<Login> {
             child: Column(
               children: [
                 SizedBox(
-                  height: getHeight(context) * 1 / 3 + 60,
+                  height: getHeight(context) * 1 / 3,
                   child: const Image(
                     image: AssetImage(
                       "assets/logo.png",
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 60,
+                  child: Center(
+                    child: Text(
+                      _loginError,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
