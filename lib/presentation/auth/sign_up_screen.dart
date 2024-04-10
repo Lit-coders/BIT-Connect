@@ -74,6 +74,17 @@ class _SignUpState extends State<SignUP> {
     }
   }
 
+  // confirm password
+  String? passwordConfirmationValidator(value) {
+    if (value.isEmpty) {
+      return "please confirm you password!";
+    } else if (_passwordController.text != value) {
+      return "please confirm password correctly!";
+    } else {
+      return null;
+    }
+  }
+
   // handling scanning id with flutter_barcode_scanner widget
   Future<void> handleScanningId() async {
     String? barcodeScanRes;
@@ -178,7 +189,9 @@ class _SignUpState extends State<SignUP> {
                         hasObscure: true,
                       ),
                       InputField(
-                        onChange: (value) {
+                        validator: passwordConfirmationValidator,
+                        onSaved: (value) {
+                          _passConfirmController.text = value!;
                           print(value);
                         },
                         controller: _passConfirmController,
