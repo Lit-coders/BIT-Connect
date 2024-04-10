@@ -1,5 +1,5 @@
-import 'package:bit_connect/home_page.dart';
 import 'package:bit_connect/presentation/auth/auth.dart';
+import 'package:bit_connect/presentation/user_profile/new_user_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,7 @@ class BiTConnect extends StatelessWidget {
             );
           } else if (snapshot.hasData) {
             // User is authenticated, show home page
-            return const HomePage();
+            return const BuildProfile();
           } else {
             return const Auth();
           }
