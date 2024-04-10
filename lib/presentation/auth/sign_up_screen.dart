@@ -63,6 +63,17 @@ class _SignUpState extends State<SignUP> {
     }
   }
 
+  // validate password
+  String? validatePassword(value) {
+    if (value.isEmpty) {
+      return "password must not be empty!";
+    } else if (value.length < 6) {
+      return "password length must be at least 6";
+    } else {
+      return null;
+    }
+  }
+
   // handling scanning id with flutter_barcode_scanner widget
   Future<void> handleScanningId() async {
     String? barcodeScanRes;
@@ -154,7 +165,9 @@ class _SignUpState extends State<SignUP> {
                         ],
                       ),
                       InputField(
-                        onChange: (value) {
+                        validator: validatePassword,
+                        onSaved: (value) {
+                          _passwordController.text = value!.trim();
                           print(value);
                         },
                         controller: _passwordController,
