@@ -83,6 +83,14 @@ class _LoginState extends State<Login> {
     }
   }
 
+  void clearError() {
+    if (_loginError != "") {
+      setState(() {
+        _loginError = "";
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,10 +129,7 @@ class _LoginState extends State<Login> {
                     children: [
                       InputField(
                         validator: validateId,
-                        onSaved: (value) {
-                          _idController.text = value!;
-                          print(value);
-                        },
+                        onChange: (value) => clearError(),
                         controller: _idController,
                         width: getWidth(context),
                         hintText: 'Enter ID',
@@ -134,9 +139,7 @@ class _LoginState extends State<Login> {
                       ),
                       InputField(
                         validator: validatePassword,
-                        onSaved: (value) {
-                          print(value);
-                        },
+                        onChange: (value) => clearError(),
                         controller: _passwordController,
                         width: getWidth(context),
                         hintText: 'Enter Password',

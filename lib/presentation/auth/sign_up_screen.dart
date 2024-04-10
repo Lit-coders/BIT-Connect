@@ -126,13 +126,21 @@ class _SignUpState extends State<SignUP> {
       } else if (barcodeScanRes != "-1") {
         setState(() {
           _signUpError =
-              "Scanned ID result don't seem BiT's, Please try again with clear scan!";
+              "Scanned ID is not valid, Please try again with clear scan!";
           _idController.text = "";
         });
       }
     } on PlatformException catch (error) {
       setState(() {
         _signUpError = error.message ?? "Unable to scan, try again!";
+      });
+    }
+  }
+
+  void clearError() {
+    if (_signUpError != "") {
+      setState(() {
+        _signUpError = "";
       });
     }
   }
@@ -179,9 +187,7 @@ class _SignUpState extends State<SignUP> {
                           children: [
                             InputField(
                               validator: validateScannedId,
-                              onSaved: (value) {
-                                _id = value;
-                              },
+                              onChange: (value) => clearError(),
                               controller: _idController,
                               width: getWidth(context) * 5 / 6 - 45,
                               hintText: 'Scan Your ID',
@@ -222,10 +228,7 @@ class _SignUpState extends State<SignUP> {
                       ),
                       InputField(
                         validator: validatePassword,
-                        onSaved: (value) {
-                          _passwordController.text = value!.trim();
-                          print(value);
-                        },
+                        onChange: (value) => clearError(),
                         controller: _passwordController,
                         width: getWidth(context),
                         hintText: 'Enter Password',
@@ -235,10 +238,7 @@ class _SignUpState extends State<SignUP> {
                       ),
                       InputField(
                         validator: passwordConfirmationValidator,
-                        onSaved: (value) {
-                          _passConfirmController.text = value!;
-                          print(value);
-                        },
+                        onChange: (value) => clearError(),
                         controller: _passConfirmController,
                         width: getWidth(context),
                         hintText: 'Confirm Password',
