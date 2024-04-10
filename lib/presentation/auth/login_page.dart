@@ -1,3 +1,4 @@
+import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
 import 'package:bit_connect/presentation/auth/components/loading_spinner.dart';
 import 'package:bit_connect/searvices/helpers.dart';
@@ -40,14 +41,17 @@ class _LoginState extends State<Login> {
               "You have entered Invalid Credential. Please sign up instead.";
         });
       } else if (error.code == 'network-request-failed') {
-        setState(() {
-          _loginError =
-              "You have lost connection. \n Please check your internet connection.";
-        });
+        ErrorSnackBar snackBar = ErrorSnackBar(
+            content:
+                "You have lost connection. Please check your internet connection.");
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+        }
       } else {
-        setState(() {
-          _loginError = error.message ?? "";
-        });
+        ErrorSnackBar snackBar = ErrorSnackBar(content: error.message ?? "");
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+        }
       }
     }
 

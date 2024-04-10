@@ -1,3 +1,4 @@
+import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
 import 'package:bit_connect/presentation/auth/components/loading_spinner.dart';
 import 'package:bit_connect/searvices/helpers.dart';
@@ -52,14 +53,17 @@ class _SignUpState extends State<SignUP> {
           _signUpError = "The ID is already in use. Please sign in instead.";
         });
       } else if (error.code == 'network-request-failed') {
-        setState(() {
-          _signUpError =
-              "You have lost connection. \n Please check your internet connection.";
-        });
+        ErrorSnackBar snackBar = ErrorSnackBar(
+            content:
+                "You have lost connection. Please check your internet connection.");
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+        }
       } else {
-        setState(() {
-          _signUpError = error.message ?? "";
-        });
+        ErrorSnackBar snackBar = ErrorSnackBar(content: error.message ?? "");
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+        }
       }
     }
     if (mounted) Navigator.of(context).pop();
