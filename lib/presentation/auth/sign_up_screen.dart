@@ -116,19 +116,25 @@ class _SignUpState extends State<SignUP> {
         true,
         ScanMode.BARCODE,
       );
-      debugPrint(barcodeScanRes);
-    } on PlatformException {
-      print("platform exception");
-    }
 
-    if (!mounted) return;
-
-    setState(() {
-      if (barcodeScanRes != "-1") {
-        _id = barcodeScanRes;
-        _idController.value = TextEditingValue(text: "BDU$barcodeScanRes");
+      RegExp pattern = RegExp(r'\d{7}[A-Z]');
+      if (pattern.hasMatch(barcodeScanRes)) {
+        setState(() {
+          _idController.text = "BDU$barcodeScanRes";
+          _signUpError = "";
+        });
+      } else if (barcodeScanRes != "-1") {
+        setState(() {
+          _signUpError =
+              "Scanned ID result don't seem BiT's, Please try again with clear scan!";
+          _idController.text = "";
+        });
       }
-    });
+    } on PlatformException catch (error) {
+      setState(() {
+        _signUpError = error.message ?? "Unable to scan, try again!";
+      });
+    }
   }
 
   @override
