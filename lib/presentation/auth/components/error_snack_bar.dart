@@ -9,7 +9,6 @@ class ErrorSnackBar {
       content: Text(
         content,
         style: const TextStyle(
-          fontSize: 17,
           fontWeight: FontWeight.bold,
         ),
       ),
