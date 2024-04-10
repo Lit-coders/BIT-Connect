@@ -38,11 +38,24 @@ class _SignUpState extends State<SignUP> {
 
   // handling signing up
   Future<void> signUp() async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    dynamic response;
+    try {
+      response = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: "${_idController.text.toLowerCase()}@gmail.com",
-        password: _passwordController.text);
-
-    print("signing up...");
+        password: _passwordController.text,
+      );
+      print("response for sign up attempt: $response");
+    } catch (error) {
+      if (error is FirebaseAuthException) {
+        if (error.code == 'email-already-in-use') {
+          print('The email address is already in use. Please sign in instead.');
+        } else {
+          print('An error occurred: ${error.message}');
+        }
+      } else {
+        print("error from sign up: $error");
+      }
+    }
   }
 
   // handling form submitting
