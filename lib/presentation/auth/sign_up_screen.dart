@@ -62,8 +62,7 @@ class _SignUpState extends State<SignUP> {
         });
       }
     }
-
-    Navigator.of(context).pop();
+    if (mounted) Navigator.of(context).pop();
   }
 
   // handling form submitting

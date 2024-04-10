@@ -51,7 +51,7 @@ class _LoginState extends State<Login> {
       }
     }
 
-    Navigator.of(context).pop();
+    if (!mounted) Navigator.of(context).pop();
   }
 
   // handle form submitting
