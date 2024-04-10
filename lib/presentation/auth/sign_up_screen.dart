@@ -1,4 +1,5 @@
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
+import 'package:bit_connect/presentation/auth/components/loading_spinner.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class _SignUpState extends State<SignUP> {
 
   // handling signing up
   Future<void> signUp() async {
+    LoadingSpinner.load(context);
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: "${_idController.text.toLowerCase()}@gmail.com",
@@ -60,6 +62,8 @@ class _SignUpState extends State<SignUP> {
         });
       }
     }
+
+    Navigator.of(context).pop();
   }
 
   // handling form submitting
