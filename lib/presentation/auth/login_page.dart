@@ -33,9 +33,19 @@ class _LoginState extends State<Login> {
   // validate password
   String? validatePassword(value) {
     if (value.isEmpty) {
-      return "Password can't be empty!";
+      return "Enter your Password,Please!";
     } else if (value.length < 6) {
       return "Password length should be at least 6";
+    } else {
+      return null;
+    }
+  }
+
+  // validate id
+
+  String? validateId(value) {
+    if (value.isEmpty) {
+      return "Enter You Id Please";
     } else {
       return null;
     }
