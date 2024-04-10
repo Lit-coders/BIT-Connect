@@ -55,8 +55,8 @@ class _SignUpState extends State<SignUP> {
 
   // validate id
 
-  dynamic validateScannedId() {
-    if (_idController.text == "") {
+  String? validateScannedId(value) {
+    if (value == "") {
       return "scan you id again please";
     } else {
       return null;
@@ -114,7 +114,9 @@ class _SignUpState extends State<SignUP> {
                       Row(
                         children: [
                           InputField(
-                            onChange: (value) {
+                            validator: validateScannedId,
+                            onSaved: (value) {
+                              _id = value;
                               print("scanned id from field : $value");
                             },
                             controller: _idController,
