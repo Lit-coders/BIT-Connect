@@ -80,7 +80,7 @@ class _LoginState extends State<Login> {
   // validate id
 
   String? validateId(value) {
-    RegExp pattern = RegExp(r'[A-Z]{3}\d{7}[A-Z]');
+    RegExp pattern = RegExp(r'[A-Z]{3}\d{7}');
 
     if (value.isEmpty) {
       return "Enter You Id Please";
