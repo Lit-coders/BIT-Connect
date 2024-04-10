@@ -21,13 +21,9 @@ class _AuthState extends State<Auth> {
   @override
   Widget build(BuildContext context) {
     if (_showLoginPage) {
-      return Login(
-        toggleToSignUP: toggleAuthScreens,
-      );
+      return Login(toggleToSignUP: toggleAuthScreens);
     } else {
-      return SignUP(
-        toggleToLogin: toggleAuthScreens,
-      );
+      return SignUP(toggleToLogin: toggleAuthScreens);
     }
   }
 }
