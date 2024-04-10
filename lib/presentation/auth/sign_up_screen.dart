@@ -20,6 +20,7 @@ class _SignUpState extends State<SignUP> {
   final _idController = TextEditingController();
   final _passwordController = TextEditingController();
   final _passConfirmController = TextEditingController();
+  String _signUpError = "";
 
   @override
   void initState() {
@@ -48,7 +49,9 @@ class _SignUpState extends State<SignUP> {
     } catch (error) {
       if (error is FirebaseAuthException) {
         if (error.code == 'email-already-in-use') {
-          print('The email address is already in use. Please sign in instead.');
+          setState(() {
+            _signUpError = "The ID is already in use. Please sign in instead.";
+          });
         } else {
           print('An error occurred: ${error.message}');
         }
@@ -136,10 +139,22 @@ class _SignUpState extends State<SignUP> {
             child: Column(
               children: [
                 SizedBox(
-                  height: getHeight(context) * 1 / 3 + 60,
+                  height: getHeight(context) * 1 / 3,
                   child: const Image(
                     image: AssetImage(
                       "assets/logo.png",
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 60,
+                  child: Center(
+                    child: Text(
+                      _signUpError,
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
