@@ -16,6 +16,14 @@ class _LoginState extends State<Login> {
   final _idController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  @override
+  void dispose() {
+    _idController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  // signing in
   Future signIn() async {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: "${_idController.text.toLowerCase()}@gmail.com",
@@ -23,11 +31,12 @@ class _LoginState extends State<Login> {
     );
   }
 
-  @override
-  void dispose() {
-    _idController.dispose();
-    _passwordController.dispose();
-    super.dispose();
+  // handle form submitting
+  void handleFormSubmitting() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      signIn();
+    }
   }
 
   // validate password
@@ -103,9 +112,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    signIn();
-                  },
+                  onTap: () => handleFormSubmitting(),
                   child: Container(
                     width: getWidth(context),
                     padding: const EdgeInsets.all(10),
