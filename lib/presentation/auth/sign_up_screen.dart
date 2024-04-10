@@ -39,28 +39,25 @@ class _SignUpState extends State<SignUP> {
 
   // handling signing up
   Future<void> signUp() async {
-    dynamic response;
     try {
-      response = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: "${_idController.text.toLowerCase()}@gmail.com",
         password: _passwordController.text,
       );
-      print("response for sign up attempt: $response");
-    } catch (error) {
-      if (error is FirebaseAuthException) {
-        if (error.code == 'email-already-in-use') {
-          setState(() {
-            _signUpError = "The ID is already in use. Please sign in instead.";
-          });
-        } else if (error.code == 'network-request-failed') {
-          setState(() {
-            _signUpError =
-                "You have lost connection. \n Please check your internet connection.";
-          });
-          print('An error occurred: ${error.message}');
-        }
+    } on FirebaseAuthException catch (error) {
+      if (error.code == 'email-already-in-use') {
+        setState(() {
+          _signUpError = "The ID is already in use. Please sign in instead.";
+        });
+      } else if (error.code == 'network-request-failed') {
+        setState(() {
+          _signUpError =
+              "You have lost connection. \n Please check your internet connection.";
+        });
       } else {
-        print("error from sign up: $error");
+        setState(() {
+          _signUpError = error.message ?? "";
+        });
       }
     }
   }
