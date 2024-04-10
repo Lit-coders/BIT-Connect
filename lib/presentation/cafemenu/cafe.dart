@@ -14,6 +14,7 @@ class _CafeMenuState extends State<CafeMenu> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+   
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
@@ -287,15 +288,133 @@ class _CafeMenuState extends State<CafeMenu> {
     );
   }
 }
-ListView _buildListViewMenu(String s) {
 
+ListView _buildListViewMenu(String s) {
+   List<Map> menu = [
+    {
+      "name": "BreakFast",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    {
+      "name": "Lunch",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    {
+      "name": "Dinner",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    //Tuesday
+    {
+      "name": "BreakFast",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    {
+      "name": "Lunch",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    {
+      "name": "Dinner",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    //Wednesday
+    {
+      "name": "BreakFast",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    {
+      "name": "Lunch",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    {
+      "name": "Dinner",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+
+    //Thursdau
+    {
+      "name": "BreakFast",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    {
+      "name": "Lunch",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    {
+      "name": "Dinner",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    //Friday
+    {
+      "name": "BreakFast",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    {
+      "name": "Lunch",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    {
+      "name": "Dinner",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    //Saturday
+    {
+      "name": "BreakFast",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    {
+      "name": "Lunch",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    {
+      "name": "Dinner",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    //Sunday
+    {
+      "name": "BreakFast",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    {
+      "name": "Lunch",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+    {
+      "name": "Dinner",
+      "img": "assets/menu/menu1.png",
+      "type": "Firfir be Dabo be Shay"
+    },
+  ];
   return ListView.builder(
-    itemBuilder: (context, index) => ListTile(
+    itemCount: 3,
+    itemBuilder: (context, index) =>
+          
+
+     ListTile(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '$s $index', // Example text, replace with your description
+            '$menu[i][\'name\']', // Example text, replace with your description
             style: const TextStyle(
               fontSize: 16, // Adjust font size as needed
               fontWeight: FontWeight.bold, // Adjust font weight as needed
@@ -303,14 +422,14 @@ ListView _buildListViewMenu(String s) {
           ),
           const SizedBox(height: 5), // Adjust spacing between text and image
           Image.asset(
-            'assets/images/menu_item_$index.png', // Replace with your image path
+            '$menu[i].img', // Replace with your image path
             width: 100, // Adjust width as needed
             height: 100, // Adjust height as needed
             fit: BoxFit.cover, // Adjust fit as needed
           ),
           const SizedBox(height: 5), // Adjust spacing between image and text
           Text(
-            'Description of item $index', // Example description, replace with your actual descriptions
+            '$menu[i].type', // Example description, replace with your actual descriptions
             style: const TextStyle(
               fontSize: 14, // Adjust font size as needed
             ),
