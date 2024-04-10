@@ -15,7 +15,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-  final _idController = TextEditingController();
+  final _idController = TextEditingController(text: "BDU");
   final _passwordController = TextEditingController();
   String _loginError = "";
 
@@ -80,7 +80,7 @@ class _LoginState extends State<Login> {
   // validate id
 
   String? validateId(value) {
-    RegExp pattern = RegExp(r'\d{7}[A-Z]');
+    RegExp pattern = RegExp(r'[A-Z]{3}\d{7}[A-Z]');
 
     if (value.isEmpty) {
       return "Enter You Id Please";

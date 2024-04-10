@@ -123,8 +123,9 @@ class _SignUpState extends State<SignUP> {
 
       RegExp pattern = RegExp(r'\d{7}[A-Z]');
       if (pattern.hasMatch(barcodeScanRes)) {
+        final idNo = barcodeScanRes.split(RegExp(r'[A-Z]'))[0];
         setState(() {
-          _idController.text = "BDU$barcodeScanRes";
+          _idController.text = "BDU$idNo";
           _signUpError = "";
         });
       } else if (barcodeScanRes != "-1") {
