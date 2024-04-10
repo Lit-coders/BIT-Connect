@@ -167,47 +167,52 @@ class _SignUpState extends State<SignUP> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          InputField(
-                            validator: validateScannedId,
-                            onSaved: (value) {
-                              _id = value;
-                              print("scanned id from field : $value");
-                            },
-                            controller: _idController,
-                            width: getWidth(context) * 5 / 6 - 45,
-                            hintText: 'Scan Your ID',
-                            isReadOnly: true,
-                            isObscured: false,
-                            hasObscure: false,
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              handleScanningId();
-                            },
-                            child: Container(
-                              width: getWidth(context) * 1 / 6 - 10,
-                              margin: const EdgeInsets.only(bottom: 15),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: const Color.fromARGB(100, 0, 0, 0),
-                                ),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              child: const Image(
-                                image: AssetImage(
-                                  "assets/icons/barcode.png",
-                                ),
-                              ),
+                      SizedBox(
+                        width: getWidth(context),
+                        child: Stack(
+                          children: [
+                            InputField(
+                              validator: validateScannedId,
+                              onSaved: (value) {
+                                _id = value;
+                              },
+                              controller: _idController,
+                              width: getWidth(context) * 5 / 6 - 45,
+                              hintText: 'Scan Your ID',
+                              isReadOnly: true,
+                              isObscured: false,
+                              hasObscure: false,
                             ),
-                          )
-                        ],
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: GestureDetector(
+                                onTap: () {
+                                  handleScanningId();
+                                },
+                                child: Container(
+                                  width: getWidth(context) * 1 / 6 - 10,
+                                  margin: const EdgeInsets.only(bottom: 15),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: const Color.fromARGB(100, 0, 0, 0),
+                                    ),
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                  ),
+                                  child: const Image(
+                                    image: AssetImage(
+                                      "assets/icons/barcode.png",
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       InputField(
                         validator: validatePassword,
