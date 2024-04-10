@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 
 class InputField extends StatefulWidget {
+  final String? Function(String?) validator;
   final TextEditingController controller;
   final double width;
   final String hintText;
   final bool isReadOnly;
   final bool hasObscure;
   bool? isObscured;
-  final Function(String) onChange;
+  final void Function(String?) onSaved;
   InputField({
     super.key,
+    required this.validator,
     required this.controller,
     required this.width,
     required this.hintText,
     required this.isReadOnly,
     required this.hasObscure,
-    required this.onChange,
+    required this.onSaved,
     this.isObscured,
   });
 
@@ -26,8 +28,9 @@ class InputField extends StatefulWidget {
 class _InputFieldState extends State<InputField> {
   Widget getField() {
     return TextFormField(
+      validator: widget.validator,
       controller: widget.controller,
-      onChanged: widget.onChange,
+      onSaved: widget.onSaved,
       readOnly: widget.isReadOnly,
       obscureText: widget.isObscured ?? false,
       decoration: InputDecoration(
