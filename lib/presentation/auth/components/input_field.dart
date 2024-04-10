@@ -8,7 +8,7 @@ class InputField extends StatefulWidget {
   final bool isReadOnly;
   final bool hasObscure;
   bool? isObscured;
-  final void Function(String?) onSaved;
+  final void Function(String?) onChange;
   InputField({
     super.key,
     required this.validator,
@@ -17,7 +17,7 @@ class InputField extends StatefulWidget {
     required this.hintText,
     required this.isReadOnly,
     required this.hasObscure,
-    required this.onSaved,
+    required this.onChange,
     this.isObscured,
   });
 
@@ -30,7 +30,7 @@ class _InputFieldState extends State<InputField> {
     return TextFormField(
       validator: widget.validator,
       controller: widget.controller,
-      onSaved: widget.onSaved,
+      onChanged: widget.onChange,
       readOnly: widget.isReadOnly,
       obscureText: widget.isObscured ?? false,
       decoration: InputDecoration(
