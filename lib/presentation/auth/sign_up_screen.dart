@@ -53,6 +53,16 @@ class _SignUpState extends State<SignUP> {
     }
   }
 
+  // validate id
+
+  dynamic validateScannedId() {
+    if (_idController.text == "") {
+      return "scan you id again please";
+    } else {
+      return null;
+    }
+  }
+
   // handling scanning id with flutter_barcode_scanner widget
   Future<void> handleScanningId() async {
     String? barcodeScanRes;
