@@ -3,18 +3,29 @@ import 'dart:io';
 import 'package:bit_connect/bit_connect.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:bit_connect/presentation/onboarding/onboard.dart';
+import 'package:bit_connect/presentation/SplashScreen.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  Platform.isAndroid
-      ? await Firebase.initializeApp(
-          options: const FirebaseOptions(
-            apiKey: "AIzaSyAZUj7DJ0vSNqkvIdGaI6E4O1j_eMp5Sxc",
-            appId: "1:880080912408:android:451d0acd1adf12a566036d",
-            messagingSenderId: "880080912408",
-            projectId: "bit-connect-7569f",
-          ),
-        )
-      : await Firebase.initializeApp();
-  runApp(const BiTConnect());
+void main() {
+  runApp( 
+    const BitConnect(),
+  );
+}
+
+class BitConnect extends StatelessWidget {
+  const BitConnect({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Bit-Connect",
+      home: const SplashScreen(),
+      routes: {
+        '/home': (context) => const Home(), 
+        '/onboarding': (context) => const Onbording(), 
+        // '/cafe': (context) => const Cafe(), // 
+      },
+    );
+  }
 }
