@@ -1,7 +1,8 @@
-import 'package:bit_connect/presentation/home/home_screen.dart';
+import 'package:bit_connect/presentation/auth/auth.dart';
 import 'package:bit_connect/presentation/onboarding/content_model.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -112,14 +113,16 @@ class _OnbordingState extends State<Onboarding> {
                   color: ColorAssets.white,
                 ),
               ),
-              onPressed: () {
+              onPressed: () async {
                 if (_currentIndex == contents.length - 1) {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  prefs.setString('username', 'Ermias sintayehu');
                   Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const Home(),
-                    ),
-                  );
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const Auth(),
+                      ));
                 } else {
                   _controller.nextPage(
                     duration: const Duration(milliseconds: 100),
