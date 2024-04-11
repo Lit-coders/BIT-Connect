@@ -43,6 +43,7 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   firebase_auth: ^4.19.1
   firebase_core: ^2.29.0
+  firebase_storage: ^11.7.1
   image_picker: ^1.0.7
   cloud_firestore: ^4.16.1
   flutter_native_splash: ^2.4.0
