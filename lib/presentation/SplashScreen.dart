@@ -13,17 +13,12 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Bit-Connect",
-      home: AnimatedSplashScreen(
-        backgroundColor: ColorAssets.white,
-        splash:
-            Image.asset('../../assets/connect.png', height: 400, width: 400),
-        splashTransition: SplashTransition.fadeTransition,
-        nextScreen: const Onbording(),
-        duration: 3000,
-      ),
+    return AnimatedSplashScreen(
+      backgroundColor: ColorAssets.white,
+      splash: Image.asset('../../assets/connect.png', height: 400, width: 400),
+      splashTransition: SplashTransition.fadeTransition,
+      nextScreen: const Onbording(),
+      duration: 3000,
     );
   }
 }
