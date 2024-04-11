@@ -27,56 +27,64 @@ class _BuildProfileState extends State<BuildProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue[100],
-        title: const Text(
-          "Build Your Profile",
-          style: TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        actions: [
-          OutlinedButton(
-            onPressed: () {
-              print("skip!");
-            },
-            style: const ButtonStyle(
-              side: MaterialStatePropertyAll(
-                BorderSide(
-                  color: Colors.blue,
-                ),
-              ),
-              textStyle: MaterialStatePropertyAll(
-                TextStyle(
-                  color: Colors.blue,
-                ),
-              ),
+      appBar: PreferredSize(
+        preferredSize: Size(getWidth(context), 70),
+        child: AppBar(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(10))),
+          backgroundColor: Colors.blue[100],
+          title: const Text(
+            "Build Your Profile",
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w400,
             ),
-            child: const Text("skip"),
-          )
-        ],
+          ),
+          actions: [
+            OutlinedButton(
+              onPressed: () {
+                print("skip!");
+              },
+              style: const ButtonStyle(
+                side: MaterialStatePropertyAll(
+                  BorderSide(
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
+              child: const Text(
+                "skip",
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Center(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+        child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
                 width: getWidth(context) * 1 / 3,
                 height: getWidth(context) * 1 / 3,
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  image: DecorationImage(
-                    image: AssetImage("assets/icons/person.png"),
+                padding: const EdgeInsets.all(3),
+                decoration: BoxDecoration(
+                  color: Colors.blue[100],
+                  border: Border.all(
+                      color: const Color.fromARGB(153, 33, 149, 243)),
+                  borderRadius: const BorderRadius.all(Radius.circular(100)),
+                  image: const DecorationImage(
+                    image: AssetImage("assets/lunchtime.png"),
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
               Form(
                 child: Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.symmetric(vertical: 30),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -130,15 +138,28 @@ class _BuildProfileState extends State<BuildProfile> {
                   ),
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  print("current user: $_currentUser");
-                  // FirebaseAuth.instance.signOut();
-                },
-                child: const Text(
-                  "Sign Out",
+              GestureDetector(
+                onTap: () => print("profile is updated!"),
+                child: Container(
+                  width: getWidth(context) * 2 / 3,
+                  padding: const EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(100, 110, 182, 255),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Finish',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
