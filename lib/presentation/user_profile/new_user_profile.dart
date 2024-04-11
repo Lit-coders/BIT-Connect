@@ -179,12 +179,7 @@ class _BuildProfileState extends State<BuildProfile> {
       _formKey.currentState!.save();
       if (_ppPath != null) {
         String ppUploadResponse = await uploadImgToStorage();
-        if (ppUploadResponse == 'error') {
-          setState(() {
-            _updatingError =
-                "Unable to upload profile picture, Please try again!";
-          });
-        } else {
+        if (ppUploadResponse != "error") {
           updateProfile(
             ppPath: ppUploadResponse,
             fName: _firstNameController.text,
@@ -216,8 +211,12 @@ class _BuildProfileState extends State<BuildProfile> {
       print("ppurl for user $uid : $ppUrl");
       return ppUrl;
     } catch (error) {
-      print("error while uploading pp: $error");
-      return "";
+      final snackBar = ErrorSnackBar(
+          content: "Unable to upload profile picture, check your internet!");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+      }
+      return "error";
     }
   }
 
