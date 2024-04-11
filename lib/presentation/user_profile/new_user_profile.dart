@@ -217,6 +217,7 @@ class _BuildProfileState extends State<BuildProfile> {
   }
 
   Future<String> uploadImgToStorage() async {
+    LoadingSpinner.load(context);
     try {
       final uid = _currentUser!.uid;
       final Reference storageRef =
@@ -234,6 +235,8 @@ class _BuildProfileState extends State<BuildProfile> {
         ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
       }
       return "error";
+    } finally {
+      if (mounted) Navigator.of(context).pop();
     }
   }
 
