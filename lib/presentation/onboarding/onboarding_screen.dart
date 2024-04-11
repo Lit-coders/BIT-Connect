@@ -1,4 +1,4 @@
-import 'package:bit_connect/presentation/home/home_screen.dart';
+import 'package:bit_connect/presentation/auth/auth.dart';
 import 'package:bit_connect/presentation/onboarding/content_model.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,8 @@ class Onboarding extends StatefulWidget {
   State<Onboarding> createState() => _OnbordingState();
 }
 
-class _OnbordingState extends State<Onboarding> {
+class _OnbordingState extends State<Onboarding> 
+{
   int _currentIndex = 0;
   late PageController _controller;
 
@@ -117,7 +118,7 @@ class _OnbordingState extends State<Onboarding> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const Home(),
+                      builder: (_) => const Auth(),
                     ),
                   );
                 } else {
