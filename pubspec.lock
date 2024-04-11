@@ -309,9 +309,7 @@ packages:
       sha256: "9e8c3858111da373efc5aa341de011d9bd23e2c5c5e0c62bccf32438e192d7b1"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
     version: "3.0.2"
-=======
     version: "2.0.3"
   flutter_native_splash:
     dependency: "direct main"
@@ -321,7 +319,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
->>>>>>> 301dd33de2fd26aa473192437a632acba202f7fe
   flutter_onboarding:
     dependency: "direct main"
     description:
@@ -364,7 +361,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "10.7.0"
-<<<<<<< HEAD
   http:
     dependency: transitive
     description:
@@ -445,7 +441,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1+1"
-=======
   html:
     dependency: transitive
     description:
@@ -470,7 +465,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.1"
->>>>>>> 301dd33de2fd26aa473192437a632acba202f7fe
   leak_tracker:
     dependency: transitive
     description:
@@ -527,7 +521,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
-<<<<<<< HEAD
   mime:
     dependency: transitive
     description:
@@ -536,7 +529,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
-=======
   page_transition:
     dependency: transitive
     description:
@@ -545,7 +537,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
->>>>>>> 301dd33de2fd26aa473192437a632acba202f7fe
   path:
     dependency: transitive
     description:
@@ -735,8 +726,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
-<<<<<<< HEAD
-=======
   universal_io:
     dependency: transitive
     description:
@@ -745,7 +734,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.2"
->>>>>>> 301dd33de2fd26aa473192437a632acba202f7fe
   vector_math:
     dependency: transitive
     description:
