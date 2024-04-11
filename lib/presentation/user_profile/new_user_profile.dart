@@ -1,7 +1,11 @@
+import 'dart:io';
+
+import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class BuildProfile extends StatefulWidget {
   const BuildProfile({super.key});
@@ -17,11 +21,76 @@ class _BuildProfileState extends State<BuildProfile> {
   final _deptController = TextEditingController();
   final _yearController = TextEditingController();
 
+  File? _ppPath;
+  String? firstName;
+  String? lastName;
+  String? dept;
+  int? year;
+
+  final _imgPicker = ImagePicker();
+
   @override
   void dispose() {
     _firstNameController.dispose();
 
     super.dispose();
+  }
+
+  Future<void> pickImage() async {
+    try {
+      final pickedFile =
+          await _imgPicker.pickImage(source: ImageSource.gallery);
+      if (pickedFile != null) {
+        setState(() {
+          _ppPath = File(pickedFile.path);
+        });
+      }
+    } catch (error) {
+      final snackBar =
+          ErrorSnackBar(content: "Unable to pick image, please try again!");
+      ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+    }
+  }
+
+  Widget iconButton() {
+    return IconButton(
+      onPressed: () => pickImage(),
+      icon: Icon(
+        Icons.add_photo_alternate,
+        color: Colors.blue[400],
+        size: 30,
+      ),
+    );
+  }
+
+  Widget selectedImage() {
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(Radius.circular(100)),
+      child: Image.file(
+        _ppPath!.absolute,
+        fit: BoxFit.cover,
+        width: getWidth(context) * 1 / 3 + 20,
+        height: getWidth(context) * 1 / 3 + 20,
+      ),
+    );
+  }
+
+  Widget imgBtn() {
+    return ElevatedButton(
+      onPressed: () => pickImage(),
+      style: const ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll(
+            Color.fromARGB(56, 232, 241, 247),
+          ),
+          padding: MaterialStatePropertyAll(
+            EdgeInsets.symmetric(horizontal: 10),
+          ),
+          shadowColor: MaterialStatePropertyAll(Colors.transparent)),
+      child: Text(
+        _ppPath == null ? 'Upload Profile Picture' : 'Change Profile Picture',
+        style: const TextStyle(color: Colors.blue),
+      ),
+    );
   }
 
   @override
@@ -68,20 +137,20 @@ class _BuildProfileState extends State<BuildProfile> {
           child: Column(
             children: [
               Container(
-                width: getWidth(context) * 1 / 3,
-                height: getWidth(context) * 1 / 3,
-                padding: const EdgeInsets.all(3),
+                width: getWidth(context) * 1 / 3 + 20,
+                height: getWidth(context) * 1 / 3 + 20,
+                padding: const EdgeInsets.all(5),
+                margin: const EdgeInsets.only(bottom: 5),
                 decoration: BoxDecoration(
-                  color: Colors.blue[100],
-                  border: Border.all(
-                      color: const Color.fromARGB(153, 33, 149, 243)),
-                  borderRadius: const BorderRadius.all(Radius.circular(100)),
-                  image: const DecorationImage(
-                    image: AssetImage("assets/lunchtime.png"),
-                    fit: BoxFit.cover,
-                  ),
+                    border: Border.all(
+                      color: const Color.fromARGB(200, 33, 149, 243),
+                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(100))),
+                child: Center(
+                  child: _ppPath == null ? iconButton() : selectedImage(),
                 ),
               ),
+              imgBtn(),
               Form(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30),
