@@ -13,6 +13,7 @@ Future<void> main() async {
             appId: "1:880080912408:android:451d0acd1adf12a566036d",
             messagingSenderId: "880080912408",
             projectId: "bit-connect-7569f",
+            storageBucket: "gs://bit-connect-7569f.appspot.com",
           ),
         )
       : await Firebase.initializeApp();
