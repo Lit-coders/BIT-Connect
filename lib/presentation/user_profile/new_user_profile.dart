@@ -28,7 +28,6 @@ class _BuildProfileState extends State<BuildProfile> {
 
   File? _ppPath;
   final _imgPicker = ImagePicker();
-  String _updatingError = "";
 
   @override
   void dispose() {
@@ -59,15 +58,23 @@ class _BuildProfileState extends State<BuildProfile> {
         final snackBar = ErrorSnackBar(
             content: "Congrats!, you have updated you profile successfully!");
         ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+
+        // navigate to home
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => Home(currentUID: _currentUser!.uid),
+          ),
+        );
       }
     } catch (error) {
-      final snackBar = ErrorSnackBar(content: "something went wrong: $error");
+      final snackBar = ErrorSnackBar(
+          content:
+              "Unable to upload profile data, Please check you connection!");
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
       }
-    } finally {
-      if (mounted) Navigator.of(context).pop();
     }
+    if (mounted) Navigator.of(context).pop();
   }
 
   // handle picking an image with image_picker package
@@ -205,14 +212,14 @@ class _BuildProfileState extends State<BuildProfile> {
       final Reference storageRef =
           FirebaseStorage.instance.ref().child("profile_pic/$uid.jpg");
       UploadTask uploadTask = storageRef.putFile(_ppPath!);
-      await uploadTask.whenComplete(() => null);
 
+      await uploadTask.whenComplete(() => null);
       String ppUrl = await storageRef.getDownloadURL();
-      print("ppurl for user $uid : $ppUrl");
       return ppUrl;
     } catch (error) {
       final snackBar = ErrorSnackBar(
-          content: "Unable to upload profile picture, check your internet!");
+          content:
+              "Unable to upload profile picture, please check your connection!");
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
       }
@@ -241,7 +248,7 @@ class _BuildProfileState extends State<BuildProfile> {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const Home(),
+                    builder: (context) => Home(currentUID: _currentUser!.uid),
                   ),
                 );
               },
