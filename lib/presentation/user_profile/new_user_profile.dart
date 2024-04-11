@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
+import 'package:bit_connect/presentation/auth/components/loading_spinner.dart';
 import 'package:bit_connect/presentation/home/home.dart';
 import 'package:bit_connect/searvices/helpers.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -39,13 +41,34 @@ class _BuildProfileState extends State<BuildProfile> {
   }
 
   // updated data sender function : to database
-  Future<void> updateProfile(
-      {ppPath,
-      required fName,
-      required lName,
-      required dept,
-      required year}) async {
-    print("new User: fName: $fName, lName: $lName, dept: $dept, year: $year");
+  Future<void> updateProfile({
+    ppPath,
+    required fName,
+    required lName,
+    required dept,
+    required year,
+  }) async {
+    LoadingSpinner.load(context);
+    try {
+      await FirebaseFirestore.instance.collection("user_data").add({
+        'fname': fName,
+        'lname': lName,
+        'year': year,
+        'dept': dept,
+        'id': _currentUser!.uid,
+      });
+
+      if (mounted) {
+        final snackBar = ErrorSnackBar(
+            content: "Congrats!, you have updated you profile successfully!");
+        ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+      }
+    } catch (error) {
+      final snackBar = ErrorSnackBar(content: "something went wrong: $error");
+      ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+    } finally {
+      Navigator.of(context).pop();
+    }
   }
 
   // handle picking an image with image_picker package
