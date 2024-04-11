@@ -13,8 +13,14 @@ import 'package:image_picker/image_picker.dart';
 class BuildProfile extends StatefulWidget {
   final String email;
   final String password;
+  final VoidCallback toggleToLogin;
 
-  const BuildProfile({super.key, required this.email, required this.password});
+  const BuildProfile({
+    super.key,
+    required this.email,
+    required this.password,
+    required this.toggleToLogin,
+  });
 
   @override
   State<BuildProfile> createState() => _BuildProfileState();
@@ -235,6 +241,7 @@ class _BuildProfileState extends State<BuildProfile> {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: widget.email, password: widget.password);
+      widget.toggleToLogin();
     } on FirebaseAuthException catch (error) {
       final snackBar =
           ErrorSnackBar(content: "Unable to sign in, ${error.code}");
