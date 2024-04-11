@@ -23,14 +23,12 @@ class _HomeState extends State<Home> {
     ["Lounge", "assets/icons/lounge.png"],
     ["Calculator", "assets/icons/calc.png"]
   ];
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
+    return Scaffold(
           key: _scaffoldKey,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
@@ -63,12 +61,12 @@ class _HomeState extends State<Home> {
               padding: EdgeInsets.zero,
               children: <Widget>[
                 DrawerHeader(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: ColorAssets.bduColor,
                   ),
                   child: Container(
                     alignment: Alignment.centerLeft,
-                    child: Text(
+                    child: const Text(
                       'BiT Connect',
                       style: TextStyle(
                           color: Colors.white,
@@ -78,8 +76,8 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.home),
-                  title: Text(
+                  leading: const Icon(Icons.home),
+                  title: const Text(
                     'Home',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
@@ -88,8 +86,8 @@ class _HomeState extends State<Home> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.category_sharp),
-                  title: Text(
+                  leading: const Icon(Icons.category_sharp),
+                  title: const Text(
                     'Cafe',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
@@ -98,8 +96,8 @@ class _HomeState extends State<Home> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.favorite),
-                  title: Text(
+                  leading: const Icon(Icons.favorite),
+                  title: const Text(
                     'Lounge',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
@@ -108,8 +106,8 @@ class _HomeState extends State<Home> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.book_rounded),
-                  title: Text(
+                  leading: const Icon(Icons.book_rounded),
+                  title: const Text(
                     'Location',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
@@ -118,8 +116,8 @@ class _HomeState extends State<Home> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.info_outlined),
-                  title: Text(
+                  leading: const Icon(Icons.info_outlined),
+                  title: const Text(
                     'Departments',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
@@ -136,7 +134,7 @@ class _HomeState extends State<Home> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      title: Text(
+                      title: const Text(
                         textAlign: TextAlign.center,
                         'Logout',
                         style: TextStyle(
@@ -151,8 +149,6 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-
-                // Add more ListTile widgets for additional menu items
               ],
             ),
           ),
@@ -214,8 +210,8 @@ class _HomeState extends State<Home> {
                       builder: (BuildContext context) {
                         return Container(
                           width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(horizontal: 10.0),
-                          decoration: BoxDecoration(
+                          margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                          decoration: const BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage('assets/bdu.png'),
                               fit: BoxFit.cover,
@@ -315,6 +311,6 @@ class _HomeState extends State<Home> {
               //Handle button tap
             },
           ),
-        ));
+        );
   }
 }
