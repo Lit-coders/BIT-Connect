@@ -183,7 +183,7 @@ class _SignUpState extends State<SignUP> {
                       _signUpError,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        color: Colors.blue,
+                        color: Colors.red,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
