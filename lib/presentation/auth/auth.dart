@@ -14,10 +14,19 @@ class Auth extends StatefulWidget {
 
 class _AuthState extends State<Auth> {
   bool _showLoginPage = true;
+  String? _signUpPass;
+  String? _signUpEmail;
 
   void toggleAuthScreens() {
     setState(() {
       _showLoginPage = !_showLoginPage;
+    });
+  }
+
+  void setSignUpData(String email, String pass) {
+    setState(() {
+      _signUpPass = pass;
+      _signUpEmail = email;
     });
   }
 
@@ -36,13 +45,16 @@ class _AuthState extends State<Auth> {
           if (_showLoginPage) {
             return const Home();
           } else {
-            return const BuildProfile();
+            return BuildProfile(email: _signUpEmail!, password: _signUpPass!);
           }
         } else {
           if (_showLoginPage) {
             return Login(toggleToSignUP: toggleAuthScreens);
           } else {
-            return SignUP(toggleToLogin: toggleAuthScreens);
+            return SignUP(
+              toggleToLogin: toggleAuthScreens,
+              setSignUpData: setSignUpData,
+            );
           }
         }
       },
