@@ -45,7 +45,11 @@ class _AuthState extends State<Auth> {
           if (_showLoginPage) {
             return const Home();
           } else {
-            return BuildProfile(email: _signUpEmail!, password: _signUpPass!);
+            return BuildProfile(
+              email: _signUpEmail!,
+              password: _signUpPass!,
+              toggleToLogin: toggleAuthScreens,
+            );
           }
         } else {
           if (_showLoginPage) {
