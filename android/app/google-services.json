@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "880080912408",
+    "project_id": "bit-connect-7569f",
+    "storage_bucket": "bit-connect-7569f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880080912408:android:451d0acd1adf12a566036d",
+        "android_client_info": {
+          "package_name": "com.example.bit_connect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZUj7DJ0vSNqkvIdGaI6E4O1j_eMp5Sxc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

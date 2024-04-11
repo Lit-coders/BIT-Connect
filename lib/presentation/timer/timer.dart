@@ -59,7 +59,7 @@ class _PomodoroState extends State<Pomodoro> {
         body: Container(
           decoration: const BoxDecoration(
               gradient: LinearGradient(
-                  colors: [ColorAssets.lightYellow, ColorAssets.bduColor],
+                  colors: [Color.fromARGB(255, 15, 132, 233), ColorAssets.bduColor],
                   begin: FractionalOffset(0.5, 1))),
           width: double.infinity,
           child: Column(
@@ -75,7 +75,7 @@ class _PomodoroState extends State<Pomodoro> {
               ),
               Container(
                 width: 200,
-                height: 300,
+                height: 400,
                 child: CircularPercentIndicator(
                   circularStrokeCap: CircularStrokeCap.round,
                   percent: percent,

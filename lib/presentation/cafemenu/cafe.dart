@@ -4,8 +4,8 @@ import 'package:bit_connect/utils/constants/padConstants.dart';
 import 'package:flutter/material.dart';
 
 class CafeMenu extends StatefulWidget {
-  const CafeMenu({super.key});
-
+  CafeMenu({super.key});
+  final List<String> tabTitle = ['M', "T", 'W', 'T', 'F', 'S', 'S'];
   @override
   State<CafeMenu> createState() => _CafeMenuState();
 }
@@ -14,6 +14,7 @@ class _CafeMenuState extends State<CafeMenu> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
@@ -158,15 +159,58 @@ class _CafeMenuState extends State<CafeMenu> {
               ],
             ),
           ),
+          // body: TabBarView(
+          //   children: <Widget>[
+          //     _buildListViewMenu('M'),
+          //     _buildListViewMenu('T'),
+          //     _buildListViewMenu('W'),
+          //     _buildListViewMenu('T'),
+          //     _buildListViewMenu('F'),
+          //     _buildListViewMenu('S'),
+          //     _buildListViewMenu('S')
+          //   ],
+          // ),
+
           body: TabBarView(
-            children: <Widget>[
-              _buildListViewMenu('M'),
-              _buildListViewMenu('T'),
-              _buildListViewMenu('W'),
-              _buildListViewMenu('T'),
-              _buildListViewMenu('F'),
-              _buildListViewMenu('S'),
-              _buildListViewMenu('S')
+            children: [
+              // Contents of Tab 1
+              TabContent(
+                title: 'Food 1',
+                image: 'assets/menu1.png',
+                name: 'Food Name 1',
+              ),
+              // Contents of Tab 2
+              TabContent(
+                title: 'Food 2',
+                image: 'assets/menu1.png',
+                name: 'Food Name 2',
+              ),
+              // Contents of Tab 3
+              TabContent(
+                title: 'Food 3',
+                image: 'assets/menu1.png',
+                name: 'Food Name 3',
+              ),
+               TabContent(
+                title: 'Food 3',
+                image: 'assets/menu1.png',
+                name: 'Food Name 3',
+              ),
+               TabContent(
+                title: 'Food 3',
+                image: 'assets/menu1.png',
+                name: 'Food Name 3',
+              ),
+               TabContent(
+                title: 'Food 3',
+                image: 'assets/menu1.png',
+                name: 'Food Name 3',
+              ),
+               TabContent(
+                title: 'Food 3',
+                image: 'assets/menu1.png',
+                name: 'Food Name 3',
+              ),
             ],
           ),
           drawer: Drawer(
@@ -287,39 +331,49 @@ class _CafeMenuState extends State<CafeMenu> {
     );
   }
 }
-ListView _buildListViewMenu(String s) {
 
-  return ListView.builder(
-    itemBuilder: (context, index) => ListTile(
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '$s $index', // Example text, replace with your description
-            style: const TextStyle(
-              fontSize: 16, // Adjust font size as needed
-              fontWeight: FontWeight.bold, // Adjust font weight as needed
-            ),
-          ),
-          const SizedBox(height: 5), // Adjust spacing between text and image
-          Image.asset(
-            'assets/images/menu_item_$index.png', // Replace with your image path
-            width: 100, // Adjust width as needed
-            height: 100, // Adjust height as needed
-            fit: BoxFit.cover, // Adjust fit as needed
-          ),
-          const SizedBox(height: 5), // Adjust spacing between image and text
-          Text(
-            'Description of item $index', // Example description, replace with your actual descriptions
-            style: const TextStyle(
-              fontSize: 14, // Adjust font size as needed
-            ),
-          ),
-        ],
+// }
+
+class TabContent extends StatelessWidget {
+  final String title;
+  final String image;
+  final String name;
+
+  TabContent({
+    required this.title,
+    required this.image,
+    required this.name,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ListView(
+        children: [Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(title, style: TextStyle(fontSize: 24)),
+            SizedBox(height: 16),
+            Image.asset(image,
+                width: 380, height: 200), // Use your own image assets
+            SizedBox(height: 16),
+            Text(name, style: TextStyle(fontSize: 18)),
+             Text(title, style: TextStyle(fontSize: 24)),
+            SizedBox(height: 16),
+            Image.asset(image,
+                width: 380, height: 200), // Use your own image assets
+            SizedBox(height: 16),
+            Text(name, style: TextStyle(fontSize: 18)),
+             Text(title, style: TextStyle(fontSize: 24)),
+            SizedBox(height: 16),
+            Image.asset(image,
+                width: 380, height: 200), // Use your own image assets
+            SizedBox(height: 16),
+            Text(name, style: TextStyle(fontSize: 18)),
+          ],
+        ),]
       ),
-      onTap: () {
-        // Handle item tap
-      },
-    ),
-  );
+    );
+  }
 }
+ 
