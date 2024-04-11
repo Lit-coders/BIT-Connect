@@ -39,7 +39,7 @@ class _BuildProfileState extends State<BuildProfile> {
 
   // updated data sender function : to database
   Future<void> updateProfile({
-    ppPath,
+    String? ppPath,
     required fName,
     required lName,
     required dept,
@@ -47,12 +47,12 @@ class _BuildProfileState extends State<BuildProfile> {
   }) async {
     LoadingSpinner.load(context);
     try {
-      await FirebaseFirestore.instance.collection("user_data").add({
-        'fname': fName,
-        'lname': lName,
+      await FirebaseFirestore.instance.collection("users").add({
+        'fName': fName,
+        'lLame': lName,
         'year': year,
         'dept': dept,
-        'id': _currentUser!.uid,
+        'ppUrl': ppPath ?? "",
       });
 
       if (mounted) {
