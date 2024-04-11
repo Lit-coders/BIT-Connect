@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
 import 'package:bit_connect/presentation/auth/components/loading_spinner.dart';
-import 'package:bit_connect/presentation/home/home.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,7 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class BuildProfile extends StatefulWidget {
-  const BuildProfile({super.key});
+  final String email;
+  final String password;
+
+  const BuildProfile({super.key, required this.email, required this.password});
 
   @override
   State<BuildProfile> createState() => _BuildProfileState();
@@ -37,7 +39,7 @@ class _BuildProfileState extends State<BuildProfile> {
   }
 
   // updated data sender function : to database
-  Future<void> updateProfile({
+  Future<String> updateProfile({
     String? ppPath,
     required fName,
     required lName,
@@ -53,19 +55,13 @@ class _BuildProfileState extends State<BuildProfile> {
         'dept': dept,
         'ppUrl': ppPath ?? "",
       });
-
       if (mounted) {
         final snackBar = ErrorSnackBar(
             content: "Congrats!, you have updated you profile successfully!");
         ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
-
-        // navigate to home
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => Home(currentUID: _currentUser!.uid),
-          ),
-        );
       }
+
+      return 'success';
     } catch (error) {
       final snackBar = ErrorSnackBar(
           content:
@@ -73,8 +69,10 @@ class _BuildProfileState extends State<BuildProfile> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
       }
+      return "error";
+    } finally {
+      if (mounted) Navigator.of(context).pop();
     }
-    if (mounted) Navigator.of(context).pop();
   }
 
   // handle picking an image with image_picker package
@@ -182,12 +180,13 @@ class _BuildProfileState extends State<BuildProfile> {
   }
 
   Future<void> finishUpdatingProfile() async {
+    String status = "";
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       if (_ppPath != null) {
         String ppUploadResponse = await uploadImgToStorage();
         if (ppUploadResponse != "error") {
-          updateProfile(
+          status = await updateProfile(
             ppPath: ppUploadResponse,
             fName: _firstNameController.text,
             lName: _lastNameController.text,
@@ -196,12 +195,17 @@ class _BuildProfileState extends State<BuildProfile> {
           );
         }
       } else {
-        updateProfile(
+        status = await updateProfile(
           fName: _firstNameController.text,
           lName: _lastNameController.text,
           dept: _deptController.text,
           year: _yearController.text,
         );
+      }
+
+      // sign in and go to home
+      if (status == 'success') {
+        singIn();
       }
     }
   }
@@ -227,6 +231,19 @@ class _BuildProfileState extends State<BuildProfile> {
     }
   }
 
+  Future<void> singIn() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: widget.email, password: widget.password);
+    } on FirebaseAuthException catch (error) {
+      final snackBar =
+          ErrorSnackBar(content: "Unable to sign in, ${error.code}");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -245,13 +262,7 @@ class _BuildProfileState extends State<BuildProfile> {
           ),
           actions: [
             OutlinedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => Home(currentUID: _currentUser!.uid),
-                  ),
-                );
-              },
+              onPressed: () => singIn(),
               style: const ButtonStyle(
                 side: MaterialStatePropertyAll(
                   BorderSide(
