@@ -7,6 +7,7 @@ import 'package:bit_connect/presentation/home/home.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -26,12 +27,8 @@ class _BuildProfileState extends State<BuildProfile> {
   final _yearController = TextEditingController();
 
   File? _ppPath;
-  String? firstName;
-  String? lastName;
-  String? dept;
-  int? year;
-
   final _imgPicker = ImagePicker();
+  String _updatingError = "";
 
   @override
   void dispose() {
@@ -177,15 +174,50 @@ class _BuildProfileState extends State<BuildProfile> {
     }
   }
 
-  void finishUpdatingProfile() {
+  Future<void> finishUpdatingProfile() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      updateProfile(
-        fName: _firstNameController.text,
-        lName: _lastNameController.text,
-        dept: _deptController.text,
-        year: _yearController.text,
-      );
+      if (_ppPath != null) {
+        String ppUploadResponse = await uploadImgToStorage();
+        if (ppUploadResponse == 'error') {
+          setState(() {
+            _updatingError =
+                "Unable to upload profile picture, Please try again!";
+          });
+        } else {
+          updateProfile(
+            ppPath: ppUploadResponse,
+            fName: _firstNameController.text,
+            lName: _lastNameController.text,
+            dept: _deptController.text,
+            year: _yearController.text,
+          );
+        }
+      } else {
+        updateProfile(
+          fName: _firstNameController.text,
+          lName: _lastNameController.text,
+          dept: _deptController.text,
+          year: _yearController.text,
+        );
+      }
+    }
+  }
+
+  Future<String> uploadImgToStorage() async {
+    try {
+      final uid = _currentUser!.uid;
+      final Reference storageRef =
+          FirebaseStorage.instance.ref().child("profile_pic/$uid.jpg");
+      UploadTask uploadTask = storageRef.putFile(_ppPath!);
+      await uploadTask.whenComplete(() => null);
+
+      String ppUrl = await storageRef.getDownloadURL();
+      print("ppurl for user $uid : $ppUrl");
+      return ppUrl;
+    } catch (error) {
+      print("error while uploading pp: $error");
+      return "";
     }
   }
 
