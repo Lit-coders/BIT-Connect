@@ -15,6 +15,7 @@ class BuildProfile extends StatefulWidget {
 }
 
 class _BuildProfileState extends State<BuildProfile> {
+  final GlobalKey<FormState> _formKey = GlobalKey();
   final _currentUser = FirebaseAuth.instance.currentUser;
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
@@ -36,6 +37,17 @@ class _BuildProfileState extends State<BuildProfile> {
     super.dispose();
   }
 
+  // updated data sender function : to database
+  Future<void> updateProfile(
+      {ppPath,
+      required fName,
+      required lName,
+      required dept,
+      required year}) async {
+    print("new User: fName: $fName, lName: $lName, dept: $dept, year: $year");
+  }
+
+  // handle picking an image with image_picker package
   Future<void> pickImage() async {
     try {
       final pickedFile =
@@ -91,6 +103,62 @@ class _BuildProfileState extends State<BuildProfile> {
         style: const TextStyle(color: Colors.blue),
       ),
     );
+  }
+
+  // validators
+  String? validateFName(value) {
+    if (value.isEmpty) {
+      return "Please enter your first name";
+    } else {
+      return null;
+    }
+  }
+
+  String? validateLName(value) {
+    if (value.isEmpty) {
+      return "Please enter your last name";
+    } else {
+      return null;
+    }
+  }
+
+  String? validateDet(value) {
+    if (value.isEmpty) {
+      return "Please enter your dept";
+    } else {
+      return null;
+    }
+  }
+
+  String? validateYear(value) {
+    if (value.isEmpty) {
+      return "Please enter your years in campus!";
+    } else {
+      return null;
+    }
+  }
+
+  void checkYear(value) {
+    final pattern = RegExp(r'[0-9]{1}');
+    if (pattern.hasMatch(value)) {
+      setState(() {
+        _yearController.text = value[0];
+      });
+    } else {
+      _yearController.clear();
+    }
+  }
+
+  void finishUpdatingProfile() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      updateProfile(
+        fName: _firstNameController.text,
+        lName: _lastNameController.text,
+        dept: _deptController.text,
+        year: _yearController.text,
+      );
+    }
   }
 
   @override
@@ -152,6 +220,7 @@ class _BuildProfileState extends State<BuildProfile> {
               ),
               imgBtn(),
               Form(
+                key: _formKey,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30),
                   child: SingleChildScrollView(
@@ -159,9 +228,7 @@ class _BuildProfileState extends State<BuildProfile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         InputField(
-                          validator: (value) {
-                            return null;
-                          },
+                          validator: validateFName,
                           controller: _firstNameController,
                           width: getWidth(context),
                           hintText: "First Name",
@@ -170,9 +237,7 @@ class _BuildProfileState extends State<BuildProfile> {
                           onChange: (value) {},
                         ),
                         InputField(
-                          validator: (value) {
-                            return null;
-                          },
+                          validator: validateLName,
                           controller: _lastNameController,
                           width: getWidth(context),
                           hintText: "Last Name",
@@ -181,9 +246,7 @@ class _BuildProfileState extends State<BuildProfile> {
                           onChange: (value) {},
                         ),
                         InputField(
-                          validator: (value) {
-                            return null;
-                          },
+                          validator: validateDet,
                           controller: _deptController,
                           width: getWidth(context),
                           hintText: "Department",
@@ -192,15 +255,13 @@ class _BuildProfileState extends State<BuildProfile> {
                           onChange: (value) {},
                         ),
                         InputField(
-                          validator: (value) {
-                            return null;
-                          },
+                          validator: validateYear,
                           controller: _yearController,
                           width: getWidth(context),
                           hintText: "Year",
                           isReadOnly: false,
                           hasObscure: false,
-                          onChange: (value) {},
+                          onChange: checkYear,
                         ),
                       ],
                     ),
@@ -208,7 +269,7 @@ class _BuildProfileState extends State<BuildProfile> {
                 ),
               ),
               GestureDetector(
-                onTap: () => print("profile is updated!"),
+                onTap: () => finishUpdatingProfile(),
                 child: Container(
                   width: getWidth(context) * 2 / 3,
                   padding: const EdgeInsets.all(10),
