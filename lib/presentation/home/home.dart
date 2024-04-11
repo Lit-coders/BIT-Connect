@@ -1,15 +1,16 @@
-import 'package:bit_connect/utils/constants/padConstants.dart';
-import 'package:bit_connect/utils/gridforhome.dart';
-import 'package:carousel_slider/carousel_options.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/material.dart';
-import '../../utils/constants/colorAssets.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'dart:ui';
 import 'dart:io';
 
+import 'package:bit_connect/utils/constants/padConstants.dart';
+import 'package:bit_connect/utils/gridforhome.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/material.dart';
+
+import '../../utils/constants/colorAssets.dart';
+
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final String currentUID;
+  const Home({super.key, required this.currentUID});
 
   @override
   State<Home> createState() => _HomeState();
@@ -156,7 +157,6 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          
           backgroundColor: Colors.white,
           body: SafeArea(
             child: Column(
