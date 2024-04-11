@@ -1,15 +1,15 @@
-import 'package:bit_connect/presentation/home/home.dart';
+import 'package:bit_connect/presentation/home/home_screen.dart';
 import 'package:bit_connect/presentation/onboarding/content_model.dart';
-import 'package:bit_connect/utils/constants/colorAssets.dart';
+import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
 
-class Onbording extends StatefulWidget {
-  const Onbording({super.key});
+class Onboarding extends StatefulWidget {
+  const Onboarding({super.key});
   @override
-  State<Onbording> createState() => _OnbordingState();
+  State<Onboarding> createState() => _OnbordingState();
 }
 
-class _OnbordingState extends State<Onbording> {
+class _OnbordingState extends State<Onboarding> {
   int _currentIndex = 0;
   late PageController _controller;
 

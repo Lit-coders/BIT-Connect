@@ -2,9 +2,8 @@ import 'dart:io';
 
 import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
-import 'package:bit_connect/presentation/home/home.dart';
+import 'package:bit_connect/presentation/home/home_screen.dart';
 import 'package:bit_connect/searvices/helpers.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -17,7 +16,6 @@ class BuildProfile extends StatefulWidget {
 
 class _BuildProfileState extends State<BuildProfile> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-  final _currentUser = FirebaseAuth.instance.currentUser;
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _deptController = TextEditingController();

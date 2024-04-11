@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:bit_connect/utils/constants/colorAssets.dart';
-import 'package:bit_connect/utils/constants/padConstants.dart';
+import 'package:bit_connect/utils/constants/color_assets.dart';
+import 'package:bit_connect/utils/constants/padding_constants.dart';
 import 'package:flutter/material.dart';
 
 class CafeMenu extends StatefulWidget {
@@ -171,7 +171,7 @@ class _CafeMenuState extends State<CafeMenu> {
           //   ],
           // ),
 
-          body: TabBarView(
+          body: const TabBarView(
             children: [
               // Contents of Tab 1
               TabContent(
@@ -191,22 +191,22 @@ class _CafeMenuState extends State<CafeMenu> {
                 image: 'assets/menu1.png',
                 name: 'Food Name 3',
               ),
-               TabContent(
+              TabContent(
                 title: 'Food 3',
                 image: 'assets/menu1.png',
                 name: 'Food Name 3',
               ),
-               TabContent(
+              TabContent(
                 title: 'Food 3',
                 image: 'assets/menu1.png',
                 name: 'Food Name 3',
               ),
-               TabContent(
+              TabContent(
                 title: 'Food 3',
                 image: 'assets/menu1.png',
                 name: 'Food Name 3',
               ),
-               TabContent(
+              TabContent(
                 title: 'Food 3',
                 image: 'assets/menu1.png',
                 name: 'Food Name 3',
@@ -339,7 +339,8 @@ class TabContent extends StatelessWidget {
   final String image;
   final String name;
 
-  TabContent({
+  const TabContent({
+    super.key,
     required this.title,
     required this.image,
     required this.name,
@@ -348,32 +349,31 @@ class TabContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ListView(
-        children: [Column(
+      child: ListView(children: [
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(title, style: TextStyle(fontSize: 24)),
-            SizedBox(height: 16),
+            Text(title, style: const TextStyle(fontSize: 24)),
+            const SizedBox(height: 16),
             Image.asset(image,
                 width: 380, height: 200), // Use your own image assets
-            SizedBox(height: 16),
-            Text(name, style: TextStyle(fontSize: 18)),
-             Text(title, style: TextStyle(fontSize: 24)),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
+            Text(name, style: const TextStyle(fontSize: 18)),
+            Text(title, style: const TextStyle(fontSize: 24)),
+            const SizedBox(height: 16),
             Image.asset(image,
                 width: 380, height: 200), // Use your own image assets
-            SizedBox(height: 16),
-            Text(name, style: TextStyle(fontSize: 18)),
-             Text(title, style: TextStyle(fontSize: 24)),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
+            Text(name, style: const TextStyle(fontSize: 18)),
+            Text(title, style: const TextStyle(fontSize: 24)),
+            const SizedBox(height: 16),
             Image.asset(image,
                 width: 380, height: 200), // Use your own image assets
-            SizedBox(height: 16),
-            Text(name, style: TextStyle(fontSize: 18)),
+            const SizedBox(height: 16),
+            Text(name, style: const TextStyle(fontSize: 18)),
           ],
-        ),]
-      ),
+        ),
+      ]),
     );
   }
 }
- 

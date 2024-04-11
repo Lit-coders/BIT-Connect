@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:bit_connect/utils/constants/colorAssets.dart';
-import 'package:bit_connect/utils/constants/padConstants.dart';
+import 'package:bit_connect/utils/constants/color_assets.dart';
+import 'package:bit_connect/utils/constants/padding_constants.dart';
 import 'package:flutter/material.dart';
 
 class StudentClubs extends StatefulWidget {
-  const StudentClubs({Key? key}) : super(key: key);
+  const StudentClubs({super.key});
 
   @override
   State<StudentClubs> createState() => _StudentClubsState();
@@ -14,17 +14,17 @@ class StudentClubs extends StatefulWidget {
 class _StudentClubsState extends State<StudentClubs> {
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        key: _scaffoldKey,
+        key: scaffoldKey,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: TextButton(
             onPressed: () {
-              _scaffoldKey.currentState?.openDrawer();
+              scaffoldKey.currentState?.openDrawer();
             },
             child: Image.asset(
               'assets/icons/menu.png',
@@ -65,7 +65,7 @@ class _StudentClubsState extends State<StudentClubs> {
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.home),
+                leading: const Icon(Icons.home),
                 title: const Text(
                   'Home',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
@@ -75,7 +75,7 @@ class _StudentClubsState extends State<StudentClubs> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.category_sharp),
+                leading: const Icon(Icons.category_sharp),
                 title: const Text(
                   'Cafe',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
@@ -85,7 +85,7 @@ class _StudentClubsState extends State<StudentClubs> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.favorite),
+                leading: const Icon(Icons.favorite),
                 title: const Text(
                   'Lounge',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
@@ -95,7 +95,7 @@ class _StudentClubsState extends State<StudentClubs> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.book_rounded),
+                leading: const Icon(Icons.book_rounded),
                 title: const Text(
                   'Location',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
@@ -147,52 +147,47 @@ class _StudentClubsState extends State<StudentClubs> {
           padding: const EdgeInsets.only(top: 16.0),
           child: Column(
             children: [
-              Builder(
-                builder: (context) {
-                  return TextButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                          
-                          backgroundColor: Color.fromARGB(255, 0, 120, 225),
-                          builder: (BuildContext context) {
-                            return SizedBox(
-                              height: 400,
-                              width: MediaQuery.of(context).size.width,
-                              child: Container(
-                                child: Text
-                                ('Trial'),
-                              ),
-                            ); 
-                          }, context: Navigator.of(context).context);
-                    },
-                    child: Center(
-                      child: Container(
-                        width: 350,
-                        alignment: Alignment.centerRight,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              color: ColorAssets.bduColor,
-                              width: 4), // Add border color
-                          // boxShadow:
-                        ),
-                        child: Material(
-                          elevation: 8,
-                          shadowColor: ColorAssets.bduColor.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(8),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.all(8),
-                            title: const Text("RDL"),
-                            tileColor: ColorAssets.white,
-                            onTap: () {},
-                            leading: Image.asset('assets/stclubs/club1.png'),
-                          ),
+              Builder(builder: (context) {
+                return TextButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                        backgroundColor: const Color.fromARGB(255, 0, 120, 225),
+                        builder: (BuildContext context) {
+                          return SizedBox(
+                            height: 400,
+                            width: MediaQuery.of(context).size.width,
+                            child: const Text('Trial'),
+                          );
+                        },
+                        context: Navigator.of(context).context);
+                  },
+                  child: Center(
+                    child: Container(
+                      width: 350,
+                      alignment: Alignment.centerRight,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                            color: ColorAssets.bduColor,
+                            width: 4), // Add border color
+                        // boxShadow:
+                      ),
+                      child: Material(
+                        elevation: 8,
+                        shadowColor: ColorAssets.bduColor.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(8),
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.all(8),
+                          title: const Text("RDL"),
+                          tileColor: ColorAssets.white,
+                          onTap: () {},
+                          leading: Image.asset('assets/stclubs/club1.png'),
                         ),
                       ),
                     ),
-                  );
-                }
-              ),
+                  ),
+                );
+              }),
             ],
           ),
         ),

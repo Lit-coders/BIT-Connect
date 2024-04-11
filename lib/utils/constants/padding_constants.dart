@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class PaddingConstant {
   static const double forPersonIcon = 100;
   static const double horizontalPadding = 30;

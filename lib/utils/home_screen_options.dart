@@ -1,5 +1,4 @@
-import 'package:bit_connect/utils/constants/colorAssets.dart';
-import 'package:flutter/foundation.dart';
+import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
 
 class HomePageOptions extends StatelessWidget {
@@ -15,8 +14,7 @@ class HomePageOptions extends StatelessWidget {
       padding: const EdgeInsets.all(30.0),
       child: Container(
         decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 255, 248, 225), 
-
+            color: const Color.fromARGB(255, 255, 248, 225),
             borderRadius: BorderRadius.circular(10)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
