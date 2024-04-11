@@ -3,7 +3,7 @@ import 'package:bit_connect/utils/gridforhome.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import '../utils/constants/colorAssets.dart';
+import '../../utils/constants/colorAssets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'dart:ui';
 import 'dart:io';
@@ -63,12 +63,12 @@ class _HomeState extends State<Home> {
               padding: EdgeInsets.zero,
               children: <Widget>[
                 DrawerHeader(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: ColorAssets.bduColor,
                   ),
                   child: Container(
                     alignment: Alignment.centerLeft,
-                    child: Text(
+                    child: const Text(
                       'BiT Connect',
                       style: TextStyle(
                           color: Colors.white,
@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
                 ),
                 ListTile(
                   leading: Icon(Icons.home),
-                  title: Text(
+                  title: const Text(
                     'Home',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
@@ -89,7 +89,7 @@ class _HomeState extends State<Home> {
                 ),
                 ListTile(
                   leading: Icon(Icons.category_sharp),
-                  title: Text(
+                  title: const Text(
                     'Cafe',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
@@ -99,7 +99,7 @@ class _HomeState extends State<Home> {
                 ),
                 ListTile(
                   leading: Icon(Icons.favorite),
-                  title: Text(
+                  title: const Text(
                     'Lounge',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),

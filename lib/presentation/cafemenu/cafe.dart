@@ -1,13 +1,11 @@
 import 'dart:io';
-
 import 'package:bit_connect/utils/constants/colorAssets.dart';
 import 'package:bit_connect/utils/constants/padConstants.dart';
-import 'package:curved_navigation_bar_with_label/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class CafeMenu extends StatefulWidget {
-  const CafeMenu({super.key});
-
+  CafeMenu({super.key});
+  final List<String> tabTitle = ['M', "T", 'W', 'T', 'F', 'S', 'S'];
   @override
   State<CafeMenu> createState() => _CafeMenuState();
 }
@@ -15,127 +13,286 @@ class CafeMenu extends StatefulWidget {
 class _CafeMenuState extends State<CafeMenu> {
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
-        
         length: 7,
         child: Scaffold(
-          key: _scaffoldKey,
+          key: scaffoldKey,
           appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              leading: TextButton(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: TextButton(
+              onPressed: () {
+                scaffoldKey.currentState?.openDrawer();
+              },
+              child: Image.asset(
+                'assets/icons/menu.png',
+                height: PaddingConstant.forPersonIcon,
+                color: ColorAssets.bduColor,
+              ),
+            ),
+            actions: [
+              IconButton(
                 onPressed: () {
-                  _scaffoldKey.currentState?.openDrawer();
+                  // Handle person button press
                 },
-                child: Image.asset(
-                  'assets/icons/menu.png',
+                icon: Image.asset(
+                  'assets/icons/person.png',
                   height: PaddingConstant.forPersonIcon,
                   color: ColorAssets.bduColor,
                 ),
               ),
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    // Handle person button press
-                  },
-                  icon: Image.asset(
-                    'assets/icons/person.png',
-                    height: PaddingConstant.forPersonIcon,
-                    color: ColorAssets.bduColor,
+            ],
+            bottom: const TabBar(
+              indicatorWeight: 10,
+              isScrollable: true,
+              indicatorColor: ColorAssets.secondaryYellow,
+              tabs: [
+                Tab(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Text(
+                        'M',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: ColorAssets.bduColor,
+                          fontSize: 22,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Tab(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Text(
+                        'T',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: ColorAssets.bduColor,
+                          fontSize: 22,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Tab(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Text(
+                        'W',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: ColorAssets.bduColor,
+                          fontSize: 22,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Tab(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Text(
+                        'T',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: ColorAssets.bduColor,
+                          fontSize: 22,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Tab(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Text(
+                        'F',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: ColorAssets.bduColor,
+                          fontSize: 22,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Tab(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Text(
+                        'S',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: ColorAssets.bduColor,
+                          fontSize: 22,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Tab(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Text(
+                        'S',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: ColorAssets.bduColor,
+                          fontSize: 22,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
-              bottom: const TabBar(tabs: [
-              Tab(text: 'Mon'),
-              Tab(text: 'Tue'),
-              Tab(text: 'Wed'),
-              Tab(text: 'Thu'),
-              Tab(text: 'Fri'),
-              Tab(text: 'Sat'),
-              Tab(text: 'Sun')
-            ]),
-            
+            ),
           ),
-           body: const TabBarView(
-          children: <Widget>[
-            Center(
-              child: Text("It's cloudy here"),
-            ),
-            Center(
-              child: Text("It's rainy here"),
-            ),
-            Center(
-              child: Text("It's sunny here"),
-            ),
-          ],
-        ),
+          // body: TabBarView(
+          //   children: <Widget>[
+          //     _buildListViewMenu('M'),
+          //     _buildListViewMenu('T'),
+          //     _buildListViewMenu('W'),
+          //     _buildListViewMenu('T'),
+          //     _buildListViewMenu('F'),
+          //     _buildListViewMenu('S'),
+          //     _buildListViewMenu('S')
+          //   ],
+          // ),
+
+          body: TabBarView(
+            children: [
+              // Contents of Tab 1
+              TabContent(
+                title: 'Food 1',
+                image: 'assets/menu1.png',
+                name: 'Food Name 1',
+              ),
+              // Contents of Tab 2
+              TabContent(
+                title: 'Food 2',
+                image: 'assets/menu1.png',
+                name: 'Food Name 2',
+              ),
+              // Contents of Tab 3
+              TabContent(
+                title: 'Food 3',
+                image: 'assets/menu1.png',
+                name: 'Food Name 3',
+              ),
+               TabContent(
+                title: 'Food 3',
+                image: 'assets/menu1.png',
+                name: 'Food Name 3',
+              ),
+               TabContent(
+                title: 'Food 3',
+                image: 'assets/menu1.png',
+                name: 'Food Name 3',
+              ),
+               TabContent(
+                title: 'Food 3',
+                image: 'assets/menu1.png',
+                name: 'Food Name 3',
+              ),
+               TabContent(
+                title: 'Food 3',
+                image: 'assets/menu1.png',
+                name: 'Food Name 3',
+              ),
+            ],
+          ),
           drawer: Drawer(
             child: ListView(
               padding: EdgeInsets.zero,
               children: <Widget>[
                 DrawerHeader(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: ColorAssets.bduColor,
                   ),
                   child: Container(
                     alignment: Alignment.centerLeft,
-                    child: Text(
+                    child: const Text(
                       'BiT Connect',
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontFamily: 'Pacifico'),
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontFamily: 'Pacifico',
+                      ),
                     ),
                   ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.home),
-                  title: Text(
+                  leading: const Icon(Icons.home),
+                  title: const Text(
                     'Home',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   onTap: () {
                     // Implement action for item 1
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.category_sharp),
-                  title: Text(
+                  leading: const Icon(Icons.category_sharp),
+                  title: const Text(
                     'Cafe',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   onTap: () {
                     // Implement action for item 2
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.favorite),
-                  title: Text(
+                  leading: const Icon(Icons.favorite),
+                  title: const Text(
                     'Lounge',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   onTap: () {
                     // Implement action for item 2
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.book_rounded),
-                  title: Text(
+                  leading: const Icon(Icons.book_rounded),
+                  title: const Text(
                     'Location',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   onTap: () {
                     // Implement action for item 2
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.info_outlined),
-                  title: Text(
+                  leading: const Icon(Icons.info_outlined),
+                  title: const Text(
                     'Departments',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   onTap: () {
                     // Implement action for item 2
@@ -150,13 +307,14 @@ class _CafeMenuState extends State<CafeMenu> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      title: Text(
-                        textAlign: TextAlign.center,
+                      title: const Text(
                         'Logout',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
                       ),
                       onTap: () {
                         // Implement logout logic
@@ -164,150 +322,6 @@ class _CafeMenuState extends State<CafeMenu> {
                       },
                     ),
                   ),
-                ),
-
-                // Add more ListTile widgets for additional menu items
-              ],
-            ),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Row(
-              children: [
-                SizedBox(width: 8),
-                Expanded(
-                  child: Stack(children: [
-                    Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: ColorAssets.bduColor,
-                        ),
-                        child: Center(
-                          child: Text(
-                            'M',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 22),
-                          ),
-                        ))
-                  ]),
-                ),
-                SizedBox(width: 8),
-                Expanded(
-                  child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorAssets.bduColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'T',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 22),
-                        ),
-                      )),
-                ),
-                SizedBox(width: 8),
-                Expanded(
-                  child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorAssets.bduColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'W',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 22),
-                        ),
-                      )),
-                ),
-                SizedBox(width: 8),
-                Expanded(
-                  child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorAssets.bduColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'T',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 22),
-                        ),
-                      )),
-                ),
-                SizedBox(width: 8),
-                Expanded(
-                  child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorAssets.bduColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'F',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 22),
-                        ),
-                      )),
-                ),
-                SizedBox(width: 8),
-                Expanded(
-                  child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorAssets.bduColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'S',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 22),
-                        ),
-                      )),
-                ),
-                SizedBox(width: 8),
-                Expanded(
-                  child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorAssets.bduColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'S',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 22),
-                        ),
-                      )),
                 ),
               ],
             ),
@@ -317,3 +331,49 @@ class _CafeMenuState extends State<CafeMenu> {
     );
   }
 }
+
+// }
+
+class TabContent extends StatelessWidget {
+  final String title;
+  final String image;
+  final String name;
+
+  TabContent({
+    required this.title,
+    required this.image,
+    required this.name,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ListView(
+        children: [Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(title, style: TextStyle(fontSize: 24)),
+            SizedBox(height: 16),
+            Image.asset(image,
+                width: 380, height: 200), // Use your own image assets
+            SizedBox(height: 16),
+            Text(name, style: TextStyle(fontSize: 18)),
+             Text(title, style: TextStyle(fontSize: 24)),
+            SizedBox(height: 16),
+            Image.asset(image,
+                width: 380, height: 200), // Use your own image assets
+            SizedBox(height: 16),
+            Text(name, style: TextStyle(fontSize: 18)),
+             Text(title, style: TextStyle(fontSize: 24)),
+            SizedBox(height: 16),
+            Image.asset(image,
+                width: 380, height: 200), // Use your own image assets
+            SizedBox(height: 16),
+            Text(name, style: TextStyle(fontSize: 18)),
+          ],
+        ),]
+      ),
+    );
+  }
+}
+ 
