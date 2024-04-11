@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
-import 'package:bit_connect/presentation/home.dart';
+import 'package:bit_connect/presentation/home/home.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
