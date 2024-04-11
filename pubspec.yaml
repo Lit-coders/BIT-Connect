@@ -44,6 +44,7 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   firebase_auth: ^4.19.1
   firebase_core: ^2.29.0
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:
