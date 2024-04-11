@@ -65,9 +65,11 @@ class _BuildProfileState extends State<BuildProfile> {
       }
     } catch (error) {
       final snackBar = ErrorSnackBar(content: "something went wrong: $error");
-      ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+      }
     } finally {
-      Navigator.of(context).pop();
+      if (mounted) Navigator.of(context).pop();
     }
   }
 
@@ -84,7 +86,9 @@ class _BuildProfileState extends State<BuildProfile> {
     } catch (error) {
       final snackBar =
           ErrorSnackBar(content: "Unable to pick image, please try again!");
-      ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+      }
     }
   }
 
