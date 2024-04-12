@@ -49,6 +49,7 @@ dependencies:
   flutter_native_splash: ^2.4.0
   animated_splash_screen: ^1.3.0
   shared_preferences: ^2.2.3
+  flutter_map: ^6.1.0
 
 dev_dependencies:
   flutter_test:
