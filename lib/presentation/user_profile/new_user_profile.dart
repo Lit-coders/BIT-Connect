@@ -54,7 +54,10 @@ class _BuildProfileState extends State<BuildProfile> {
   }) async {
     LoadingSpinner.load(context);
     try {
-      await FirebaseFirestore.instance.collection("users").add({
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(_currentUser!.uid)
+          .set({
         'fName': fName,
         'lLame': lName,
         'year': year,
