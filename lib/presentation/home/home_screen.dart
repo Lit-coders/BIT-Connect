@@ -2,6 +2,7 @@ import 'package:bit_connect/presentation/home/components/left_drawer.dart';
 import 'package:bit_connect/presentation/home/home_overview.dart';
 import 'package:bit_connect/presentation/location/components/app_bar.dart';
 import 'package:bit_connect/presentation/location/location_screen.dart';
+import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:bit_connect/utils/constants/padding_constants.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -62,7 +63,10 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               )
-            : const LocationAppBar(),
+            : PreferredSize(
+                preferredSize: Size(getWidth(context), 80),
+                child: const LocationAppBar(),
+              ),
         backgroundColor: Colors.white,
         drawer: const LeftDrawer(),
         body: homeContents[_contentIndex],
