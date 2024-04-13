@@ -1,5 +1,12 @@
 import 'package:latlong2/latlong.dart';
 
+final bit = {
+  'name': "Bahir Dar Institute Of Technology",
+  'description':
+      "a campus of engineering in Bahir Dar University. historically, it is the oldest one - originated in 1963 by Emperor HaileSelassie",
+  'position': [11.597621756651337, 37.39551835806901],
+};
+
 final List places = [
   {
     'category': 'Lounges',
