@@ -33,6 +33,7 @@ class _BitMapState extends State<BitMap> {
         const Icon(
           Icons.place,
           size: 30,
+          color: ColorAssets.bduColor,
         ),
       ],
     );
@@ -48,7 +49,7 @@ class _BitMapState extends State<BitMap> {
       ),
       children: [
         TileLayer(
-          urlTemplate: 'http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',
+          urlTemplate: 'http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',
           subdomains: const ["mt0", "mt1", "mt2", "mt3"],
         ),
         PolygonLayer(
@@ -64,6 +65,7 @@ class _BitMapState extends State<BitMap> {
           ],
         ),
         MarkerLayer(
+          rotate: false,
           markers: [
             Marker(
               point: latLng,
@@ -110,7 +112,7 @@ class _BitMapState extends State<BitMap> {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
