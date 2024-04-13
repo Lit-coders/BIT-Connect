@@ -1,4 +1,5 @@
 import 'package:bit_connect/searvices/helpers.dart';
+import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -45,11 +46,10 @@ class _BitMapState extends State<BitMap> {
         initialZoom: 18,
       ),
       children: [
-        TileLayer(
-          urlTemplate: 'http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',
-          userAgentPackageName: 'com.example.app',
-          subdomains: const ["mt0", "mt1", "mt2", "mt3"],
-        ),
+        // TileLayer(
+        //   urlTemplate: 'http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',
+        //   subdomains: const ["mt0", "mt1", "mt2", "mt3"],
+        // ),
         MarkerLayer(
           markers: [
             Marker(
@@ -81,12 +81,15 @@ class _BitMapState extends State<BitMap> {
                   alignment: Alignment.bottomRight,
                   child: Container(
                     margin: const EdgeInsets.all(10),
-                    decoration: const BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.all(Radius.circular(7)),
-                    ),
                     child: IconButton(
                       onPressed: () {},
+                      style: const ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll(ColorAssets.bduColor),
+                        padding: MaterialStatePropertyAll(
+                          EdgeInsets.all(5),
+                        ),
+                      ),
                       icon: const Icon(
                         Icons.my_location,
                         size: 25,
