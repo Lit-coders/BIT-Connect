@@ -28,7 +28,9 @@ class _LocationState extends State<Location> {
           horizontal: 20,
         ),
         decoration: BoxDecoration(
-          color: _selectedPlaceIndex == index ? Colors.blue : Colors.blue[200],
+          color: _selectedPlaceIndex == index
+              ? const Color.fromARGB(224, 187, 222, 251)
+              : const Color.fromARGB(255, 235, 246, 255),
           borderRadius: const BorderRadius.all(
             Radius.circular(10),
           ),
@@ -44,10 +46,38 @@ class _LocationState extends State<Location> {
     );
   }
 
+  Widget searchBar() {
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Container(
+        margin: const EdgeInsets.only(top: 65, bottom: 20),
+        width: getWidth(context) - 40,
+        child: const TextField(
+          style: TextStyle(
+            fontSize: 20,
+          ),
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.black12,
+            hintText: 'Search Places ...',
+            hintStyle: TextStyle(
+              color: Colors.black45,
+            ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget getPlaceCard(place) {
     return GestureDetector(
       child: Container(
-        width: getWidth(context) - 20,
+        width: getWidth(context) - 36,
         padding: const EdgeInsets.symmetric(
           vertical: 8,
           horizontal: 20,
@@ -105,37 +135,22 @@ class _LocationState extends State<Location> {
                 ),
                 child: Stack(
                   children: [
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 20),
-                        width: getWidth(context) * 3 / 4 + 20,
-                        child: const TextField(
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.black12,
-                            hintText: 'Search Places ...',
-                            hintStyle: TextStyle(
-                              color: Colors.black45,
-                            ),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 10),
-                          ),
+                    const Padding(
+                      padding: EdgeInsets.all(18.0),
+                      child: Text(
+                        "Inside BiT",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
                         ),
                       ),
                     ),
+                    searchBar(),
                     Align(
                       child: Container(
                         padding:
-                            EdgeInsets.only(top: getHeight(context) * 1 / 10),
+                            EdgeInsets.only(top: getHeight(context) * 1 / 7),
                         child: Column(
                           children: [
                             SizedBox(
