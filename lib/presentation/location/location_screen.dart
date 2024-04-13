@@ -82,20 +82,20 @@ class _LocationState extends State<Location> {
         vertical: 10,
         horizontal: 15,
       ),
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 235, 246, 255),
-        borderRadius: const BorderRadius.all(
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 235, 246, 255),
+        borderRadius: BorderRadius.all(
           Radius.circular(10),
         ),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             place['name'],
             textAlign: TextAlign.start,
             style: const TextStyle(
-              fontSize: 22,
+              fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -103,44 +103,48 @@ class _LocationState extends State<Location> {
             place['description'],
             textAlign: TextAlign.start,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 16,
             ),
           ),
-          SizedBox(
-            width: 156,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => BitMap(place: place),
+          Align(
+            alignment: Alignment.centerRight,
+            child: SizedBox(
+              width: 145,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => BitMap(place: place),
+                    ),
+                  );
+                },
+                style: const ButtonStyle(
+                  backgroundColor:
+                      MaterialStatePropertyAll(ColorAssets.bduColor),
+                  overlayColor: MaterialStatePropertyAll(Colors.transparent),
+                  shadowColor: MaterialStatePropertyAll(Colors.transparent),
+                  padding: MaterialStatePropertyAll(
+                    EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   ),
-                );
-              },
-              style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(ColorAssets.bduColor),
-                overlayColor: MaterialStatePropertyAll(Colors.transparent),
-                shadowColor: MaterialStatePropertyAll(Colors.transparent),
-                padding: MaterialStatePropertyAll(
-                  EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 ),
-              ),
-              child: const Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 5.0),
-                    child: Icon(
-                      Icons.map,
-                      color: Colors.white,
+                child: const Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 5.0),
+                      child: Icon(
+                        Icons.map_outlined,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "see on map",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
+                    Text(
+                      "see on map",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -171,15 +175,52 @@ class _LocationState extends State<Location> {
                 ),
                 child: Stack(
                   children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.all(18.0),
-                      child: Text(
-                        "Inside BiT",
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                        ),
+                      child: Row(
+                        children: [
+                          const Text(
+                            "Inside BiT",
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                            ),
+                          ),
+                          const Expanded(child: SizedBox()),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => BitMap(place: bit),
+                                ),
+                              );
+                            },
+                            style: const ButtonStyle(
+                              padding: MaterialStatePropertyAll(
+                                EdgeInsets.all(5),
+                              ),
+                            ),
+                            child: const Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(right: 5.0),
+                                  child: Icon(
+                                    Icons.map,
+                                    color: ColorAssets.bduColor,
+                                  ),
+                                ),
+                                Text(
+                                  "Open Map",
+                                  style: TextStyle(
+                                    color: ColorAssets.bduColor,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     searchBar(),
