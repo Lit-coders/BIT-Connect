@@ -13,10 +13,13 @@ class Location extends StatefulWidget {
 
 class _LocationState extends State<Location> {
   final _places = places;
-  List _selectedPlace = [];
+  List _selectedPlace = places[0]['places'];
 
   Widget getPlaceTab(dynamic place) {
     return GestureDetector(
+      onTap: () => setState(() {
+        _selectedPlace = place['places'];
+      }),
       child: Container(
         padding: const EdgeInsets.symmetric(
           vertical: 8,
@@ -80,9 +83,6 @@ class _LocationState extends State<Location> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      _selectedPlace = _places[0]['places'];
-    });
     return SafeArea(
       child: Container(
         width: getWidth(context),
