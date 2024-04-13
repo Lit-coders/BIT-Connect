@@ -117,67 +117,98 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
   Widget nearestPlace() {
     return Builder(builder: (context) {
       return Align(
-        alignment: Alignment.topLeft,
+        alignment: Alignment.bottomCenter,
         child: Container(
-          width: getWidth(context),
-          height: isExpanded ? 165 : 50,
-          child: Column(
-            children: [
-              IconButton(
-                onPressed: () => setState(() {
-                  isExpanded = !isExpanded;
-                }),
-                icon: Icon(
-                  isExpanded
-                      ? Icons.arrow_drop_down_rounded
-                      : Icons.arrow_drop_up_rounded,
-                  size: 25,
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  width: getWidth(context),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                  ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          width: getWidth(context) - 36,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: const Text("Nearest restroom"),
-                          ),
-                        ),
-                        SizedBox(
-                          width: getWidth(context) - 36,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: const Text("Nearest wifi center"),
-                          ),
-                        ),
-                        SizedBox(
-                          width: getWidth(context) - 36,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: const Text("Nearest place to eat"),
-                          ),
-                        ),
-                      ],
-                    ),
+          width: getWidth(context) * 3 / 4,
+          height: isExpanded ? 170 : 0,
+          padding: const EdgeInsets.all(10),
+          margin: const EdgeInsets.only(bottom: 65, right: 30),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  width: getWidth(context) - 36,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text("Nearest restroom"),
                   ),
                 ),
-              )
-            ],
+                SizedBox(
+                  width: getWidth(context) - 36,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text("Nearest wifi center"),
+                  ),
+                ),
+                SizedBox(
+                  width: getWidth(context) - 36,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text("Nearest place to eat"),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );
     });
+  }
+
+  Widget layerBtn() {
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 60),
+        child: IconButton(
+          onPressed: () => setState(() {
+            isExpanded = !isExpanded;
+          }),
+          style: const ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(ColorAssets.bduColor),
+            padding: MaterialStatePropertyAll(
+              EdgeInsets.all(5),
+            ),
+          ),
+          icon: Icon(
+            isExpanded ? Icons.close : Icons.layers,
+            size: 25,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget nearestPlaceBtn() {
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 60),
+        child: IconButton(
+          onPressed: () => setState(() {
+            isExpanded = !isExpanded;
+          }),
+          style: const ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(ColorAssets.bduColor),
+            padding: MaterialStatePropertyAll(
+              EdgeInsets.all(5),
+            ),
+          ),
+          icon: Icon(
+            isExpanded ? Icons.close : Icons.directions_walk,
+            size: 25,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
   }
 
   Widget curLocBtn() {
@@ -255,7 +286,9 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
             child: Stack(
               children: [
                 getMap(),
+                layerBtn(),
                 nearestPlace(),
+                nearestPlaceBtn(),
                 _loadCurLoc ? smallLoadingSpinner() : curLocBtn(),
               ],
             ),
