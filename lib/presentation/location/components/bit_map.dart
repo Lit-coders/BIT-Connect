@@ -13,9 +13,20 @@ class BitMap extends StatefulWidget {
   State<BitMap> createState() => _BitMapState();
 }
 
-class _BitMapState extends State<BitMap> {
+class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
   bool _loadCurLoc = false;
   Map<String, dynamic> _currPlace = {'name': ''};
+
+  AnimationController? _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    _animationController!.forward();
+  }
 
   Widget placeMarker() {
     return Column(
@@ -42,44 +53,124 @@ class _BitMapState extends State<BitMap> {
     );
   }
 
-  FlutterMap getMap() {
+  Widget getMap() {
     _currPlace = _currPlace['name'] == '' ? widget.place : _currPlace;
     final latLng = LatLng(_currPlace['position'][0], _currPlace['position'][1]);
 
-    return FlutterMap(
-      options: MapOptions(
-        initialCenter: latLng,
-        initialZoom: 16,
+    return Center(
+      child: FlutterMap(
+        options: MapOptions(
+          initialCenter: latLng,
+          initialZoom: 16,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate: 'http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',
+            subdomains: const ["mt0", "mt1", "mt2", "mt3"],
+          ),
+          PolygonLayer(
+            polygons: [
+              Polygon(
+                points: bitBorders,
+                borderColor: Colors.blue,
+                borderStrokeWidth: 5,
+                isDotted: true,
+                color: const Color.fromARGB(42, 33, 149, 243),
+                isFilled: true,
+              ),
+            ],
+          ),
+          MarkerLayer(
+            rotate: false,
+            markers: [
+              Marker(
+                point: latLng,
+                width: 200,
+                height: 100,
+                child: placeMarker(),
+              ),
+            ],
+          ),
+        ],
       ),
-      children: [
-        TileLayer(
-          urlTemplate: 'http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',
-          subdomains: const ["mt0", "mt1", "mt2", "mt3"],
-        ),
-        PolygonLayer(
-          polygons: [
-            Polygon(
-              points: bitBorders,
-              borderColor: Colors.blue,
-              borderStrokeWidth: 5,
-              isDotted: true,
-              color: const Color.fromARGB(42, 33, 149, 243),
-              isFilled: true,
+    );
+  }
+
+  // Widget nearestPlace() {
+  //   return Align(
+  //     alignment: Alignment.bottomLeft,
+  //     child: BottomSheet(
+  //       animationController: _animationController,
+  //       showDragHandle: true,
+  //       onClosing: () {},
+  //       builder: (context) {
+  //         return Container(
+  //           child: Text("data"),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
+
+  Widget nearestPlace() {
+    bool isExpanded = true;
+
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        width: getWidth(context),
+        height: isExpanded ? 165 : 100,
+        child: Column(
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.arrow_drop_up_rounded,
+                size: 25,
+              ),
             ),
+            Expanded(
+              child: Container(
+                width: getWidth(context),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: getWidth(context) - 36,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const Text("Nearest restroom"),
+                        ),
+                      ),
+                      SizedBox(
+                        width: getWidth(context) - 36,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const Text("Nearest wifi center"),
+                        ),
+                      ),
+                      SizedBox(
+                        width: getWidth(context) - 36,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const Text("Nearest place to eat"),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
           ],
         ),
-        MarkerLayer(
-          rotate: false,
-          markers: [
-            Marker(
-              point: latLng,
-              width: 200,
-              height: 100,
-              child: placeMarker(),
-            ),
-          ],
-        ),
-      ],
+      ),
     );
   }
 
@@ -156,9 +247,8 @@ class _BitMapState extends State<BitMap> {
           child: Center(
             child: Stack(
               children: [
-                Center(
-                  child: getMap(),
-                ),
+                getMap(),
+                nearestPlace(),
                 _loadCurLoc ? smallLoadingSpinner() : curLocBtn(),
               ],
             ),
