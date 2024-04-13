@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class LocOverview extends StatelessWidget {
   const LocOverview({super.key});
 
-  Widget getOverviewItem(title, color) {
+  Widget getOverviewItem(title, icon) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: Column(
@@ -15,9 +15,15 @@ class LocOverview extends StatelessWidget {
               bottom: 25,
             ),
             transform: Matrix4.rotationZ(3.14 / 180 * 45),
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
             width: 50,
             height: 50,
-            color: color,
+            child: Center(
+              child: Icon(icon),
+            ),
           ),
           Text(title),
         ],
@@ -32,9 +38,9 @@ class LocOverview extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          getOverviewItem('Offices', Colors.red),
-          getOverviewItem('Facilities', Colors.yellow),
-          getOverviewItem('Distances', Colors.green),
+          getOverviewItem('Offices', Icons.build),
+          getOverviewItem('Facilities', Icons.data_array),
+          getOverviewItem('Distances', Icons.social_distance),
         ],
       ),
     );
