@@ -1,3 +1,4 @@
+import 'package:bit_connect/presentation/location/components/loc_overview.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
 
@@ -18,10 +19,7 @@ class _LocationState extends State<Location> {
         color: Colors.blue[200],
         child: Column(
           children: [
-            const SizedBox(
-              height: 150,
-              child: Text("Map Page"),
-            ),
+            const LocOverview(),
             Expanded(
               child: Container(
                 width: getWidth(context),
