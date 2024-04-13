@@ -1,4 +1,5 @@
 import 'package:bit_connect/searvices/helpers.dart';
+import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +88,7 @@ class _LocationAppBarState extends State<LocationAppBar> {
     return AppBar(
       toolbarHeight: 80,
       automaticallyImplyLeading: false,
-      backgroundColor: Colors.blue[200],
+      backgroundColor: ColorAssets.bduColor,
       title: Container(
         padding: const EdgeInsets.only(right: 5),
         width: getWidth(context),
