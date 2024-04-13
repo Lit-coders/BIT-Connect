@@ -1,3 +1,4 @@
+import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -13,15 +14,30 @@ double getHeight(context) {
 // 1. to locate and mark devices's location
 // 2. to locate and mark nearest desired places from the device's current location
 
-Future<void> getUserLoc() async {
+Future<List?> getUserLoc(context) async {
   try {
-    await Geolocator.checkPermission();
-    await Geolocator.requestPermission();
-    Position position = await Geolocator.getCurrentPosition(
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      // request for permission
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permission still denied
+        final snackBar = ErrorSnackBar(
+            content:
+                "User denied to grant permission of sharing device's location, Sorry!");
+        ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+        return null;
+      }
+    }
+
+    final position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );
-    print(position);
+    return [position.latitude, position.longitude];
   } catch (error) {
-    print("error while locating user: $error");
+    final snackBar =
+        ErrorSnackBar(content: "Unable to locate user, Please try again?");
+    ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+    return null;
   }
 }
