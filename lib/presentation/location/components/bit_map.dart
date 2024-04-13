@@ -1,3 +1,4 @@
+import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -64,8 +65,36 @@ class _BitMapState extends State<BitMap> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: getMap(),
+        body: SizedBox(
+          height: getHeight(context),
+          width: getWidth(context),
+          child: Center(
+            child: Stack(
+              children: [
+                Center(
+                  child: getMap(),
+                ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Container(
+                    margin: const EdgeInsets.all(10),
+                    decoration: const BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.all(Radius.circular(7)),
+                    ),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.my_location,
+                        size: 25,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
