@@ -14,11 +14,13 @@ class Location extends StatefulWidget {
 class _LocationState extends State<Location> {
   final _places = places;
   List _selectedPlace = places[0]['places'];
+  int _selectedPlaceIndex = 0;
 
-  Widget getPlaceTab(dynamic place) {
+  Widget getPlaceTab(dynamic place, int index) {
     return GestureDetector(
       onTap: () => setState(() {
         _selectedPlace = place['places'];
+        _selectedPlaceIndex = index;
       }),
       child: Container(
         padding: const EdgeInsets.symmetric(
@@ -26,7 +28,7 @@ class _LocationState extends State<Location> {
           horizontal: 20,
         ),
         decoration: BoxDecoration(
-          color: Colors.blue[200],
+          color: _selectedPlaceIndex == index ? Colors.blue : Colors.blue[200],
           borderRadius: const BorderRadius.all(
             Radius.circular(10),
           ),
@@ -143,7 +145,11 @@ class _LocationState extends State<Location> {
                                 child: Wrap(
                                   spacing: 10,
                                   children: _places
-                                      .map((place) => getPlaceTab(place))
+                                      .map((
+                                        place,
+                                      ) =>
+                                          getPlaceTab(
+                                              place, _places.indexOf(place)))
                                       .toList(),
                                 ),
                               ),
