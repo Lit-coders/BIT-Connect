@@ -46,8 +46,9 @@ class _BitMapState extends State<BitMap> {
       ),
       children: [
         TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          urlTemplate: 'http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',
           userAgentPackageName: 'com.example.app',
+          subdomains: const ["mt0", "mt1", "mt2", "mt3"],
         ),
         MarkerLayer(
           markers: [
