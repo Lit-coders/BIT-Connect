@@ -3,7 +3,6 @@ import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
 class BitMap extends StatefulWidget {
@@ -15,6 +14,8 @@ class BitMap extends StatefulWidget {
 }
 
 class _BitMapState extends State<BitMap> {
+  bool _loadCurLoc = false;
+
   Widget placeMarker() {
     return Column(
       children: [
@@ -80,17 +81,58 @@ class _BitMapState extends State<BitMap> {
     );
   }
 
-  Future<void> getUserLoc() async {
+  Widget curLocBtn() {
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: Container(
+        margin: const EdgeInsets.all(10),
+        child: IconButton(
+          onPressed: () => getAndMarkUser(),
+          style: const ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(ColorAssets.bduColor),
+            padding: MaterialStatePropertyAll(
+              EdgeInsets.all(5),
+            ),
+          ),
+          icon: const Icon(
+            Icons.my_location,
+            size: 25,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget smallLoadingSpinner() {
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: Container(
+        height: 45,
+        width: 45,
+        margin: const EdgeInsets.all(10),
+        child: const Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.white,
+            color: ColorAssets.bduColor,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void getAndMarkUser() async {
+    setState(() {
+      _loadCurLoc = true;
+    });
     try {
-      await Geolocator.checkPermission();
-      await Geolocator.requestPermission();
-      Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
-      print(position);
+      await getUserLoc();
     } catch (error) {
-      print("error while locating user: $error");
+      print(error);
     }
+    setState(() {
+      _loadCurLoc = false;
+    });
   }
 
   @override
@@ -106,27 +148,7 @@ class _BitMapState extends State<BitMap> {
                 Center(
                   child: getMap(),
                 ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                    margin: const EdgeInsets.all(10),
-                    child: IconButton(
-                      onPressed: () => getUserLoc(),
-                      style: const ButtonStyle(
-                        backgroundColor:
-                            MaterialStatePropertyAll(ColorAssets.bduColor),
-                        padding: MaterialStatePropertyAll(
-                          EdgeInsets.all(5),
-                        ),
-                      ),
-                      icon: const Icon(
-                        Icons.my_location,
-                        size: 25,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
+                _loadCurLoc ? smallLoadingSpinner() : curLocBtn(),
               ],
             ),
           ),
