@@ -15,7 +15,7 @@ class BitMap extends StatefulWidget {
 
 class _BitMapState extends State<BitMap> {
   bool _loadCurLoc = false;
-  Map<String, dynamic> _currPlace = {};
+  Map<String, dynamic> _currPlace = {'name': ''};
 
   Widget placeMarker() {
     return Column(
@@ -27,7 +27,7 @@ class _BitMapState extends State<BitMap> {
             borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
           child: Text(
-            widget.place['name'],
+            _currPlace['name'],
             style: const TextStyle(
               fontWeight: FontWeight.w500,
             ),
@@ -43,18 +43,20 @@ class _BitMapState extends State<BitMap> {
   }
 
   FlutterMap getMap() {
-    final latLng =
-        LatLng(widget.place['position'][0], widget.place['position'][1]);
+    _currPlace = _currPlace['name'] == '' ? widget.place : _currPlace;
+
+    final latLng = LatLng(_currPlace['position'][0], _currPlace['position'][1]);
+    print('latLng: $latLng, currPlace: $_currPlace');
     return FlutterMap(
       options: MapOptions(
         initialCenter: latLng,
         initialZoom: 16,
       ),
       children: [
-        TileLayer(
-          urlTemplate: 'http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',
-          subdomains: const ["mt0", "mt1", "mt2", "mt3"],
-        ),
+        // TileLayer(
+        //   urlTemplate: 'http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',
+        //   subdomains: const ["mt0", "mt1", "mt2", "mt3"],
+        // ),
         PolygonLayer(
           polygons: [
             Polygon(
@@ -130,16 +132,15 @@ class _BitMapState extends State<BitMap> {
       final position = await getUserLoc(context);
       if (position != null) {
         setState(() {
-          widget.place = {
+          _currPlace = {
             'name': 'Your Location',
             'description': "",
             'position': position,
           };
         });
-        print("user loc: $position");
       }
     } catch (error) {
-      print(error);
+      // already caught
     }
     setState(() {
       _loadCurLoc = false;
