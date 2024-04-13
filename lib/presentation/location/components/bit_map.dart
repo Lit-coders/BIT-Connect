@@ -112,66 +112,72 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
   //   );
   // }
 
-  Widget nearestPlace() {
-    bool isExpanded = true;
+  bool isExpanded = false;
 
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Container(
-        width: getWidth(context),
-        height: isExpanded ? 165 : 100,
-        child: Column(
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.arrow_drop_up_rounded,
-                size: 25,
-              ),
-            ),
-            Expanded(
-              child: Container(
-                width: getWidth(context),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: getWidth(context) - 36,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Text("Nearest restroom"),
-                        ),
-                      ),
-                      SizedBox(
-                        width: getWidth(context) - 36,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Text("Nearest wifi center"),
-                        ),
-                      ),
-                      SizedBox(
-                        width: getWidth(context) - 36,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Text("Nearest place to eat"),
-                        ),
-                      ),
-                    ],
-                  ),
+  Widget nearestPlace() {
+    return Builder(builder: (context) {
+      return Align(
+        alignment: Alignment.topLeft,
+        child: Container(
+          width: getWidth(context),
+          height: isExpanded ? 165 : 50,
+          child: Column(
+            children: [
+              IconButton(
+                onPressed: () => setState(() {
+                  isExpanded = !isExpanded;
+                }),
+                icon: Icon(
+                  isExpanded
+                      ? Icons.arrow_drop_down_rounded
+                      : Icons.arrow_drop_up_rounded,
+                  size: 25,
                 ),
               ),
-            )
-          ],
+              Expanded(
+                child: Container(
+                  width: getWidth(context),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          width: getWidth(context) - 36,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            child: const Text("Nearest restroom"),
+                          ),
+                        ),
+                        SizedBox(
+                          width: getWidth(context) - 36,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            child: const Text("Nearest wifi center"),
+                          ),
+                        ),
+                        SizedBox(
+                          width: getWidth(context) - 36,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            child: const Text("Nearest place to eat"),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget curLocBtn() {
