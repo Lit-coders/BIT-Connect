@@ -3,6 +3,7 @@ import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
 class BitMap extends StatefulWidget {
@@ -79,6 +80,19 @@ class _BitMapState extends State<BitMap> {
     );
   }
 
+  Future<void> getUserLoc() async {
+    try {
+      await Geolocator.checkPermission();
+      await Geolocator.requestPermission();
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+      print(position);
+    } catch (error) {
+      print("error while locating user: $error");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -97,7 +111,7 @@ class _BitMapState extends State<BitMap> {
                   child: Container(
                     margin: const EdgeInsets.all(10),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () => getUserLoc(),
                       style: const ButtonStyle(
                         backgroundColor:
                             MaterialStatePropertyAll(ColorAssets.bduColor),
