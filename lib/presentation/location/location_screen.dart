@@ -50,7 +50,7 @@ class _LocationState extends State<Location> {
     return Align(
       alignment: Alignment.topCenter,
       child: Container(
-        margin: const EdgeInsets.only(top: 65, bottom: 20),
+        margin: const EdgeInsets.only(top: 70),
         width: getWidth(context) - 40,
         child: const TextField(
           style: TextStyle(
@@ -58,7 +58,7 @@ class _LocationState extends State<Location> {
           ),
           decoration: InputDecoration(
             filled: true,
-            fillColor: Colors.black12,
+            fillColor: Color.fromARGB(31, 171, 167, 167),
             hintText: 'Search Places ...',
             hintStyle: TextStyle(
               color: Colors.black45,
@@ -75,40 +75,71 @@ class _LocationState extends State<Location> {
   }
 
   Widget getPlaceCard(place) {
-    return GestureDetector(
-      child: Container(
-        width: getWidth(context) - 36,
-        padding: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 20,
+    return Container(
+      width: getWidth(context) - 36,
+      padding: const EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 15,
+      ),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 235, 246, 255),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(10),
         ),
-        decoration: BoxDecoration(
-          color: Colors.blue[200],
-          borderRadius: const BorderRadius.all(
-            Radius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+            place['name'],
+            textAlign: TextAlign.start,
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              place['name'],
-              style: const TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+          Text(
+            place['description'],
+            textAlign: TextAlign.start,
+            style: const TextStyle(
+              fontSize: 20,
+            ),
+          ),
+          SizedBox(
+            width: 156,
+            child: ElevatedButton(
+              onPressed: () {
+                print(place['description']);
+              },
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(ColorAssets.bduColor),
+                overlayColor: MaterialStatePropertyAll(Colors.transparent),
+                shadowColor: MaterialStatePropertyAll(Colors.transparent),
+                padding: MaterialStatePropertyAll(
+                  EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                ),
+              ),
+              child: const Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: 5.0),
+                    child: Icon(
+                      Icons.map,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    "see on map",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
               ),
             ),
-            Text(
-              place['description'],
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -150,7 +181,7 @@ class _LocationState extends State<Location> {
                     Align(
                       child: Container(
                         padding:
-                            EdgeInsets.only(top: getHeight(context) * 1 / 7),
+                            EdgeInsets.only(top: getHeight(context) * 1 / 6),
                         child: Column(
                           children: [
                             SizedBox(
