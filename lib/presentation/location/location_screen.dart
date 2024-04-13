@@ -31,12 +31,45 @@ class _LocationState extends State<Location> {
                     topRight: Radius.circular(30),
                   ),
                 ),
-                child: const SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Text("Facilities"),
-                    ],
-                  ),
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 20),
+                        width: getWidth(context) * 3 / 4 + 20,
+                        child: const TextField(
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.black12,
+                            hintText: 'Search Places ...',
+                            hintStyle: TextStyle(
+                              color: Colors.black45,
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const Align(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Text("Facilities"),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             )
