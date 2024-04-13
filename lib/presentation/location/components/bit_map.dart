@@ -1,3 +1,4 @@
+import 'package:bit_connect/searvices/data/place_list.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
@@ -43,13 +44,25 @@ class _BitMapState extends State<BitMap> {
     return FlutterMap(
       options: MapOptions(
         initialCenter: latLng,
-        initialZoom: 18,
+        initialZoom: 16,
       ),
       children: [
-        // TileLayer(
-        //   urlTemplate: 'http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',
-        //   subdomains: const ["mt0", "mt1", "mt2", "mt3"],
-        // ),
+        TileLayer(
+          urlTemplate: 'http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',
+          subdomains: const ["mt0", "mt1", "mt2", "mt3"],
+        ),
+        PolygonLayer(
+          polygons: [
+            Polygon(
+              points: bitBorders,
+              borderColor: Colors.blue,
+              borderStrokeWidth: 5,
+              isDotted: true,
+              color: const Color.fromARGB(42, 33, 149, 243),
+              isFilled: true,
+            ),
+          ],
+        ),
         MarkerLayer(
           markers: [
             Marker(
