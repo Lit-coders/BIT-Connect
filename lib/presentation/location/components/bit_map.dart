@@ -44,19 +44,18 @@ class _BitMapState extends State<BitMap> {
 
   FlutterMap getMap() {
     _currPlace = _currPlace['name'] == '' ? widget.place : _currPlace;
-
     final latLng = LatLng(_currPlace['position'][0], _currPlace['position'][1]);
-    print('latLng: $latLng, currPlace: $_currPlace');
+
     return FlutterMap(
       options: MapOptions(
         initialCenter: latLng,
         initialZoom: 16,
       ),
       children: [
-        // TileLayer(
-        //   urlTemplate: 'http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',
-        //   subdomains: const ["mt0", "mt1", "mt2", "mt3"],
-        // ),
+        TileLayer(
+          urlTemplate: 'http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',
+          subdomains: const ["mt0", "mt1", "mt2", "mt3"],
+        ),
         PolygonLayer(
           polygons: [
             Polygon(
