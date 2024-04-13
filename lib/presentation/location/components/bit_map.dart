@@ -246,6 +246,7 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SizedBox(
           height: getHeight(context),
