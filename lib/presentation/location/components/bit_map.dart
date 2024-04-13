@@ -15,6 +15,7 @@ class BitMap extends StatefulWidget {
 
 class _BitMapState extends State<BitMap> {
   bool _loadCurLoc = false;
+  Map<String, dynamic> _currPlace = {};
 
   Widget placeMarker() {
     return Column(
@@ -126,7 +127,17 @@ class _BitMapState extends State<BitMap> {
       _loadCurLoc = true;
     });
     try {
-      await getUserLoc();
+      final position = await getUserLoc(context);
+      if (position != null) {
+        setState(() {
+          widget.place = {
+            'name': 'Your Location',
+            'description': "",
+            'position': position,
+          };
+        });
+        print("user loc: $position");
+      }
     } catch (error) {
       print(error);
     }
