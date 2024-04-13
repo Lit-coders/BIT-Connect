@@ -1,5 +1,6 @@
 import 'package:bit_connect/presentation/location/components/loc_overview.dart';
 import 'package:bit_connect/searvices/helpers.dart';
+import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
 
 class Location extends StatefulWidget {
@@ -16,7 +17,7 @@ class _LocationState extends State<Location> {
       child: Container(
         width: getWidth(context),
         height: getHeight(context),
-        color: Colors.blue[200],
+        color: ColorAssets.bduColor,
         child: Column(
           children: [
             const LocOverview(),
