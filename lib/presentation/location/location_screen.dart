@@ -1,3 +1,4 @@
+import 'package:bit_connect/presentation/location/components/bit_map.dart';
 import 'package:bit_connect/presentation/location/components/loc_overview.dart';
 import 'package:bit_connect/searvices/data/place_list.dart';
 import 'package:bit_connect/searvices/helpers.dart';
@@ -109,7 +110,11 @@ class _LocationState extends State<Location> {
             width: 156,
             child: ElevatedButton(
               onPressed: () {
-                print(place['description']);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BitMap(place: place),
+                  ),
+                );
               },
               style: const ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(ColorAssets.bduColor),
