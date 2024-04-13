@@ -37,10 +37,12 @@ class _BitMapState extends State<BitMap> {
   }
 
   FlutterMap getMap() {
+    final latLng =
+        LatLng(widget.place['position'][0], widget.place['position'][1]);
     return FlutterMap(
-      options: const MapOptions(
-        initialCenter: LatLng(11.597370448983153, 37.3976755142212),
-        initialZoom: 9.2,
+      options: MapOptions(
+        initialCenter: latLng,
+        initialZoom: 18,
       ),
       children: [
         TileLayer(
@@ -50,7 +52,7 @@ class _BitMapState extends State<BitMap> {
         MarkerLayer(
           markers: [
             Marker(
-              point: const LatLng(11.597370448983153, 37.3976755142212),
+              point: latLng,
               width: 200,
               height: 100,
               child: placeMarker(),
