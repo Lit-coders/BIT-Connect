@@ -42,6 +42,7 @@ class _LocationState extends State<Location> {
   Widget getPlaceCard(place) {
     return GestureDetector(
       child: Container(
+        width: getWidth(context) - 20,
         padding: const EdgeInsets.symmetric(
           vertical: 8,
           horizontal: 20,
@@ -52,12 +53,26 @@ class _LocationState extends State<Location> {
             Radius.circular(10),
           ),
         ),
-        child: Text(
-          place['category'],
-          style: const TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.w500,
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              place['name'],
+              style: const TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            Text(
+              place['description'],
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -133,14 +148,21 @@ class _LocationState extends State<Location> {
                                 ),
                               ),
                             ),
-                            Container(
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                child: Wrap(
-                                  spacing: 10,
-                                  children: _selectedPlace
-                                      .map((place) => getPlaceCard(place))
-                                      .toList(),
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 20,
+                                ),
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.vertical,
+                                  child: Wrap(
+                                    direction: Axis.vertical,
+                                    spacing: 10,
+                                    children: _selectedPlace
+                                        .map((place) => getPlaceCard(place))
+                                        .toList(),
+                                  ),
                                 ),
                               ),
                             )
