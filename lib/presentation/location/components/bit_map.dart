@@ -16,6 +16,7 @@ class BitMap extends StatefulWidget {
 class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
   bool _loadCurLoc = false;
   Map<String, dynamic> _currPlace = {'name': ''};
+  String _layerCode = 'm';
 
   AnimationController? _animationController;
 
@@ -65,7 +66,8 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
         ),
         children: [
           TileLayer(
-            urlTemplate: 'http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',
+            urlTemplate:
+                'http://{s}.google.com/vt?lyrs=$_layerCode&x={x}&y={y}&z={z}',
             subdomains: const ["mt0", "mt1", "mt2", "mt3"],
           ),
           PolygonLayer(
@@ -97,22 +99,39 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
   }
 
   Widget getLayerTab(name, code) {
-    return SizedBox(
-      child: Row(
-        children: [
-          ClipRRect(
-            child: Image(
-              image: AssetImage('assets/layers/$name.png'),
-              fit: BoxFit.cover,
-              width: 20,
-              height: 20,
+    return Container(
+      width: 150,
+      padding: const EdgeInsets.only(bottom: 3),
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll(
+            _layerCode == code
+                ? const Color.fromARGB(165, 87, 172, 246)
+                : const Color.fromARGB(50, 87, 172, 246),
+          ),
+          shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+          padding: const MaterialStatePropertyAll(
+            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          ),
+        ),
+        onPressed: () {},
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(5)),
+              child: Image(
+                image: AssetImage('assets/layers/$name.png'),
+                fit: BoxFit.cover,
+                width: 30,
+                height: 30,
+              ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text(name),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: Text(name),
+            ),
+          ],
+        ),
       ),
     );
   }
