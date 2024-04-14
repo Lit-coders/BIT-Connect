@@ -114,7 +114,9 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           ),
         ),
-        onPressed: () {},
+        onPressed: () => setState(() {
+          _layerCode = code;
+        }),
         child: Row(
           children: [
             ClipRRect(
