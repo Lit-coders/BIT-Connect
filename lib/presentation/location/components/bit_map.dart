@@ -96,21 +96,80 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
     );
   }
 
-  // Widget nearestPlace() {
-  //   return Align(
-  //     alignment: Alignment.bottomLeft,
-  //     child: BottomSheet(
-  //       animationController: _animationController,
-  //       showDragHandle: true,
-  //       onClosing: () {},
-  //       builder: (context) {
-  //         return Container(
-  //           child: Text("data"),
-  //         );
-  //       },
-  //     ),
-  //   );
-  // }
+  Widget getLayerTab(name, code) {
+    return SizedBox(
+      child: Row(
+        children: [
+          ClipRRect(
+            child: Image(
+              image: AssetImage('assets/layers/$name.png'),
+              fit: BoxFit.cover,
+              width: 20,
+              height: 20,
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text(name),
+          ),
+        ],
+      ),
+    );
+  }
+
+  bool isLayerBoxExpanded = true;
+
+  Widget mapLayer() {
+    return Align(
+      alignment: Alignment.topRight,
+      child: Container(
+        height: isLayerBoxExpanded ? 220 : 0,
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.only(top: 100, right: 10),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              getLayerTab('default', 'm'),
+              getLayerTab('hybrid', 's,h'),
+              getLayerTab('satellite', 's'),
+              getLayerTab('terrain', 'p'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget layerBtn() {
+    return Align(
+      alignment: Alignment.topRight,
+      child: Container(
+        margin: const EdgeInsets.only(right: 10, top: 50),
+        child: IconButton(
+          onPressed: () => setState(() {
+            isLayerBoxExpanded = !isLayerBoxExpanded;
+          }),
+          style: const ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(ColorAssets.bduColor),
+            padding: MaterialStatePropertyAll(
+              EdgeInsets.all(5),
+            ),
+          ),
+          icon: Icon(
+            isLayerBoxExpanded ? Icons.close : Icons.layers,
+            size: 25,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
 
   bool isExpanded = false;
 
@@ -159,31 +218,6 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
         ),
       );
     });
-  }
-
-  Widget layerBtn() {
-    return Align(
-      alignment: Alignment.bottomRight,
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 60),
-        child: IconButton(
-          onPressed: () => setState(() {
-            isExpanded = !isExpanded;
-          }),
-          style: const ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(ColorAssets.bduColor),
-            padding: MaterialStatePropertyAll(
-              EdgeInsets.all(5),
-            ),
-          ),
-          icon: Icon(
-            isExpanded ? Icons.close : Icons.layers,
-            size: 25,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
   }
 
   Widget nearestPlaceBtn() {
@@ -286,6 +320,7 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
             child: Stack(
               children: [
                 getMap(),
+                mapLayer(),
                 layerBtn(),
                 nearestPlace(),
                 nearestPlaceBtn(),
