@@ -147,52 +147,54 @@ class _StudentClubsState extends State<StudentClubs> {
           padding: const EdgeInsets.only(top: 16.0),
           child: Column(
             children: [
-              Builder(
-                builder: (context) {
-                  return TextButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                          
-                          backgroundColor: Color.fromARGB(255, 0, 120, 225),
-                          builder: (BuildContext context) {
-                            return SizedBox(
-                              height: 400,
-                              width: MediaQuery.of(context).size.width,
-                              child: Container(
-                                child: Text
-                                ('Trial'),
+              Builder(builder: (context) {
+                return TextButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                        backgroundColor: Color.fromARGB(255, 0, 120, 225),
+                        builder: (BuildContext context) {
+                          return SizedBox(
+                            height: 400,
+                            width: MediaQuery.of(context).size.width,
+                            child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: ListView(children: const [
+                                  Text('Trial'),
+                                ]),
                               ),
-                            ); 
-                          }, context: Navigator.of(context).context);
-                    },
-                    child: Center(
-                      child: Container(
-                        width: 350,
-                        alignment: Alignment.centerRight,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              color: ColorAssets.bduColor,
-                              width: 4), // Add border color
-                          // boxShadow:
-                        ),
-                        child: Material(
-                          elevation: 8,
-                          shadowColor: ColorAssets.bduColor.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(8),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.all(8),
-                            title: const Text("RDL"),
-                            tileColor: ColorAssets.white,
-                            onTap: () {},
-                            leading: Image.asset('assets/stclubs/club1.png'),
-                          ),
+                            ),
+                          );
+                        },
+                        context: Navigator.of(context).context);
+                  },
+                  child: Center(
+                    child: Container(
+                      width: 350,
+                      alignment: Alignment.centerRight,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                            color: ColorAssets.bduColor,
+                            width: 4), // Add border color
+                        // boxShadow:
+                      ),
+                      child: Material(
+                        elevation: 8,
+                        shadowColor: ColorAssets.bduColor.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(8),
+                        child: ListTile(
+                          contentPadding: EdgeInsets.all(8),
+                          title: const Text("RDL"),
+                          tileColor: ColorAssets.white,
+                          onTap: () {},
+                          leading: Image.asset('assets/stclubs/club1.png'),
                         ),
                       ),
                     ),
-                  );
-                }
-              ),
+                  ),
+                );
+              }),
             ],
           ),
         ),
