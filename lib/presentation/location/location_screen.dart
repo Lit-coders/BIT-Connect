@@ -1,9 +1,11 @@
 import 'package:bit_connect/presentation/location/components/bit_map.dart';
 import 'package:bit_connect/presentation/location/components/loc_overview.dart';
+import 'package:bit_connect/presentation/location/model/search_result.dart';
 import 'package:bit_connect/searvices/data/place_list.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Location extends StatefulWidget {
   const Location({super.key});
@@ -17,17 +19,7 @@ class _LocationState extends State<Location> {
   List _selectedPlace = places[0]['places'];
   int _selectedPlaceIndex = 0;
 
-  final fieldController = TextEditingController();
-  List<Map<String, dynamic>> _searchResults = [];
-
-  void searchOnChange(query) {
-    final result = searchFor(query);
-    setState(() {
-      _searchResults = result;
-    });
-  }
-
-  Future<dynamic> showQuickSearchWindow(BuildContext context) async {
+  Future<dynamic> showQuickSearchWindow(context) async {
     showDialog(
       context: context,
       builder: (context) {
@@ -36,7 +28,11 @@ class _LocationState extends State<Location> {
           content: Column(
             children: [
               TextField(
-                onChanged: searchOnChange,
+                onChanged: (query) {
+                  final result = searchFor(query);
+                  Search search = Provider.of<Search>(context, listen: false);
+                  search.updateSearchResults(result);
+                },
                 autofocus: true,
                 style: const TextStyle(
                   fontSize: 20,
@@ -58,11 +54,13 @@ class _LocationState extends State<Location> {
               const Text('search results for ...'),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: _searchResults
-                      .map((place) => Text(place['name']))
-                      .toList(),
-                ),
+                child: Consumer<Search>(builder: (context, search, child) {
+                  return Column(
+                    children: search.searchResults
+                        .map((place) => Text(place['name']))
+                        .toList(),
+                  );
+                }),
               ),
             ],
           ),
