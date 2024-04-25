@@ -187,6 +187,17 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
     );
   }
 
+  void showNearest(category) {
+    for (var place in places) {
+      if (place['category'] == category) {
+        List nearest =
+            getNearest(place['places'], [11.59559775563384, 37.39580471521378]);
+        print(
+            'nearest $category is ${nearest[0]['name']} with distance ${nearest[1]}');
+      }
+    }
+  }
+
   bool isExpanded = false;
 
   Widget nearestPlace() {
@@ -210,22 +221,22 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
                 SizedBox(
                   width: getWidth(context) - 36,
                   child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text("Nearest restroom"),
+                    onPressed: () => showNearest('Lounges'),
+                    child: const Text("Nearest Lounges"),
                   ),
                 ),
                 SizedBox(
                   width: getWidth(context) - 36,
                   child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text("Nearest wifi center"),
+                    onPressed: () => showNearest('dormitories'),
+                    child: const Text("Nearest dormitories"),
                   ),
                 ),
                 SizedBox(
                   width: getWidth(context) - 36,
                   child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text("Nearest place to eat"),
+                    onPressed: () => showNearest('Cafes'),
+                    child: const Text("Nearest Cafes"),
                   ),
                 ),
               ],
