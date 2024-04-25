@@ -24,19 +24,20 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-    _mapController = MapController();
-
     super.initState();
+    _mapController = MapController();
   }
 
   void _flyTo(latLng) {
-    _mapController!.move(latLng, _mapController!.camera.zoom);
+    if (_mapController != null) {
+      _mapController!.move(latLng, _mapController!.camera.zoom);
+    }
   }
 
   Widget getMap() {
     return Center(
       child: FlutterMap(
-        mapController: _mapController!,
+        mapController: _mapController,
         options: MapOptions(
           initialCenter: _center,
           initialZoom: 16,
@@ -89,9 +90,6 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
   }
 
   Widget placeMarker(place) {
-    // if (_mapController != null) {
-    //   _flyTo(_center);
-    // }
     return Column(
       children: [
         Container(
