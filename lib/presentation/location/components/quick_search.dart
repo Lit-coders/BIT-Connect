@@ -1,16 +1,12 @@
+import 'package:bit_connect/presentation/location/model/search_result.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class QuickSearch {
-  List<Map<String, dynamic>>? searchResults;
   static final fieldController = TextEditingController();
 
-  static searchOnChange(query) {
-    final result = searchFor(query);
-    print(result.length);
-  }
-
-  static Future<dynamic> showQuickSearchWindow(BuildContext context) async {
+  static Future<dynamic> showQuickSearchWindow(context) async {
     showDialog(
       context: context,
       builder: (context) {
@@ -19,8 +15,11 @@ class QuickSearch {
           content: Column(
             children: [
               TextField(
-                controller: fieldController,
-                onChanged: searchOnChange,
+                onChanged: (query) {
+                  final result = searchFor(query);
+                  Search search = Provider.of<Search>(context, listen: false);
+                  search.updateSearchResults(result);
+                },
                 autofocus: true,
                 style: const TextStyle(
                   fontSize: 20,
@@ -38,6 +37,17 @@ class QuickSearch {
                   ),
                   contentPadding: EdgeInsets.symmetric(horizontal: 10),
                 ),
+              ),
+              const Text('search results for ...'),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Consumer<Search>(builder: (context, search, child) {
+                  return Column(
+                    children: search.searchResults
+                        .map((place) => Text(place['name']))
+                        .toList(),
+                  );
+                }),
               ),
             ],
           ),
