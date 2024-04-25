@@ -23,30 +23,6 @@ final List places = [
             'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
         'position': [11.598283015211864, 37.39589959956143],
       },
-      {
-        'name': 'Kitaw Lounge',
-        'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
-        'position': [11.597925500052817, 37.397444149178554]
-      },
-      {
-        'name': 'Main BiT Lounge',
-        'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
-        'position': [11.598283015211864, 37.39589959956143],
-      },
-      {
-        'name': 'Kitaw Lounge',
-        'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
-        'position': [11.597925500052817, 37.397444149178554]
-      },
-      {
-        'name': 'Main BiT Lounge',
-        'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
-        'position': [11.598283015211864, 37.39589959956143],
-      },
     ]
   },
   {
@@ -75,18 +51,6 @@ final List places = [
         'description':
             'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
         'position': [11.598180000732109, 37.397755980491645],
-      },
-      {
-        'name': "Abdissa : Male Dormitory",
-        'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
-        'position': [11.599231398547118, 37.397739329225715],
-      },
-      {
-        'name': "Guna : Male Dormitory",
-        'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
-        'position': [11.598689869893942, 37.39736928087995],
       },
     ]
   },
