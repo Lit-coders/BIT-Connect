@@ -209,17 +209,20 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
     );
   }
 
-  void showNearest(category) {
-    for (var place in places) {
-      if (place['category'] == category) {
-        List nearest =
-            getNearest(place['places'], [11.59559775563384, 37.39580471521378]);
-        setState(() {
-          _nearestPlace = nearest[0];
-        });
-        print(
-            'nearest $category is ${nearest[0]['name']} with distance ${nearest[1]}');
+  Future<void> showNearest(category) async {
+    try {
+      await getAndMarkUser();
+      for (var place in places) {
+        if (place['category'] == category) {
+          List nearest = getNearest(
+              place['places'], [_center.latitude, _center.longitude]);
+          setState(() {
+            _nearestPlace = nearest[0];
+          });
+        }
       }
+    } catch (error) {
+      // error is handled 😕
     }
   }
 
@@ -337,7 +340,7 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
     );
   }
 
-  void getAndMarkUser() async {
+  Future<void> getAndMarkUser() async {
     setState(() {
       _loadCurLoc = true;
     });
@@ -353,11 +356,6 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
           _center =
               LatLng(_currPlace['position'][0], _currPlace['position'][1]);
         });
-
-        // _mapController = MapController();
-        // if (_mapController != null) {
-        //   _mapController!.move(LatLng(position[0], position[1]), 16);
-        // }
       }
     } catch (error) {
       // already caught
