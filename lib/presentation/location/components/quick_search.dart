@@ -1,11 +1,13 @@
+import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
 
 class QuickSearch {
   List<Map<String, dynamic>>? searchResults;
   static final fieldController = TextEditingController();
 
-  static searchOnChange(value) {
-    print(value);
+  static searchOnChange(query) {
+    final result = searchFor(query);
+    print(result.length);
   }
 
   static Future<dynamic> showQuickSearchWindow(BuildContext context) async {
