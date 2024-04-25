@@ -33,6 +33,7 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
         options: MapOptions(
           initialCenter: _center,
           initialZoom: 1,
+          onTap: (tapPosition, point) => _flyTo(point),
         ),
         children: [
           TileLayer(
