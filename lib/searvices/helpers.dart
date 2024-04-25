@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
+import 'package:bit_connect/searvices/data/place_list.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -102,31 +103,30 @@ String convertDistance(double d) {
   }
 }
 
-// export function getNearestPlace(positions) {
-// 	return new Promise((resolve, reject) => {
-// 		if ("geolocation" in navigator) {
-// 			navigator.geolocation.getCurrentPosition(
-// 				(userPos) => {
-// 					const { latitude, longitude } = userPos.coords;
-// 					const nearest = getNearest(positions, [latitude, longitude]);
+// customized searching
+List<Map<String, dynamic>> searchFor(query) {
+  List<Map<String, dynamic>> allPlaces = [];
+  List<Map<String, dynamic>> matchedPlace = [];
+  // get all place list
+  for (var place in places) {
+    for (var p in place['places']) {
+      allPlaces.add(p);
+    }
+  }
 
-// 					resolve([
-// 						[
-// 							{
-// 								name: "user",
-// 								position: [latitude, longitude],
-// 							},
-// 							nearest[0],
-// 						],
-// 						nearest[1],
-// 					]);
-// 				},
-// 				(error) => {
-// 					reject("Something went wrong while locating user : " + error);
-// 				}
-// 			);
-// 		} else {
-// 			throw new Error("geolocation is not supported in this browser!");
-// 		}
-// 	});
-// }
+  // search for matched places
+  for (var place in allPlaces) {
+    if (place['name'].toLowerCase().contains(query.toLowerCase())) {
+      matchedPlace.add(place);
+    }
+  }
+
+  return matchedPlace;
+}
+
+// sort given array of places based on their name
+Map<String, dynamic> sortPlaces(place1, place2) {
+  final name1 = place1['name'].toLowerCase();
+  final name2 = place2['name'].toLowerCase();
+  return name1.localeCompare(name2);
+}
