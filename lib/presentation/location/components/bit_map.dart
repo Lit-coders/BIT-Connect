@@ -40,7 +40,7 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
         mapController: _mapController,
         options: MapOptions(
           initialCenter: _center,
-          initialZoom: 16,
+          initialZoom: 1,
           onTap: (tapPosition, point) => _flyTo(point),
         ),
         children: [
@@ -61,6 +61,21 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
               ),
             ],
           ),
+          if (_nearestPlace != null)
+            PolylineLayer(
+              polylines: [
+                Polyline(
+                  points: [
+                    _center,
+                    LatLng(_nearestPlace!['position'][0],
+                        _nearestPlace!['position'][1])
+                  ],
+                  isDotted: true,
+                  color: Colors.blue,
+                  strokeWidth: 4,
+                ),
+              ],
+            ),
           MarkerLayer(
             rotate: false,
             markers: [
