@@ -18,6 +18,7 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
   Map<String, dynamic> _currPlace = {'name': ''};
   LatLng _center = const LatLng(11.597621756651337, 37.39551835806901);
   String _layerCode = 'm';
+  Map<String, dynamic>? _nearestPlace;
 
   MapController? _mapController;
 
@@ -62,12 +63,24 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
           MarkerLayer(
             rotate: false,
             markers: [
+              // mark center
               Marker(
                 point: _center,
                 width: 200,
                 height: 100,
-                child: placeMarker(),
+                child: placeMarker(_currPlace),
               ),
+              // mark nearest place
+              if (_nearestPlace != null)
+                Marker(
+                  point: LatLng(
+                    _nearestPlace!['position'][0],
+                    _nearestPlace!['position'][1],
+                  ),
+                  width: 200,
+                  height: 100,
+                  child: placeMarker(_nearestPlace!),
+                ),
             ],
           ),
         ],
@@ -75,10 +88,10 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
     );
   }
 
-  Widget placeMarker() {
-    if (_mapController != null) {
-      _flyTo(_center);
-    }
+  Widget placeMarker(place) {
+    // if (_mapController != null) {
+    //   _flyTo(_center);
+    // }
     return Column(
       children: [
         Container(
@@ -88,7 +101,7 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
             borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
           child: Text(
-            _currPlace['name'],
+            place['name'],
             style: const TextStyle(
               fontWeight: FontWeight.w500,
             ),
@@ -203,6 +216,9 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
       if (place['category'] == category) {
         List nearest =
             getNearest(place['places'], [11.59559775563384, 37.39580471521378]);
+        setState(() {
+          _nearestPlace = nearest[0];
+        });
         print(
             'nearest $category is ${nearest[0]['name']} with distance ${nearest[1]}');
       }
