@@ -40,7 +40,7 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
         mapController: _mapController,
         options: MapOptions(
           initialCenter: _center,
-          initialZoom: 1,
+          initialZoom: 16,
           onTap: (tapPosition, point) => _flyTo(point),
         ),
         children: [
