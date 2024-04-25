@@ -50,25 +50,56 @@ class _LocationState extends State<Location> {
   Widget searchBar() {
     return Align(
       alignment: Alignment.topCenter,
-      child: Container(
-        margin: const EdgeInsets.only(top: 70),
-        width: getWidth(context) - 40,
-        child: const TextField(
-          style: TextStyle(
-            fontSize: 20,
-          ),
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: Color.fromARGB(31, 171, 167, 167),
-            hintText: 'Search Places ...',
-            hintStyle: TextStyle(
-              color: Colors.black45,
+      child: SingleChildScrollView(
+        child: GestureDetector(
+          onTap: () => print('start searching...'),
+          child: Container(
+            margin: const EdgeInsets.only(top: 70),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            width: getWidth(context) - 40,
+            height: 50,
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(25, 0, 0, 0),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
             ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Search Places ...",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black54,
+                  ),
+                ),
+                Icon(
+                  Icons.search,
+                  size: 25,
+                  color: Colors.black54,
+                ),
+              ],
             ),
-            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+            // child: TextField(
+            //   onChanged: (value) => print(value),
+            //   style: const TextStyle(
+            //     fontSize: 20,
+            //   ),
+            //   decoration: const InputDecoration(
+            //     filled: true,
+            //     fillColor: Color.fromARGB(31, 171, 167, 167),
+            //     hintText: 'Search Places ...',
+            //     hintStyle: TextStyle(
+            //       color: Colors.black45,
+            //     ),
+            //     border: OutlineInputBorder(
+            //       borderSide: BorderSide.none,
+            //       borderRadius: BorderRadius.all(Radius.circular(10)),
+            //     ),
+            //     contentPadding: EdgeInsets.symmetric(horizontal: 10),
+            //   ),
+            // ),
           ),
         ),
       ),
@@ -176,7 +207,7 @@ class _LocationState extends State<Location> {
                 child: Stack(
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(18.0),
+                      padding: const EdgeInsets.all(18.0),
                       child: Row(
                         children: [
                           const Text(
