@@ -46,15 +46,23 @@ class QuickSearch {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Search places, facilities, ...'),
+          title: const Text(
+            'Search places, facilities, ...',
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
           content: SingleChildScrollView(
             child: Column(
               children: [
                 TextField(
                   onChanged: (query) {
-                    final result = searchFor(query);
-                    Search search = Provider.of<Search>(context, listen: false);
-                    search.updateSearchResults(result);
+                    if (query.isNotEmpty) {
+                      final result = searchFor(query);
+                      Search search =
+                          Provider.of<Search>(context, listen: false);
+                      search.updateSearchResults(result);
+                    }
                   },
                   autofocus: true,
                   style: const TextStyle(
@@ -63,9 +71,9 @@ class QuickSearch {
                   decoration: const InputDecoration(
                     filled: true,
                     fillColor: Color.fromARGB(25, 0, 0, 0),
-                    hintText: 'Search Places ...',
+                    hintText: 'Search here ...',
                     hintStyle: TextStyle(
-                      color: Color.fromARGB(163, 0, 0, 0),
+                      color: Color.fromARGB(100, 0, 0, 0),
                     ),
                     border: OutlineInputBorder(
                       borderSide: BorderSide.none,
