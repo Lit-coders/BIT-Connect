@@ -84,7 +84,7 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
                 point: _center,
                 width: 200,
                 height: 100,
-                child: placeMarker(_currPlace),
+                child: placeMarker(_currPlace, false),
               ),
               // mark nearest place
               if (_nearestPlace != null)
@@ -95,7 +95,7 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
                   ),
                   width: 200,
                   height: 100,
-                  child: placeMarker(_nearestPlace!),
+                  child: placeMarker(_nearestPlace!, true),
                 ),
             ],
           ),
@@ -104,7 +104,7 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
     );
   }
 
-  Widget placeMarker(place) {
+  Widget placeMarker(place, isDistancing) {
     return Column(
       children: [
         Container(
@@ -113,11 +113,26 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
             color: Colors.blue[100],
             borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
-          child: Text(
-            place['name'],
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-            ),
+          child: Column(
+            children: [
+              Text(
+                place['name'],
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 15,
+                ),
+              ),
+              if (isDistancing)
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(
+                    place['distance'],
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+            ],
           ),
         ),
         const Icon(
@@ -232,7 +247,12 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
           List nearest = getNearest(
               place['places'], [_center.latitude, _center.longitude]);
           setState(() {
-            _nearestPlace = nearest[0];
+            _nearestPlace = {
+              'name': nearest[0]['name'],
+              'description': nearest[0]['description'],
+              'position': nearest[0]['position'],
+              'distance': nearest[1],
+            };
           });
         }
       }
