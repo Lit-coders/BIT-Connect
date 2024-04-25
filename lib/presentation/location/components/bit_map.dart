@@ -111,6 +111,7 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
         ),
         onPressed: () => setState(() {
           _layerCode = code;
+          isLayerBoxExpanded = false;
         }),
         child: Row(
           children: [
