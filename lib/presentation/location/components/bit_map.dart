@@ -21,18 +21,18 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
 
   final MapController _mapController = MapController();
 
-  void _flyTo(TapPosition position, latLng) {
-    _mapController.move(latLng, 16);
+  void _flyTo(latLng) {
+    _mapController.move(latLng, _mapController.camera.zoom);
   }
 
   Widget getMap() {
+    _flyTo(_center);
     return Center(
       child: FlutterMap(
         mapController: _mapController,
         options: MapOptions(
           initialCenter: _center,
           initialZoom: 1,
-          onTap: _flyTo,
         ),
         children: [
           TileLayer(
