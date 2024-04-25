@@ -1,5 +1,6 @@
 import 'package:bit_connect/presentation/location/components/bit_map.dart';
 import 'package:bit_connect/presentation/location/components/loc_overview.dart';
+import 'package:bit_connect/presentation/location/components/quick_search.dart';
 import 'package:bit_connect/searvices/data/place_list.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
@@ -52,7 +53,9 @@ class _LocationState extends State<Location> {
       alignment: Alignment.topCenter,
       child: SingleChildScrollView(
         child: GestureDetector(
-          onTap: () => print('start searching...'),
+          onTap: () => {
+            QuickSearch.showQuickSearchWindow(context),
+          },
           child: Container(
             margin: const EdgeInsets.only(top: 70),
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -81,25 +84,6 @@ class _LocationState extends State<Location> {
                 ),
               ],
             ),
-            // child: TextField(
-            //   onChanged: (value) => print(value),
-            //   style: const TextStyle(
-            //     fontSize: 20,
-            //   ),
-            //   decoration: const InputDecoration(
-            //     filled: true,
-            //     fillColor: Color.fromARGB(31, 171, 167, 167),
-            //     hintText: 'Search Places ...',
-            //     hintStyle: TextStyle(
-            //       color: Colors.black45,
-            //     ),
-            //     border: OutlineInputBorder(
-            //       borderSide: BorderSide.none,
-            //       borderRadius: BorderRadius.all(Radius.circular(10)),
-            //     ),
-            //     contentPadding: EdgeInsets.symmetric(horizontal: 10),
-            //   ),
-            // ),
           ),
         ),
       ),
