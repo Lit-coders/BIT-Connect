@@ -19,20 +19,26 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
   LatLng _center = const LatLng(11.597621756651337, 37.39551835806901);
   String _layerCode = 'm';
 
-  final MapController _mapController = MapController();
+  MapController? _mapController;
+
+  @override
+  void initState() {
+    _mapController = MapController();
+
+    super.initState();
+  }
 
   void _flyTo(latLng) {
-    _mapController.move(latLng, _mapController.camera.zoom);
+    _mapController!.move(latLng, _mapController!.camera.zoom);
   }
 
   Widget getMap() {
-    _flyTo(_center);
     return Center(
       child: FlutterMap(
-        mapController: _mapController,
+        mapController: _mapController!,
         options: MapOptions(
           initialCenter: _center,
-          initialZoom: 1,
+          initialZoom: 16,
           onTap: (tapPosition, point) => _flyTo(point),
         ),
         children: [
@@ -70,6 +76,9 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
   }
 
   Widget placeMarker() {
+    if (_mapController != null) {
+      _flyTo(_center);
+    }
     return Column(
       children: [
         Container(
