@@ -16,17 +16,56 @@ class BitMap extends StatefulWidget {
 class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
   bool _loadCurLoc = false;
   Map<String, dynamic> _currPlace = {'name': ''};
+  LatLng _center = const LatLng(11.597621756651337, 37.39551835806901);
   String _layerCode = 'm';
 
-  AnimationController? _animationController;
+  final MapController _mapController = MapController();
 
-  @override
-  void initState() {
-    super.initState();
+  void _flyTo(TapPosition position, latLng) {
+    _mapController.move(latLng, 16);
+  }
 
-    _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
-    _animationController!.forward();
+  Widget getMap() {
+    return Center(
+      child: FlutterMap(
+        mapController: _mapController,
+        options: MapOptions(
+          initialCenter: _center,
+          initialZoom: 1,
+          onTap: _flyTo,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate:
+                'http://{s}.google.com/vt?lyrs=$_layerCode&x={x}&y={y}&z={z}',
+            subdomains: const ["mt0", "mt1", "mt2", "mt3"],
+          ),
+          PolygonLayer(
+            polygons: [
+              Polygon(
+                points: bitBorders,
+                borderColor: Colors.blue,
+                borderStrokeWidth: 5,
+                isDotted: true,
+                color: const Color.fromARGB(42, 33, 149, 243),
+                isFilled: true,
+              ),
+            ],
+          ),
+          MarkerLayer(
+            rotate: false,
+            markers: [
+              Marker(
+                point: _center,
+                width: 200,
+                height: 100,
+                child: placeMarker(),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   Widget placeMarker() {
@@ -51,50 +90,6 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
           color: ColorAssets.bduColor,
         ),
       ],
-    );
-  }
-
-  Widget getMap() {
-    _currPlace = _currPlace['name'] == '' ? widget.place : _currPlace;
-    final latLng = LatLng(_currPlace['position'][0], _currPlace['position'][1]);
-
-    return Center(
-      child: FlutterMap(
-        options: MapOptions(
-          initialCenter: latLng,
-          initialZoom: 16,
-        ),
-        children: [
-          TileLayer(
-            urlTemplate:
-                'http://{s}.google.com/vt?lyrs=$_layerCode&x={x}&y={y}&z={z}',
-            subdomains: const ["mt0", "mt1", "mt2", "mt3"],
-          ),
-          PolygonLayer(
-            polygons: [
-              Polygon(
-                points: bitBorders,
-                borderColor: Colors.blue,
-                borderStrokeWidth: 5,
-                isDotted: true,
-                color: const Color.fromARGB(42, 33, 149, 243),
-                isFilled: true,
-              ),
-            ],
-          ),
-          MarkerLayer(
-            rotate: false,
-            markers: [
-              Marker(
-                point: latLng,
-                width: 200,
-                height: 100,
-                child: placeMarker(),
-              ),
-            ],
-          ),
-        ],
-      ),
     );
   }
 
@@ -138,7 +133,7 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
     );
   }
 
-  bool isLayerBoxExpanded = true;
+  bool isLayerBoxExpanded = false;
 
   Widget mapLayer() {
     return Align(
@@ -319,7 +314,14 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
             'description': "",
             'position': position,
           };
+          _center =
+              LatLng(_currPlace['position'][0], _currPlace['position'][1]);
         });
+
+        // _mapController = MapController();
+        // if (_mapController != null) {
+        //   _mapController!.move(LatLng(position[0], position[1]), 16);
+        // }
       }
     } catch (error) {
       // already caught
@@ -331,6 +333,9 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    _currPlace = _currPlace['name'] == '' ? widget.place : _currPlace;
+    _center = LatLng(_currPlace['position'][0], _currPlace['position'][1]);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
