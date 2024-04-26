@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:bit_connect/presentation/home/home_screen.dart';
+import 'package:bit_connect/presentation/location/model/search_result.dart';
 import 'package:bit_connect/presentation/onboarding/onboarding_screen.dart';
-import 'package:bit_connect/presentation/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +21,10 @@ Future<void> main() async {
         )
       : await Firebase.initializeApp();
   runApp(
-    const BitConnect(),
+    ChangeNotifierProvider(
+      create: (context) => Search(),
+      child: const BitConnect(),
+    ),
   );
 }
 
@@ -32,7 +36,7 @@ class BitConnect extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Bit-Connect",
-      home: const SplashScreen(),
+      home: const Home(),
       routes: {
         '/home': (context) => const Home(),
         '/onboarding': (context) => const Onboarding(),
