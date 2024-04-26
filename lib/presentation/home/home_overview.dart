@@ -1,4 +1,6 @@
 import 'package:bit_connect/presentation/home/components/news_slide.dart';
+import 'package:bit_connect/presentation/home/components/user_welcomer.dart';
+import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/padding_constants.dart';
 import 'package:bit_connect/utils/home_screen_options.dart';
 import 'package:flutter/material.dart';
@@ -24,56 +26,26 @@ class _HomeOverviewState extends State<HomeOverview> {
     return SafeArea(
       child: Column(
         children: [
-          //custom appbar
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(
-          //       horizontal: PaddingConstant.horizontalPadding,
-          //       vertical: PaddingConstant.verticalPadding),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       TextButton(
-          //         onPressed: () {
-          //           _scaffoldKey.currentState
-          //               ?.openDrawer(); // Open the drawer
-          //         },
-          //         child: Image.asset(
-          //           'assets/icons/menu.png',
-          //           height: 45,
-          //           color: ColorAssets.bduColor,
-          //         ),
-          //       ),
-          //       Image.asset(
-          //         'assets/icons/person.png',
-          //         height: PaddingConstant.forPersonIcon,
-          //         color: ColorAssets.bduColor,
-          //       ),
-          //     ],
-          //   ),
-          // ),
-
-          const SizedBox(
-            height: 20,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: PreferredSize(
+              preferredSize: Size(getWidth(context), 100),
+              child: const UserWelcomer(),
+            ),
           ),
-
-          //Welcome
           const NewsSlide(),
-          const SizedBox(
-            height: 20,
+          Container(
+            width: getWidth(context),
+            padding: const EdgeInsets.all(8.0),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: PaddingConstant.horizontalPadding),
+              child: Text(
+                "App Services",
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+              ),
+            ),
           ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: PaddingConstant.horizontalPadding),
-                  child: Text(
-                    "App Services",
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
-                  )),
-            ],
-          ),
-
           Expanded(
               child: Padding(
             padding: const EdgeInsets.symmetric(
