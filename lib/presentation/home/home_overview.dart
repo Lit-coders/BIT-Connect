@@ -1,9 +1,10 @@
+import 'package:bit_connect/presentation/home/components/news_list.dart';
 import 'package:bit_connect/presentation/home/components/news_slide.dart';
 import 'package:bit_connect/presentation/home/components/user_welcomer.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/padding_constants.dart';
-import 'package:bit_connect/utils/home_screen_options.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class HomeOverview extends StatefulWidget {
   const HomeOverview({super.key});
@@ -46,25 +47,7 @@ class _HomeOverviewState extends State<HomeOverview> {
               ),
             ),
           ),
-          Expanded(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(
-                vertical: PaddingConstant.horizontalPadding),
-            child: GridView.builder(
-              itemCount: myOptions.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
-              itemBuilder: (context, index) {
-                return HomePageOptions(
-                  name: myOptions[index][0],
-                  iconPath: myOptions[index][1],
-                );
-              },
-            ),
-          ))
-
-          //the 4 menus
+          Expanded(child: NewsList()),
         ],
       ),
     );
