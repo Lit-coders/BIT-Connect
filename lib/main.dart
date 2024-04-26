@@ -8,11 +8,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-<<<<<<< HEAD
-
-void main() {
-  runApp(Home());
-=======
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Platform.isAndroid
@@ -50,5 +45,4 @@ class BitConnect extends StatelessWidget {
       },
     );
   }
->>>>>>> 8d3ed9e951c726a36b2e3474de1672ea12b410b4
 }

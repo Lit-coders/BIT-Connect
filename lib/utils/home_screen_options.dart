@@ -13,17 +13,9 @@ class HomePageOptions extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
-<<<<<<< HEAD:lib/utils/gridforhome.dart
-        decoration: const BoxDecoration(
-            color: ColorAssets.bduColor, 
-
-            // borderRadius: BorderRadius.circular(10)
-            ),
-=======
         decoration: BoxDecoration(
             color: const Color.fromARGB(255, 255, 248, 225),
             borderRadius: BorderRadius.circular(10)),
->>>>>>> 8d3ed9e951c726a36b2e3474de1672ea12b410b4:lib/utils/home_screen_options.dart
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
