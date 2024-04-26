@@ -130,7 +130,7 @@ class _HomeState extends State<Home> {
                 Container(
                   alignment: Alignment.center,
                   child: SizedBox(
-                    width: 100,
+                    // width: 100,
                     child: ListTile(
                       tileColor: ColorAssets.secondaryYellow,
                       shape: RoundedRectangleBorder(
