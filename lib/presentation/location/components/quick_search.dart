@@ -114,6 +114,12 @@ class QuickSearch {
               ],
             ),
           ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('close', style: TextStyle(),),
+            )
+          ],
         );
       },
     );
