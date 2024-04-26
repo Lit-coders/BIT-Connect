@@ -2,13 +2,25 @@ import 'dart:io';
 
 import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
-import 'package:bit_connect/presentation/home/home_screen.dart';
+import 'package:bit_connect/presentation/auth/components/loading_spinner.dart';
 import 'package:bit_connect/searvices/helpers.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class BuildProfile extends StatefulWidget {
-  const BuildProfile({super.key});
+  final String email;
+  final String password;
+  final VoidCallback toggleToLogin;
+
+  const BuildProfile({
+    super.key,
+    required this.email,
+    required this.password,
+    required this.toggleToLogin,
+  });
 
   @override
   State<BuildProfile> createState() => _BuildProfileState();
@@ -16,17 +28,13 @@ class BuildProfile extends StatefulWidget {
 
 class _BuildProfileState extends State<BuildProfile> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  final _currentUser = FirebaseAuth.instance.currentUser;
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _deptController = TextEditingController();
   final _yearController = TextEditingController();
 
   File? _ppPath;
-  String? firstName;
-  String? lastName;
-  String? dept;
-  int? year;
-
   final _imgPicker = ImagePicker();
 
   @override
@@ -37,13 +45,43 @@ class _BuildProfileState extends State<BuildProfile> {
   }
 
   // updated data sender function : to database
-  Future<void> updateProfile(
-      {ppPath,
-      required fName,
-      required lName,
-      required dept,
-      required year}) async {
-    print("new User: fName: $fName, lName: $lName, dept: $dept, year: $year");
+  Future<String> updateProfile({
+    String? ppPath,
+    required fName,
+    required lName,
+    required dept,
+    required year,
+  }) async {
+    LoadingSpinner.load(context);
+    try {
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(_currentUser!.uid)
+          .set({
+        'fName': fName,
+        'lLame': lName,
+        'year': year,
+        'dept': dept,
+        'ppUrl': ppPath ?? "",
+      });
+      if (mounted) {
+        final snackBar = ErrorSnackBar(
+            content: "Congrats!, you have updated you profile successfully!");
+        ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+      }
+
+      return 'success';
+    } catch (error) {
+      final snackBar = ErrorSnackBar(
+          content:
+              "Unable to upload profile data, Please check you connection!");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+      }
+      return "error";
+    } finally {
+      if (mounted) Navigator.of(context).pop();
+    }
   }
 
   // handle picking an image with image_picker package
@@ -59,7 +97,9 @@ class _BuildProfileState extends State<BuildProfile> {
     } catch (error) {
       final snackBar =
           ErrorSnackBar(content: "Unable to pick image, please try again!");
-      ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+      }
     }
   }
 
@@ -148,15 +188,72 @@ class _BuildProfileState extends State<BuildProfile> {
     }
   }
 
-  void finishUpdatingProfile() {
+  Future<void> finishUpdatingProfile() async {
+    String status = "";
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      updateProfile(
-        fName: _firstNameController.text,
-        lName: _lastNameController.text,
-        dept: _deptController.text,
-        year: _yearController.text,
-      );
+      if (_ppPath != null) {
+        String ppUploadResponse = await uploadImgToStorage();
+        if (ppUploadResponse != "error") {
+          status = await updateProfile(
+            ppPath: ppUploadResponse,
+            fName: _firstNameController.text,
+            lName: _lastNameController.text,
+            dept: _deptController.text,
+            year: _yearController.text,
+          );
+        }
+      } else {
+        status = await updateProfile(
+          fName: _firstNameController.text,
+          lName: _lastNameController.text,
+          dept: _deptController.text,
+          year: _yearController.text,
+        );
+      }
+
+      // sign in and go to home
+      if (status == 'success') {
+        singIn();
+      }
+    }
+  }
+
+  Future<String> uploadImgToStorage() async {
+    LoadingSpinner.load(context);
+    try {
+      final uid = _currentUser!.uid;
+      final Reference storageRef =
+          FirebaseStorage.instance.ref().child("profile_pic/$uid.jpg");
+      UploadTask uploadTask = storageRef.putFile(_ppPath!);
+
+      await uploadTask.whenComplete(() => null);
+      String ppUrl = await storageRef.getDownloadURL();
+      return ppUrl;
+    } catch (error) {
+      final snackBar = ErrorSnackBar(
+          content:
+              "Unable to upload profile picture, please check your connection!");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+      }
+      return "error";
+    } finally {
+      if (mounted) Navigator.of(context).pop();
+    }
+  }
+
+  Future<void> singIn() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: widget.email, password: widget.password);
+      widget.toggleToLogin();
+    } on FirebaseAuthException catch (error) {
+      final snackBar =
+          ErrorSnackBar(content: "Unable to sign in, ${error.code}");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+      }
     }
   }
 
@@ -178,13 +275,7 @@ class _BuildProfileState extends State<BuildProfile> {
           ),
           actions: [
             OutlinedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const Home(),
-                  ),
-                );
-              },
+              onPressed: () => singIn(),
               style: const ButtonStyle(
                 side: MaterialStatePropertyAll(
                   BorderSide(

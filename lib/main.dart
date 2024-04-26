@@ -61,8 +61,24 @@ Future<void> main() async {
         )
       : await Firebase.initializeApp();
   runApp(
-    const BitConnect()
+    const BitConnect(),
   );
 }
 
+class BitConnect extends StatelessWidget {
+  const BitConnect({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Bit-Connect",
+      home: const SplashScreen(),
+      routes: {
+        '/home': (context) => const Home(),
+        '/onboarding': (context) => const Onboarding(),
+        // '/cafe': (context) => const Cafe(), //
+      },
+    );
+  }
 }

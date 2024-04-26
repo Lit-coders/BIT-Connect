@@ -9,7 +9,9 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class SignUP extends StatefulWidget {
   final VoidCallback toggleToLogin;
-  const SignUP({super.key, required this.toggleToLogin});
+  final Function(String, String) setSignUpData;
+  const SignUP(
+      {super.key, required this.toggleToLogin, required this.setSignUpData});
 
   @override
   State<SignUP> createState() => _SignUpState();
@@ -44,6 +46,11 @@ class _SignUpState extends State<SignUP> {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: "${_idController.text.toLowerCase()}@gmail.com",
         password: _passwordController.text,
+      );
+
+      widget.setSignUpData(
+        "${_idController.text.toLowerCase()}@gmail.com",
+        _passwordController.text,
       );
     } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use') {
@@ -174,7 +181,7 @@ class _SignUpState extends State<SignUP> {
                       _signUpError,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        color: Colors.blue,
+                        color: Colors.red,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
