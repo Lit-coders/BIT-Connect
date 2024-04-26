@@ -74,32 +74,28 @@ class _UserWelcomerState extends State<UserWelcomer> {
     );
   }
 
-  AppBar getAppBar(Map<String, dynamic>? data) {
-    return AppBar(
-      toolbarHeight: 80,
-      automaticallyImplyLeading: false,
-      title: Container(
-        padding: const EdgeInsets.only(right: 5),
-        width: getWidth(context),
-        child: Row(
-          children: [
-            getPP(data == null ? "" : data['ppUrl']),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Hi, ${data == null ? _currentUser!.email!.split('@')[0].split(RegExp(r'[a-z]{3}'))[1] : data['fName']}',
-                  // 'Hi, 1308736',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                const Text(
-                  "What do you want to exploare?",
-                  style: TextStyle(fontSize: 15),
-                )
-              ],
-            )
-          ],
-        ),
+  Widget getAppBar(Map<String, dynamic>? data) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      width: getWidth(context),
+      child: Row(
+        children: [
+          getPP(data == null ? "" : data['ppUrl']),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Hi, ${data == null ? _currentUser!.email!.split('@')[0].split(RegExp(r'[a-z]{3}'))[1] : data['fName']}',
+                // 'Hi, 1308736',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const Text(
+                "What do you want to explore?",
+                style: TextStyle(fontSize: 15),
+              )
+            ],
+          )
+        ],
       ),
     );
   }
