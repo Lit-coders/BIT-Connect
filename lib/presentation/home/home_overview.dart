@@ -3,6 +3,7 @@ import 'package:bit_connect/presentation/home/components/news_slide.dart';
 import 'package:bit_connect/presentation/home/components/user_welcomer.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/padding_constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -42,12 +43,12 @@ class _HomeOverviewState extends State<HomeOverview> {
               padding: EdgeInsets.symmetric(
                   horizontal: PaddingConstant.horizontalPadding),
               child: Text(
-                "App Services",
+                "News",
                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
               ),
             ),
           ),
-          Expanded(child: NewsList()),
+          Expanded(child: NewsList())
         ],
       ),
     );
