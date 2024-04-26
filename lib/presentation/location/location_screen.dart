@@ -190,6 +190,7 @@ class _LocationState extends State<Location> {
                 ),
                 child: Stack(
                   children: [
+                    searchBar(),
                     Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Row(
@@ -238,7 +239,6 @@ class _LocationState extends State<Location> {
                         ],
                       ),
                     ),
-                    searchBar(),
                     Align(
                       child: Container(
                         padding:
