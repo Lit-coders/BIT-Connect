@@ -6,11 +6,47 @@ import 'package:bit_connect/presentation/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-<<<<<<< HEAD
-
 void main() {
-  runApp(Home());
-=======
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(BitConnect());
+}
+
+class BitConnect extends StatelessWidget {
+  const BitConnect({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: _initializeFirebase(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: "Bit-Connect",
+            home: const SplashScreen(),
+            routes: {
+              '/home': (context) => const Home(),
+              '/onboarding': (context) => const Onboarding(),
+              // '/cafe': (context) => const Cafe(), //
+            },
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('Error initializing Firebase'),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+
+  Future<void> _initializeFirebase() async{
+    
+  }
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Platform.isAndroid
@@ -24,25 +60,8 @@ Future<void> main() async {
         )
       : await Firebase.initializeApp();
   runApp(
-    const BitConnect(),
+    const BitConnect()
   );
 }
 
-class BitConnect extends StatelessWidget {
-  const BitConnect({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Bit-Connect",
-      home: const SplashScreen(),
-      routes: {
-        '/home': (context) => const Home(),
-        '/onboarding': (context) => const Onboarding(),
-        // '/cafe': (context) => const Cafe(), //
-      },
-    );
-  }
->>>>>>> 8d3ed9e951c726a36b2e3474de1672ea12b410b4
 }
