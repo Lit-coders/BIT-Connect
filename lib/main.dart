@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bit_connect/presentation/home/home_screen.dart';
 import 'package:bit_connect/presentation/location/model/search_result.dart';
 import 'package:bit_connect/presentation/onboarding/onboarding_screen.dart';
+import 'package:bit_connect/presentation/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +37,7 @@ class BitConnect extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Bit-Connect",
-      home: const Home(),
+      home: const SplashScreen(),
       routes: {
         '/home': (context) => const Home(),
         '/onboarding': (context) => const Onboarding(),
