@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class QuickSearch {
   static final fieldController = TextEditingController();
 
-  static Widget resultTab(place, context) {
+  static Widget resultTab(place, context, Search search) {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
@@ -35,12 +35,28 @@ class QuickSearch {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 5.0),
-              child: Icon(
-                Icons.map_outlined,
-                color: Colors.white70,
-              ),
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0),
+              child: search.query.isNotEmpty
+                  ? const Icon(
+                      Icons.map_outlined,
+                      color: Colors.white70,
+                    )
+                  : InkWell(
+                      onTap: () {
+                        search.deleteHistory(place['name']);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white70,
+                        ),
+                        child: const Icon(
+                          Icons.close,
+                          color: ColorAssets.bduColor,
+                        ),
+                      ),
+                    ),
             )
           ],
         ),
@@ -52,9 +68,22 @@ class QuickSearch {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Consumer<Search>(builder: (context, search, child) {
+        if (search.searchResults.isEmpty && search.query.isNotEmpty) {
+          return const Center(
+            child: Text(
+              "No such place is found, Please try again!",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 16,
+              ),
+            ),
+          );
+        }
+
         return Column(
           children: search.searchResults
-              .map((place) => resultTab(place, context))
+              .map((place) => resultTab(place, context, search))
               .toList(),
         );
       }),
@@ -78,7 +107,7 @@ class QuickSearch {
               children: [
                 TextField(
                   onChanged: (query) {
-                    search.setQuery(query);
+                    search.updateQuery(query);
                     if (query.isNotEmpty) {
                       final result = searchFor(query);
                       search.updateSearchResults(result);
@@ -102,14 +131,7 @@ class QuickSearch {
                     contentPadding: EdgeInsets.symmetric(horizontal: 10),
                   ),
                 ),
-                Consumer(builder: (context, search, child) {
-                  return const Wrap(
-                    children: [
-                      Text('search results for '),
-                      // Text(search.query),
-                    ],
-                  );
-                }),
+                const Text('search results'),
                 searchResult(),
               ],
             ),
@@ -117,7 +139,12 @@ class QuickSearch {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('close', style: TextStyle(),),
+              child: const Text(
+                'close',
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
             )
           ],
         );
