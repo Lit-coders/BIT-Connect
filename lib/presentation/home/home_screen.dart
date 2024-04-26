@@ -1,11 +1,9 @@
-import 'package:bit_connect/utils/constants/padConstants.dart';
-import 'package:bit_connect/utils/gridforhome.dart';
-import 'package:carousel_slider/carousel_options.dart';
+import 'package:bit_connect/utils/constants/color_assets.dart';
+import 'package:bit_connect/utils/constants/padding_constants.dart';
+import 'package:bit_connect/utils/home_screen_options.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import '../../utils/constants/colorAssets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'dart:ui';
 import 'dart:io';
 
 class Home extends StatefulWidget {
@@ -26,18 +24,18 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          key: _scaffoldKey,
+          key: scaffoldKey,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
             leading: TextButton(
               onPressed: () {
-                _scaffoldKey.currentState?.openDrawer();
+                scaffoldKey.currentState?.openDrawer();
               },
               child: Image.asset(
                 'assets/icons/menu.png',
@@ -78,7 +76,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.home),
+                  leading: const Icon(Icons.home),
                   title: const Text(
                     'Home',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
@@ -88,7 +86,7 @@ class _HomeState extends State<Home> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.category_sharp),
+                  leading: const Icon(Icons.category_sharp),
                   title: const Text(
                     'Cafe',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
@@ -98,7 +96,7 @@ class _HomeState extends State<Home> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.favorite),
+                  leading: const Icon(Icons.favorite),
                   title: const Text(
                     'Lounge',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
@@ -108,8 +106,8 @@ class _HomeState extends State<Home> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.book_rounded),
-                  title: Text(
+                  leading: const Icon(Icons.book_rounded),
+                  title: const Text(
                     'Location',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
@@ -118,8 +116,8 @@ class _HomeState extends State<Home> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.info_outlined),
-                  title: Text(
+                  leading: const Icon(Icons.info_outlined),
+                  title: const Text(
                     'Departments',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
@@ -136,7 +134,7 @@ class _HomeState extends State<Home> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      title: Text(
+                      title: const Text(
                         textAlign: TextAlign.center,
                         'Logout',
                         style: TextStyle(
@@ -156,7 +154,6 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          
           backgroundColor: Colors.white,
           body: SafeArea(
             child: Column(
@@ -214,8 +211,8 @@ class _HomeState extends State<Home> {
                       builder: (BuildContext context) {
                         return Container(
                           width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(horizontal: 10.0),
-                          decoration: BoxDecoration(
+                          margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                          decoration: const BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage('assets/bdu.png'),
                               fit: BoxFit.cover,

@@ -1,10 +1,7 @@
 import 'dart:async';
 
-import 'package:bit_connect/utils/constants/colorAssets.dart';
-import 'package:flutter/cupertino.dart';
-
+import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -26,7 +23,7 @@ class _PomodoroState extends State<Pomodoro> {
     int Time = TimeInMinut * 60;
     double SecPercent = (Time / 100);
 
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (Time > 0) {
           Time--;
@@ -45,7 +42,6 @@ class _PomodoroState extends State<Pomodoro> {
           TimeInMinut = 25;
           timer.cancel();
         }
-        ;
       });
     });
   }
@@ -58,9 +54,10 @@ class _PomodoroState extends State<Pomodoro> {
           child: Scaffold(
         body: Container(
           decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [Color.fromARGB(255, 15, 132, 233), ColorAssets.bduColor],
-                  begin: FractionalOffset(0.5, 1))),
+              gradient: LinearGradient(colors: [
+            Color.fromARGB(255, 15, 132, 233),
+            ColorAssets.bduColor
+          ], begin: FractionalOffset(0.5, 1))),
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -73,7 +70,7 @@ class _PomodoroState extends State<Pomodoro> {
                   style: TextStyle(color: Colors.white, fontSize: 40),
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 200,
                 height: 400,
                 child: CircularPercentIndicator(
@@ -103,7 +100,7 @@ class _PomodoroState extends State<Pomodoro> {
                         topRight: Radius.circular(20),
                         topLeft: Radius.circular(20))),
                 child: Padding(
-                  padding: EdgeInsets.only(top: 30, left: 20, right: 20),
+                  padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
                   child: Column(
                     children: <Widget>[
                       const Expanded(
@@ -149,14 +146,14 @@ class _PomodoroState extends State<Pomodoro> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: 30),
+                        padding: const EdgeInsets.symmetric(vertical: 30),
                         child: TextButton(
                           onPressed: _StartTimer,
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 ColorAssets.bduColor),
                             padding: MaterialStateProperty.all<EdgeInsets>(
-                              EdgeInsets.symmetric(
+                              const EdgeInsets.symmetric(
                                   vertical: 20, horizontal: 80),
                             ),
                             shape: MaterialStateProperty.all<
@@ -167,7 +164,7 @@ class _PomodoroState extends State<Pomodoro> {
                               ),
                             ),
                           ),
-                          child: Text(
+                          child: const Text(
                             'START',
                             style: TextStyle(
                                 color: ColorAssets.white, fontSize: 22),

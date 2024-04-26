@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:bit_connect/utils/constants/colorAssets.dart';
-import 'package:bit_connect/utils/constants/padConstants.dart';
+import 'package:bit_connect/utils/constants/color_assets.dart';
+import 'package:bit_connect/utils/constants/padding_constants.dart';
 import 'package:flutter/material.dart';
 
 class StudentClubs extends StatefulWidget {
-  const StudentClubs({Key? key}) : super(key: key);
+  const StudentClubs({super.key});
 
   @override
   State<StudentClubs> createState() => _StudentClubsState();
@@ -14,17 +14,17 @@ class StudentClubs extends StatefulWidget {
 class _StudentClubsState extends State<StudentClubs> {
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        key: _scaffoldKey,
+        key: scaffoldKey,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: TextButton(
             onPressed: () {
-              _scaffoldKey.currentState?.openDrawer();
+              scaffoldKey.currentState?.openDrawer();
             },
             child: Image.asset(
               'assets/icons/menu.png',
@@ -65,7 +65,7 @@ class _StudentClubsState extends State<StudentClubs> {
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.home),
+                leading: const Icon(Icons.home),
                 title: const Text(
                   'Home',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
@@ -75,7 +75,7 @@ class _StudentClubsState extends State<StudentClubs> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.category_sharp),
+                leading: const Icon(Icons.category_sharp),
                 title: const Text(
                   'Cafe',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
@@ -85,7 +85,7 @@ class _StudentClubsState extends State<StudentClubs> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.favorite),
+                leading: const Icon(Icons.favorite),
                 title: const Text(
                   'Lounge',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
@@ -95,7 +95,7 @@ class _StudentClubsState extends State<StudentClubs> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.book_rounded),
+                leading: const Icon(Icons.book_rounded),
                 title: const Text(
                   'Location',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
@@ -151,11 +151,16 @@ class _StudentClubsState extends State<StudentClubs> {
                 return TextButton(
                   onPressed: () {
                     showModalBottomSheet(
+<<<<<<< HEAD:lib/presentation/studentclubs/studentClubs.dart
                         backgroundColor: Color.fromARGB(255, 0, 120, 225),
+=======
+                        backgroundColor: const Color.fromARGB(255, 0, 120, 225),
+>>>>>>> 8d3ed9e951c726a36b2e3474de1672ea12b410b4:lib/presentation/student_clubs/student_clubs.dart
                         builder: (BuildContext context) {
                           return SizedBox(
                             height: 400,
                             width: MediaQuery.of(context).size.width,
+<<<<<<< HEAD:lib/presentation/studentclubs/studentClubs.dart
                             child: Container(
                               child: Padding(
                                 padding: const EdgeInsets.all(16.0),
@@ -164,6 +169,9 @@ class _StudentClubsState extends State<StudentClubs> {
                                 ]),
                               ),
                             ),
+=======
+                            child: const Text('Trial'),
+>>>>>>> 8d3ed9e951c726a36b2e3474de1672ea12b410b4:lib/presentation/student_clubs/student_clubs.dart
                           );
                         },
                         context: Navigator.of(context).context);
@@ -184,7 +192,11 @@ class _StudentClubsState extends State<StudentClubs> {
                         shadowColor: ColorAssets.bduColor.withOpacity(0.5),
                         borderRadius: BorderRadius.circular(8),
                         child: ListTile(
+<<<<<<< HEAD:lib/presentation/studentclubs/studentClubs.dart
                           contentPadding: EdgeInsets.all(8),
+=======
+                          contentPadding: const EdgeInsets.all(8),
+>>>>>>> 8d3ed9e951c726a36b2e3474de1672ea12b410b4:lib/presentation/student_clubs/student_clubs.dart
                           title: const Text("RDL"),
                           tileColor: ColorAssets.white,
                           onTap: () {},
