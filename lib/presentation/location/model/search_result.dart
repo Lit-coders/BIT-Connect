@@ -9,8 +9,15 @@ class Search extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setQuery(query) {
-    query = query;
+  void updateQuery(String q) {
+    query = q;
+    notifyListeners();
+  }
+
+  void deleteHistory(String name) {
+    final filteredHis =
+        searchResults.where((place) => place['name'] != name).toList();
+    searchResults = filteredHis;
     notifyListeners();
   }
 }
