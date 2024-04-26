@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 AppBar homeAppBar(context, scaffoldKey) {
   return AppBar(
     backgroundColor: Colors.transparent,
+    surfaceTintColor: Colors.transparent,
     elevation: 0,
     leading: TextButton(
       onPressed: () {
