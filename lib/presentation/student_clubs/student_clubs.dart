@@ -151,12 +151,27 @@ class _StudentClubsState extends State<StudentClubs> {
                 return TextButton(
                   onPressed: () {
                     showModalBottomSheet(
+<<<<<<< HEAD:lib/presentation/studentclubs/studentClubs.dart
+                        backgroundColor: Color.fromARGB(255, 0, 120, 225),
+=======
                         backgroundColor: const Color.fromARGB(255, 0, 120, 225),
+>>>>>>> 8d3ed9e951c726a36b2e3474de1672ea12b410b4:lib/presentation/student_clubs/student_clubs.dart
                         builder: (BuildContext context) {
                           return SizedBox(
                             height: 400,
                             width: MediaQuery.of(context).size.width,
+<<<<<<< HEAD:lib/presentation/studentclubs/studentClubs.dart
+                            child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: ListView(children: const [
+                                  Text('Trial'),
+                                ]),
+                              ),
+                            ),
+=======
                             child: const Text('Trial'),
+>>>>>>> 8d3ed9e951c726a36b2e3474de1672ea12b410b4:lib/presentation/student_clubs/student_clubs.dart
                           );
                         },
                         context: Navigator.of(context).context);
@@ -177,7 +192,11 @@ class _StudentClubsState extends State<StudentClubs> {
                         shadowColor: ColorAssets.bduColor.withOpacity(0.5),
                         borderRadius: BorderRadius.circular(8),
                         child: ListTile(
+<<<<<<< HEAD:lib/presentation/studentclubs/studentClubs.dart
+                          contentPadding: EdgeInsets.all(8),
+=======
                           contentPadding: const EdgeInsets.all(8),
+>>>>>>> 8d3ed9e951c726a36b2e3474de1672ea12b410b4:lib/presentation/student_clubs/student_clubs.dart
                           title: const Text("RDL"),
                           tileColor: ColorAssets.white,
                           onTap: () {},
