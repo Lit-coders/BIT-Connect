@@ -14,6 +14,7 @@ AppBar homeAppBar(context, scaffoldKey) {
         'assets/icons/menu.png',
         height: PaddingConstant.forPersonIcon,
         color: ColorAssets.bduColor,
+        width: 30,
       ),
     ),
     actions: [
@@ -25,6 +26,7 @@ AppBar homeAppBar(context, scaffoldKey) {
           'assets/icons/person.png',
           height: PaddingConstant.forPersonIcon,
           color: ColorAssets.bduColor,
+          width: 30,
         ),
       ),
     ],

@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
         key: scaffoldKey,
         appBar: _contentIndex != 2
             ? PreferredSize(
-                preferredSize: Size(getWidth(context), 80),
+                preferredSize: Size(getWidth(context), 50),
                 child: homeAppBar(context, scaffoldKey),
               )
             : PreferredSize(
