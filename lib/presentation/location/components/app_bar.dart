@@ -51,26 +51,27 @@ class _LocationAppBarState extends State<LocationAppBar> {
       ),
       child: Center(
         child: ppUrl == ""
-            ? const ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(100)),
-                child: Image(
-                  image: AssetImage('assets/bdu.png'),
-                  fit: BoxFit.cover,
-                  height: 60,
-                  width: 60,
-                ),
-              )
-            // Text(
-            //     _currentUser!.email!
-            //         .split('@')[0]
-            //         .split(RegExp(r'[a-z]{3}'))[1]
-            //         .substring(3),
-            //     style: const TextStyle(
-            //       color: Colors.white,
-            //       fontSize: 15,
-            //       fontWeight: FontWeight.w500,
+            ?
+            // const ClipRRect(
+            //     borderRadius: BorderRadius.all(Radius.circular(100)),
+            //     child: Image(
+            //       image: AssetImage('assets/bdu.png'),
+            //       fit: BoxFit.cover,
+            //       height: 60,
+            //       width: 60,
             //     ),
             //   )
+            Text(
+                _currentUser!.email!
+                    .split('@')[0]
+                    .split(RegExp(r'[a-z]{3}'))[1]
+                    .substring(3),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                ),
+              )
             : ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(100)),
                 child: Image(
@@ -95,16 +96,16 @@ class _LocationAppBarState extends State<LocationAppBar> {
         child: Row(
           children: [
             getPP(data == null ? "" : data['ppUrl']),
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  // 'Hi, ${data == null ? _currentUser!.email!.split('@')[0].split(RegExp(r'[a-z]{3}'))[1] : data['fName']}',
-                  'Hi, 1308736',
-                  style: TextStyle(
+                  'Hi, ${data == null ? _currentUser!.email!.split('@')[0].split(RegExp(r'[a-z]{3}'))[1] : data['fName']}',
+                  // 'Hi, 1308736',
+                  style: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                Text(
+                const Text(
                   "What do you want to exploare?",
                   style: TextStyle(color: Colors.white, fontSize: 15),
                 )
@@ -118,18 +119,18 @@ class _LocationAppBarState extends State<LocationAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    return getAppBar(null);
-    // return FutureBuilder(
-    //   future: getUserData(),
-    //   builder: (context, snapshot) {
-    //     if (snapshot.connectionState == ConnectionState.waiting) {
-    //       return getAppBar(null);
-    //     } else if (snapshot.hasData || snapshot.hasError) {
-    //       final data = snapshot.requireData;
-    //       return getAppBar(data);
-    //     }
-    //     return const Center();
-    //   },
-    // );
+    // return getAppBar(null);
+    return FutureBuilder(
+      future: getUserData(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return getAppBar(null);
+        } else if (snapshot.hasData || snapshot.hasError) {
+          final data = snapshot.requireData;
+          return getAppBar(data);
+        }
+        return const Center();
+      },
+    );
   }
 }
