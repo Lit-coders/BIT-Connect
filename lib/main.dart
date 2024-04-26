@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bit_connect/presentation/gpa/gpacalc.dart';
 import 'package:bit_connect/presentation/home/home_screen.dart';
 import 'package:bit_connect/presentation/onboarding/onboarding_screen.dart';
 import 'package:bit_connect/presentation/splash_screen.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(BitConnect());
+  runApp(GpaCalculator());
 }
 
 class BitConnect extends StatelessWidget {
