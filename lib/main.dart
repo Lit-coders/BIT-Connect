@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:bit_connect/presentation/home/home_screen.dart';
+import 'package:bit_connect/presentation/location/model/search_result.dart';
 import 'package:bit_connect/presentation/onboarding/onboarding_screen.dart';
 import 'package:bit_connect/presentation/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,11 +17,15 @@ Future<void> main() async {
             appId: "1:880080912408:android:451d0acd1adf12a566036d",
             messagingSenderId: "880080912408",
             projectId: "bit-connect-7569f",
+            storageBucket: "gs://bit-connect-7569f.appspot.com",
           ),
         )
       : await Firebase.initializeApp();
   runApp(
-    const BitConnect(),
+    ChangeNotifierProvider(
+      create: (context) => Search(),
+      child: const BitConnect(),
+    ),
   );
 }
 
