@@ -1,3 +1,4 @@
+import 'package:bit_connect/presentation/location/components/bit_map.dart';
 import 'package:bit_connect/presentation/location/model/search_result.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
@@ -8,40 +9,60 @@ class QuickSearch {
   static final fieldController = TextEditingController();
 
   static Widget resultTab(place, context) {
-    return Container(
-      width: getWidth(context),
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.only(bottom: 10),
-      decoration: const BoxDecoration(
-        color: ColorAssets.bduColor,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              place['name'],
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => BitMap(place: place)));
+      },
+      child: Container(
+        width: getWidth(context),
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.only(bottom: 10),
+        decoration: const BoxDecoration(
+          color: ColorAssets.bduColor,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                place['name'],
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
-              overflow: TextOverflow.ellipsis,
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 5.0),
-            child: Icon(
-              Icons.map_outlined,
-              color: Colors.white70,
-            ),
-          )
-        ],
+            const Padding(
+              padding: EdgeInsets.only(left: 5.0),
+              child: Icon(
+                Icons.map_outlined,
+                color: Colors.white70,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 
+  static Widget searchResult() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Consumer<Search>(builder: (context, search, child) {
+        return Column(
+          children: search.searchResults
+              .map((place) => resultTab(place, context))
+              .toList(),
+        );
+      }),
+    );
+  }
+
   static Future<dynamic> showQuickSearchWindow(context) async {
+    Search search = Provider.of<Search>(context, listen: false);
     showDialog(
       context: context,
       builder: (context) {
@@ -57,10 +78,9 @@ class QuickSearch {
               children: [
                 TextField(
                   onChanged: (query) {
+                    search.setQuery(query);
                     if (query.isNotEmpty) {
                       final result = searchFor(query);
-                      Search search =
-                          Provider.of<Search>(context, listen: false);
                       search.updateSearchResults(result);
                     }
                   },
@@ -82,17 +102,15 @@ class QuickSearch {
                     contentPadding: EdgeInsets.symmetric(horizontal: 10),
                   ),
                 ),
-                const Text('search results for ...'),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Consumer<Search>(builder: (context, search, child) {
-                    return Column(
-                      children: search.searchResults
-                          .map((place) => resultTab(place, context))
-                          .toList(),
-                    );
-                  }),
-                ),
+                Consumer(builder: (context, search, child) {
+                  return const Wrap(
+                    children: [
+                      Text('search results for '),
+                      // Text(search.query),
+                    ],
+                  );
+                }),
+                searchResult(),
               ],
             ),
           ),
