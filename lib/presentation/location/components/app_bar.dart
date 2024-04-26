@@ -51,17 +51,7 @@ class _LocationAppBarState extends State<LocationAppBar> {
       ),
       child: Center(
         child: ppUrl == ""
-            ?
-            // const ClipRRect(
-            //     borderRadius: BorderRadius.all(Radius.circular(100)),
-            //     child: Image(
-            //       image: AssetImage('assets/bdu.png'),
-            //       fit: BoxFit.cover,
-            //       height: 60,
-            //       width: 60,
-            //     ),
-            //   )
-            Text(
+            ? Text(
                 _currentUser!.email!
                     .split('@')[0]
                     .split(RegExp(r'[a-z]{3}'))[1]
