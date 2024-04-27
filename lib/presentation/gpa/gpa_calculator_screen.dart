@@ -12,6 +12,12 @@ class GpaCalculatorScreen extends StatefulWidget {
 class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
   List<Map<String, dynamic>> courseData = [];
 
+  void removeCourseData(Map<String, dynamic> courseToRemove) {
+    setState(() {
+      courseData.remove(courseToRemove);
+    });
+  }
+
   double calculateGpa() {
     Map<String, int> gradeValue = {
       'A': 4,
@@ -24,8 +30,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
     int totalWeight = 0;
     for (var course in courseData) {
       if (course['value'] != null) {
-        totalValue +=
-            (course['value'] as int) * gradeValue[course['grade']]!;
+        totalValue += (course['value'] as int) * gradeValue[course['grade']]!;
         totalWeight += course['value'] as int;
       }
     }
@@ -57,6 +62,9 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                         courseData[index] = newData;
                       });
                     },
+                    onCourseRemoved:() {
+                      removeCourseData(courseData[index]);
+                    }
                   );
                 },
               ),
@@ -100,7 +108,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('Calculation Result'),
+                      title: const Text('Calculation Result'),
                       content: Text(
                           'The result is: ${calculateGpa().toStringAsFixed(2)}'),
                       actions: <Widget>[
@@ -108,7 +116,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text('OK'),
+                          child: const Text('OK'),
                         ),
                       ],
                     );
@@ -139,23 +147,24 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
 class CourseInputRow extends StatelessWidget {
   final Map<String, dynamic> courseData;
   final ValueChanged<Map<String, dynamic>> onCourseDataChanged;
+  final VoidCallback onCourseRemoved;
 
-  const CourseInputRow({
-    required this.courseData,
-    required this.onCourseDataChanged,
-  });
+  const CourseInputRow(
+      {required this.courseData, required this.onCourseDataChanged,required this.onCourseRemoved, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.blue.shade500, width: 2),
-        ),
-        child: Row(
-          children: [
-            Expanded(
+      padding: const EdgeInsets.all(5.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(width: 2, color: Colors.lightBlue),
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: Column(
                 children: [
                   TextField(
@@ -200,24 +209,22 @@ class CourseInputRow extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: Container(
-                          child: DropdownButtonFormField<int>(
-                            value: courseData['value'],
-                            onChanged: (newValue) {
-                              courseData['value'] = newValue!;
-                              onCourseDataChanged(courseData);
-                            },
-                            items: <int>[30, 7, 6, 5, 4].map((int value) {
-                              return DropdownMenuItem<int>(
-                                value: value,
-                                child: Text(value.toString()),
-                              );
-                            }).toList(),
-                            decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.all(5),
-                              hintText: 'Value',
-                              border: InputBorder.none,
-                            ),
+                        child: DropdownButtonFormField<int>(
+                          value: courseData['value'],
+                          onChanged: (newValue) {
+                            courseData['value'] = newValue!;
+                            onCourseDataChanged(courseData);
+                          },
+                          items: <int>[30, 7, 6, 5, 4].map((int value) {
+                            return DropdownMenuItem<int>(
+                              value: value,
+                              child: Text(value.toString()),
+                            );
+                          }).toList(),
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.all(5),
+                            hintText: 'Value',
+                            border: InputBorder.none,
                           ),
                         ),
                       ),
@@ -226,20 +233,21 @@ class CourseInputRow extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(width: 2 , color: Colors.red),
-              ),
-              child: IconButton(
-                onPressed: () {
-                  onCourseDataChanged({});
-                },
-                icon: const Icon(Icons.close,color: Colors.red,),
-              ),
-            )
-          ],
-        ),
+          ),
+          const SizedBox(width: 5),
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(width: 2, color: Colors.red),
+            ),
+            child: IconButton(
+              onPressed: () {
+                onCourseRemoved();
+              },
+              icon: const Icon(Icons.close, color: Colors.red),
+            ),
+          ),
+        ],
       ),
     );
   }
