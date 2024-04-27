@@ -9,6 +9,27 @@ class GpaCalculatorScreen extends StatefulWidget {
 
 class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
   List<Map<String, dynamic>> courseData = [];
+    double calculateGpa() {
+    Map <String,int> gradeValue = {
+      'A': 4,
+      'B': 3,
+      'C': 2,
+      'D': 1,
+      'F': 0,
+    };
+    int totalValue = 0;
+    int totalWeight = 0;
+    for (var course in courseData) {
+      if (course['value'] != null) {
+        totalValue += (course['value'] as int) * gradeValue[course['grade']]!;
+        totalWeight += course['value'] as int ;
+      }
+    }
+    if (totalWeight == 0) {
+      return 0.0;
+    }
+    return totalValue / totalWeight;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +95,24 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
-                courseData.add({});
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Calculation Result'),
+                      content: Text(
+                          'The result is: ${calculateGpa()}'), // Display the result in the dialog
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                          child: Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green, // Background color
@@ -105,7 +143,7 @@ class CourseInputRow extends StatelessWidget {
     required this.courseData,
     required this.onCourseDataChanged,
   });
-  
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -159,7 +197,7 @@ class CourseInputRow extends StatelessWidget {
                       courseData['value'] = newValue!;
                       onCourseDataChanged(courseData);
                     },
-                    items: <int>[4, 3, 2, 1].map((int value) {
+                    items: <int>[30, 7, 6, 5,4].map((int value) {
                       return DropdownMenuItem<int>(
                         value: value,
                         child: Text(value.toString()),
@@ -176,16 +214,4 @@ class CourseInputRow extends StatelessWidget {
           ),
         ));
   }
-}
-
-double calculateGpa(List<Map<String, dynamic>> courseData) {
-  int totalValue = 0;
-  int totalWeight = 0;
-  for (var course in courseData) {
-    if (course['value'] != null) {
-      totalValue += int.parse(course['value']) * int.parse(course['grade']);
-      totalWeight += int.parse(course['value']);
-    }
-  }
-  return totalValue / totalWeight;
 }
