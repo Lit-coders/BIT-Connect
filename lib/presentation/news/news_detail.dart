@@ -1,3 +1,4 @@
+import 'package:bit_connect/presentation/home/components/news_age.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
 
@@ -99,26 +100,8 @@ class NewsDetail extends StatelessWidget {
                                   color: Colors.black,
                                   borderRadius: BorderRadius.circular(50),
                                 ),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.timer,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      news['uploadTime']
-                                          .toDate()
-                                          .toLocal()
-                                          .toString()
-                                          .split(" ")
-                                          .toList()[0],
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                child: NewsAge(
+                                    uploadTime: getNewsAge(news['uploadTime'])),
                               ),
                               Center(
                                 child: Text(
