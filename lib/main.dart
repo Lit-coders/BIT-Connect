@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:bit_connect/presentation/home/home_screen.dart';
 import 'package:bit_connect/presentation/location/model/search_result.dart';
-import 'package:bit_connect/presentation/news/model/news_adaptor.dart';
+import 'package:bit_connect/presentation/news/data/news_adaptor.dart';
 import 'package:bit_connect/presentation/onboarding/onboarding_screen.dart';
 import 'package:bit_connect/presentation/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
