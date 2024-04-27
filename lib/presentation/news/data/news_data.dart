@@ -33,19 +33,20 @@ Future<void> retrieveAndCatchNews() async {
 // store data to Hive box
 Future<void> catchNews(List<NewsModel> newsModels) async {
   if (newsModels.isEmpty) {
-    print('no news is fetched');
     return;
   } else {
-    print('fetched: ${newsModels.length}');
-
     newsBox.clear();
     newsBox.addAll(newsModels);
   }
 }
 
 // retrieve box data
-
 Future<List<NewsModel>> getCatchNews() async {
   await retrieveAndCatchNews();
   return newsBox.values.toList();
+}
+
+// handle page refreshing with page dragging down
+Future<void> refreshNewsData() async {
+  await getCatchNews();
 }
