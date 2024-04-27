@@ -27,9 +27,9 @@ class NewsAdaptor extends TypeAdapter<NewsModel> {
 
   @override
   void write(BinaryWriter writer, NewsModel obj) {
-    writer.write(obj.title.toString());
-    writer.write(obj.detail.toString());
-    writer.write(obj.uploadDate.seconds.toInt());
-    writer.write(obj.imgUrl.toString());
+    writer.writeString(obj.title);
+    writer.writeString(obj.detail);
+    writer.writeInt(obj.uploadDate.seconds);
+    writer.writeString(obj.imgUrl);
   }
 }
