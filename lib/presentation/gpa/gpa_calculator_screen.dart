@@ -5,9 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:bit_connect/presentation/gpa/gpa_circular_progress.dart';
 
 class GpaCalculatorScreen extends StatefulWidget {
-  GpaCalculatorScreen({Key? key}) : super(key: key);
+  const GpaCalculatorScreen({super.key});
   @override
-  _GpaCalculatorScreenState createState() => _GpaCalculatorScreenState();
+  State<GpaCalculatorScreen> createState() => _GpaCalculatorScreenState();
 }
 
 class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
@@ -109,13 +109,12 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: const Text('Calculation Result'),
+                      title: const Text('Calculation Result',textAlign: TextAlign.center,),
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           GpaCircularProgress(
                             gpa: calculateGpa(),
-                            size: 100,
                           ),
                           const SizedBox(height: 20),
                           Text(
@@ -124,6 +123,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
+                            
                           ),
                         ],
                       ),
