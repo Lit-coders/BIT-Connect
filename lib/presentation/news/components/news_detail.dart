@@ -20,7 +20,7 @@ class NewsDetail extends StatelessWidget {
                 color: const Color.fromARGB(200, 2, 53, 95),
                 image: DecorationImage(
                   image: AssetImage(
-                    news['img'],
+                    news['img'] ?? 'assets/logo.png',
                   ),
                   fit: BoxFit.cover,
                   opacity: 0.7,
@@ -97,11 +97,10 @@ class NewsDetail extends StatelessWidget {
                                   bottom: 20,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.black,
                                   borderRadius: BorderRadius.circular(50),
                                 ),
                                 child: NewsAge(
-                                    uploadTime: getNewsAge(news['uploadTime'])),
+                                    uploadTime: getNewsAge(news['uploadDate'])),
                               ),
                               Center(
                                 child: Text(
