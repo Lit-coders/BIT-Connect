@@ -1,52 +1,11 @@
 import 'dart:io';
 
-import 'package:bit_connect/presentation/gpa/gpacalc.dart';
 import 'package:bit_connect/presentation/home/home_screen.dart';
 import 'package:bit_connect/presentation/onboarding/onboarding_screen.dart';
 import 'package:bit_connect/presentation/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(GpaCalculator());
-}
-
-class BitConnect extends StatelessWidget {
-  const BitConnect({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _initializeFirebase(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: "Bit-Connect",
-            home: const SplashScreen(),
-            routes: {
-              '/home': (context) => const Home(),
-              '/onboarding': (context) => const Onboarding(),
-              // '/cafe': (context) => const Cafe(), //
-            },
-          );
-        } else if (snapshot.hasError) {
-          return Center(
-            child: Text('Error initializing Firebase'),
-          );
-        } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
-    );
-  }
-
-  Future<void> _initializeFirebase() async{
-    
-  }
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
