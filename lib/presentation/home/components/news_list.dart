@@ -1,4 +1,6 @@
+import 'package:bit_connect/presentation/home/components/news_age.dart';
 import 'package:bit_connect/presentation/news/news_detail.dart';
+import 'package:bit_connect/searvices/helpers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +57,7 @@ class NewsList extends StatelessWidget {
       itemCount: newsList.length,
       itemBuilder: (context, index) {
         final news = newsList[index];
-        final Timestamp uploadTime = news['uploadTime'];
+        final uploadTime = getNewsAge(news['uploadTime']);
 
         return InkWell(
           onTap: () => Navigator.of(context).push(
@@ -98,25 +100,7 @@ class NewsList extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.timer,
-                                color: Colors.black38,
-                              ),
-                              Text(
-                                uploadTime
-                                    .toDate()
-                                    .toLocal()
-                                    .toString()
-                                    .split(" ")
-                                    .toList()[0],
-                                style: const TextStyle(
-                                    color: Colors.black38,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
+                          NewsAge(uploadTime: uploadTime),
                         ],
                       ),
                     ),
