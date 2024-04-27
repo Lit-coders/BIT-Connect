@@ -20,7 +20,7 @@ class NewsDetail extends StatelessWidget {
                 color: const Color.fromARGB(200, 2, 53, 95),
                 image: DecorationImage(
                   image: AssetImage(
-                    news['img'] ?? 'assets/logo.png',
+                    news['imgUrl'] ?? 'assets/logo.png',
                   ),
                   fit: BoxFit.cover,
                   opacity: 0.7,

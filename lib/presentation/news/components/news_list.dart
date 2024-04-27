@@ -33,7 +33,7 @@ class NewsList extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     child: Image(
                       image: AssetImage(
-                        news['img'] ?? 'assets/logo.png',
+                        news['imgUrl'] ?? 'assets/logo.png',
                       ),
                       fit: BoxFit.cover,
                       width: 90,

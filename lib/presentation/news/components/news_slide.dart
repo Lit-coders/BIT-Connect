@@ -39,7 +39,7 @@ class NewsSlide extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 10.0),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(slide['img'] ?? 'assets/logo.png'),
+                    image: AssetImage(slide['imgUrl'] ?? 'assets/logo.png'),
                     fit: BoxFit.cover,
                     opacity: 0.8,
                   ),
