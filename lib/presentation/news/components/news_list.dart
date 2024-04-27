@@ -1,22 +1,19 @@
 import 'package:bit_connect/presentation/news/components/news_age.dart';
 import 'package:bit_connect/presentation/news/components/news_detail.dart';
-import 'package:bit_connect/presentation/news/model/news_model.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class NewsList extends StatelessWidget {
-  NewsList({super.key});
+  List<Map<String, dynamic>> newsList;
+  NewsList({super.key, required this.newsList});
 
   @override
   Widget build(BuildContext context) {
-    final searchModel = Provider.of<NewsModel>(context, listen: false);
-    final allNews = searchModel.newsList;
     return ListView.builder(
-      itemCount: allNews.length,
+      itemCount: newsList.length,
       itemBuilder: (context, index) {
-        final news = allNews[index];
-        final uploadTime = getNewsAge(news['uploadTime']);
+        final news = newsList[index];
+        final uploadTime = getNewsAge(news['uploadDate']);
 
         return InkWell(
           onTap: () => Navigator.of(context).push(
@@ -36,7 +33,7 @@ class NewsList extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     child: Image(
                       image: AssetImage(
-                        news['img'],
+                        news['img'] ?? 'assets/logo.png',
                       ),
                       fit: BoxFit.cover,
                       width: 90,
@@ -52,7 +49,7 @@ class NewsList extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            allNews[index]['title'],
+                            newsList[index]['title'],
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: const TextStyle(

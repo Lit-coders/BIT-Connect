@@ -1,23 +1,19 @@
 import 'package:bit_connect/presentation/news/components/news_detail.dart';
-import 'package:bit_connect/presentation/news/model/news_model.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class NewsSlide extends StatefulWidget {
-  const NewsSlide({super.key});
+class NewsSlide extends StatelessWidget {
+  List<Map<String, dynamic>> newsList;
 
-  @override
-  State<NewsSlide> createState() => _NewsSlideState();
-}
+  NewsSlide({super.key, required this.newsList});
 
-class _NewsSlideState extends State<NewsSlide> {
   @override
   Widget build(BuildContext context) {
-    final newsModel = Provider.of<NewsModel>(context, listen: false);
-    final topNews = newsModel.newsList.sublist(0, 3);
+    final topNews = newsList.length > 3 ? newsList.sublist(0, 3) : newsList;
+
+    print('top news: $topNews');
     return CarouselSlider(
       options: CarouselOptions(
         height: 160.0,
@@ -29,6 +25,7 @@ class _NewsSlideState extends State<NewsSlide> {
         enlargeCenterPage: true,
       ),
       items: topNews.map((Map<String, dynamic> slide) {
+        print('news: $slide');
         return Builder(
           builder: (BuildContext context) {
             return GestureDetector(
@@ -42,7 +39,7 @@ class _NewsSlideState extends State<NewsSlide> {
                 margin: const EdgeInsets.symmetric(horizontal: 10.0),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(slide['img']),
+                    image: AssetImage(slide['img'] ?? 'assets/logo.png'),
                     fit: BoxFit.cover,
                     opacity: 0.8,
                   ),
@@ -83,7 +80,7 @@ class _NewsSlideState extends State<NewsSlide> {
                               color: Colors.black54,
                             ),
                             Text(
-                              getNewsAge(slide['uploadTime']),
+                              getNewsAge(slide['uploadDate']),
                               style: const TextStyle(
                                   color: Colors.black54,
                                   fontWeight: FontWeight.w500),
