@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/widgets.dart';
 import 'package:bit_connect/presentation/gpa/gpa_circular_progress.dart';
-
+import 'package:bit_connect/presentation/gpa/gpa_calculator.dart';
 class GpaCalculatorScreen extends StatefulWidget {
   const GpaCalculatorScreen({super.key});
   @override
@@ -13,30 +13,14 @@ class GpaCalculatorScreen extends StatefulWidget {
 class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
   List<Map<String, dynamic>> courseData = [];
 
+
   void removeCourseData(Map<String, dynamic> courseToRemove) {
     setState(() {
       courseData.remove(courseToRemove);
     });
   }
 
-  double calculateGpa() {
-    Map<String, int> gradeValue = {
-      'A': 4,
-      'B': 3,
-      'C': 2,
-      'D': 1,
-      'F': 0,
-    };
-    int totalValue = 0;
-    int totalWeight = 0;
-    for (var course in courseData) {
-      if (course['value'] != null || course['grade'] != null) {
-        totalValue += (course['value'] as int) * gradeValue[course['grade']]!;
-        totalWeight += course['value'] as int;
-      }
-    }
-    return totalWeight == 0 ? 0 : totalValue / totalWeight;
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +86,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
-                if (courseData.any((course) => course['value'] == null || course['grade'] == null)) {
+                if (courseData.any((course) => course['value'] == null || course['grade'] == null) || courseData.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Please enter valid data for all courses.'),
@@ -110,6 +94,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                     ),
                   );
                 } else {
+                  
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -119,11 +104,11 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             GpaCircularProgress(
-                              gpa: calculateGpa(),
+                              gpa: calculateGpa(courseData),
                             ),
                             const SizedBox(height: 20),
                             Text(
-                              'Your GPA is ${calculateGpa().toStringAsFixed(2)}',
+                              'Your GPA is ${calculateGpa(courseData).toStringAsFixed(2)}',
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
