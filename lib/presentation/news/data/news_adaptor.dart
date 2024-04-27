@@ -22,8 +22,7 @@ class NewsAdaptor extends TypeAdapter<NewsModel> {
   }
 
   @override
-  // TODO: implement typeId
-  int get typeId => throw UnimplementedError();
+  int get typeId => 1;
 
   @override
   void write(BinaryWriter writer, NewsModel obj) {
