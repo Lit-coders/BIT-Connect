@@ -81,6 +81,10 @@ flutter:
     - assets/icons/
     - assets/stclubs/
     - assets/layers/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-Regular.ttf
 
   #   - images/a_dot_ham.jpeg
 
