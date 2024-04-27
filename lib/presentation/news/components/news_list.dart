@@ -1,62 +1,21 @@
 import 'package:bit_connect/presentation/news/components/news_age.dart';
 import 'package:bit_connect/presentation/news/components/news_detail.dart';
+import 'package:bit_connect/presentation/news/model/news_model.dart';
 import 'package:bit_connect/searvices/helpers.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NewsList extends StatelessWidget {
   NewsList({super.key});
-  final List<Map<String, dynamic>> newsList = [
-    {
-      'title': 'Who deserves A+? answer this and you will get A+',
-      'detail':
-          'the question is not how to get A+, it is who really deserves it. who really deserves it than Gash Dimamu!?',
-      'uploadTime': Timestamp.now(),
-      'img': 'assets/lunchtime.png',
-    },
-    {
-      'title': 'Who deserves A+?',
-      'detail':
-          'the question is not how to get A+, it is who really deserves it. who really deserves it than Gash Dimamu!?',
-      'uploadTime': Timestamp.now(),
-      'img': 'assets/bdu.png',
-    },
-    {
-      'title': 'Who deserves A+?',
-      'detail':
-          'the question is not how to get A+, it is who really deserves it. who really deserves it than Gash Dimamu!?',
-      'uploadTime': Timestamp.now(),
-      'img': 'assets/logo.png',
-    },
-    {
-      'title': 'Who deserves A+?',
-      'detail':
-          'the question is not how to get A+, it is who really deserves it. who really deserves it than Gash Dimamu!?',
-      'uploadTime': Timestamp.now(),
-      'img': 'assets/logo.png',
-    },
-    {
-      'title': 'Who deserves A+?',
-      'detail':
-          'the question is not how to get A+, it is who really deserves it. who really deserves it than Gash Dimamu!?',
-      'uploadTime': Timestamp.now(),
-      'img': 'assets/logo.png',
-    },
-    {
-      'title': 'Who deserves A+?',
-      'detail':
-          'the question is not how to get A+, it is who really deserves it. who really deserves it than Gash Dimamu!?',
-      'uploadTime': Timestamp.now(),
-      'img': 'assets/logo.png',
-    }
-  ];
 
   @override
   Widget build(BuildContext context) {
+    final searchModel = Provider.of<NewsModel>(context, listen: false);
+    final allNews = searchModel.newsList;
     return ListView.builder(
-      itemCount: newsList.length,
+      itemCount: allNews.length,
       itemBuilder: (context, index) {
-        final news = newsList[index];
+        final news = allNews[index];
         final uploadTime = getNewsAge(news['uploadTime']);
 
         return InkWell(
@@ -93,8 +52,9 @@ class NewsList extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            newsList[index]['title'],
-                            overflow: TextOverflow.clip,
+                            allNews[index]['title'],
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
