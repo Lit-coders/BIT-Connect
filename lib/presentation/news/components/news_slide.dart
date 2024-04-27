@@ -1,11 +1,12 @@
 import 'package:bit_connect/presentation/news/components/news_detail.dart';
+import 'package:bit_connect/presentation/news/model/news_model.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class NewsSlide extends StatelessWidget {
-  List<Map<String, dynamic>> newsList;
+  List<NewsModel> newsList;
 
   NewsSlide({super.key, required this.newsList});
 
@@ -24,7 +25,7 @@ class NewsSlide extends StatelessWidget {
         pauseAutoPlayOnTouch: true,
         enlargeCenterPage: true,
       ),
-      items: topNews.map((Map<String, dynamic> slide) {
+      items: topNews.map((NewsModel slide) {
         print('news: $slide');
         return Builder(
           builder: (BuildContext context) {
@@ -39,7 +40,7 @@ class NewsSlide extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 10.0),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(slide['imgUrl'] ?? 'assets/logo.png'),
+                    image: AssetImage(slide.imgUrl),
                     fit: BoxFit.cover,
                     opacity: 0.8,
                   ),
@@ -59,7 +60,7 @@ class NewsSlide extends StatelessWidget {
                         ),
                         margin: const EdgeInsets.only(bottom: 5),
                         child: Text(
-                          slide['title'],
+                          slide.title,
                           overflow: TextOverflow.clip,
                           style: const TextStyle(
                             fontSize: 20,
@@ -80,7 +81,7 @@ class NewsSlide extends StatelessWidget {
                               color: Colors.black54,
                             ),
                             Text(
-                              getNewsAge(slide['uploadDate']),
+                              getNewsAge(slide.uploadDate),
                               style: const TextStyle(
                                   color: Colors.black54,
                                   fontWeight: FontWeight.w500),

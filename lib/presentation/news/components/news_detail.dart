@@ -1,9 +1,10 @@
 import 'package:bit_connect/presentation/news/components/news_age.dart';
+import 'package:bit_connect/presentation/news/model/news_model.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
 
 class NewsDetail extends StatelessWidget {
-  Map<String, dynamic> news;
+  NewsModel news;
 
   NewsDetail({super.key, required this.news});
 
@@ -20,7 +21,7 @@ class NewsDetail extends StatelessWidget {
                 color: const Color.fromARGB(200, 2, 53, 95),
                 image: DecorationImage(
                   image: AssetImage(
-                    news['imgUrl'] ?? 'assets/logo.png',
+                    news.imgUrl,
                   ),
                   fit: BoxFit.cover,
                   opacity: 0.7,
@@ -62,7 +63,7 @@ class NewsDetail extends StatelessWidget {
                       padding: const EdgeInsets.all(10.0),
                       width: getWidth(context),
                       child: Text(
-                        news['title'],
+                        news.title,
                         overflow: TextOverflow.clip,
                         style: const TextStyle(
                           fontSize: 30,
@@ -100,11 +101,11 @@ class NewsDetail extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(50),
                                 ),
                                 child: NewsAge(
-                                    uploadTime: getNewsAge(news['uploadDate'])),
+                                    uploadTime: getNewsAge(news.uploadDate)),
                               ),
                               Center(
                                 child: Text(
-                                  news['detail'],
+                                  news.detail,
                                   overflow: TextOverflow.clip,
                                 ),
                               ),

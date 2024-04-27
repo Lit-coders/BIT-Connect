@@ -1,10 +1,11 @@
 import 'package:bit_connect/presentation/news/components/news_age.dart';
 import 'package:bit_connect/presentation/news/components/news_detail.dart';
+import 'package:bit_connect/presentation/news/model/news_model.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
 
 class NewsList extends StatelessWidget {
-  List<Map<String, dynamic>> newsList;
+  List<NewsModel> newsList;
   NewsList({super.key, required this.newsList});
 
   @override
@@ -13,7 +14,7 @@ class NewsList extends StatelessWidget {
       itemCount: newsList.length,
       itemBuilder: (context, index) {
         final news = newsList[index];
-        final uploadTime = getNewsAge(news['uploadDate']);
+        final uploadTime = getNewsAge(news.uploadDate);
 
         return InkWell(
           onTap: () => Navigator.of(context).push(
@@ -33,7 +34,7 @@ class NewsList extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     child: Image(
                       image: AssetImage(
-                        news['imgUrl'] ?? 'assets/logo.png',
+                        news.imgUrl,
                       ),
                       fit: BoxFit.cover,
                       width: 90,
@@ -49,7 +50,7 @@ class NewsList extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            newsList[index]['title'],
+                            news.title,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: const TextStyle(
