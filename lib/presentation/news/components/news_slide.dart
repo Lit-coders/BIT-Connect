@@ -1,9 +1,10 @@
 import 'package:bit_connect/presentation/news/components/news_detail.dart';
+import 'package:bit_connect/presentation/news/model/news_model.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NewsSlide extends StatefulWidget {
   const NewsSlide({super.key});
@@ -15,6 +16,8 @@ class NewsSlide extends StatefulWidget {
 class _NewsSlideState extends State<NewsSlide> {
   @override
   Widget build(BuildContext context) {
+    final newsModel = Provider.of<NewsModel>(context, listen: false);
+    final topNews = newsModel.newsList.sublist(0, 3);
     return CarouselSlider(
       options: CarouselOptions(
         height: 160.0,
@@ -25,30 +28,7 @@ class _NewsSlideState extends State<NewsSlide> {
         pauseAutoPlayOnTouch: true,
         enlargeCenterPage: true,
       ),
-      items: [
-        {
-          'title': 'Who deserves A+? answer this and you will get A+',
-          'detail':
-              'the question is not how to get A+, it is who really deserves it. who really deserves it than Gash Dimamu!?',
-          'uploadTime': Timestamp.now(),
-          'img': 'assets/lunchtime.png',
-        },
-        {
-          'title': 'Who deserves A+?',
-          'detail':
-              'the question is not how to get A+, it is who really deserves it. who really deserves it than Gash Dimamu!?',
-          'uploadTime': Timestamp.now(),
-          'img': 'assets/bdu.png',
-        },
-        {
-          'title':
-              'Scientists Discover New Programming Language Based on Cat Meows!',
-          'detail':
-              'In a groundbreaking discovery, researchers have unveiled a new programming language inspired by the subtle nuances of cat communication. Dubbed "MeowScript," this feline-inspired language promises to revolutionize the way developers write code, with syntax and semantics based entirely on the various meows, purrs, and hisses of our furry friends. According to Dr. Whiskers, the lead researcher behind the project, MeowScript was developed after years of studying cat behavior and vocalizations. "We noticed that cats have an incredibly complex language of their own, and we wanted to harness that power for programming," Dr. Whiskers explained. "MeowScript allows developers to express their code using the rich vocabulary of feline sounds, making programming more intuitive and, dare I say, purr-fectly delightful!',
-          'uploadTime': Timestamp.now(),
-          'img': 'assets/bdu.png',
-        }
-      ].map((Map<String, dynamic> slide) {
+      items: topNews.map((Map<String, dynamic> slide) {
         return Builder(
           builder: (BuildContext context) {
             return GestureDetector(
