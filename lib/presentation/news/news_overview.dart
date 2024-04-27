@@ -1,11 +1,10 @@
-import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
 import 'package:bit_connect/presentation/home/components/user_welcomer.dart';
 import 'package:bit_connect/presentation/news/components/news_list.dart';
 import 'package:bit_connect/presentation/news/components/news_slide.dart';
+import 'package:bit_connect/presentation/news/data/news_data.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:bit_connect/utils/constants/padding_constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class NewsOverview extends StatefulWidget {
@@ -16,31 +15,17 @@ class NewsOverview extends StatefulWidget {
 }
 
 class _NewsOverviewState extends State<NewsOverview> {
-  final CollectionReference news =
-      FirebaseFirestore.instance.collection('news');
-
-  Future<List<Map<String, dynamic>>> getNews() async {
-    List<Map<String, dynamic>> newses = [];
-    try {
-      final QuerySnapshot snapshot =
-          await news.orderBy('uploadDate', descending: true).get();
-      for (var doc in snapshot.docs) {
-        newses.add(doc.data() as Map<String, dynamic>);
-      }
-      return newses;
-    } catch (e) {
-      final errorSnackBar =
-          ErrorSnackBar(content: 'Unable to fetch news, pleas try again');
-      if (mounted) errorSnackBar.getSnackBar();
-    }
-    return [];
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   retrieveAndCatchNews();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: FutureBuilder(
-        future: getNews(),
+        future: getCatchNews(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
