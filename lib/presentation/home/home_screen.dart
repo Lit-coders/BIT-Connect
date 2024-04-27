@@ -1,8 +1,8 @@
 import 'package:bit_connect/presentation/home/components/app_bar.dart';
 import 'package:bit_connect/presentation/home/components/left_drawer.dart';
-import 'package:bit_connect/presentation/news/home_overview.dart';
 import 'package:bit_connect/presentation/location/components/app_bar.dart';
 import 'package:bit_connect/presentation/location/location_screen.dart';
+import 'package:bit_connect/presentation/news/news_provider.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -17,10 +17,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final homeContents = [
-    const HomeOverview(),
-    const HomeOverview(),
+    const News(),
+    const News(),
     const Location(),
-    const HomeOverview(),
+    const News(),
   ];
   int _contentIndex = 0;
 
