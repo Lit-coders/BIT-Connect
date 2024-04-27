@@ -103,12 +103,7 @@ class _NewsSlideState extends State<NewsSlide> {
                               color: Colors.black54,
                             ),
                             Text(
-                              slide['uploadTime']
-                                  .toDate()
-                                  .toLocal()
-                                  .toString()
-                                  .split(" ")
-                                  .toList()[0],
+                              getNewsAge(slide['uploadTime']),
                               style: const TextStyle(
                                   color: Colors.black54,
                                   fontWeight: FontWeight.w500),
