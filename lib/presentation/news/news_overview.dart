@@ -15,60 +15,62 @@ class NewsOverview extends StatefulWidget {
 }
 
 class _NewsOverviewState extends State<NewsOverview> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   retrieveAndCatchNews();
-  // }
+  Future<void> refresh() async {
+    setState(() {});
+    await refreshNewsData();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: FutureBuilder(
-        future: getCatchNews(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: ColorAssets.bduColor,
-                backgroundColor: Colors.white,
-              ),
-            );
-          } else if (snapshot.hasError) {
-            return const Center(child: Text('Error'));
-          } else if (snapshot.hasData) {
-            final newsList = snapshot.requireData;
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: PreferredSize(
-                    preferredSize: Size(getWidth(context), 100),
-                    child: const UserWelcomer(),
-                  ),
+    return RefreshIndicator(
+      onRefresh: () => refresh(),
+      child: SafeArea(
+        child: FutureBuilder(
+          future: getCatchNews(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: ColorAssets.bduColor,
+                  backgroundColor: Colors.white,
                 ),
-                NewsSlide(newsList: newsList),
-                Container(
-                  width: getWidth(context),
-                  padding: const EdgeInsets.all(8.0),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: PaddingConstant.horizontalPadding),
-                    child: Text(
-                      "News",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+              );
+            } else if (snapshot.hasError) {
+              return const Center(child: Text('Error'));
+            } else if (snapshot.hasData) {
+              final newsList = snapshot.requireData;
+              return Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: PreferredSize(
+                      preferredSize: Size(getWidth(context), 100),
+                      child: const UserWelcomer(),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: NewsList(newsList: newsList),
-                )
-              ],
-            );
-          }
-          return const Center();
-        },
+                  NewsSlide(newsList: newsList),
+                  Container(
+                    width: getWidth(context),
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: PaddingConstant.horizontalPadding),
+                      child: Text(
+                        "News",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 18),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: NewsList(newsList: newsList),
+                  )
+                ],
+              );
+            }
+            return const Center();
+          },
+        ),
       ),
     );
   }
