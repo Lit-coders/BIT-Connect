@@ -22,7 +22,8 @@ class _NewsOverviewState extends State<NewsOverview> {
   Future<List<Map<String, dynamic>>> getNews() async {
     List<Map<String, dynamic>> newses = [];
     try {
-      final QuerySnapshot snapshot = await news.get();
+      final QuerySnapshot snapshot =
+          await news.orderBy('uploadDate', descending: true).get();
       for (var doc in snapshot.docs) {
         newses.add(doc.data() as Map<String, dynamic>);
       }
@@ -32,7 +33,6 @@ class _NewsOverviewState extends State<NewsOverview> {
           ErrorSnackBar(content: 'Unable to fetch news, pleas try again');
       if (mounted) errorSnackBar.getSnackBar();
     }
-
     return [];
   }
 
