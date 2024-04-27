@@ -1,6 +1,6 @@
 import 'package:bit_connect/presentation/home/components/app_bar.dart';
 import 'package:bit_connect/presentation/home/components/left_drawer.dart';
-import 'package:bit_connect/presentation/home/home_overview.dart';
+import 'package:bit_connect/presentation/news/home_overview.dart';
 import 'package:bit_connect/presentation/location/components/app_bar.dart';
 import 'package:bit_connect/presentation/location/location_screen.dart';
 import 'package:bit_connect/searvices/helpers.dart';
