@@ -6,7 +6,7 @@ final CollectionReference news = FirebaseFirestore.instance.collection('news');
 final newsBox = Hive.box<NewsModel>('newsBox');
 
 // retrieve data from firestore
-Future<void> getNews() async {
+Future<void> retrieveAndCatchNews() async {
   final List<NewsModel> newsModels = [];
 
   try {
@@ -33,9 +33,19 @@ Future<void> getNews() async {
 // store data to Hive box
 Future<void> catchNews(List<NewsModel> newsModels) async {
   if (newsModels.isEmpty) {
+    print('no news is fetched');
     return;
   } else {
+    print('fetched: ${newsModels.length}');
+
     newsBox.clear();
     newsBox.addAll(newsModels);
   }
+}
+
+// retrieve box data
+
+Future<List<NewsModel>> getCatchNews() async {
+  await retrieveAndCatchNews();
+  return newsBox.values.toList();
 }
