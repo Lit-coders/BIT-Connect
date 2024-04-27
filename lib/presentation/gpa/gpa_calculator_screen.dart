@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/widgets.dart';
 
 class GpaCalculatorScreen extends StatefulWidget {
   GpaCalculatorScreen({Key? key}) : super(key: key);
@@ -9,8 +11,9 @@ class GpaCalculatorScreen extends StatefulWidget {
 
 class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
   List<Map<String, dynamic>> courseData = [];
-    double calculateGpa() {
-    Map <String,int> gradeValue = {
+
+  double calculateGpa() {
+    Map<String, int> gradeValue = {
       'A': 4,
       'B': 3,
       'C': 2,
@@ -21,8 +24,9 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
     int totalWeight = 0;
     for (var course in courseData) {
       if (course['value'] != null) {
-        totalValue += (course['value'] as int) * gradeValue[course['grade']]!;
-        totalWeight += course['value'] as int ;
+        totalValue +=
+            (course['value'] as int) * gradeValue[course['grade']]!;
+        totalWeight += course['value'] as int;
       }
     }
     if (totalWeight == 0) {
@@ -57,40 +61,37 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                 },
               ),
             ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  courseData.add({});
-                });
-              },
-              child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: DottedBorder(
-                    dashPattern: [5, 5],
-                    color: Colors.grey,
-                    strokeWidth: 2,
-                    child: Expanded(
-                      child: Container(
-                          // decoration: BoxDecoration(
-                          //   border: Border.all(color: Colors.blueAccent),
-                          // ),
-                          padding: const EdgeInsets.all(20),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.add_circle,
-                                color: Colors.red,
-                                size: 20,
-                              ),
-                              SizedBox(width: 10),
-                              Text(
-                                'Add Course',
-                              )
-                            ],
-                          )),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    courseData.add({});
+                  });
+                },
+                child: DottedBorder(
+                  dashPattern: [5, 5],
+                  color: Colors.grey,
+                  strokeWidth: 2,
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.add_circle,
+                          color: Colors.red,
+                          size: 20,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'Add Course',
+                        )
+                      ],
                     ),
-                  )),
+                  ),
+                ),
+              ),
             ),
             const SizedBox(height: 40),
             ElevatedButton(
@@ -101,11 +102,11 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                     return AlertDialog(
                       title: Text('Calculation Result'),
                       content: Text(
-                          'The result is: ${calculateGpa()}'), // Display the result in the dialog
+                          'The result is: ${calculateGpa().toStringAsFixed(2)}'),
                       actions: <Widget>[
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).pop(); // Close the dialog
+                            Navigator.of(context).pop();
                           },
                           child: Text('OK'),
                         ),
@@ -115,8 +116,8 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green, // Background color
-                padding: const EdgeInsets.all(25), // Padding
+                backgroundColor: Colors.green,
+                padding: const EdgeInsets.all(25),
               ),
               child: const Text(
                 'Calculate GPA',
@@ -147,71 +148,99 @@ class CourseInputRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Container(
-          decoration:
-              BoxDecoration(border: Border.all(color: Colors.blueAccent)),
-          child: Column(
-            children: [
-              TextField(
-                onChanged: (value) {
-                  courseData['courseName'] = value;
-                  onCourseDataChanged(courseData);
-                },
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.all(10),
-                  hintText: 'Course Name',
-                  border: UnderlineInputBorder(),
-                ),
-              ),
-              Row(children: [
-                Expanded(
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        border: Border(
-                      right: BorderSide(color: Colors.black),
-                    )),
-                    child: DropdownButtonFormField<String>(
-                      value: courseData['grade'],
-                      onChanged: (newValue) {
-                        courseData['grade'] = newValue!;
-                        onCourseDataChanged(courseData);
-                      },
-                      items: <String>['A', 'B', 'C'].map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.all(10),
-                          hintText: 'Grade',
-                          border: InputBorder.none),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: DropdownButtonFormField<int>(
-                    value: courseData['value'],
-                    onChanged: (newValue) {
-                      courseData['value'] = newValue!;
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.blue.shade500, width: 2),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                children: [
+                  TextField(
+                    onChanged: (value) {
+                      courseData['courseName'] = value;
                       onCourseDataChanged(courseData);
                     },
-                    items: <int>[30, 7, 6, 5,4].map((int value) {
-                      return DropdownMenuItem<int>(
-                        value: value,
-                        child: Text(value.toString()),
-                      );
-                    }).toList(),
                     decoration: const InputDecoration(
-                      hintText: 'Value',
-                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.all(10),
+                      hintText: 'Course Name',
+                      border: UnderlineInputBorder(),
                     ),
                   ),
-                ),
-              ])
-            ],
-          ),
-        ));
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              right: BorderSide(color: Colors.black),
+                            ),
+                          ),
+                          child: DropdownButtonFormField<String>(
+                            value: courseData['grade'],
+                            onChanged: (newValue) {
+                              courseData['grade'] = newValue!;
+                              onCourseDataChanged(courseData);
+                            },
+                            items: <String>['A', 'B', 'C', 'D', 'F']
+                                .map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.all(5),
+                              hintText: 'Grade',
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: DropdownButtonFormField<int>(
+                            value: courseData['value'],
+                            onChanged: (newValue) {
+                              courseData['value'] = newValue!;
+                              onCourseDataChanged(courseData);
+                            },
+                            items: <int>[30, 7, 6, 5, 4].map((int value) {
+                              return DropdownMenuItem<int>(
+                                value: value,
+                                child: Text(value.toString()),
+                              );
+                            }).toList(),
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.all(5),
+                              hintText: 'Value',
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(width: 2 , color: Colors.red),
+              ),
+              child: IconButton(
+                onPressed: () {
+                  onCourseDataChanged({});
+                },
+                icon: const Icon(Icons.close,color: Colors.red,),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
