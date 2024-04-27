@@ -92,7 +92,9 @@ class NewsDetail extends StatelessWidget {
                                   horizontal: 10,
                                   vertical: 5,
                                 ),
-                                margin: const EdgeInsets.only(bottom: 20),
+                                margin: const EdgeInsets.only(
+                                  bottom: 20,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.black,
                                   borderRadius: BorderRadius.circular(50),
