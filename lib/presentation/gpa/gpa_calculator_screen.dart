@@ -45,15 +45,15 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
               child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: DottedBorder(
-                    dashPattern: [5,5],
+                    dashPattern: [5, 5],
                     color: Colors.grey,
-                    strokeWidth : 2,
+                    strokeWidth: 2,
                     child: Expanded(
                       child: Container(
-                        // decoration: BoxDecoration(
-                        //   border: Border.all(color: Colors.blueAccent),
-                        // ),
-                          padding : const EdgeInsets.all(20),
+                          // decoration: BoxDecoration(
+                          //   border: Border.all(color: Colors.blueAccent),
+                          // ),
+                          padding: const EdgeInsets.all(20),
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -72,14 +72,24 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                   )),
             ),
             const SizedBox(height: 40),
-            OutlinedButton(
+            ElevatedButton(
               onPressed: () {
-                setState(() {
-                  courseData.add({});
-                });
+                courseData.add({});
               },
-              child: const Text('Calculate GPA'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green, // Background color
+                padding: const EdgeInsets.all(25), // Padding
+              ),
+              child: const Text(
+                'Calculate GPA',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ),
+            const SizedBox(height: 40),
           ],
         ),
       ),
@@ -95,7 +105,7 @@ class CourseInputRow extends StatelessWidget {
     required this.courseData,
     required this.onCourseDataChanged,
   });
-
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -166,4 +176,16 @@ class CourseInputRow extends StatelessWidget {
           ),
         ));
   }
+}
+
+double calculateGpa(List<Map<String, dynamic>> courseData) {
+  int totalValue = 0;
+  int totalWeight = 0;
+  for (var course in courseData) {
+    if (course['value'] != null) {
+      totalValue += int.parse(course['value']) * int.parse(course['grade']);
+      totalWeight += int.parse(course['value']);
+    }
+  }
+  return totalValue / totalWeight;
 }
