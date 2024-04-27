@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/widgets.dart';
+import 'package:bit_connect/presentation/gpa/gpa_circular_progress.dart';
 
 class GpaCalculatorScreen extends StatefulWidget {
   GpaCalculatorScreen({Key? key}) : super(key: key);
@@ -109,8 +110,23 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: const Text('Calculation Result'),
-                      content: Text(
-                          'The result is: ${calculateGpa().toStringAsFixed(2)}'),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          GpaCircularProgress(
+                            gpa: calculateGpa(),
+                            size: 100,
+                          ),
+                          const SizedBox(height: 20),
+                          Text(
+                            'Your GPA is ${calculateGpa().toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                       actions: <Widget>[
                         TextButton(
                           onPressed: () {
