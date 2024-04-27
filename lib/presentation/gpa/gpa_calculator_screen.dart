@@ -30,15 +30,12 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
     int totalValue = 0;
     int totalWeight = 0;
     for (var course in courseData) {
-      if (course['value'] != null) {
+      if (course['value'] != null || course['grade'] != null) {
         totalValue += (course['value'] as int) * gradeValue[course['grade']]!;
         totalWeight += course['value'] as int;
       }
     }
-    if (totalWeight == 0) {
-      return 0.0;
-    }
-    return totalValue / totalWeight;
+    return totalWeight == 0 ? 0 : totalValue / totalWeight;
   }
 
   @override
@@ -89,7 +86,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                       children: [
                         Icon(
                           Icons.add_circle,
-                          color: Colors.red,
+                          color: Colors.green,
                           size: 20,
                         ),
                         SizedBox(width: 10),
@@ -105,39 +102,47 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Calculation Result',textAlign: TextAlign.center,),
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          GpaCircularProgress(
-                            gpa: calculateGpa(),
-                          ),
-                          const SizedBox(height: 20),
-                          Text(
-                            'Your GPA is ${calculateGpa().toStringAsFixed(2)}',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                if (courseData.any((course) => course['value'] == null || course['grade'] == null)) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Please enter valid data for all courses.'),
+                      duration: Duration(seconds: 3),
+                    ),
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Calculation Result',textAlign: TextAlign.center,),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            GpaCircularProgress(
+                              gpa: calculateGpa(),
                             ),
-                            
+                            const SizedBox(height: 20),
+                            Text(
+                              'Your GPA is ${calculateGpa().toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('OK'),
                           ),
                         ],
-                      ),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    );
-                  },
-                );
+                      );
+                    },
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
