@@ -11,16 +11,17 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class BuildProfile extends StatefulWidget {
-  final String email;
-  final String password;
-  final VoidCallback toggleToLogin;
+   String? email;
+   String? password;
+   VoidCallback? toggleToLogin;
 
-  const BuildProfile({
+   BuildProfile({
     super.key,
     required this.email,
     required this.password,
     required this.toggleToLogin,
   });
+   BuildProfile.personIcon({super.key});
 
   @override
   State<BuildProfile> createState() => _BuildProfileState();
@@ -36,6 +37,30 @@ class _BuildProfileState extends State<BuildProfile> {
 
   File? _ppPath;
   final _imgPicker = ImagePicker();
+  @override
+  void initState() {
+    super.initState();
+    if (_currentUser != null) {
+      _initUserData();
+    }
+  }  
+  Future<void> _initUserData() async {
+  // _firstNameController.text = _currentUser!.displayName!.split(" ")[0];
+  // _lastNameController.text = _currentUser!.displayName!.split(" ")[1];
+  try {
+    var userDoc = await FirebaseFirestore.instance.collection("users").doc(_currentUser!.uid).get();
+    if (userDoc.exists) {
+      setState(() {
+        _firstNameController.text = userDoc.get("fName");
+        _lastNameController.text = userDoc.get("lName");
+        _deptController.text = userDoc.get("dept");
+        _yearController.text = userDoc.get("year");
+      });
+    }
+  } catch (error) {
+    print("Error fetching user data: $error");
+  }
+}
 
   @override
   void dispose() {
@@ -246,8 +271,8 @@ class _BuildProfileState extends State<BuildProfile> {
   Future<void> singIn() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: widget.email, password: widget.password);
-      widget.toggleToLogin();
+          email: widget.email!, password: widget.password!);
+      widget.toggleToLogin!();
     } on FirebaseAuthException catch (error) {
       final snackBar =
           ErrorSnackBar(content: "Unable to sign in, ${error.code}");
