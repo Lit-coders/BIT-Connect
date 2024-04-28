@@ -5,6 +5,7 @@ import 'package:bit_connect/presentation/location/model/search_result.dart';
 import 'package:bit_connect/presentation/news/data/news_adaptor.dart';
 import 'package:bit_connect/presentation/news/model/news_model.dart';
 import 'package:bit_connect/presentation/onboarding/onboarding_screen.dart';
+import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
 import 'package:bit_connect/presentation/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +29,15 @@ Future<void> main() async {
   await Hive.openBox<NewsModel>('newsBox');
 
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => Search(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => Search(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SIMSProvider(),
+        ),
+      ],
       child: const BitConnect(),
     ),
   );
