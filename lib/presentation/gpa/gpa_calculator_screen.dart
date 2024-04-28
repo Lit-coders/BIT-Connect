@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:bit_connect/utils/constants/gpa_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/widgets.dart';
 import 'package:bit_connect/presentation/gpa/gpa_circular_progress.dart';
 import 'package:bit_connect/presentation/gpa/gpa_calculator.dart';
 class GpaCalculatorScreen extends StatefulWidget {
@@ -154,8 +153,9 @@ class CourseInputRow extends StatelessWidget {
   final Map<String, dynamic> courseData;
   final ValueChanged<Map<String, dynamic>> onCourseDataChanged;
   final VoidCallback onCourseRemoved;
+  final GpaConstants gpaConstants = GpaConstants();
 
-  const CourseInputRow(
+  CourseInputRow(
       {required this.courseData, required this.onCourseDataChanged,required this.onCourseRemoved, super.key});
 
   @override
@@ -199,7 +199,7 @@ class CourseInputRow extends StatelessWidget {
                               courseData['grade'] = newValue!;
                               onCourseDataChanged(courseData);
                             },
-                            items: gradeValue.keys.toList()
+                            items: gpaConstants.gradeValue.keys.toList()
                                 .map((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -221,7 +221,7 @@ class CourseInputRow extends StatelessWidget {
                             courseData['value'] = newValue!;
                             onCourseDataChanged(courseData);
                           },
-                          items: creditPoints.map((int value) {
+                          items: gpaConstants.creditPoints.map((int value) {
                             return DropdownMenuItem<int>(
                               value: value,
                               child: Text(value.toString()),
