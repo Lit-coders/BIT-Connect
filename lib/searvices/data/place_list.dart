@@ -52,6 +52,42 @@ final List places = [
             'Our male dormitory, named after the renowned scientist Aklilu Lemma, offers a quiet and peaceful setting. With a green area behind it, residents can enjoy moments of tranquility and serenity.',
         'position': [11.598180000732109, 37.397755980491645],
       },
+      {
+        'name': "Albert Einstein Building : Male Dormitory",
+        'description':
+            'Albert Einstein Dormitory is a prestigious and comfortable male residential facility, providing students with a supportive living environment for academic and personal growth.',
+        'position': [11.59981365005201,37.397031784057624],
+      },
+       {
+        'name': "James Watt Building : Male Dormitory",
+        'description':
+            'James Watt Dormitory is a highly regarded male residential facility, offering a top-notch living environment for students. Known for its quality and comfort, it provides a supportive atmosphere conducive to academic and personal growth.',
+        'position': [11.599992315052539,37.39718735218049],
+      },
+      {
+        'name': "Thomas Edison Building : Male Dormitory",
+        'description':
+            'Thomas Edison Dormitory is a superb male residential building with a picturesque city view, providing students a comfortable and inspiring living space.',
+        'position': [11.599992315052539,37.39718735218049],
+      },
+      {
+        'name': "Lucy Building: female Dormitory",
+        'description':
+            'Lucy Building is a centrally located female dormitory, offering convenient access to campus facilities and creating a safe living environment.',
+        'position': [11.600134196000917,37.39730536937714],
+      },
+      {
+        'name': "Amsale Gualu Building: female Dormitory",
+        'description':
+            'Named after our beloved female captain Amsale Gualu, This female dormitory offers a peaceful and comfortable place to live in.',
+        'position': [11.598804716137987,37.39744484424592],
+      },
+      {
+        'name': "Taytu Building: female Dormitory",
+        'description':
+            'One of the most comfortable female dormitories in the campus, which is named after Empress Taytu, is known to be the builiding with high standard and high comfort',
+        'position': [11.598484168662399,37.39755749702454],
+      },
     ]
   },
   {
