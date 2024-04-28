@@ -6,7 +6,7 @@ import 'package:bit_connect/presentation/location/location_screen.dart';
 import 'package:bit_connect/presentation/news/news_provider.dart';
 import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
 import 'package:bit_connect/presentation/sims/sims.dart';
-import 'package:bit_connect/presentation/sims/sims_login.dart';
+import 'package:bit_connect/presentation/sims/components/sims_login.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
