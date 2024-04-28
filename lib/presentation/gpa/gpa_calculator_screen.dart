@@ -21,10 +21,6 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('GPA Calculator'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
