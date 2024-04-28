@@ -78,37 +78,37 @@ final List places = [
         'name': 'Poly A Building',
         'description':
             'Poly A Building is a contemporary and spacious classroom facility known for its modern design and comfortable amenities. It offers a welcoming environment for learning and teaching activities.',
-        'position': [11.597925500052817, 37.397444149178554]
+        'position': [11.596156247264737,37.39481627941132]
       },
       {
         'name': 'Poly B Building',
         'description':
             'Poly B Building is a prominent classroom building that prioritizes student comfort. It features well-appointed classrooms and study spaces, combining functionality and aesthetic appeal.  ',
-        'position': [11.598283015211864, 37.39589959956143],
+        'position': [11.595982834735972,37.39469826221467],
       },
       {
         'name': 'Poly C Building',
         'description':
             'Poly C Building is a functional classroom facility that provides standard classrooms and study spaces for students',
-        'position': [11.597925500052817, 37.397444149178554]
+        'position': [11.595825186889083,37.39467144012452]
       },
       {
         'name': 'Poly D Building',
         'description':
             'Poly D Building is a technologically advanced and comfortable facility with smart rooms, providing students an immersive and innovative learning environment.',
-        'position': [11.598283015211864, 37.39589959956143],
+        'position': [11.595636009355347,37.39462316036225],
       },
       {
         'name': 'Ghion Building',
         'description':
             'Ghion Building is a prominent learning facility with the largest number of classrooms on campus. It offers students access to internet connectivity, enhancing their educational experience.',
-        'position': [11.597925500052817, 37.397444149178554]
+        'position': [11.595541420540414,37.395030856132514]
       },
       {
         'name': 'Emperor Tewodros Hall',
         'description':
             'Tewodros Hall is a spacious classroom named after Emperor Tewodros II. It has the capacity to accommodate a large number of students, providing ample space for educational activities and lectures.',
-        'position': [11.598283015211864, 37.39589959956143],
+        'position': [11.596219306339401,37.39542782306672],
       },
     ]
   },
