@@ -1,7 +1,7 @@
+import 'package:bit_connect/presentation/gpa/components/gpa_circular_progress.dart';
 import 'package:bit_connect/utils/constants/gpa_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:bit_connect/presentation/gpa/gpa_circular_progress.dart';
 import 'package:bit_connect/presentation/gpa/gpa_calculator.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';  
 
@@ -52,7 +52,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                   });
                 },
                 child: DottedBorder(
-                  dashPattern: [5, 5],
+                  dashPattern: const [5, 5],
                   color: Colors.grey,
                   strokeWidth: 2,
                   child: Container(
@@ -77,7 +77,8 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
             ),
             const SizedBox(height: 40),
             Container(
-              padding : const EdgeInsets.symmetric(vertical: 15), // Added padding to the container (line 108-109
+              padding : const EdgeInsets.symmetric(vertical: 8), // Added padding to the container (line 108-109
+              margin: const EdgeInsets.symmetric(horizontal: 5),
               width: double.infinity,
               decoration: BoxDecoration(
                 color: ColorAssets.bduColor,
