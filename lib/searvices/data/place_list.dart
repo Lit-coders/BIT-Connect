@@ -14,13 +14,13 @@ final List places = [
       {
         'name': 'Kitaw Lounge',
         'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
+            'Named after the esteemed BiT alumnus, Engineer Kitaw Ejigu, this inviting student lounge offers a cozy space to relax, enjoy delicious food, and connect with fellow BiT students',
         'position': [11.597925500052817, 37.397444149178554]
       },
       {
-        'name': 'Main BiT Lounge',
+        'name': 'BiT Main Lounge',
         'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
+            'Immerse yourself in the heart of the BiT community at our comfortable and vibrant main lounge. Indulge in delightful food while enjoying a welcoming atmosphere, fostering connections, and creating unforgettable memories with fellow BiT students',
         'position': [11.598283015211864, 37.39589959956143],
       },
     ]
@@ -29,27 +29,27 @@ final List places = [
     'category': 'dormitories',
     'places': [
       {
-        'name': "Nubya : Male Dormitory",
+        'name': "Gafat Building: Male Dormitory",
         'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
+            'Our male dormitory, named after the historic Gafat, offers comfortable accommodations and a sense of community, providing a welcoming environment for male BiT students',
         'position': [11.598180000732109, 37.397755980491645],
       },
       {
-        'name': "Abdissa : Male Dormitory",
+        'name': "Abdissa Aga Building: Male Dormitory",
         'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
+            'Named in honor of the heroic Ethiopian figure, Abdissa Aga, our dormitory combines tribute with comfort. Experience a welcoming atmosphere and modern amenities that ensure your stay is both inspiring and comfortable.',
         'position': [11.599231398547118, 37.397739329225715],
       },
       {
-        'name': "Guna : Male Dormitory",
+        'name': "Guna Mountain Building: Male Dormitory",
         'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
+            'Located at the center of the BiT campus, our male dormitory is named after the majestic Mount Guna. Enjoy the convenience of its central location, making it easy to quickly reach any destination',
         'position': [11.598689869893942, 37.39736928087995],
       },
       {
-        'name': "Nubya : Male Dormitory",
+        'name': "Aklilu Lemma Building : Male Dormitory",
         'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
+            'Our male dormitory, named after the renowned scientist Aklilu Lemma, offers a quiet and peaceful setting. With a green area behind it, residents can enjoy moments of tranquility and serenity.',
         'position': [11.598180000732109, 37.397755980491645],
       },
     ]
@@ -60,13 +60,13 @@ final List places = [
       {
         'name': 'Sister Cafe',
         'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
+            'The vibrant cafeteria for 2nd and 3rd-year students. Join us for a delightful dining experience and memorable moments.',
         'position': [11.598230439481872, 37.39662897021394]
       },
       {
         'name': 'Mother Cafe',
         'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
+            'It is a cafeteria 4th and 5th-year students gather for delicious meals and great company.',
         'position': [11.597893954575634, 37.396119483361076],
       },
     ]
@@ -75,39 +75,39 @@ final List places = [
     'category': 'Class Rooms',
     'places': [
       {
-        'name': 'Kitaw Lounge',
+        'name': 'Poly A Building',
         'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
+            'Poly A Building is a contemporary and spacious classroom facility known for its modern design and comfortable amenities. It offers a welcoming environment for learning and teaching activities.',
         'position': [11.597925500052817, 37.397444149178554]
       },
       {
-        'name': 'Main BiT Lounge',
+        'name': 'Poly B Building',
         'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
+            'Poly B Building is a prominent classroom building that prioritizes student comfort. It features well-appointed classrooms and study spaces, combining functionality and aesthetic appeal.  ',
         'position': [11.598283015211864, 37.39589959956143],
       },
       {
-        'name': 'Kitaw Lounge',
+        'name': 'Poly C Building',
         'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
+            'Poly C Building is a functional classroom facility that provides standard classrooms and study spaces for students',
         'position': [11.597925500052817, 37.397444149178554]
       },
       {
-        'name': 'Main BiT Lounge',
+        'name': 'Poly D Building',
         'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
+            'Poly D Building is a technologically advanced and comfortable facility with smart rooms, providing students an immersive and innovative learning environment.',
         'position': [11.598283015211864, 37.39589959956143],
       },
       {
-        'name': 'Kitaw Lounge',
+        'name': 'Ghion Building',
         'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
+            'Ghion Building is a prominent learning facility with the largest number of classrooms on campus. It offers students access to internet connectivity, enhancing their educational experience.',
         'position': [11.597925500052817, 37.397444149178554]
       },
       {
-        'name': 'Main BiT Lounge',
+        'name': 'Emperor Tewodros Hall',
         'description':
-            'a student\'s lounge named after a famous scientist and former student of BiT named Engineer Kitaw Ejigu.',
+            'Tewodros Hall is a spacious classroom named after Emperor Tewodros II. It has the capacity to accommodate a large number of students, providing ample space for educational activities and lectures.',
         'position': [11.598283015211864, 37.39589959956143],
       },
     ]
