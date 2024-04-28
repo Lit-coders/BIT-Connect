@@ -6,6 +6,7 @@ class SIMSProvider extends ChangeNotifier {
   int _previousIndex = 0;
   bool _isLoginCanceled = false;
   Student? student;
+  bool _isUserLoggedInBefore = true;
 
   void setPreviousIndex(int index) {
     _previousIndex = index;
@@ -17,22 +18,31 @@ class SIMSProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void cancelLogin() {
-    _isLoginCanceled = true;
+  void setIsUserAlreadyLoggedIn(bool truthValue) {
+    _isUserLoggedInBefore = truthValue;
     notifyListeners();
   }
 
   int get previousIndex => _previousIndex;
   bool get isLoginCanceled => _isLoginCanceled;
+  bool get isUserLoggedInBefore => _isUserLoggedInBefore;
+
+  void cancelLogin() {
+    _isLoginCanceled = true;
+    notifyListeners();
+  }
 
   // manage Account
   Future<void> login(username, password) async {
     try {
       SharedPreferences loginPref = await SharedPreferences.getInstance();
-      loginPref.setString('username', username);
-      loginPref.setString('username', password);
+      loginPref.setString('simsUsername', username);
+      loginPref.setString('simsPassword', password);
+      _isUserLoggedInBefore = true;
     } catch (e) {
       // let's hope the error will not happen next time
+    } finally {
+      notifyListeners();
     }
   }
 }
