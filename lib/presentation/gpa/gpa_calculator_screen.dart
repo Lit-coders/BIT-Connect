@@ -85,9 +85,24 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                         course['value'] == null || course['grade'] == null) ||
                     courseData.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Please enter valid data for all courses.'),
+                      SnackBar(
+                      backgroundColor: Colors.white,
+                      content: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration : BoxDecoration(
+                          color : Colors.white,
+                          border : Border.all(color : Colors.red),
+                          borderRadius : BorderRadius.circular(10),
+                        ),
+                        child : const Row(children: [
+                          Icon(Icons.error, color: Colors.red,),
+                          SizedBox(width: 10,),
+                          Text('Please fill all the fields', style: TextStyle(color: Colors.red),),
+                        ],),
+                      ),
                       duration: Duration(seconds: 3),
+                      
+
                     ),
                   );
                 } else {
@@ -130,7 +145,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
-                padding: const EdgeInsets.all(25),
+                padding: const EdgeInsets.all(30),
               ),
               child: const Text(
                 'Calculate GPA',
@@ -141,7 +156,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 60),
           ],
         ),
       ),
