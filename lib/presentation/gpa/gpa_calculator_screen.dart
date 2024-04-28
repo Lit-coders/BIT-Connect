@@ -187,17 +187,6 @@ class CourseInputRow extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  TextField(
-                    onChanged: (value) {
-                      courseData['courseName'] = value;
-                      onCourseDataChanged(courseData);
-                    },
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.all(10),
-                      hintText: 'Course Name',
-                      border: UnderlineInputBorder(),
-                    ),
-                  ),
                   Row(
                     children: [
                       Expanded(
