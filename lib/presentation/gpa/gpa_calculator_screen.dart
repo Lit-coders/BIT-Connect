@@ -100,7 +100,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                           Text('Please fill all the fields', style: TextStyle(color: Colors.red),),
                         ],),
                       ),
-                      duration: Duration(seconds: 3),
+                      duration: const Duration(seconds: 3),
                       
 
                     ),
@@ -145,7 +145,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
-                padding: const EdgeInsets.all(30),
+                padding: const EdgeInsets.symmetric(vertical:40,horizontal:80),
               ),
               child: const Text(
                 'Calculate GPA',
