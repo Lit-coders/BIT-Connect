@@ -77,7 +77,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
             ),
             const SizedBox(height: 40),
             Container(
-              padding : EdgeInsets.symmetric(vertical: 15), // Added padding to the container (line 108-109
+              padding : const EdgeInsets.symmetric(vertical: 15), // Added padding to the container (line 108-109
               width: double.infinity,
               decoration: BoxDecoration(
                 color: ColorAssets.bduColor,
@@ -215,7 +215,7 @@ class CourseInputRow extends StatelessWidget {
                               );
                             }).toList(),
                             decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.all(5),
+                              contentPadding: EdgeInsets.all(10),
                               hintText: 'Grade',
                               border: InputBorder.none,
                             ),
@@ -236,7 +236,7 @@ class CourseInputRow extends StatelessWidget {
                             );
                           }).toList(),
                           decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.all(5),
+                            contentPadding: EdgeInsets.all(10),
                             hintText: 'Credit Points',
                             border: InputBorder.none,
                           ),
