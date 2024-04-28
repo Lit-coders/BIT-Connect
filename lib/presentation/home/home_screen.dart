@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
                 getIcon(icon: Icons.home),
                 getIcon(icon: Icons.calculate),
                 getIcon(icon: Icons.place),
-                getIcon(icon: Icons.person),
+                getIcon(icon: Icons.school),
               ],
               onTap: (index) {
                 setState(
@@ -80,8 +80,6 @@ class _HomeState extends State<Home> {
                     }
                     simsProvider.setIsLoginCanceledFalse();
                     _contentIndex = index;
-                    print(
-                        'pIndex in navigation bar: ${simsProvider.previousIndex} , is canceled: ${simsProvider.isLoginCanceled}');
                   },
                 );
               },
