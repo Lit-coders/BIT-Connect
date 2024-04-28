@@ -1,10 +1,8 @@
-import 'package:bit_connect/presentation/home/components/app_bar.dart';
+import 'package:bit_connect/common/app_bar.dart';
 import 'package:bit_connect/presentation/gpa/gpa_calculator_screen.dart';
 import 'package:bit_connect/presentation/home/components/left_drawer.dart';
-import 'package:bit_connect/presentation/location/components/app_bar.dart';
 import 'package:bit_connect/presentation/location/location_screen.dart';
 import 'package:bit_connect/presentation/news/news_provider.dart';
-import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -37,15 +35,7 @@ class _HomeState extends State<Home> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         key: scaffoldKey,
-        appBar: _contentIndex != 2
-            ? PreferredSize(
-                preferredSize: Size(getWidth(context), 50),
-                child: homeAppBar(context, scaffoldKey),
-              )
-            : PreferredSize(
-                preferredSize: Size(getWidth(context), 80),
-                child: const LocationAppBar(),
-              ),
+        appBar: appBarChooser(_contentIndex, context, scaffoldKey),
         backgroundColor: Colors.white,
         drawer: const LeftDrawer(),
         body: homeContents[_contentIndex],
