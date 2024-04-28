@@ -28,7 +28,10 @@ Future<void> main() async {
   await Hive.openBox<NewsModel>('newsBox');
 
   runApp(
-    const BitConnect(),
+    ChangeNotifierProvider(
+      create: (context) => Search(),
+      child: const BitConnect(),
+    ),
   );
 }
 
@@ -41,8 +44,8 @@ class BitConnect extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: const TextTheme(
-          bodyText1: TextStyle(fontFamily: 'Poppins'),
-          bodyText2: TextStyle(fontFamily: 'Poppins'),
+          bodyLarge: TextStyle(fontFamily: 'Poppins'),
+          bodyMedium: TextStyle(fontFamily: 'Poppins'),
         ),
       ),
       title: "Bit-Connect",
