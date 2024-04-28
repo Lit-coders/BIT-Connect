@@ -6,8 +6,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
 class BitMap extends StatefulWidget {
-  Map<String, dynamic> place;
-  BitMap({super.key, required this.place});
+  final Map<String, dynamic> place;
+  
+  const BitMap({super.key, required this.place});
 
   @override
   State<BitMap> createState() => _BitMapState();

@@ -6,9 +6,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class NewsSlide extends StatelessWidget {
-  List<NewsModel> newsList;
+  final List<NewsModel> newsList;
 
-  NewsSlide({super.key, required this.newsList});
+  const NewsSlide({super.key, required this.newsList});
 
   @override
   Widget build(BuildContext context) {

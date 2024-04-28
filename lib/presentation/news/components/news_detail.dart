@@ -4,9 +4,9 @@ import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
 
 class NewsDetail extends StatelessWidget {
-  NewsModel news;
+  final NewsModel news;
 
-  NewsDetail({super.key, required this.news});
+  const NewsDetail({super.key, required this.news});
 
   @override
   Widget build(BuildContext context) {
