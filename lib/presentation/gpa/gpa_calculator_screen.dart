@@ -199,7 +199,7 @@ class CourseInputRow extends StatelessWidget {
                               courseData['grade'] = newValue!;
                               onCourseDataChanged(courseData);
                             },
-                            items: <String>['A', 'B', 'C', 'D', 'F']
+                            items: gradeValue.keys.toList()
                                 .map((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -221,7 +221,7 @@ class CourseInputRow extends StatelessWidget {
                             courseData['value'] = newValue!;
                             onCourseDataChanged(courseData);
                           },
-                          items: <int>[30, 7, 6, 5, 4].map((int value) {
+                          items: creditPoints.map((int value) {
                             return DropdownMenuItem<int>(
                               value: value,
                               child: Text(value.toString()),
