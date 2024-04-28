@@ -11,5 +11,5 @@ class GpaConstants {
     'D': 1,
     'F': 0,
   };
-  List<int> creditPoints = [30, 24, 7, 6, 5, 4, 3, 0];
+  List<double> creditPoints = [30, 24, 7, 6, 5, 4, 3, 0];
 }

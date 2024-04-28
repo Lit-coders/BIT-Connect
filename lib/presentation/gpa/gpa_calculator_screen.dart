@@ -234,14 +234,14 @@ class CourseInputRow extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: DropdownButtonFormField<int>(
+                        child: DropdownButtonFormField<double>(
                           value: courseData['value'],
                           onChanged: (newValue) {
                             courseData['value'] = newValue!;
                             onCourseDataChanged(courseData);
                           },
-                          items: gpaConstants.creditPoints.map((int value) {
-                            return DropdownMenuItem<int>(
+                          items: gpaConstants.creditPoints.map((double value) {
+                            return DropdownMenuItem<double>(
                               value: value,
                               child: Text(value.toString()),
                             );
