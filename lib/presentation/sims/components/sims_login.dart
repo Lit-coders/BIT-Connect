@@ -8,15 +8,36 @@ import 'package:provider/provider.dart';
 class SIMSLogin extends StatelessWidget {
   static final _usernameController = TextEditingController();
   static final _passwordController = TextEditingController();
+  static final GlobalKey<FormState> _form = GlobalKey();
 
   const SIMSLogin({super.key});
 
   static String? usernameValidator(String? username) {
+    if (username!.isEmpty) {
+      return 'username is required!';
+    } else if (!isUsernameValid(username)) {
+      return 'username is not valid, please try again!';
+    }
     return null;
   }
 
+  static bool isUsernameValid(String username) {
+    final RegExp pattern = RegExp(r'^BDU\d+$');
+    if (username.contains(pattern)) {
+      return true;
+    }
+    return false;
+  }
+
   static String? passwordValidator(String? password) {
+    if (password!.isEmpty) {
+      return 'Password is required!';
+    }
     return null;
+  }
+
+  static void submitForm() {
+    if (_form.currentState!.validate()) {}
   }
 
   static Future<void> showSIMSLogin(context) async {
@@ -56,6 +77,7 @@ class SIMSLogin extends StatelessWidget {
               ],
             ),
             content: Form(
+              key: _form,
               child: Column(
                 children: [
                   InputField(
@@ -81,7 +103,7 @@ class SIMSLogin extends StatelessWidget {
                       backgroundColor:
                           MaterialStatePropertyAll(ColorAssets.bduColor),
                     ),
-                    onPressed: () => {},
+                    onPressed: () => submitForm(),
                     child: const Text(
                       'Login',
                       style: TextStyle(
