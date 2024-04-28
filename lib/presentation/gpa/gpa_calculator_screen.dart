@@ -195,9 +195,9 @@ class CourseInputRow extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Container(
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             border: Border(
-                              right: BorderSide(color: Colors.black),
+                              right: BorderSide(color: Colors.grey.shade400, width: 1),
                             ),
                           ),
                           child: DropdownButtonFormField<String>(
@@ -237,7 +237,7 @@ class CourseInputRow extends StatelessWidget {
                           }).toList(),
                           decoration: const InputDecoration(
                             contentPadding: EdgeInsets.all(5),
-                            hintText: 'Value',
+                            hintText: 'Credit Points',
                             border: InputBorder.none,
                           ),
                         ),
