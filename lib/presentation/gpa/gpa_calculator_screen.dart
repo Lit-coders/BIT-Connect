@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:bit_connect/presentation/gpa/gpa_circular_progress.dart';
 import 'package:bit_connect/presentation/gpa/gpa_calculator.dart';
+
 class GpaCalculatorScreen extends StatefulWidget {
   const GpaCalculatorScreen({super.key});
   @override
@@ -11,15 +12,11 @@ class GpaCalculatorScreen extends StatefulWidget {
 
 class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
   List<Map<String, dynamic>> courseData = [];
-
-
   void removeCourseData(Map<String, dynamic> courseToRemove) {
     setState(() {
       courseData.remove(courseToRemove);
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +34,15 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                 itemCount: courseData.length,
                 itemBuilder: (context, index) {
                   return CourseInputRow(
-                    courseData: courseData[index],
-                    onCourseDataChanged: (newData) {
-                      setState(() {
-                        courseData[index] = newData;
+                      courseData: courseData[index],
+                      onCourseDataChanged: (newData) {
+                        setState(() {
+                          courseData[index] = newData;
+                        });
+                      },
+                      onCourseRemoved: () {
+                        removeCourseData(courseData[index]);
                       });
-                    },
-                    onCourseRemoved:() {
-                      removeCourseData(courseData[index]);
-                    }
-                  );
                 },
               ),
             ),
@@ -85,7 +81,9 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
-                if (courseData.any((course) => course['value'] == null || course['grade'] == null) || courseData.isEmpty) {
+                if (courseData.any((course) =>
+                        course['value'] == null || course['grade'] == null) ||
+                    courseData.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Please enter valid data for all courses.'),
@@ -93,12 +91,14 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                     ),
                   );
                 } else {
-                  
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text('Calculation Result',textAlign: TextAlign.center,),
+                        title: const Text(
+                          'Calculation Result',
+                          textAlign: TextAlign.center,
+                        ),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -156,7 +156,10 @@ class CourseInputRow extends StatelessWidget {
   final GpaConstants gpaConstants = GpaConstants();
 
   CourseInputRow(
-      {required this.courseData, required this.onCourseDataChanged,required this.onCourseRemoved, super.key});
+      {required this.courseData,
+      required this.onCourseDataChanged,
+      required this.onCourseRemoved,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -199,7 +202,8 @@ class CourseInputRow extends StatelessWidget {
                               courseData['grade'] = newValue!;
                               onCourseDataChanged(courseData);
                             },
-                            items: gpaConstants.gradeValue.keys.toList()
+                            items: gpaConstants.gradeValue.keys
+                                .toList()
                                 .map((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
