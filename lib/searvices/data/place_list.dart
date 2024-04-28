@@ -71,19 +71,19 @@ final List places = [
         'position': [11.599992315052539,37.39718735218049],
       },
       {
-        'name': "Lucy Building: female Dormitory",
+        'name': "Lucy Building: Female Dormitory",
         'description':
             'Lucy Building is a centrally located female dormitory, offering convenient access to campus facilities and creating a safe living environment.',
         'position': [11.600134196000917,37.39730536937714],
       },
       {
-        'name': "Amsale Gualu Building: female Dormitory",
+        'name': "Amsale Gualu Building: Female Dormitory",
         'description':
             'Named after our beloved female captain Amsale Gualu, This female dormitory offers a peaceful and comfortable place to live in.',
         'position': [11.598804716137987,37.39744484424592],
       },
       {
-        'name': "Taytu Building: female Dormitory",
+        'name': "Taytu Building: Female Dormitory",
         'description':
             'One of the most comfortable female dormitories in the campus, which is named after Empress Taytu, is known to be the builiding with high standard and high comfort',
         'position': [11.598484168662399,37.39755749702454],
