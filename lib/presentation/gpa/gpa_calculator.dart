@@ -10,7 +10,7 @@ Map<String, double> gradeValue = {
       'D': 1,
       'F': 0,
   }; 
- 
+List <int> creditPoints = [30,24,7,6,5,4,3,0];
  
  
   double calculateGpa(List<Map<String, dynamic>> courseData) {
