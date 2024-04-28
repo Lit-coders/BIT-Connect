@@ -39,6 +39,12 @@ class BitConnect extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(fontFamily: 'Poppins'),
+          bodyText2: TextStyle(fontFamily: 'Poppins'),
+        ),
+      ),
       title: "Bit-Connect",
       home: const SplashScreen(),
       routes: {
