@@ -51,37 +51,39 @@ class _OnbordingState extends State<Onboarding> {
               itemCount: contents.length,
               onPageChanged: _onPageChanged,
               itemBuilder: (_, i) {
-                return Padding(
-                  padding: const EdgeInsets.all(40),
-                  child: SafeArea(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 40),
-                          child: Image.asset(
-                            contents[i].image,
-                            height: 250,
+                return SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(40),
+                    child: SafeArea(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 40),
+                            child: Image.asset(
+                              contents[i].image,
+                              height: 250,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 60),
-                        Text(
-                          contents[i].title,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
+                          const SizedBox(height: 60),
+                          Text(
+                            contents[i].title,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 35,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          contents[i].discription,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.grey,
-                          ),
-                        )
-                      ],
+                          const SizedBox(height: 20),
+                          Text(
+                            contents[i].discription,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Colors.grey,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 );

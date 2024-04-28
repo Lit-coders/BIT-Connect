@@ -1,4 +1,5 @@
 import 'package:bit_connect/presentation/home/components/app_bar.dart';
+import 'package:bit_connect/presentation/gpa/gpa_calculator_screen.dart';
 import 'package:bit_connect/presentation/home/components/left_drawer.dart';
 import 'package:bit_connect/presentation/location/components/app_bar.dart';
 import 'package:bit_connect/presentation/location/location_screen.dart';
@@ -18,7 +19,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final homeContents = [
     const News(),
-    const News(),
+    const GpaCalculatorScreen(),
     const Location(),
     const News(),
   ];

@@ -11,7 +11,7 @@ class HomePageOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(30.0),
+      padding: const EdgeInsets.all(10.0),
       child: Container(
         decoration: BoxDecoration(
             color: const Color.fromARGB(255, 255, 248, 225),
@@ -23,7 +23,7 @@ class HomePageOptions extends StatelessWidget {
             Image.asset(
               iconPath,
               height: 35,
-              color: ColorAssets.secondaryYellow,
+              color: ColorAssets.white,
             ),
             //name
             Padding(
@@ -33,7 +33,7 @@ class HomePageOptions extends StatelessWidget {
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
-                    color: Colors.blue[700]),
+                    color: ColorAssets.white),
               ),
             )
           ],
