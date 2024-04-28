@@ -246,6 +246,8 @@ class CourseInputRow extends StatelessWidget {
           ),
           const SizedBox(width: 5),
           Container(
+            height : 40,
+            width : 40,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(width: 2, color: Colors.red),
@@ -254,7 +256,7 @@ class CourseInputRow extends StatelessWidget {
               onPressed: () {
                 onCourseRemoved();
               },
-              icon: const Icon(Icons.close, color: Colors.red),
+              icon: const Icon(Icons.close, color: Colors.red,size: 20,),
             ),
           ),
         ],
