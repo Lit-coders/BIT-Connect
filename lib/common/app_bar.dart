@@ -3,6 +3,7 @@ import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:bit_connect/utils/constants/padding_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:bit_connect/presentation/user_profile/new_user_profile.dart';
 
 AppBar customAppBar(
     BuildContext context, GlobalKey<ScaffoldState> scaffoldKey, String title) {
@@ -27,6 +28,11 @@ AppBar customAppBar(
       IconButton(
         onPressed: () {
           // Handle person button press
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => BuildProfile.personIcon()),
+          );
+
         },
         icon: Image.asset(
           'assets/icons/person.png',
