@@ -1,11 +1,11 @@
+import 'package:bit_connect/presentation/home/components/app_bar.dart';
 import 'package:bit_connect/presentation/gpa/gpa_calculator_screen.dart';
 import 'package:bit_connect/presentation/home/components/left_drawer.dart';
-import 'package:bit_connect/presentation/home/home_overview.dart';
 import 'package:bit_connect/presentation/location/components/app_bar.dart';
 import 'package:bit_connect/presentation/location/location_screen.dart';
+import 'package:bit_connect/presentation/news/news_provider.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
-import 'package:bit_connect/utils/constants/padding_constants.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -18,10 +18,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final homeContents = [
-    const HomeOverview(),
+    const News(),
     const GpaCalculatorScreen(),
     const Location(),
-    const HomeOverview(),
+    const News(),
   ];
   int _contentIndex = 0;
 
@@ -38,31 +38,9 @@ class _HomeState extends State<Home> {
       home: Scaffold(
         key: scaffoldKey,
         appBar: _contentIndex != 2
-            ? AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                leading: TextButton(
-                  onPressed: () {
-                    scaffoldKey.currentState?.openDrawer();
-                  },
-                  child: Image.asset(
-                    'assets/icons/menu.png',
-                    height: PaddingConstant.forPersonIcon,
-                    color: ColorAssets.bduColor,
-                  ),
-                ),
-                actions: [
-                  IconButton(
-                    onPressed: () {
-                      // Handle person button press
-                    },
-                    icon: Image.asset(
-                      'assets/icons/person.png',
-                      height: PaddingConstant.forPersonIcon,
-                      color: ColorAssets.bduColor,
-                    ),
-                  ),
-                ],
+            ? PreferredSize(
+                preferredSize: Size(getWidth(context), 50),
+                child: homeAppBar(context, scaffoldKey),
               )
             : PreferredSize(
                 preferredSize: Size(getWidth(context), 80),

@@ -8,13 +8,13 @@ class LocOverview extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             margin: const EdgeInsets.only(
               bottom: 25,
             ),
             transform: Matrix4.rotationZ(3.14 / 180 * 45),
+            transformAlignment: Alignment.center,
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -25,7 +25,16 @@ class LocOverview extends StatelessWidget {
               child: Icon(icon),
             ),
           ),
-          Text(title),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -38,7 +47,7 @@ class LocOverview extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          getOverviewItem('Offices', Icons.build),
+          getOverviewItem('Offices', Icons.location_city_outlined),
           getOverviewItem('Facilities', Icons.data_array),
           getOverviewItem('Distances', Icons.social_distance),
         ],

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
 import 'package:bit_connect/searvices/data/place_list.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -129,4 +130,47 @@ Map<String, dynamic> sortPlaces(place1, place2) {
   final name1 = place1['name'].toLowerCase();
   final name2 = place2['name'].toLowerCase();
   return name1.localeCompare(name2);
+}
+
+// find the timestamp difference between to dates
+String getNewsAge(Timestamp timeStamp) {
+  final now = Timestamp.now();
+  Duration difference = now.toDate().difference(timeStamp.toDate());
+
+  final ageInSec = difference.inSeconds;
+  if (ageInSec < 60) {
+    return 'Just now';
+  } else {
+    final ageInMin = difference.inMinutes;
+    if (ageInMin >= 1 && ageInMin < 60) {
+      return '$ageInMin minutes ago';
+    } else {
+      final ageInHr = difference.inHours;
+      if (ageInHr >= 1 && ageInHr < 24) {
+        return '$ageInHr hours ago';
+      } else {
+        final ageInDay = difference.inDays;
+        if (ageInDay >= 1 && ageInDay < 7) {
+          return '$ageInDay days ago';
+        } else {
+          final ageInWeek = (ageInDay / 7).round();
+          if (ageInWeek >= 1 && ageInWeek < 4) {
+            return '$ageInWeek weeks ago';
+          } else {
+            final ageInMonth = (ageInWeek / 4).round();
+            if (ageInMonth >= 1 && ageInMonth < 12) {
+              return '$ageInMonth monthes ago';
+            } else {
+              final ageInYear = (ageInMonth / 12).round();
+              if (ageInYear >= 1 && ageInYear < 5) {
+                return '$ageInYear years ago';
+              } else {
+                return 'long time ago';
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
