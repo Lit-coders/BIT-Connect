@@ -44,13 +44,13 @@ final List places = [
         'name': "Guna Mountain Building: Male Dormitory",
         'description':
             'Located at the center of the BiT campus, our male dormitory is named after the majestic Mount Guna. Enjoy the convenience of its central location, making it easy to quickly reach any destination',
-        'position': [11.598689869893942, 37.39736928087995],
+        'position': [11.599114753510106,37.39741265773774],
       },
       {
         'name': "Aklilu Lemma Building : Male Dormitory",
         'description':
             'Our male dormitory, named after the renowned scientist Aklilu Lemma, offers a quiet and peaceful setting. With a green area behind it, residents can enjoy moments of tranquility and serenity.',
-        'position': [11.598180000732109, 37.397755980491645],
+        'position': [11.598647069884507,37.397782802581794],
       },
       {
         'name': "Albert Einstein Building : Male Dormitory",
@@ -80,7 +80,7 @@ final List places = [
         'name': "Amsale Gualu Building: female Dormitory",
         'description':
             'Named after our beloved female captain Amsale Gualu, This female dormitory offers a peaceful and comfortable place to live in.',
-        'position': [11.598804716137987,37.39744484424592],
+        'position': [11.598794206390524, 37.39742875099183],
       },
       {
         'name': "Taytu Building: female Dormitory",
