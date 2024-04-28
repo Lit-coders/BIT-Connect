@@ -107,6 +107,10 @@ class NewsDetail extends StatelessWidget {
                                 child: Text(
                                   news.detail,
                                   overflow: TextOverflow.clip,
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               ),
                             ],
