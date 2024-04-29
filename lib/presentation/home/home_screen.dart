@@ -3,9 +3,12 @@ import 'package:bit_connect/presentation/gpa/gpa_calculator_screen.dart';
 import 'package:bit_connect/presentation/home/components/left_drawer.dart';
 import 'package:bit_connect/presentation/location/location_screen.dart';
 import 'package:bit_connect/presentation/news/news_provider.dart';
+import 'package:bit_connect/presentation/sims/components/sims_login.dart';
+import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -19,7 +22,7 @@ class _HomeState extends State<Home> {
     const News(),
     const GpaCalculatorScreen(),
     const Location(),
-    const News(),
+    const SIMSLogin(),
   ];
   int _contentIndex = 0;
 
@@ -31,32 +34,45 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        key: scaffoldKey,
-        appBar: appBarChooser(_contentIndex, context, scaffoldKey),
-        backgroundColor: Colors.white,
-        drawer: const LeftDrawer(),
-        body: homeContents[_contentIndex],
-        bottomNavigationBar: CurvedNavigationBar(
-          index: _contentIndex,
-          height: 50,
-          backgroundColor: Colors.transparent,
-          color: ColorAssets.bduColor,
-          items: <Widget>[
-            getIcon(icon: Icons.home),
-            getIcon(icon: Icons.food_bank),
-            getIcon(icon: Icons.location_city),
-            getIcon(icon: Icons.person),
-          ],
-          onTap: (index) {
-            setState(() {
-              _contentIndex = index;
-            });
-          },
-        ),
-      ),
+    return Consumer<SIMSProvider>(
+      builder: (context, simsProvider, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            key: scaffoldKey,
+            appBar: appBarChooser(_contentIndex, context, scaffoldKey),
+            backgroundColor: Colors.white,
+            drawer: const LeftDrawer(),
+            body: homeContents[simsProvider.isLoginCanceled
+                ? simsProvider.previousIndex
+                : _contentIndex],
+            bottomNavigationBar: CurvedNavigationBar(
+              index: simsProvider.isLoginCanceled
+                  ? simsProvider.previousIndex
+                  : _contentIndex,
+              height: 50,
+              backgroundColor: Colors.transparent,
+              color: ColorAssets.bduColor,
+              items: <Widget>[
+                getIcon(icon: Icons.home),
+                getIcon(icon: Icons.calculate),
+                getIcon(icon: Icons.place),
+                getIcon(icon: Icons.school),
+              ],
+              onTap: (index) {
+                setState(() {
+                  if (index != 3) {
+                    simsProvider.setPreviousIndex(index);
+                  }
+                  simsProvider.setIsLoginCanceledFalse();
+
+                  _contentIndex = index;
+                });
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }
