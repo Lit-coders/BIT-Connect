@@ -33,38 +33,46 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    final simsProvider = Provider.of<SIMSProvider>(context, listen: false);
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        key: scaffoldKey,
-        appBar: appBarChooser(_contentIndex, context, scaffoldKey),
-        backgroundColor: Colors.white,
-        drawer: const LeftDrawer(),
-        body: homeContents[simsProvider.isLoginCanceled
-            ? simsProvider.previousIndex
-            : _contentIndex],
-        bottomNavigationBar: CurvedNavigationBar(
-          index: simsProvider.isLoginCanceled
-              ? simsProvider.previousIndex
-              : _contentIndex,
-          height: 50,
-          backgroundColor: Colors.transparent,
-          color: ColorAssets.bduColor,
-          items: <Widget>[
-            getIcon(icon: Icons.home),
-            getIcon(icon: Icons.food_bank),
-            getIcon(icon: Icons.location_city),
-            getIcon(icon: Icons.person),
-          ],
-          onTap: (index) {
-            setState(() {
-              _contentIndex = index;
-            });
-          },
-        ),
-      ),
+    return Consumer<SIMSProvider>(
+      builder: (context, simsProvider, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            key: scaffoldKey,
+            appBar: appBarChooser(_contentIndex, context, scaffoldKey),
+            backgroundColor: Colors.white,
+            drawer: const LeftDrawer(),
+            body: homeContents[simsProvider.isLoginCanceled
+                ? simsProvider.previousIndex
+                : _contentIndex],
+            bottomNavigationBar: CurvedNavigationBar(
+              index: simsProvider.isLoginCanceled
+                  ? simsProvider.previousIndex
+                  : _contentIndex,
+              height: 50,
+              backgroundColor: Colors.transparent,
+              color: ColorAssets.bduColor,
+              items: <Widget>[
+                getIcon(icon: Icons.home),
+                getIcon(icon: Icons.calculate),
+                getIcon(icon: Icons.place),
+                getIcon(icon: Icons.school),
+              ],
+              onTap: (index) {
+                setState(() {
+                  if (index != 3) {
+                    simsProvider.setPreviousIndex(index);
+                  }
+                  simsProvider.setIsLoginCanceledFalse();
+
+                  _contentIndex = index;
+                });
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }
