@@ -20,6 +20,15 @@ class _SIMSLoginState extends State<SIMSLogin> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final GlobalKey<FormState> _form = GlobalKey();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+  }
+
+  // states
   bool _isLoading = false;
   String _error = "";
 
