@@ -42,23 +42,29 @@ class _NewsOverviewState extends State<NewsOverview> {
               return Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.only(left: 40, bottom: 12.0),
                     child: PreferredSize(
                       preferredSize: Size(getWidth(context), 100),
                       child: const UserWelcomer(),
                     ),
                   ),
                   NewsSlide(newsList: newsList),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Container(
                     width: getWidth(context),
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                     child: const Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: PaddingConstant.horizontalPadding),
                       child: Text(
-                        "News",
+                        "Latest News and Events",
                         style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 18),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 24,
+                          color: Colors.blueGrey,
+                        ),
                       ),
                     ),
                   ),

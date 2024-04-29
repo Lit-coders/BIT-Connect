@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class NewsList extends StatelessWidget {
   final List<NewsModel> newsList;
-  
+
   const NewsList({super.key, required this.newsList});
 
   @override
@@ -23,7 +23,22 @@ class NewsList extends StatelessWidget {
               builder: (context) => NewsDetail(news: news),
             ),
           ),
-          child: Card(
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+                boxShadow: const [
+                  BoxShadow(
+                    blurRadius: 30.0,
+                    offset: Offset(-10, -10),
+                    color: Color.fromARGB(41, 201, 133, 163),
+                  ),
+                  BoxShadow(
+                    blurRadius: 30.0,
+                    offset: Offset(10, 10),
+                    color: Color.fromARGB(41, 153, 92, 119),
+                  )
+                ]),
             margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
