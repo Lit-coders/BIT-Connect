@@ -186,9 +186,12 @@ class _SIMSLoginState extends State<SIMSLogin> {
   Widget loader() {
     return const Center(
       child: SizedBox(
-        width: 40,
-        height: 40,
-        child: CircularProgressIndicator(),
+        width: 30,
+        height: 30,
+        child: CircularProgressIndicator(
+          backgroundColor: Colors.white,
+          color: ColorAssets.bduColor,
+        ),
       ),
     );
   }
