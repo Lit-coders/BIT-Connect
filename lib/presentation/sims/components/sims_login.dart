@@ -5,6 +5,7 @@ import 'package:bit_connect/presentation/sims/api/sims_auth.dart';
 import 'package:bit_connect/presentation/sims/components/loader.dart';
 import 'package:bit_connect/presentation/sims/helpers/sims_helpers.dart';
 import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
+import 'package:bit_connect/presentation/sims/sims.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _SIMSLoginState extends State<SIMSLogin> {
   }
 
   // states
-  bool _isLoading = true;
+  bool _isLoading = false;
   String _error = "";
 
   void submitForm(context, simsProvider) async {
@@ -160,7 +161,11 @@ class _SIMSLoginState extends State<SIMSLogin> {
               ),
             ),
             ElevatedButton(
-              onPressed: () => print('Open on bit'),
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => SIMS(isWebView: true),
+                ),
+              ),
               style: const ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(Colors.transparent),
                 shadowColor: MaterialStatePropertyAll(Colors.transparent),
