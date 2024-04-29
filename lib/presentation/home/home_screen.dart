@@ -4,7 +4,6 @@ import 'package:bit_connect/presentation/home/components/left_drawer.dart';
 import 'package:bit_connect/presentation/location/components/app_bar.dart';
 import 'package:bit_connect/presentation/location/location_screen.dart';
 import 'package:bit_connect/presentation/news/news_provider.dart';
-import 'package:bit_connect/presentation/sims/components/sims_login.dart';
 import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
 import 'package:bit_connect/presentation/sims/sims.dart';
 import 'package:bit_connect/searvices/helpers.dart';
@@ -73,9 +72,7 @@ class _HomeState extends State<Home> {
               onTap: (index) {
                 setState(
                   () {
-                    if (index == 3) {
-                      SIMSLogin.showSIMSLogin(context);
-                    } else {
+                    if (index != 3) {
                       simsProvider.setPreviousIndex(index);
                     }
                     simsProvider.setIsLoginCanceledFalse();
