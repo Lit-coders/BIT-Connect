@@ -195,10 +195,13 @@ class _SIMSLoginState extends State<SIMSLogin> {
 
   Widget error() {
     return Center(
-      child: SizedBox(
+      child: Padding(
+        padding: const EdgeInsets.all(18.0),
         child: Text(
           _error,
-          style: const TextStyle(color: Colors.red),
+          style: const TextStyle(
+            color: Colors.red,
+          ),
         ),
       ),
     );
@@ -225,11 +228,31 @@ class _SIMSLoginState extends State<SIMSLogin> {
                   ],
                 ),
                 if (_error.isNotEmpty)
-                  TextButton(
-                    onPressed: () => setState(() {
-                      _error = "";
-                    }),
-                    child: const Text('try again'),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 18.0),
+                    child: TextButton(
+                      onPressed: () => setState(() {
+                        _error = "";
+                      }),
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.refresh,
+                              size: 18,
+                            ),
+                            Text(
+                              'try again',
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 Container(
                   alignment: Alignment.bottomRight,
