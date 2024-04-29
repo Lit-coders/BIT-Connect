@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:bit_connect/utils/constants/padding_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CafeMenu extends StatefulWidget {
   CafeMenu({super.key});
@@ -11,14 +12,20 @@ class CafeMenu extends StatefulWidget {
 }
 
 class _CafeMenuState extends State<CafeMenu> {
+  late List<Map<String, dynamic>> _menuList;
+
+  Future<void> _fetchMenu() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('days').get();
+    _menuList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
-        length: 7,
+    return DefaultTabController(
+        length: _menuList.length,
         child: Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -46,108 +53,19 @@ class _CafeMenuState extends State<CafeMenu> {
                 ),
               ),
             ],
-            bottom: const TabBar(
+            bottom:  TabBar(
               indicatorWeight: 10,
               isScrollable: true,
               indicatorColor: ColorAssets.secondaryYellow,
               tabs: [
+                for (var menu in _menuList)
                 Tab(
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      Text(
-                        'M',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: ColorAssets.bduColor,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Tab(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(
-                        'T',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: ColorAssets.bduColor,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Tab(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(
-                        'W',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: ColorAssets.bduColor,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Tab(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(
-                        'T',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: ColorAssets.bduColor,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Tab(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(
-                        'F',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: ColorAssets.bduColor,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Tab(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(
-                        'S',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: ColorAssets.bduColor,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Tab(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(
-                        'S',
-                        style: TextStyle(
+                       Text(
+                        menu['day'],
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: ColorAssets.bduColor,
                           fontSize: 22,
@@ -327,8 +245,7 @@ class _CafeMenuState extends State<CafeMenu> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
 
