@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:bit_connect/utils/constants/api_constants.dart';
 import 'package:http/http.dart' as http;
 
-Future<void> loginSIMS(username, password) async {
+Future<String> loginSIMS(username, password) async {
   try {
     // Create a map to hold the data
 
@@ -18,9 +18,8 @@ Future<void> loginSIMS(username, password) async {
     // Send the POST request with the sdJSON body
     final response = await http.post(Uri.parse(SIMS_LOGIN_ENDPOINT),
         body: jsonData, headers: {'Content-Type': 'application/json'});
-
-    print("from sims ${response.body}");
+    return response.body;
   } catch (e) {
-    print(e);
+    rethrow;
   }
 }
