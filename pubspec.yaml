@@ -57,6 +57,7 @@ dependencies:
   hive_flutter: ^1.1.0
   http: ^1.2.1
   dotted_border: ^2.1.0
+  webview_flutter: ^4.7.0
 
 dev_dependencies:
   flutter_test:
@@ -85,6 +86,10 @@ flutter:
     - assets/icons/
     - assets/stclubs/
     - assets/layers/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-Regular.ttf
 
   #   - images/a_dot_ham.jpeg
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class NewsAge extends StatelessWidget {
-  String uploadTime;
+  final String uploadTime;
 
-  NewsAge({super.key, required this.uploadTime});
+  const NewsAge({super.key, required this.uploadTime});
 
   @override
   Widget build(BuildContext context) {
