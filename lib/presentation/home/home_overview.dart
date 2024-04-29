@@ -13,7 +13,7 @@ class HomeOverview extends StatefulWidget {
 class _HomeOverviewState extends State<HomeOverview> {
   //The 4 home Screen options
   List myOptions = [
-    ["About BiT", "assets/icons/abt.png"],
+    ["About BiT", "assets/icons/abt2.png"],
     ["Cafe", "assets/icons/cafe.png"],
     ["Lounge", "assets/icons/lounge.png"],
     ["Calculator", "assets/icons/calc.png"]
@@ -67,9 +67,14 @@ class _HomeOverviewState extends State<HomeOverview> {
               Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: PaddingConstant.horizontalPadding),
-                  child: Text(
-                    "App Services",
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                      
+                  child: SafeArea(
+                    child: Expanded(
+                      child: Text(
+                        "App Services",
+                        style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24,fontFamily: 'Poppins'),
+                      ),
+                    ),
                   )),
             ],
           ),
@@ -85,6 +90,7 @@ class _HomeOverviewState extends State<HomeOverview> {
               ),
               itemBuilder: (context, index) {
                 return HomePageOptions(
+                  
                   name: myOptions[index][0],
                   iconPath: myOptions[index][1],
                 );

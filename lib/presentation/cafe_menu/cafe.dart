@@ -3,7 +3,26 @@ import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:bit_connect/utils/constants/padding_constants.dart';
 import 'package:flutter/material.dart';
 
+// class CafeModel {
+//   final String kurs;
+//   final String misa;
+//   final String rat;
+
+//   const cafemodel(){
+//     required this. kurs;
+//     this .misa;
+//     this.rat;
+//   }
+// }
+
 class CafeMenu extends StatefulWidget {
+  get firestoreInstance => null;
+
+  void listCafeMenu(){
+    var result;
+    firestoreInstance.collection("cafe").get().then((value)=>{
+      value.docs.forEach(result)});
+  }
   CafeMenu({super.key});
   final List<String> tabTitle = ['M', "T", 'W', 'T', 'F', 'S', 'S'];
   @override
@@ -159,25 +178,13 @@ class _CafeMenuState extends State<CafeMenu> {
               ],
             ),
           ),
-          // body: TabBarView(
-          //   children: <Widget>[
-          //     _buildListViewMenu('M'),
-          //     _buildListViewMenu('T'),
-          //     _buildListViewMenu('W'),
-          //     _buildListViewMenu('T'),
-          //     _buildListViewMenu('F'),
-          //     _buildListViewMenu('S'),
-          //     _buildListViewMenu('S')
-          //   ],
-          // ),
-
           body: const TabBarView(
             children: [
               // Contents of Tab 1
               TabContent(
                 title: 'Food 1',
                 image: 'assets/menu1.png',
-                name: 'Food Name 1',
+                name: 'Firfir Be Dabo be Shay',
               ),
               // Contents of Tab 2
               TabContent(
@@ -353,24 +360,30 @@ class TabContent extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(title, style: const TextStyle(fontSize: 24)),
+            Text(title,
+                style: const TextStyle(fontSize: 24, fontFamily: 'Poppins')),
             const SizedBox(height: 16),
             Image.asset(image,
                 width: 380, height: 200), // Use your own image assets
             const SizedBox(height: 16),
-            Text(name, style: const TextStyle(fontSize: 18)),
-            Text(title, style: const TextStyle(fontSize: 24)),
+            Text(name,
+                style: const TextStyle(fontSize: 18, fontFamily: 'Poppins')),
+            Text(title,
+                style: const TextStyle(fontSize: 24, fontFamily: 'Poppins')),
             const SizedBox(height: 16),
             Image.asset(image,
                 width: 380, height: 200), // Use your own image assets
             const SizedBox(height: 16),
-            Text(name, style: const TextStyle(fontSize: 18)),
-            Text(title, style: const TextStyle(fontSize: 24)),
+            Text(name,
+                style: const TextStyle(fontSize: 18, fontFamily: 'Poppins')),
+            Text(title,
+                style: const TextStyle(fontSize: 24, fontFamily: 'Poppins')),
             const SizedBox(height: 16),
             Image.asset(image,
                 width: 380, height: 200), // Use your own image assets
             const SizedBox(height: 16),
-            Text(name, style: const TextStyle(fontSize: 18)),
+            Text(name,
+                style: const TextStyle(fontSize: 18, fontFamily: 'Poppins')),
           ],
         ),
       ]),

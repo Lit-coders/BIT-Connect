@@ -14,7 +14,7 @@ class HomePageOptions extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: Container(
         decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 255, 248, 225),
+            color:ColorAssets.bduColor,
             borderRadius: BorderRadius.circular(10)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -22,7 +22,7 @@ class HomePageOptions extends StatelessWidget {
             //icon
             Image.asset(
               iconPath,
-              height: 35,
+              height: 40,
               color: ColorAssets.white,
             ),
             //name
@@ -33,6 +33,7 @@ class HomePageOptions extends StatelessWidget {
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
+                    
                     color: ColorAssets.white),
               ),
             )
@@ -42,3 +43,4 @@ class HomePageOptions extends StatelessWidget {
     );
   }
 }
+

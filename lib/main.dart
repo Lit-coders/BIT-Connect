@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:bit_connect/presentation/cafe_menu/cafe.dart';
 import 'package:bit_connect/presentation/home/home_screen.dart';
 import 'package:bit_connect/presentation/onboarding/onboarding_screen.dart';
 import 'package:bit_connect/presentation/splash_screen.dart';
+import 'package:bit_connect/presentation/student_clubs/student_clubs.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +22,7 @@ Future<void> main() async {
         )
       : await Firebase.initializeApp();
   runApp(
-    const BitConnect(),
+    CafeMenu(),
   );
 }
 
@@ -35,6 +37,7 @@ class BitConnect extends StatelessWidget {
         textTheme: const TextTheme(
           bodyText1: TextStyle(fontFamily: 'Poppins'),
           bodyText2: TextStyle(fontFamily: 'Poppins'),
+         
         ),
       ),
       title: "Bit-Connect",
