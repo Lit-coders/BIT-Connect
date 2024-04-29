@@ -8,21 +8,21 @@ class OnboardingContent {
 
 List<OnboardingContent> contents = [
   OnboardingContent(
-      title: 'Experimenting',
+      title: 'Stay Informed',
       image: 'assets/desinging.png',
       discription:
-          "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the "
+          "Get the latest news and updates right at your fingertips. Stay informed about campus events, announcements, and important information with our app's dedicated news section."
      ),
   OnboardingContent(
-      title: 'Oncampus',
+      title: 'Unlock Campus Discoveries',
       image: 'assets/lunchtime.png',
       discription:
-          "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the "
+          "Easily locate classrooms, cafeterias, dormitories, lounges and student clubs with our user-friendly app"
     ),
   OnboardingContent(
-      title: 'Campus Life',
+      title: 'Academic Insights',
       image: 'assets/studentsreading.png',
       discription:
-          "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the "
+          "Gain valuable insights into your academic journey. Easily access and review your grades, course schedules, and important academic information through our app's intuitive interface."
     ),
 ];
