@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
 import 'package:bit_connect/presentation/sims/api/sims_auth.dart';
+import 'package:bit_connect/presentation/sims/components/loader.dart';
 import 'package:bit_connect/presentation/sims/helpers/sims_helpers.dart';
 import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
 import 'package:bit_connect/searvices/helpers.dart';
@@ -179,36 +180,6 @@ class _SIMSLoginState extends State<SIMSLogin> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget loader() {
-    return Center(
-      child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            width: 50,
-            height: 50,
-            child: const CircularProgressIndicator(
-              backgroundColor: Colors.white,
-              color: ColorAssets.bduColor,
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: const Text(
-              'For good reason, It may take a few seconds',
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.clip,
-              style: TextStyle(
-                color: Colors.black87,
-                fontWeight: FontWeight.w300,
-              ),
-            ),
-          )
-        ],
       ),
     );
   }
