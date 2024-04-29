@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
 import 'package:bit_connect/presentation/sims/api/sims_auth.dart';
 import 'package:bit_connect/presentation/sims/helpers/sims_helpers.dart';
@@ -7,80 +9,109 @@ import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SIMSLogin extends StatelessWidget {
-  static final _usernameController = TextEditingController();
-  static final _passwordController = TextEditingController();
-  static final GlobalKey<FormState> _form = GlobalKey();
-
+class SIMSLogin extends StatefulWidget {
   const SIMSLogin({super.key});
 
-  static void submitForm(context) async {
-    final simsProvider = Provider.of<SIMSProvider>(context, listen: false);
+  @override
+  State<SIMSLogin> createState() => _SIMSLoginState();
+}
 
+class _SIMSLoginState extends State<SIMSLogin> {
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final GlobalKey<FormState> _form = GlobalKey();
+  bool _isLoading = false;
+  String _error = "";
+
+  void submitForm(context, simsProvider) async {
     if (_form.currentState!.validate()) {
-      // simsProvider.setIsLoading(true);
+      setState(() {
+        _isLoading = true;
+      });
       try {
         final res =
             await loginSIMS(_usernameController.text, _passwordController.text);
-        _passwordController.text = "logged in ";
+        final Map<String, dynamic> data = jsonDecode(res);
       } catch (error) {
         print('error from sims login file: $error');
+        setState(() {
+          _error = 'Something went wrong, Please try again!';
+        });
       } finally {
-        // simsProvider.setIsLoading(false);
+        setState(() {
+          _isLoading = false;
+        });
       }
       // simsProvider.login(_usernameController.text, _passwordController.text);
     }
   }
 
-  static Widget loader() {
-    return Container(
-      child: const Text('Loading ...'),
+  Widget loader() {
+    return const Center(
+      child: SizedBox(
+        width: 20,
+        height: 20,
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 
-  static Future<void> showSIMSLogin(context) async {
+  Widget error() {
+    return Center(
+      child: SizedBox(
+        child: Text(
+          _error,
+          style: const TextStyle(color: Colors.red),
+        ),
+      ),
+    );
+  }
+
+  Widget showSIMSLogin(context) {
     final simsProvider = Provider.of<SIMSProvider>(context, listen: false);
-    await initializeLoginPreference(simsProvider);
-    if (simsProvider.isUserLoggedInBefore) {
-      return;
-    } else {
-      showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) {
-          return SizedBox(
-            width: getWidth(context),
-            height: getHeight(context) * 1 / 2,
-            child: AlertDialog(
-              contentPadding: const EdgeInsets.only(top: 20),
-              scrollable: true,
-              title: const Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 8.0),
-                    child: Icon(
-                      Icons.login,
-                      size: 20,
-                    ),
-                  ),
-                  Text(
-                    'Login',
-                  ),
-                  Expanded(
-                    child: Text(
-                      'BiT SIMS',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 16,
+
+    return Center(
+      child: Container(
+        color: Colors.white,
+        padding: const EdgeInsets.all(8.0),
+        width: getWidth(context) * 3 / 4 + 300,
+        height: getHeight(context) * 1 / 3,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: Icon(
+                        Icons.login,
+                        size: 20,
                       ),
                     ),
-                  ),
-                ],
+                    Text(
+                      'Login',
+                    ),
+                    Expanded(
+                      child: Text(
+                        'BiT SIMS',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              content: simsProvider.isLoading
-                  ? loader()
-                  : Form(
+              Stack(
+                children: [
+                  if (_isLoading) loader(),
+                  if (_error.isNotEmpty && !_isLoading) error(),
+                  if (!_isLoading && _error.isEmpty)
+                    Form(
                       key: _form,
                       child: Column(
                         children: [
@@ -107,7 +138,7 @@ class SIMSLogin extends StatelessWidget {
                               backgroundColor: MaterialStatePropertyAll(
                                   ColorAssets.bduColor),
                             ),
-                            onPressed: () => submitForm(context),
+                            onPressed: () => submitForm(context, simsProvider),
                             child: const Text(
                               'Login',
                               style: TextStyle(
@@ -120,26 +151,37 @@ class SIMSLogin extends StatelessWidget {
                         ],
                       ),
                     ),
-              actions: [
+                ],
+              ),
+              if (_error.isNotEmpty)
                 TextButton(
-                  onPressed: () {
-                    simsProvider.cancelLogin();
-                    Navigator.pop(context);
-                  },
-                  child: const Text('cancel'),
-                )
-              ],
-            ),
-          );
-        },
-      );
-    }
+                  onPressed: () => setState(() {
+                    _error = "";
+                  }),
+                  child: const Text('try again'),
+                ),
+              TextButton(
+                onPressed: () {
+                  simsProvider.cancelLogin();
+                },
+                child: const Text('Cancel'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color.fromARGB(255, 87, 172, 246),
+    final simsProvider = Provider.of<SIMSProvider>(context, listen: false);
+    initializeLoginPreference(simsProvider);
+
+    return Scaffold(
+      body: Center(
+        child: showSIMSLogin(context),
+      ),
     );
   }
 }
