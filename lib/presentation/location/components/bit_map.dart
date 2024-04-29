@@ -7,7 +7,7 @@ import 'package:latlong2/latlong.dart';
 
 class BitMap extends StatefulWidget {
   final Map<String, dynamic> place;
-  
+
   const BitMap({super.key, required this.place});
 
   @override
@@ -240,6 +240,30 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
     );
   }
 
+  Widget backBtn() {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Container(
+        margin: const EdgeInsets.only(left: 10, top: 50),
+        child: IconButton(
+          onPressed: () => Navigator.pop(context),
+          style: const ButtonStyle(
+            alignment: Alignment.center,
+            backgroundColor: MaterialStatePropertyAll(ColorAssets.bduColor),
+            padding: MaterialStatePropertyAll(
+              EdgeInsets.all(5),
+            ),
+          ),
+          icon: const Icon(
+            Icons.arrow_back,
+            size: 25,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
   bool isExpanded = false;
 
   Future<void> showNearest(category) async {
@@ -428,6 +452,7 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
                 getMap(),
                 mapLayer(),
                 layerBtn(),
+                backBtn(),
                 nearestPlace(),
                 nearestPlaceBtn(),
                 _loadCurLoc ? smallLoadingSpinner() : curLocBtn(),
