@@ -29,7 +29,7 @@ class _SIMSLoginState extends State<SIMSLogin> {
   }
 
   // states
-  bool _isLoading = false;
+  bool _isLoading = true;
   String _error = "";
 
   void submitForm(context, simsProvider) async {
@@ -184,14 +184,31 @@ class _SIMSLoginState extends State<SIMSLogin> {
   }
 
   Widget loader() {
-    return const Center(
-      child: SizedBox(
-        width: 30,
-        height: 30,
-        child: CircularProgressIndicator(
-          backgroundColor: Colors.white,
-          color: ColorAssets.bduColor,
-        ),
+    return Center(
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10.0),
+            width: 50,
+            height: 50,
+            child: const CircularProgressIndicator(
+              backgroundColor: Colors.white,
+              color: ColorAssets.bduColor,
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(10),
+            child: const Text(
+              'For good reason, It may take a few seconds',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.clip,
+              style: TextStyle(
+                color: Colors.black87,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
