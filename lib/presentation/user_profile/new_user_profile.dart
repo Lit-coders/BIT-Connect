@@ -11,17 +11,17 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class BuildProfile extends StatefulWidget {
-   String? email;
-   String? password;
-   VoidCallback? toggleToLogin;
+  String? email;
+  String? password;
+  VoidCallback? toggleToLogin;
 
-   BuildProfile({
+  BuildProfile({
     super.key,
     required this.email,
     required this.password,
     required this.toggleToLogin,
   });
-   BuildProfile.personIcon({super.key});
+  BuildProfile.personIcon({super.key});
 
   @override
   State<BuildProfile> createState() => _BuildProfileState();
@@ -36,6 +36,8 @@ class _BuildProfileState extends State<BuildProfile> {
   final _yearController = TextEditingController();
 
   File? _ppPath;
+  String _ppUrl = "";
+  bool isNetworkImage = false;
   final _imgPicker = ImagePicker();
   @override
   void initState() {
@@ -43,25 +45,32 @@ class _BuildProfileState extends State<BuildProfile> {
     if (_currentUser != null) {
       _initUserData();
     }
-  }  
-  Future<void> _initUserData() async {
-  // _firstNameController.text = _currentUser!.displayName!.split(" ")[0];
-  // _lastNameController.text = _currentUser!.displayName!.split(" ")[1];
-  try {
-    var userDoc = await FirebaseFirestore.instance.collection("users").doc(_currentUser!.uid).get();
-    if (userDoc.exists) {
-      setState(() {
-        _firstNameController.text = userDoc.get("fName");
-        _lastNameController.text = userDoc.get("lName");
-        _deptController.text = userDoc.get("dept");
-        _yearController.text = userDoc.get("year");
-        _ppPath = File(userDoc.get("ppUrl"));
-      });
-    }
-  } catch (error) {
-    print("Error fetching user data: $error");
   }
-}
+
+  Future<void> _initUserData() async {
+    // _firstNameController.text = _currentUser!.displayName!.split(" ")[0];
+    // _lastNameController.text = _currentUser!.displayName!.split(" ")[1];
+    try {
+      var userDoc = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(_currentUser!.uid)
+          .get();
+      if (userDoc.exists) {
+        setState(() {
+          _firstNameController.text = userDoc.get("fName");
+          _lastNameController.text = userDoc.get("lName");
+          _deptController.text = userDoc.get("dept");
+          _yearController.text = userDoc.get("year");
+          _ppUrl = userDoc.get("ppUrl");
+          if (_ppUrl.isNotEmpty) {
+            isNetworkImage = true;
+          }
+        });
+      }
+    } catch (error) {
+      print("Error fetching user data: $error");
+    }
+  }
 
   @override
   void dispose() {
@@ -141,15 +150,27 @@ class _BuildProfileState extends State<BuildProfile> {
   }
 
   Widget selectedImage() {
-    return ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(100)),
-      child: Image.file(
-        _ppPath!.absolute,
-        fit: BoxFit.cover,
-        width: getWidth(context) * 1 / 3 + 20,
-        height: getWidth(context) * 1 / 3 + 20,
-      ),
-    );
+    if (isNetworkImage) {
+      return ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(100)),
+        child: Image.network(
+          _ppUrl,
+          fit: BoxFit.cover,
+          width: getWidth(context) * 1 / 3 + 20,
+          height: getWidth(context) * 1 / 3 + 20,
+        ),
+      );
+    } else {
+      return ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(100)),
+        child: Image.file(
+          _ppPath!.absolute,
+          fit: BoxFit.cover,
+          width: getWidth(context) * 1 / 3 + 20,
+          height: getWidth(context) * 1 / 3 + 20,
+        ),
+      );
+    }
   }
 
   Widget imgBtn() {
