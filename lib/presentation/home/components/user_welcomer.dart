@@ -50,15 +50,13 @@ class _UserWelcomerState extends State<UserWelcomer> {
       ),
       child: Center(
         child: ppUrl == ""
-            ? Text(
-                _currentUser!.email!
-                    .split('@')[0]
-                    .split(RegExp(r'[a-z]{3}'))[1]
-                    .substring(3),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+            ? const ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(100)),
+                child: Image(
+                  image: AssetImage('assets/icons/unknownuser.jpg'),
+                  fit: BoxFit.fill,
+                  height: 80,
+                  width: 80,
                 ),
               )
             : ClipRRect(
@@ -86,12 +84,16 @@ class _UserWelcomerState extends State<UserWelcomer> {
             children: [
               Text(
                 'Hi, ${data == null ? _currentUser!.email!.split('@')[0].split(RegExp(r'[a-z]{3}'))[1] : data['fName']}',
-                // 'Hi, 1308736',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                ),
               ),
               const Text(
                 "What do you want to explore?",
-                style: TextStyle(fontSize: 15),
+                style: TextStyle(
+                  fontSize: 15,
+                ),
               )
             ],
           )
