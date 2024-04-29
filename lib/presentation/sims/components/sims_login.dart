@@ -1,4 +1,5 @@
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
+import 'package:bit_connect/presentation/sims/api/sims_auth.dart';
 import 'package:bit_connect/presentation/sims/helpers/sims_helpers.dart';
 import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
 import 'package:bit_connect/searvices/helpers.dart';
@@ -13,16 +14,28 @@ class SIMSLogin extends StatelessWidget {
 
   const SIMSLogin({super.key});
 
-  static void submitForm(context) {
+  static void submitForm(context) async {
     final simsProvider = Provider.of<SIMSProvider>(context, listen: false);
 
     if (_form.currentState!.validate()) {
-      if (simsProvider.isUserLoggedInBefore) {
-        // pass login process
-      } else {
-        simsProvider.login(_usernameController.text, _passwordController.text);
+      // simsProvider.setIsLoading(true);
+      try {
+        final res =
+            await loginSIMS(_usernameController.text, _passwordController.text);
+        _passwordController.text = "logged in ";
+      } catch (error) {
+        print('error from sims login file: $error');
+      } finally {
+        // simsProvider.setIsLoading(false);
       }
+      // simsProvider.login(_usernameController.text, _passwordController.text);
     }
+  }
+
+  static Widget loader() {
+    return Container(
+      child: const Text('Loading ...'),
+    );
   }
 
   static Future<void> showSIMSLogin(context) async {
@@ -65,46 +78,48 @@ class SIMSLogin extends StatelessWidget {
                   ),
                 ],
               ),
-              content: Form(
-                key: _form,
-                child: Column(
-                  children: [
-                    InputField(
-                      validator: usernameValidator,
-                      controller: _usernameController,
-                      width: getWidth(context) * 2 / 3,
-                      hintText: 'username',
-                      isReadOnly: false,
-                      hasObscure: false,
-                      onChange: (value) {},
-                    ),
-                    InputField(
-                      validator: passwordValidator,
-                      controller: _passwordController,
-                      width: getWidth(context) * 2 / 3,
-                      hintText: 'Password',
-                      isReadOnly: false,
-                      hasObscure: true,
-                      onChange: (value) {},
-                    ),
-                    ElevatedButton(
-                      style: const ButtonStyle(
-                        backgroundColor:
-                            MaterialStatePropertyAll(ColorAssets.bduColor),
+              content: simsProvider.isLoading
+                  ? loader()
+                  : Form(
+                      key: _form,
+                      child: Column(
+                        children: [
+                          InputField(
+                            validator: usernameValidator,
+                            controller: _usernameController,
+                            width: getWidth(context) * 2 / 3,
+                            hintText: 'username',
+                            isReadOnly: false,
+                            hasObscure: false,
+                            onChange: (value) {},
+                          ),
+                          InputField(
+                            validator: passwordValidator,
+                            controller: _passwordController,
+                            width: getWidth(context) * 2 / 3,
+                            hintText: 'Password',
+                            isReadOnly: false,
+                            hasObscure: true,
+                            onChange: (value) {},
+                          ),
+                          ElevatedButton(
+                            style: const ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll(
+                                  ColorAssets.bduColor),
+                            ),
+                            onPressed: () => submitForm(context),
+                            child: const Text(
+                              'Login',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      onPressed: () => submitForm(context),
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
                     ),
-                  ],
-                ),
-              ),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -123,6 +138,8 @@ class SIMSLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center();
+    return const Scaffold(
+      backgroundColor: Color.fromARGB(255, 87, 172, 246),
+    );
   }
 }
