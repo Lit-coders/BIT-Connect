@@ -55,6 +55,7 @@ class _BuildProfileState extends State<BuildProfile> {
         _lastNameController.text = userDoc.get("lName");
         _deptController.text = userDoc.get("dept");
         _yearController.text = userDoc.get("year");
+        _ppPath = File(userDoc.get("ppUrl"));
       });
     }
   } catch (error) {
