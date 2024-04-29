@@ -55,11 +55,139 @@ class _SIMSLoginState extends State<SIMSLogin> {
     }
   }
 
+  Widget header() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20),
+      child: Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Icon(
+              Icons.login,
+              size: 20,
+            ),
+          ),
+          Text(
+            'Login',
+          ),
+          Expanded(
+            child: Text(
+              'BiT SIMS',
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget line(double width) {
+    return Container(
+      margin: const EdgeInsets.all(5.0),
+      color: Colors.black12,
+      height: 2.0,
+      width: width,
+    );
+  }
+
+  Widget form(SIMSProvider simsProvider) {
+    return Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: Form(
+        key: _form,
+        child: Column(
+          children: [
+            InputField(
+              validator: usernameValidator,
+              controller: _usernameController,
+              width: getWidth(context) * 2 / 3,
+              hintText: 'username',
+              isReadOnly: false,
+              hasObscure: false,
+              onChange: (value) {},
+            ),
+            InputField(
+              validator: passwordValidator,
+              controller: _passwordController,
+              width: getWidth(context) * 2 / 3,
+              hintText: 'Password',
+              isReadOnly: false,
+              hasObscure: true,
+              onChange: (value) {},
+            ),
+            line(getWidth(context) * 2 / 3 - 40),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: ElevatedButton(
+                style: const ButtonStyle(
+                  backgroundColor:
+                      MaterialStatePropertyAll(ColorAssets.bduColor),
+                ),
+                onPressed: () => submitForm(context, simsProvider),
+                child: Container(
+                  alignment: Alignment.center,
+                  width: getWidth(context) * 2 / 3 - 50,
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  line(85.0),
+                  const Text(
+                    'OR',
+                    style: TextStyle(
+                      color: Colors.black38,
+                    ),
+                  ),
+                  line(85.0),
+                ],
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () => print('Open on bit'),
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(Colors.transparent),
+                shadowColor: MaterialStatePropertyAll(Colors.transparent),
+              ),
+              child: Container(
+                alignment: Alignment.center,
+                width: getWidth(context) * 2 / 3 - 50,
+                child: const Text(
+                  'Open BiT SIMS',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget loader() {
     return const Center(
       child: SizedBox(
-        width: 20,
-        height: 20,
+        width: 40,
+        height: 40,
         child: CircularProgressIndicator(),
       ),
     );
@@ -81,101 +209,40 @@ class _SIMSLoginState extends State<SIMSLogin> {
 
     return Center(
       child: Container(
-        color: Colors.white,
         padding: const EdgeInsets.all(8.0),
-        width: getWidth(context) * 3 / 4 + 300,
-        height: getHeight(context) * 1 / 3,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20),
-                child: Row(
+        margin: const EdgeInsets.symmetric(horizontal: 18.0),
+        width: getWidth(context),
+        child: Card(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                header(),
+                Stack(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(right: 8.0),
-                      child: Icon(
-                        Icons.login,
-                        size: 20,
-                      ),
-                    ),
-                    Text(
-                      'Login',
-                    ),
-                    Expanded(
-                      child: Text(
-                        'BiT SIMS',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
+                    if (_isLoading) loader(),
+                    if (_error.isNotEmpty && !_isLoading) error(),
+                    if (!_isLoading && _error.isEmpty) form(simsProvider),
                   ],
                 ),
-              ),
-              Stack(
-                children: [
-                  if (_isLoading) loader(),
-                  if (_error.isNotEmpty && !_isLoading) error(),
-                  if (!_isLoading && _error.isEmpty)
-                    Form(
-                      key: _form,
-                      child: Column(
-                        children: [
-                          InputField(
-                            validator: usernameValidator,
-                            controller: _usernameController,
-                            width: getWidth(context) * 2 / 3,
-                            hintText: 'username',
-                            isReadOnly: false,
-                            hasObscure: false,
-                            onChange: (value) {},
-                          ),
-                          InputField(
-                            validator: passwordValidator,
-                            controller: _passwordController,
-                            width: getWidth(context) * 2 / 3,
-                            hintText: 'Password',
-                            isReadOnly: false,
-                            hasObscure: true,
-                            onChange: (value) {},
-                          ),
-                          ElevatedButton(
-                            style: const ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
-                                  ColorAssets.bduColor),
-                            ),
-                            onPressed: () => submitForm(context, simsProvider),
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                ],
-              ),
-              if (_error.isNotEmpty)
-                TextButton(
-                  onPressed: () => setState(() {
-                    _error = "";
-                  }),
-                  child: const Text('try again'),
+                if (_error.isNotEmpty)
+                  TextButton(
+                    onPressed: () => setState(() {
+                      _error = "";
+                    }),
+                    child: const Text('try again'),
+                  ),
+                Container(
+                  alignment: Alignment.bottomRight,
+                  margin: const EdgeInsets.only(right: 8),
+                  child: TextButton(
+                    onPressed: () {
+                      simsProvider.cancelLogin();
+                    },
+                    child: const Text('Cancel'),
+                  ),
                 ),
-              TextButton(
-                onPressed: () {
-                  simsProvider.cancelLogin();
-                },
-                child: const Text('Cancel'),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
