@@ -1,3 +1,4 @@
+import 'package:bit_connect/presentation/sims/components/status_color.dart';
 import 'package:bit_connect/presentation/sims/components/title.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -118,37 +119,12 @@ class _StatusGraphState extends State<StatusGraph> {
           LineChartBarData bar,
           int index,
         ) {
-          final Map<String, dynamic> dotStyle = getDotStyle(index);
+          final Map<String, dynamic> dotStyle = getStatusStyle(index, gpa);
           return FlDotCirclePainter(
             color: dotStyle['color'],
             radius: dotStyle['size'],
           );
         });
-  }
-
-  Map<String, dynamic> getDotStyle(int index) {
-    final average = (gpa[index] - 0) / (4 - 0);
-    if (average >= 0.8) {
-      return {
-        'color': Colors.green,
-        'size': 7.0,
-      };
-    } else if (average >= 0.6) {
-      return {
-        'color': Colors.yellow,
-        'size': 6.0,
-      };
-    } else if (average >= 0.4) {
-      return {
-        'color': Colors.orange,
-        'size': 5.0,
-      };
-    } else {
-      return {
-        'color': Colors.red,
-        'size': 6.5,
-      };
-    }
   }
 
   @override
