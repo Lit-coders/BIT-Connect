@@ -142,6 +142,48 @@ class _StatusGraphState extends State<StatusGraph> {
     );
   }
 
+  FlDotData flDotData() {
+    return FlDotData(
+        show: true,
+        getDotPainter: (
+          FlSpot spot,
+          double xPercentage,
+          LineChartBarData bar,
+          int index,
+        ) {
+          final Map<String, dynamic> dotStyle = getDotStyle(index);
+          return FlDotCirclePainter(
+            color: dotStyle['color'],
+            radius: dotStyle['size'],
+          );
+        });
+  }
+
+  Map<String, dynamic> getDotStyle(int index) {
+    final average = (gpa[index] - 0) / (4 - 0);
+    if (average >= 0.8) {
+      return {
+        'color': Colors.green,
+        'size': 7.0,
+      };
+    } else if (average >= 0.6) {
+      return {
+        'color': Colors.yellow,
+        'size': 6.0,
+      };
+    } else if (average >= 0.4) {
+      return {
+        'color': Colors.orange,
+        'size': 5.0,
+      };
+    } else {
+      return {
+        'color': Colors.red,
+        'size': 6.5,
+      };
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -155,7 +197,7 @@ class _StatusGraphState extends State<StatusGraph> {
                 padding: const EdgeInsets.only(right: 20, top: 20),
                 height: getWidth(context),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(31, 162, 0, 255),
+                  color: const Color.fromARGB(31, 30, 0, 255),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
@@ -169,7 +211,9 @@ class _StatusGraphState extends State<StatusGraph> {
                         rightTitles: const AxisTitles(
                           sideTitles: SideTitles(showTitles: false),
                         ),
-                        topTitles: const AxisTitles(),
+                        topTitles: const AxisTitles(
+                          sideTitles: SideTitles(showTitles: false),
+                        ),
                       ),
                       lineBarsData: [
                         LineChartBarData(
@@ -183,7 +227,7 @@ class _StatusGraphState extends State<StatusGraph> {
                           color: Colors.blue,
                           barWidth: 4,
                           isStrokeCapRound: true,
-                          belowBarData: BarAreaData(show: true),
+                          dotData: flDotData(),
                         ),
                       ],
                       minX: 0,
@@ -191,6 +235,7 @@ class _StatusGraphState extends State<StatusGraph> {
                       minY: 0,
                       maxY: 4,
                     ),
+                    duration: const Duration(seconds: 5),
                   ),
                 ),
               ),
