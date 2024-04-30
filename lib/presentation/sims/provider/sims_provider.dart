@@ -1,3 +1,4 @@
+import 'package:bit_connect/presentation/sims/model/general_status.dart';
 import 'package:bit_connect/presentation/sims/model/sims_std.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,6 +10,8 @@ class SIMSProvider extends ChangeNotifier {
   bool _isStatusWithLogin = true;
 
   Student? _loggedInStd;
+
+  List<GeneralStatus> _generalStatus = [];
 
   void setPreviousIndex(int index) {
     _previousIndex = index;
@@ -35,11 +38,17 @@ class SIMSProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setGeneralStatus(List<GeneralStatus> generalStatus) {
+    _generalStatus = generalStatus;
+  }
+
   int get previousIndex => _previousIndex;
   bool get isLoginCanceled => _isLoginCanceled;
   bool get isUserLoggedInBefore => _isUserLoggedInBefore;
   bool get isStatusWithLogin => _isStatusWithLogin;
   Student? get loggedInStd => _loggedInStd;
+
+  List<GeneralStatus> get generalStatus => _generalStatus;
 
   void cancelLogin() {
     _isLoginCanceled = true;
