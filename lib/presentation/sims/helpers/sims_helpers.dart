@@ -1,10 +1,23 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+// shared preference
 Future<void> initializeLoginPreference(simsProvider) async {
   final loginPre = await SharedPreferences.getInstance();
   final isLoggedIn = loginPre.containsKey('simsUsername') &&
       loginPre.containsKey('simsPassword');
   simsProvider.setIsUserAlreadyLoggedIn(isLoggedIn);
+}
+
+Future<Map<String, dynamic>?> getStudentData() async {
+  final SharedPreferences studentPre = await SharedPreferences.getInstance();
+  final simsUsername = studentPre.getString('simsUsername');
+  final simsToken = studentPre.getString('simsToke');
+  final simsStdName = studentPre.getString('simsStdName');
+  return {
+    'username': simsUsername,
+    'toke': simsToken,
+    'fullName': simsStdName,
+  };
 }
 
 String? usernameValidator(String? username) {
