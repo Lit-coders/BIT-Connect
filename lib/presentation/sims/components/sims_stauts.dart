@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bit_connect/presentation/sims/components/status_table.dart';
 import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,9 +23,9 @@ class _SIMSStatusState extends State<SIMSStatus> {
   Widget build(BuildContext context) {
     return Consumer<SIMSProvider>(builder: (context, simsProvider, child) {
       final std = simsProvider.loggedInStd;
-      return Scaffold(
+      return const Scaffold(
         body: Center(
-          child: Text('Welcome, ${std!.fullName}'),
+          child: StatusTable(),
         ),
       );
     });
