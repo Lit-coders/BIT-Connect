@@ -274,8 +274,6 @@ class _SIMSLoginState extends State<SIMSLogin> {
   @override
   Widget build(BuildContext context) {
     return Consumer<SIMSProvider>(builder: (context, simsProvider, child) {
-      initializeLoginPreference(simsProvider);
-      if (simsProvider.isUserLoggedInBefore) {}
       return Scaffold(
         body: Center(
           child: showSIMSLogin(context, simsProvider),
