@@ -1,3 +1,4 @@
+import 'package:bit_connect/presentation/sims/components/line.dart';
 import 'package:flutter/material.dart';
 
 class StatusTable extends StatefulWidget {
@@ -69,33 +70,55 @@ class _StatusTableState extends State<StatusTable> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: DataTable(
-          showBottomBorder: false,
-          horizontalMargin: 0,
-          columnSpacing: 6.0,
-          columns: status.keys.map((String key) {
-            return DataColumn(label: th(key, true, false));
-          }).toList(),
-          rows: List<DataRow>.generate(
-            status.values.first.length,
-            (index) => DataRow(
-              cells: status.keys.map((String key) {
-                return DataCell(
-                  th(
-                    status[key]![index],
-                    false,
-                    index == status.values.first.length - 1,
-                  ),
-                );
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              line(true, context),
+              const Text(
+                'Academic Summary',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 0, 33, 61),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              line(false, context)
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: DataTable(
+              showBottomBorder: false,
+              horizontalMargin: 0,
+              columnSpacing: 6.0,
+              columns: status.keys.map((String key) {
+                return DataColumn(label: th(key, true, false));
               }).toList(),
+              rows: List<DataRow>.generate(
+                status.values.first.length,
+                (index) => DataRow(
+                  cells: status.keys.map((String key) {
+                    return DataCell(
+                      th(
+                        status[key]![index],
+                        false,
+                        index == status.values.first.length - 1,
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
             ),
           ),
         ),
-      ),
+      ],
     );
 
     // return Container(
