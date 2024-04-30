@@ -62,7 +62,7 @@ class _BuildProfileState extends State<BuildProfile> {
           _deptController.text = userDoc.get("dept");
           _yearController.text = userDoc.get("year");
           _ppUrl = userDoc.get("ppUrl");
-          if (_ppUrl.isNotEmpty) {
+          if (_ppUrl != '') {
             isNetworkImage = true;
           }
         });
@@ -235,7 +235,7 @@ class _BuildProfileState extends State<BuildProfile> {
     }
   }
 
-  Future<void> finishUpdatingProfile() async {
+      Future<void> finishUpdatingProfile() async {
     String status = "";
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
