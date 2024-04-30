@@ -58,7 +58,7 @@ class _BuildProfileState extends State<BuildProfile> {
       if (userDoc.exists) {
         setState(() {
           _firstNameController.text = userDoc.get("fName");
-          _lastNameController.text = userDoc.get("lName");
+          _lastNameController.text = userDoc.get("lLame");
           _deptController.text = userDoc.get("dept");
           _yearController.text = userDoc.get("year");
           _ppUrl = userDoc.get("ppUrl");
