@@ -28,7 +28,6 @@ Widget profileCard() {
     child: Container(
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.only(right: 10),
-      height: 30,
       decoration: BoxDecoration(
           color: Colors.blue,
           borderRadius: BorderRadius.circular(10),
