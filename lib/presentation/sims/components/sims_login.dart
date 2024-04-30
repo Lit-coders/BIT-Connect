@@ -258,7 +258,13 @@ class _SIMSLoginState extends State<SIMSLogin> {
                   margin: const EdgeInsets.only(right: 8),
                   child: TextButton(
                     onPressed: () {
-                      simsProvider.cancelLogin();
+                      if (_isLoading) {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      } else {
+                        simsProvider.cancelLogin();
+                      }
                     },
                     child: const Text('Cancel'),
                   ),
