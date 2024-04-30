@@ -44,9 +44,14 @@ class _SIMSLoginState extends State<SIMSLogin> {
         final Map<String, dynamic> body = jsonDecode(response.body);
         final int statusCode = response.statusCode;
         if (statusCode == 200) {
-          print(response.headers);
+          final Map<String, dynamic> headers = response.headers;
+
           simsProvider.login(
-              _usernameController.text, _passwordController.text);
+            _usernameController.text,
+            body['studentName'],
+            _passwordController.text,
+            headers['authorization'],
+          );
         } else {
           if (body['error'].isNotEmpty) {
             setState(() {
