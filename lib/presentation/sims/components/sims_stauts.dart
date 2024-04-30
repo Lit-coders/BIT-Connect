@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bit_connect/presentation/sims/components/status_graph.dart';
 import 'package:bit_connect/presentation/sims/components/status_table.dart';
 import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,14 @@ class _SIMSStatusState extends State<SIMSStatus> {
     return Consumer<SIMSProvider>(builder: (context, simsProvider, child) {
       final std = simsProvider.loggedInStd;
       return const Scaffold(
-        body: Center(
-          child: StatusTable(),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              StatusTable(),
+              StatusGraph(),
+            ],
+          ),
         ),
       );
     });
