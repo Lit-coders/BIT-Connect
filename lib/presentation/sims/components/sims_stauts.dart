@@ -1,7 +1,6 @@
 import 'dart:async';
 
-import 'package:bit_connect/presentation/sims/components/status_graph.dart';
-import 'package:bit_connect/presentation/sims/components/status_table.dart';
+import 'package:bit_connect/presentation/sims/components/status_pie_chart.dart';
 import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,8 +28,9 @@ class _SIMSStatusState extends State<SIMSStatus> {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              StatusTable(),
-              StatusGraph(),
+              // StatusTable(),
+              // StatusGraph(),
+              StatusPiChart(),
             ],
           ),
         ),

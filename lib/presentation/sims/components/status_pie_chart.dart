@@ -37,17 +37,14 @@ class _StatusPiChartState extends State<StatusPiChart> {
   }
 
   List<PieChartSectionData> pieChartSection() {
-    List<List<dynamic>> timeGpa = calcTotalCgpa();
-
-    return List.generate(timeGpa[0].length, (index) {
-      final color = getStatusStyle(
-          index, timeGpa[0].map((e) => e / 100).toList())['color'];
+    return List.generate(gpa.length, (index) {
+      final color = getStatusStyle(index, gpa)['color'];
       return PieChartSectionData(
         color: color,
         radius: 120,
-        value: timeGpa[0][index],
+        value: gpa[index],
         badgeWidget: badge(
-          timeGpa[1][index],
+          time[index],
           color,
         ),
         badgePositionPercentageOffset: 1,
