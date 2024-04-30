@@ -1,16 +1,36 @@
+import 'package:bit_connect/presentation/sims/helpers/sims_helpers.dart';
 import 'package:flutter/material.dart';
 
 class SIMSStatus extends StatefulWidget {
-  bool isWebView;
-  SIMSStatus({super.key, required this.isWebView});
+  const SIMSStatus({super.key});
 
   @override
   State<SIMSStatus> createState() => _SIMSStatusState();
 }
 
 class _SIMSStatusState extends State<SIMSStatus> {
+  String? _username;
+  String? _token;
+  String? _fullName;
+
+  @override
+  void initState() async {
+    final loginData = await getStudentData();
+    setState(() {
+      _username = loginData!['username'];
+      _token = loginData['token'];
+      _fullName = loginData['fullName'];
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      body: Center(
+        child: Text('Welcome man of bit'),
+      ),
+    );
   }
 }
