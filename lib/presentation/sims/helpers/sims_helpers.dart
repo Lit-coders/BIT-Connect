@@ -9,10 +9,17 @@ Future<void> initializeLoginPreference(simsProvider) async {
 }
 
 // get current student
-Future<String> getLoggedInStd() async {
-  SharedPreferences stdRef = await SharedPreferences.getInstance();
-  final token = stdRef.getString('simsToken');
-  return token!;
+Future<List> getLoggedInStd() async {
+  try {
+    SharedPreferences stdRef = await SharedPreferences.getInstance();
+    final token = stdRef.getString('simsToken');
+    final username = stdRef.getString('simsUsername');
+    final fullName = stdRef.getString('simsFullName');
+    return [token, username, fullName];
+  } catch (e) {
+    print('logged in user: $e');
+  }
+  return [];
 }
 
 String? usernameValidator(String? username) {
