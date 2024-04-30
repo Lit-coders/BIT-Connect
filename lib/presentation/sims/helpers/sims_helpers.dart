@@ -8,18 +8,6 @@ Future<void> initializeLoginPreference(simsProvider) async {
   simsProvider.setIsUserAlreadyLoggedIn(isLoggedIn);
 }
 
-Future<Map<String, dynamic>?> getStudentData() async {
-  final SharedPreferences studentPre = await SharedPreferences.getInstance();
-  final simsUsername = studentPre.getString('simsUsername');
-  final simsToken = studentPre.getString('simsToke');
-  final simsStdName = studentPre.getString('simsStdName');
-  return {
-    'username': simsUsername,
-    'toke': simsToken,
-    'fullName': simsStdName,
-  };
-}
-
 String? usernameValidator(String? username) {
   if (username!.isEmpty) {
     return 'username is required!';
