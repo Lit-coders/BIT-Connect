@@ -11,39 +11,6 @@ class StatusGraph extends StatefulWidget {
 }
 
 class _StatusGraphState extends State<StatusGraph> {
-  final status = {
-    'Academic Year': [
-      '2020/2021',
-      '2020/2021',
-      '2020/2021',
-      '2020/2021',
-      '2020/2021',
-      '2020/2021'
-    ],
-    'Batch': ['1', '1', '1', '1', '1', '1'],
-    'Semester': ['I', "II", 'I', "II", 'I', "II"],
-    'Registration Date': [
-      '7/23/2021',
-      '10/8/2021',
-      '7/23/2021',
-      '10/8/2021',
-      '7/23/2021',
-      '10/8/2021'
-    ],
-    'Reg Condition': [
-      "Normal Load",
-      "Normal Load",
-      "Normal Load",
-      "Normal Load",
-      "Normal Load",
-      "Normal Load"
-    ],
-    'SGPA': ['1.2', '3.4', '1.2', '3.4', '1.2', '3.4'],
-    'CGPA': ['2.3', '2.5', '4.0', '2.3', '3.4', '2.5'],
-    'prevStatus': ['Pass', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass'],
-    'finalStatus': ['Pass', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass'],
-  };
-
   final List<double> gpa = [0, 2.3, 3.5, 2.8, 3.7, 4.0, 1.87];
   final List<String> time = [
     '20/20 i',
