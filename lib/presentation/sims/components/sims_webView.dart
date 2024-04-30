@@ -60,17 +60,28 @@ class _SIMSWebViewState extends State<SIMSWebView> {
     );
   }
 
-  Widget backButton() {
+  Widget backButton(SIMSProvider simsProvider) {
     return Align(
       alignment: Alignment.topLeft,
-      child: IconButton(
-        onPressed: () {},
-        style: const ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(Colors.white),
-          elevation: MaterialStatePropertyAll(2.6),
-        ),
-        icon: const Icon(
-          Icons.arrow_back,
+      child: Container(
+        padding: const EdgeInsets.all(0),
+        margin: const EdgeInsets.all(2),
+        decoration: const BoxDecoration(boxShadow: [
+          BoxShadow(
+            blurRadius: 18,
+            color: Colors.black26,
+            offset: Offset(-1, 1),
+          )
+        ]),
+        child: IconButton(
+          onPressed: () => simsProvider.setIsStatusWithLogin(true),
+          style: const ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(Colors.white),
+            elevation: MaterialStatePropertyAll(2),
+          ),
+          icon: const Icon(
+            Icons.arrow_back,
+          ),
         ),
       ),
     );
@@ -86,7 +97,7 @@ class _SIMSWebViewState extends State<SIMSWebView> {
           child: Stack(
             children: [
               bitWebView(),
-              backButton(),
+              backButton(simsProvider),
             ],
           ),
         );
