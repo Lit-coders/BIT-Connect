@@ -1,4 +1,4 @@
-import 'package:bit_connect/presentation/sims/components/line.dart';
+import 'package:bit_connect/presentation/sims/components/title.dart';
 import 'package:flutter/material.dart';
 
 class StatusTable extends StatefulWidget {
@@ -72,24 +72,7 @@ class _StatusTableState extends State<StatusTable> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              line(true, context),
-              const Text(
-                'Academic Summary',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 0, 33, 61),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              line(false, context)
-            ],
-          ),
-        ),
+        title(context, 'Tabulated Academic Summary'),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: SingleChildScrollView(
