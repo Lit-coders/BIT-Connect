@@ -13,23 +13,26 @@ class _SIMSStatusState extends State<SIMSStatus> {
   String? _token;
   String? _fullName;
 
-  @override
-  void initState() async {
-    final loginData = await getStudentData();
-    setState(() {
-      _username = loginData!['username'];
-      _token = loginData['token'];
-      _fullName = loginData['fullName'];
-    });
-
-    super.initState();
+  Future<void> initializeLoginData() async {
+    try {
+      final loginData = await getStudentData();
+      setState(() {
+        _username = loginData!['username'];
+        _token = loginData['token'];
+        _fullName = loginData['fullName'];
+      });
+    } catch (e) {
+      //
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    initializeLoginData();
+
+    return Scaffold(
       body: Center(
-        child: Text('Welcome man of bit'),
+        child: Text('Welcome, $_token'),
       ),
     );
   }
