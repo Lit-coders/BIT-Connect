@@ -8,6 +8,13 @@ Future<void> initializeLoginPreference(simsProvider) async {
   simsProvider.setIsUserAlreadyLoggedIn(isLoggedIn);
 }
 
+// get current student
+Future<String> getLoggedInStd() async {
+  SharedPreferences stdRef = await SharedPreferences.getInstance();
+  final token = stdRef.getString('simsToken');
+  return token!;
+}
+
 String? usernameValidator(String? username) {
   if (username!.isEmpty) {
     return 'username is required!';
