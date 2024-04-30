@@ -11,38 +11,17 @@ class StatusTable extends StatefulWidget {
 }
 
 class _StatusTableState extends State<StatusTable> {
-  final status = {
-    'Academic Year': [
-      '2020/2021',
-      '2020/2021',
-      '2020/2021',
-      '2020/2021',
-      '2020/2021',
-      '2020/2021'
-    ],
-    'Batch': ['1', '1', '1', '1', '1', '1'],
-    'Semester': ['I', "II", 'I', "II", 'I', "II"],
-    'Registration Date': [
-      '7/23/2021',
-      '10/8/2021',
-      '7/23/2021',
-      '10/8/2021',
-      '7/23/2021',
-      '10/8/2021'
-    ],
-    'Reg Condition': [
-      "Normal Load",
-      "Normal Load",
-      "Normal Load",
-      "Normal Load",
-      "Normal Load",
-      "Normal Load"
-    ],
-    'SGPA': ['1.2', '3.4', '1.2', '3.4', '1.2', '3.4'],
-    'CGPA': ['2.3', '2.3', '2.3', '2.3', '2.3', '2.3'],
-    'prevStatus': ['Pass', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass'],
-    'finalStatus': ['Pass', 'Pass', 'Pass', 'Pass', 'Pass', 'Pass'],
-  };
+  final headers = [
+    'Academic Year',
+    'Batch',
+    'Semester',
+    'Registration Date',
+    'Reg Condition',
+    'SGPA',
+    'CGPA',
+    'prevStatus',
+    'finalStatus',
+  ];
 
   Widget th(value, isTh, isLast) {
     return Container(
@@ -72,6 +51,8 @@ class _StatusTableState extends State<StatusTable> {
 
   @override
   Widget build(BuildContext context) {
+    final List<GeneralStatus> status = widget.generalStatus;
+    print('list of general status: ${status.length}');
     return Column(
       children: [
         title(context, 'Tabulated Academic Summary'),
@@ -83,57 +64,30 @@ class _StatusTableState extends State<StatusTable> {
               showBottomBorder: false,
               horizontalMargin: 0,
               columnSpacing: 6.0,
-              columns: status.keys.map((String key) {
-                return DataColumn(label: th(key, true, false));
+              columns: headers
+                  .map(
+                    (e) => DataColumn(
+                      label: th(e, true, false),
+                    ),
+                  )
+                  .toList(),
+              rows: status.map((gStatus) {
+                return DataRow(cells: [
+                  DataCell(Text(gStatus.academicYear)),
+                  DataCell(Text(gStatus.semester)),
+                  DataCell(Text(gStatus.batch)),
+                  DataCell(Text(gStatus.regDate)),
+                  DataCell(Text(gStatus.regCondition)),
+                  DataCell(Text(gStatus.sGpa)),
+                  DataCell(Text(gStatus.cGpa.toString())),
+                  DataCell(Text(gStatus.prevStatus.toString())),
+                  DataCell(Text(gStatus.finalStatus.toString())),
+                ]);
               }).toList(),
-              rows: List<DataRow>.generate(
-                status.values.first.length,
-                (index) => DataRow(
-                  cells: status.keys.map((String key) {
-                    return DataCell(
-                      th(
-                        status[key]![index],
-                        false,
-                        index == status.values.first.length - 1,
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
             ),
           ),
         ),
       ],
     );
-
-    // return Container(
-    //   child: GridView.builder(
-    //     shrinkWrap: true,
-    //     scrollDirection: Axis.horizontal,
-    //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-    //       crossAxisCount: 1,
-    //     ),
-    //     itemCount: status.values.toList()[0].length + 1,
-    //     itemBuilder: (context, index) {
-    //       return ListView.builder(
-    //         shrinkWrap: true,
-    //         itemCount: status.values.toList()[0].length + 1,
-    //         itemBuilder: (context, index) {
-    //           if (index == 0) {
-    //             return Row(
-    //               children: status.keys.map((key) => th(key)).toList(),
-    //             );
-    //           }
-
-    //           return Row(
-    //             children: status.keys.map((String key) {
-    //               return th(status[key]![index - 1]);
-    //             }).toList(),
-    //           );
-    //         },
-    //       );
-    //     },
-    //   ),
-    // );
   }
 }
