@@ -12,6 +12,8 @@ class SIMSProvider extends ChangeNotifier {
   Student? _loggedInStd;
 
   List<GeneralStatus> _generalStatus = [];
+  bool _isLoading = false;
+  String _error = "";
 
   void setPreviousIndex(int index) {
     _previousIndex = index;
@@ -40,6 +42,17 @@ class SIMSProvider extends ChangeNotifier {
 
   void setGeneralStatus(List<GeneralStatus> generalStatus) {
     _generalStatus = generalStatus;
+    notifyListeners();
+  }
+
+  void setError(error) {
+    _error = error;
+    notifyListeners();
+  }
+
+  void setIsLoaeing(bool truthValue) {
+    _isLoading = truthValue;
+    notifyListeners();
   }
 
   int get previousIndex => _previousIndex;
@@ -47,6 +60,8 @@ class SIMSProvider extends ChangeNotifier {
   bool get isUserLoggedInBefore => _isUserLoggedInBefore;
   bool get isStatusWithLogin => _isStatusWithLogin;
   Student? get loggedInStd => _loggedInStd;
+  String get error => _error;
+  bool get isLoading => _isLoading;
 
   List<GeneralStatus> get generalStatus => _generalStatus;
 
