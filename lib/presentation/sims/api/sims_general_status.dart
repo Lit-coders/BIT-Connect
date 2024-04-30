@@ -11,7 +11,7 @@ Future<http.Response> fetchGeneralStatus() async {
       Uri.parse(GENERAL_STATUS_ENDPOINT),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': "Bearer ${token ?? ''}"
+        'Authorization': 'Bearer ${token ?? ''}',
       },
     );
 
