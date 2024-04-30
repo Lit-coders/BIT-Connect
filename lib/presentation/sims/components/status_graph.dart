@@ -1,11 +1,13 @@
 import 'package:bit_connect/presentation/sims/components/status_color.dart';
 import 'package:bit_connect/presentation/sims/components/title.dart';
+import 'package:bit_connect/presentation/sims/model/general_status.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class StatusGraph extends StatefulWidget {
-  const StatusGraph({super.key});
+  List<GeneralStatus> generalStatus;
+  StatusGraph({super.key, required this.generalStatus});
 
   @override
   State<StatusGraph> createState() => _StatusGraphState();

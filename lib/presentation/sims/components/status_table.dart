@@ -1,8 +1,10 @@
 import 'package:bit_connect/presentation/sims/components/title.dart';
+import 'package:bit_connect/presentation/sims/model/general_status.dart';
 import 'package:flutter/material.dart';
 
 class StatusTable extends StatefulWidget {
-  const StatusTable({super.key});
+  List<GeneralStatus> generalStatus;
+  StatusTable({super.key, required this.generalStatus});
 
   @override
   State<StatusTable> createState() => _StatusTableState();
