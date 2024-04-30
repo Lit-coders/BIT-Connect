@@ -1,5 +1,9 @@
-import 'package:bit_connect/presentation/sims/helpers/sims_helpers.dart';
+import 'dart:async';
+
+import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SIMSStatus extends StatefulWidget {
   const SIMSStatus({super.key});
@@ -8,32 +12,21 @@ class SIMSStatus extends StatefulWidget {
   State<SIMSStatus> createState() => _SIMSStatusState();
 }
 
+Future<void> clear() async {
+  final SharedPreferences x = await SharedPreferences.getInstance();
+  x.clear();
+}
+
 class _SIMSStatusState extends State<SIMSStatus> {
-  String? _username;
-  String? _token;
-  String? _fullName;
-
-  Future<void> initializeLoginData() async {
-    try {
-      final loginData = await getStudentData();
-      setState(() {
-        _username = loginData!['username'];
-        _token = loginData['token'];
-        _fullName = loginData['fullName'];
-      });
-    } catch (e) {
-      //
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    initializeLoginData();
-
-    return Scaffold(
-      body: Center(
-        child: Text('Welcome, $_token'),
-      ),
-    );
+    return Consumer<SIMSProvider>(builder: (context, simsProvider, child) {
+      final std = simsProvider.loggedInStd;
+      return Scaffold(
+        body: Center(
+          child: Text('Welcome, ${std!.fullName}'),
+        ),
+      );
+    });
   }
 }
