@@ -7,8 +7,7 @@ class SIMSProvider extends ChangeNotifier {
   bool _isLoginCanceled = false;
   Student? student;
   bool _isUserLoggedInBefore = true;
-  bool _isLoading = false;
-  String _error = "";
+  bool _isStatusWithLogin = true;
 
   void setPreviousIndex(int index) {
     _previousIndex = index;
@@ -25,20 +24,16 @@ class SIMSProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setIsLoading(bool truthValue) {
-    _isLoading = truthValue;
-    notifyListeners();
-  }
-
-  void setError(String newError) {
-    _error = newError;
+  void setIsStatusWithLogin(bool truthValue) {
+    _isStatusWithLogin = truthValue;
+    print('show status with login: $_isStatusWithLogin');
     notifyListeners();
   }
 
   int get previousIndex => _previousIndex;
   bool get isLoginCanceled => _isLoginCanceled;
   bool get isUserLoggedInBefore => _isUserLoggedInBefore;
-  bool get isLoading => _isLoading;
+  bool get isStatusWithLogin => _isStatusWithLogin;
 
   void cancelLogin() {
     _isLoginCanceled = true;
