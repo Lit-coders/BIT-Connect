@@ -1,13 +1,10 @@
-import 'dart:async';
-
 import 'package:bit_connect/presentation/sims/api/sims_general_status.dart';
 import 'package:bit_connect/presentation/sims/components/status_graph.dart';
 import 'package:bit_connect/presentation/sims/components/status_pie_chart.dart';
 import 'package:bit_connect/presentation/sims/components/status_table.dart';
-import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
+import 'package:bit_connect/presentation/sims/model/general_status.dart';
+import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SIMSStatus extends StatefulWidget {
   const SIMSStatus({super.key});
@@ -17,11 +14,6 @@ class SIMSStatus extends StatefulWidget {
 }
 
 class _SIMSStatusState extends State<SIMSStatus> {
-  Future<void> clear() async {
-    final SharedPreferences x = await SharedPreferences.getInstance();
-    x.clear();
-  }
-
   Widget profileCard(std) {
     return Align(
       alignment: Alignment.topRight,
@@ -49,6 +41,37 @@ class _SIMSStatusState extends State<SIMSStatus> {
     );
   }
 
+  Widget load() {
+    return Align(
+      child: Container(
+        color: Colors.blue.withOpacity(.3),
+        width: getWidth(context),
+        height: getHeight(context),
+        child: const Center(
+          child: SizedBox(
+            width: 22,
+            height: 22,
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget error(error) {
+    return Align(
+      child: SizedBox(
+        child: Center(
+          child: SizedBox(
+            width: 22,
+            height: 22,
+            child: Text(error),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     fetchGeneralStatus();
@@ -57,14 +80,26 @@ class _SIMSStatusState extends State<SIMSStatus> {
         children: [
           SingleChildScrollView(
             scrollDirection: Axis.vertical,
-            child: Consumer<SIMSProvider>(
-              builder: (context, value, child) => const Column(
-                children: [
-                  StatusTable(),
-                  StatusGraph(),
-                  StatusPiChart(),
-                ],
-              ),
+            child: FutureBuilder(
+              future: fetchGeneralStatus(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return load();
+                } else if (snapshot.hasError) {
+                  return error(snapshot.error);
+                } else if (snapshot.hasData) {
+                  final List<GeneralStatus> generalStatus =
+                      snapshot.requireData;
+                  return Column(
+                    children: [
+                      StatusTable(generalStatus: generalStatus),
+                      StatusGraph(generalStatus: generalStatus),
+                      StatusPiChart(generalStatus: generalStatus),
+                    ],
+                  );
+                }
+                return const Spacer();
+              },
             ),
           ),
           // profileCard(simsProvider.loggedInStd)
