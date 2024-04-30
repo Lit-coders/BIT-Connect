@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SIMSProvider extends ChangeNotifier {
   int _previousIndex = 0;
   bool _isLoginCanceled = false;
-  Student? student;
   bool _isUserLoggedInBefore = true;
   bool _isStatusWithLogin = true;
 
