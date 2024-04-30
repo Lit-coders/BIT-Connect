@@ -5,13 +5,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CafeMenu extends StatefulWidget {
   CafeMenu({super.key});
-  final List<String> tabTitle = ['M', "T", 'W', 'T', 'F', 'S', 'S'];
   @override
   State<CafeMenu> createState() => _CafeMenuState();
 }
 
 class _CafeMenuState extends State<CafeMenu> {
   late List<Map<String, dynamic>> _menuList;
+  final List<String> tabTitle = ['M', "T", 'W', 'T', 'F', 'S', 'S'];
 
   @override
   void initState() {
@@ -21,8 +21,9 @@ class _CafeMenuState extends State<CafeMenu> {
 
   Future<void> _fetchMenu() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('cafe').get();
-    querySnapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
-    setState(() {});
+    _menuList = querySnapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+    setState(() {
+    });
   }
 
   @override
@@ -63,13 +64,13 @@ class _CafeMenuState extends State<CafeMenu> {
               isScrollable: true,
               indicatorColor: ColorAssets.secondaryYellow,
               tabs: [
-                for (var menu in _menuList)
+                for (var title in tabTitle)
                 Tab(
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
                        Text(
-                        menu['day'],
+                        title,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: ColorAssets.bduColor,
@@ -98,7 +99,7 @@ class _CafeMenuState extends State<CafeMenu> {
             children: [
               for (var menu in _menuList)
               TabContent(
-                meal: menu['meal'],
+                breakfast: menu['breakfast'],
                 lunch: menu['lunch'],
                 dinner: menu['dinner'],
               ),
@@ -115,34 +116,34 @@ class TabContent extends StatelessWidget {
   // final String title;
   // final String image;
   // final String name;
-  final Map<String,String> meal;
+  final Map<String,String> breakfast;
   final Map<String,String> lunch;
   final Map<String,String> dinner;
 
 
   const TabContent({
     super.key,
-    required this.meal,
+    required this.breakfast,
     required this.lunch,
     required this.dinner,
   });
 
   @override
   Widget build(BuildContext context) {
-  List<Map<String,String>> noOfMeal = [meal,lunch,dinner];
+  List<Map<String,String>> noOfMeal = [breakfast,lunch,dinner];
     return Center(
       child: ListView(children: [
+        for (var meal in noOfMeal) 
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            for (var meal in noOfMeal)
             Text(meal['title']!, style: const TextStyle(fontSize: 24)),
             const SizedBox(height: 16),
-            Image.asset(meal['image']!,
+            Image.network(meal['image']!,
                 width: 380, height: 200), // Use your own image assets
             const SizedBox(height: 16),
             Text(meal['name']!, style: const TextStyle(fontSize: 18)),
-                      ],
+          ],
         ),
       ]),
     );
