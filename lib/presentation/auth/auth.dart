@@ -49,6 +49,7 @@ class _AuthState extends State<Auth> {
               email: _signUpEmail!,
               password: _signUpPass!,
               toggleToLogin: toggleAuthScreens,
+              isFirstTime: true,
             );
           }
         } else {

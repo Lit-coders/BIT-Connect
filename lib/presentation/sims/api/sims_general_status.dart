@@ -1,14 +1,19 @@
 import 'dart:convert';
 
 import 'package:bit_connect/presentation/sims/model/general_status.dart';
+import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
 import 'package:bit_connect/utils/constants/api_constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<List<GeneralStatus>> fetchGeneralStatus() async {
+Future<List<GeneralStatus>> fetchGeneralStatus(context) async {
+  final simsProvider = Provider.of<SIMSProvider>(context, listen: false);
   try {
     SharedPreferences stdPref = await SharedPreferences.getInstance();
     final token = stdPref.getString('simsToken');
+    final fullName = stdPref.getString('simsFullName');
+    simsProvider.setGStatusError("");
 
     final response = await http.get(
       Uri.parse(GENERAL_STATUS_ENDPOINT),
@@ -28,19 +33,21 @@ Future<List<GeneralStatus>> fetchGeneralStatus() async {
         return body['generalStatus'][index] as Map<String, dynamic>;
       });
 
-      return generateModel(castedBody);
+      return generateModel(castedBody, fullName!);
     } else if (body['error'].isNotEmpty) {
       if (body['error']['message'] == 'Unauthorized') {
         logout();
+      } else {
+        simsProvider.setGStatusError(body['error']['message']);
       }
-    } else {
-      throw Exception();
     }
 
     return [];
   } catch (e) {
-    rethrow;
+    simsProvider.setGStatusError('Something went wrong, please try again!');
   }
+
+  return [];
 }
 
 Future<void> logout() async {
@@ -48,7 +55,8 @@ Future<void> logout() async {
   x.clear();
 }
 
-List<GeneralStatus> generateModel(List<Map<String, dynamic>> body) {
+List<GeneralStatus> generateModel(
+    List<Map<String, dynamic>> body, String fullName) {
   List<GeneralStatus> generalStatus = List.generate(body.length, (index) {
     return GeneralStatus(
       academicYear: body[index]['academicyear'],
@@ -60,6 +68,7 @@ List<GeneralStatus> generateModel(List<Map<String, dynamic>> body) {
       cGpa: double.parse(body[index]['cgpa']),
       prevStatus: body[index]['prevStatus'],
       finalStatus: body[index]['finalStatus'],
+      fullName: fullName,
     );
   });
   return generalStatus;

@@ -15,11 +15,11 @@ class _UserWelcomerState extends State<UserWelcomer> {
   String _getGreeting() {
     var hour = DateTime.now().hour;
     if (hour < 12) {
-      return 'Good morning';
+      return 'Good Morning';
     } else if (hour < 17) {
-      return 'Good afternoon';
+      return 'Good Afternoon';
     } else {
-      return 'Good evening';
+      return 'Good Evening';
     }
   }
 
@@ -86,7 +86,7 @@ class _UserWelcomerState extends State<UserWelcomer> {
   Widget getAppBar(Map<String, dynamic>? data) {
     return Container(
       
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       width: getWidth(context),
       child: Row(
         children: [
@@ -100,6 +100,7 @@ class _UserWelcomerState extends State<UserWelcomer> {
                   fontWeight: FontWeight.bold,
                   fontSize: 22,
                 ),
+                overflow: TextOverflow.clip,
               ),
             
               const Text(
