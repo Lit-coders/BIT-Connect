@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
 import 'package:bit_connect/presentation/auth/components/loading_spinner.dart';
@@ -11,6 +10,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+// ignore: must_be_immutable
 class BuildProfile extends StatefulWidget {
   String? email;
   String? password;
@@ -288,7 +288,6 @@ class _BuildProfileState extends State<BuildProfile> {
           .child("profile_pic/$uid.jpg");
 
       UploadTask uploadTask = storageRef.putFile(_ppPath!);
-
       await uploadTask.whenComplete(() => null);
       String ppUrl = await storageRef.getDownloadURL();
       return ppUrl;

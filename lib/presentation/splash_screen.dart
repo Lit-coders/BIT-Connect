@@ -13,12 +13,11 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool _isFirstTime = true; // Assume it's the first time by default
+  bool _isFirstTime = true; 
 
   @override
   void initState() {
     super.initState();
-    // Initialize _isFirstTime based on SharedPreferences
     SharedPreferences.getInstance().then((prefs) {
       setState(() {
         _isFirstTime = prefs.getString('username') == null;
