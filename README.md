@@ -127,4 +127,12 @@ You're good to go 😊
     class="round-image" 
   />
 </a>
+
+![Avatar](https://picsum.photos/id/219/300/300#avatar)
+img[src$="#avatar"] {
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+  max-width: 50%;
+}
 </div>
