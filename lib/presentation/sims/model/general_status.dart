@@ -4,10 +4,10 @@ class GeneralStatus {
   String batch;
   String regDate;
   String regCondition;
-  String sGpa;
+  double sGpa;
   double cGpa;
-  double prevStatus;
-  double finalStatus;
+  String prevStatus;
+  String finalStatus;
 
   GeneralStatus({
     required this.academicYear,
