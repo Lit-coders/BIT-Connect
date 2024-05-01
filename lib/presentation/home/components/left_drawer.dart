@@ -20,7 +20,7 @@ class LeftDrawer extends StatelessWidget {
               child: const Text(
                 'BiT Connect',
                 style: TextStyle(
-                    color: Colors.white, fontSize: 24, fontFamily: 'Pacifico'),
+                    color: Colors.white, fontSize: 24, fontFamily: 'Poppins'),
               ),
             ),
           ),

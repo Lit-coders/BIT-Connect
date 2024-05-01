@@ -70,7 +70,7 @@ class _NewsOverviewState extends State<NewsOverview> {
                     ),
                   ),
                   Expanded(
-                    child: NewsList(newsList: newsList),
+                    child: NewsList(),
                   )
                 ],
               );

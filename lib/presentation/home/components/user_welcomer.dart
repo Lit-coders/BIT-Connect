@@ -51,6 +51,7 @@ class _UserWelcomerState extends State<UserWelcomer> {
 
   Widget getPP(String ppUrl) {
     return Container(
+      
       width: 60,
       height: 60,
       margin: const EdgeInsets.only(right: 10),
@@ -85,6 +86,7 @@ class _UserWelcomerState extends State<UserWelcomer> {
 
   Widget getAppBar(Map<String, dynamic>? data) {
     return Container(
+      
       padding: const EdgeInsets.all(8),
       width: getWidth(context),
       child: Row(
