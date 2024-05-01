@@ -2,6 +2,7 @@ import 'package:bit_connect/presentation/sims/components/title.dart';
 import 'package:bit_connect/presentation/sims/model/general_status.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class StatusTable extends StatefulWidget {
   List<GeneralStatus> generalStatus;
   StatusTable({super.key, required this.generalStatus});

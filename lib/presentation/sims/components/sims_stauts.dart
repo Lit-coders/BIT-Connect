@@ -16,6 +16,7 @@ class SIMSStatus extends StatefulWidget {
 }
 
 class _SIMSStatusState extends State<SIMSStatus> {
+  // ignore: unused_field
   bool _isRetrying = false;
   Widget profileCard(username) {
     return Align(
