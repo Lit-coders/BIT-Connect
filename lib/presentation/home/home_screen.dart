@@ -40,7 +40,12 @@ class _HomeState extends State<Home> {
           debugShowCheckedModeBanner: false,
           home: Scaffold(
             key: scaffoldKey,
-            appBar: appBarChooser(_contentIndex, context, scaffoldKey),
+            appBar: appBarChooser(
+                simsProvider.isLoginCanceled
+                    ? simsProvider.previousIndex
+                    : _contentIndex,
+                context,
+                scaffoldKey),
             backgroundColor: Colors.white,
             drawer: const LeftDrawer(),
             body: homeContents[simsProvider.isLoginCanceled
