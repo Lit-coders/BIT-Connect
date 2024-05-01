@@ -14,16 +14,16 @@ class StatusGraph extends StatefulWidget {
 }
 
 class _StatusGraphState extends State<StatusGraph> {
-  final List<double> gpa = [0, 2.3, 3.5, 2.8, 3.7, 4.0, 1.87];
-  final List<String> time = [
-    '20/20 i',
-    '20/20 I',
-    '20/20 II',
-    '20/21 I',
-    '20/21 II',
-    '20/22 I',
-    '20/22 II',
-  ];
+  final List<double> gpa = [];
+  final List<String> time = [];
+
+  void initializeStatus() {
+    final List<GeneralStatus> status = widget.generalStatus;
+    for (var i = 0; i < status.length; i++) {
+      gpa.add(status[i].cGpa);
+      time.add('${status[i].academicYear} ${status[i].semester}');
+    }
+  }
 
   FlGridData gridData() {
     return FlGridData(
@@ -131,6 +131,8 @@ class _StatusGraphState extends State<StatusGraph> {
 
   @override
   Widget build(BuildContext context) {
+    initializeStatus();
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
       child: SingleChildScrollView(
