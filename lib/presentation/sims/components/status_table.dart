@@ -78,7 +78,7 @@ class _StatusTableState extends State<StatusTable> {
                   DataCell(Text(gStatus.batch)),
                   DataCell(Text(gStatus.regDate)),
                   DataCell(Text(gStatus.regCondition)),
-                  DataCell(Text(gStatus.sGpa)),
+                  DataCell(Text(gStatus.sGpa.toString())),
                   DataCell(Text(gStatus.cGpa.toString())),
                   DataCell(Text(gStatus.prevStatus.toString())),
                   DataCell(Text(gStatus.finalStatus.toString())),
