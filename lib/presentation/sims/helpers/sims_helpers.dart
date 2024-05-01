@@ -17,7 +17,7 @@ Future<List> getLoggedInStd() async {
     final fullName = stdRef.getString('simsFullName');
     return [token, username, fullName];
   } catch (e) {
-    print('logged in user: $e');
+    //
   }
   return [];
 }
