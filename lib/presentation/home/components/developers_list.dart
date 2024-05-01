@@ -2,6 +2,7 @@ import 'package:bit_connect/presentation/sims/components/title.dart';
 import 'package:bit_connect/searvices/data/dev_profile.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DevList extends StatelessWidget {
   const DevList({super.key});
@@ -27,19 +28,31 @@ class DevList extends StatelessWidget {
     );
   }
 
-  Widget link(link, isG) {
+  Widget icon(url) {
+    return Image(
+      image: AssetImage(url),
+      width: 22,
+      height: 22,
+    );
+  }
+
+  Future<void> goto(url) async {
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Widget link(url, isG) {
     return isG
         ? IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.face,
-            ),
+            onPressed: () => goto(url),
+            icon: icon('assets/icons/linkedin.png'),
           )
         : IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.facebook,
-            ),
+            onPressed: () => goto(url),
+            icon: icon('assets/icons/github.png'),
           );
   }
 
@@ -48,8 +61,8 @@ class DevList extends StatelessWidget {
       padding: const EdgeInsets.all(0.0),
       child: Row(
         children: [
-          link(links[0], false),
-          link(links[1], true),
+          link(links[0], true),
+          link(links[1], false),
         ],
       ),
     );
@@ -92,7 +105,7 @@ class DevList extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           name(devName),
-          about(['abc.com', 'abc.com']),
+          about(links),
         ],
       ),
     );
