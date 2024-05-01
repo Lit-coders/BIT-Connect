@@ -2,7 +2,6 @@ import 'package:bit_connect/presentation/cafe_menu/cafe.dart';
 import 'package:bit_connect/presentation/home/components/developers_list.dart';
 import 'package:bit_connect/presentation/home/components/drawer_tile.dart';
 import 'package:bit_connect/presentation/home/home_screen.dart';
-import 'package:bit_connect/presentation/location/location_screen.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -54,15 +53,6 @@ class LeftDrawer extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => const CafeMenu())),
-                  }),
-          drawerTile(
-              "Location",
-              Icons.place,
-              () => {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Location())),
                   }),
           drawerTile(
               "Developers",
