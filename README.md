@@ -28,3 +28,35 @@ BiT Connect is your go-to app for navigating campus life at Bahir Dar University
 **5.** [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
 
 **6.** [Android Studio](https://developer.android.com/studio)
+
+## Project Setup ⚙️
+
+Want to add your project to the repo? We invite you to contribute.
+To start contributing, follow the below guidelines: 
+
+**1.** Fork [this](https://github.com/Lit-coders/BIT-Connect) repository.
+
+**2.** Open [VS Code](https://code.visualstudio.com/) and clone your forked copy of the project.
+
+```
+git clone https://github.com/Lit-coders/BIT-Connect.git
+```
+
+**3.** Navigate to the project directory **BiT-Connect**:
+
+```
+cd BiT-Connect
+```
+
+**4.** Run the following command to install the dependencies:
+
+```
+flutter pub get
+```
+**5.** Run the project:
+
+```
+flutter run
+```
+
+You're good to go 😊
