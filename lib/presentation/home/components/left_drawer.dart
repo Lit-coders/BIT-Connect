@@ -78,8 +78,8 @@ class LeftDrawer extends StatelessWidget {
               // Implement action for item 2
             },
           ),
-          
-          Exanded(child: Container()),
+
+          Expanded(child: Container()),
 
           Container(
             alignment: Alignment.center,
