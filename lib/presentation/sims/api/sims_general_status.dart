@@ -9,6 +9,7 @@ Future<List<GeneralStatus>> fetchGeneralStatus() async {
   try {
     SharedPreferences stdPref = await SharedPreferences.getInstance();
     final token = stdPref.getString('simsToken');
+    final fullName = stdPref.getString('simsFullName');
 
     final response = await http.get(
       Uri.parse(GENERAL_STATUS_ENDPOINT),
@@ -28,7 +29,7 @@ Future<List<GeneralStatus>> fetchGeneralStatus() async {
         return body['generalStatus'][index] as Map<String, dynamic>;
       });
 
-      return generateModel(castedBody);
+      return generateModel(castedBody, fullName!);
     } else if (body['error'].isNotEmpty) {
       if (body['error']['message'] == 'Unauthorized') {
         logout();
@@ -48,7 +49,8 @@ Future<void> logout() async {
   x.clear();
 }
 
-List<GeneralStatus> generateModel(List<Map<String, dynamic>> body) {
+List<GeneralStatus> generateModel(
+    List<Map<String, dynamic>> body, String fullName) {
   List<GeneralStatus> generalStatus = List.generate(body.length, (index) {
     return GeneralStatus(
       academicYear: body[index]['academicyear'],
@@ -60,6 +62,7 @@ List<GeneralStatus> generateModel(List<Map<String, dynamic>> body) {
       cGpa: double.parse(body[index]['cgpa']),
       prevStatus: body[index]['prevStatus'],
       finalStatus: body[index]['finalStatus'],
+      fullName: fullName,
     );
   });
   return generalStatus;
