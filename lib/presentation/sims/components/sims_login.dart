@@ -5,7 +5,6 @@ import 'package:bit_connect/presentation/sims/api/sims_auth.dart';
 import 'package:bit_connect/presentation/sims/components/loader.dart';
 import 'package:bit_connect/presentation/sims/helpers/sims_helpers.dart';
 import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
-import 'package:bit_connect/presentation/sims/sims.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
@@ -40,11 +39,27 @@ class _SIMSLoginState extends State<SIMSLogin> {
         _isLoading = true;
       });
       try {
-        final res =
+        final response =
             await loginSIMS(_usernameController.text, _passwordController.text);
-        final Map<String, dynamic> data = jsonDecode(res);
+        final Map<String, dynamic> body = jsonDecode(response.body);
+        final int statusCode = response.statusCode;
+        if (statusCode == 200) {
+          final Map<String, dynamic> headers = response.headers;
+
+          simsProvider.login(
+            _usernameController.text,
+            body['studentName'],
+            _passwordController.text,
+            headers['authorization'],
+          );
+        } else {
+          if (body['error'].isNotEmpty) {
+            setState(() {
+              _error = body['error']['message'];
+            });
+          }
+        }
       } catch (error) {
-        print('error from sims login file: $error');
         setState(() {
           _error = 'Something went wrong, Please try again!';
         });
@@ -53,7 +68,6 @@ class _SIMSLoginState extends State<SIMSLogin> {
           _isLoading = false;
         });
       }
-      // simsProvider.login(_usernameController.text, _passwordController.text);
     }
   }
 
@@ -161,11 +175,7 @@ class _SIMSLoginState extends State<SIMSLogin> {
               ),
             ),
             ElevatedButton(
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => SIMS(isWebView: true),
-                ),
-              ),
+              onPressed: () => simsProvider.setIsStatusWithLogin(false),
               style: const ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(Colors.transparent),
                 shadowColor: MaterialStatePropertyAll(Colors.transparent),
@@ -203,9 +213,7 @@ class _SIMSLoginState extends State<SIMSLogin> {
     );
   }
 
-  Widget showSIMSLogin(context) {
-    final simsProvider = Provider.of<SIMSProvider>(context, listen: false);
-
+  Widget showSIMSLogin(context, simsProvider) {
     return Center(
       child: Container(
         padding: const EdgeInsets.all(8.0),
@@ -255,7 +263,13 @@ class _SIMSLoginState extends State<SIMSLogin> {
                   margin: const EdgeInsets.only(right: 8),
                   child: TextButton(
                     onPressed: () {
-                      simsProvider.cancelLogin();
+                      if (_isLoading) {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      } else {
+                        simsProvider.cancelLogin();
+                      }
                     },
                     child: const Text('Cancel'),
                   ),
@@ -270,13 +284,12 @@ class _SIMSLoginState extends State<SIMSLogin> {
 
   @override
   Widget build(BuildContext context) {
-    final simsProvider = Provider.of<SIMSProvider>(context, listen: false);
-    initializeLoginPreference(simsProvider);
-
-    return Scaffold(
-      body: Center(
-        child: showSIMSLogin(context),
-      ),
-    );
+    return Consumer<SIMSProvider>(builder: (context, simsProvider, child) {
+      return Scaffold(
+        body: Center(
+          child: showSIMSLogin(context, simsProvider),
+        ),
+      );
+    });
   }
 }
