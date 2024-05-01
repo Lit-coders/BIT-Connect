@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
 import 'package:bit_connect/presentation/auth/components/loading_spinner.dart';
@@ -10,6 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+// ignore: must_be_immutable
 class BuildProfile extends StatefulWidget {
   String? email;
   String? password;
@@ -48,8 +48,6 @@ class _BuildProfileState extends State<BuildProfile> {
   }
 
   Future<void> _initUserData() async {
-    // _firstNameController.text = _currentUser!.displayName!.split(" ")[0];
-    // _lastNameController.text = _currentUser!.displayName!.split(" ")[1];
     try {
       var userDoc = await FirebaseFirestore.instance
           .collection("users")
@@ -235,7 +233,7 @@ class _BuildProfileState extends State<BuildProfile> {
     }
   }
 
-      Future<void> finishUpdatingProfile() async {
+  Future<void> finishUpdatingProfile() async {
     String status = "";
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
