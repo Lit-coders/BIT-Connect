@@ -1,18 +1,20 @@
 import 'dart:io';
-
 import 'package:bit_connect/presentation/auth/components/error_snack_bar.dart';
 import 'package:bit_connect/presentation/auth/components/input_field.dart';
 import 'package:bit_connect/presentation/auth/components/loading_spinner.dart';
 import 'package:bit_connect/searvices/helpers.dart';
+import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+// ignore: must_be_immutable
 class BuildProfile extends StatefulWidget {
   String? email;
   String? password;
+  bool isFirstTime;
   VoidCallback? toggleToLogin;
 
   BuildProfile({
@@ -20,8 +22,13 @@ class BuildProfile extends StatefulWidget {
     required this.email,
     required this.password,
     required this.toggleToLogin,
+    required this.isFirstTime,
   });
-  BuildProfile.personIcon({super.key});
+
+  BuildProfile.personIcon({
+    super.key,
+    required this.isFirstTime,
+  });
 
   @override
   State<BuildProfile> createState() => _BuildProfileState();
@@ -48,8 +55,6 @@ class _BuildProfileState extends State<BuildProfile> {
   }
 
   Future<void> _initUserData() async {
-    // _firstNameController.text = _currentUser!.displayName!.split(" ")[0];
-    // _lastNameController.text = _currentUser!.displayName!.split(" ")[1];
     try {
       var userDoc = await FirebaseFirestore.instance
           .collection("users")
@@ -62,13 +67,17 @@ class _BuildProfileState extends State<BuildProfile> {
           _deptController.text = userDoc.get("dept");
           _yearController.text = userDoc.get("year");
           _ppUrl = userDoc.get("ppUrl");
-          if (_ppUrl != '') {
+          if (_ppUrl != "") {
             isNetworkImage = true;
           }
         });
       }
     } catch (error) {
-      print("Error fetching user data: $error");
+      final snackBar = ErrorSnackBar(
+          content: "Unable to fetch user data, please check your connection!");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar.getSnackBar());
+      }
     }
   }
 
@@ -126,6 +135,7 @@ class _BuildProfileState extends State<BuildProfile> {
           await _imgPicker.pickImage(source: ImageSource.gallery);
       if (pickedFile != null) {
         setState(() {
+          isNetworkImage = false;
           _ppPath = File(pickedFile.path);
         });
       }
@@ -185,7 +195,9 @@ class _BuildProfileState extends State<BuildProfile> {
           ),
           shadowColor: MaterialStatePropertyAll(Colors.transparent)),
       child: Text(
-        _ppPath == null ? 'Upload Profile Picture' : 'Change Profile Picture',
+        _ppPath == null && _ppUrl == ""
+            ? 'Upload Profile Picture'
+            : 'Change Profile Picture',
         style: const TextStyle(color: Colors.blue),
       ),
     );
@@ -235,7 +247,7 @@ class _BuildProfileState extends State<BuildProfile> {
     }
   }
 
-      Future<void> finishUpdatingProfile() async {
+  Future<void> finishUpdatingProfile() async {
     String status = "";
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
@@ -260,7 +272,7 @@ class _BuildProfileState extends State<BuildProfile> {
       }
 
       // sign in and go to home
-      if (status == 'success') {
+      if (status == 'success' && widget.isFirstTime) {
         singIn();
       }
     }
@@ -270,10 +282,12 @@ class _BuildProfileState extends State<BuildProfile> {
     LoadingSpinner.load(context);
     try {
       final uid = _currentUser!.uid;
-      final Reference storageRef =
-          FirebaseStorage.instance.ref().child("profile_pic/$uid.jpg");
-      UploadTask uploadTask = storageRef.putFile(_ppPath!);
+      final Reference storageRef = FirebaseStorage.instanceFor(
+              bucket: "gs://bit-connect-7569f.appspot.com")
+          .ref()
+          .child("profile_pic/$uid.jpg");
 
+      UploadTask uploadTask = storageRef.putFile(_ppPath!);
       await uploadTask.whenComplete(() => null);
       String ppUrl = await storageRef.getDownloadURL();
       return ppUrl;
@@ -310,33 +324,53 @@ class _BuildProfileState extends State<BuildProfile> {
       appBar: PreferredSize(
         preferredSize: Size(getWidth(context), 70),
         child: AppBar(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(10))),
-          backgroundColor: Colors.blue[100],
-          title: const Text(
-            "Build Your Profile",
-            style: TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          actions: [
-            OutlinedButton(
-              onPressed: () => singIn(),
-              style: const ButtonStyle(
-                side: MaterialStatePropertyAll(
-                  BorderSide(
-                    color: Colors.blue,
+          leading: IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: const Icon(
+                Icons.arrow_back,
+                color: ColorAssets.bduColor,
+                size: 28,
+              )),
+          title: widget.isFirstTime
+              ? const Text(
+                  "Build Your Profile",
+                  style: TextStyle(
+                    color: Colors.blueGrey,
+                  ),
+                )
+              : const Text(
+                  "Update Your Profile",
+                  style: TextStyle(
+                    color: Colors.blueGrey,
                   ),
                 ),
-              ),
-              child: const Text(
-                "skip",
-                style: TextStyle(
-                  color: Colors.blue,
-                ),
-              ),
-            )
+          actions: [
+            !widget.isFirstTime
+                ? const SizedBox()
+                : GestureDetector(
+                    onTap: () => singIn(),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: ColorAssets.bduColor,
+                        ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                      ),
+                      margin: const EdgeInsets.only(right: 15),
+                      child: const Padding(
+                        padding: EdgeInsets.only(
+                            top: 5, bottom: 5, right: 10, left: 10),
+                        child: Text(
+                          "Skip",
+                          style: TextStyle(
+                            color: ColorAssets.bduColor,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
           ],
         ),
       ),
@@ -356,7 +390,9 @@ class _BuildProfileState extends State<BuildProfile> {
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(100))),
                 child: Center(
-                  child: _ppPath == null ? iconButton() : selectedImage(),
+                  child: _ppPath == null && _ppUrl == ""
+                      ? iconButton()
+                      : selectedImage(),
                 ),
               ),
               imgBtn(),
@@ -415,7 +451,7 @@ class _BuildProfileState extends State<BuildProfile> {
                   width: getWidth(context) * 2 / 3,
                   padding: const EdgeInsets.all(10),
                   decoration: const BoxDecoration(
-                    color: Color.fromARGB(100, 110, 182, 255),
+                    color: ColorAssets.bduColor,
                     borderRadius: BorderRadius.all(
                       Radius.circular(10),
                     ),
@@ -424,9 +460,9 @@ class _BuildProfileState extends State<BuildProfile> {
                     child: Text(
                       'Finish',
                       style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
                     ),
                   ),
                 ),

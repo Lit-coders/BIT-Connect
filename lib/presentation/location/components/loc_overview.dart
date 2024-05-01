@@ -1,3 +1,4 @@
+import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:flutter/material.dart';
 
 class LocOverview extends StatelessWidget {
@@ -22,7 +23,10 @@ class LocOverview extends StatelessWidget {
             width: 50,
             height: 50,
             child: Center(
-              child: Icon(icon),
+              child: Icon(
+                icon,
+                color: ColorAssets.bduColor,
+              ),
             ),
           ),
           Padding(
@@ -30,9 +34,9 @@ class LocOverview extends StatelessWidget {
             child: Text(
               title,
               style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-              ),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                  color: Colors.black54),
             ),
           ),
         ],

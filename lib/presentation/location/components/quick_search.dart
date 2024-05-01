@@ -29,6 +29,7 @@ class QuickSearch {
                 place['name'],
                 style: const TextStyle(
                   fontSize: 16,
+                  fontFamily: 'Poppins',
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
@@ -71,9 +72,10 @@ class QuickSearch {
         if (search.searchResults.isEmpty && search.query.isNotEmpty) {
           return const Center(
             child: Text(
-              "No such place is found, Please try again!",
+              "No Such Place Found, Search Again",
               textAlign: TextAlign.center,
               style: TextStyle(
+                fontFamily: 'Poppins',
                 color: Colors.red,
                 fontSize: 16,
               ),
@@ -99,6 +101,7 @@ class QuickSearch {
           title: const Text(
             'Search places, facilities, ...',
             style: TextStyle(
+              fontFamily: 'Poppins',
               fontSize: 16,
             ),
           ),
@@ -120,7 +123,7 @@ class QuickSearch {
                   decoration: const InputDecoration(
                     filled: true,
                     fillColor: Color.fromARGB(25, 0, 0, 0),
-                    hintText: 'Search here ...',
+                    hintText: 'Search Here ...',
                     hintStyle: TextStyle(
                       color: Color.fromARGB(100, 0, 0, 0),
                     ),
@@ -131,7 +134,10 @@ class QuickSearch {
                     contentPadding: EdgeInsets.symmetric(horizontal: 10),
                   ),
                 ),
-                const Text('search results'),
+                const SizedBox(height: 10),
+                const Text('Search Results', style: TextStyle(
+                    fontFamily: 'Poppins',
+                  ),),
                 searchResult(),
               ],
             ),
@@ -140,9 +146,10 @@ class QuickSearch {
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: const Text(
-                'close',
+                'Close',
                 style: TextStyle(
                   fontSize: 17,
+                  fontFamily: 'Poppins',
                 ),
               ),
             )

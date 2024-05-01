@@ -3,7 +3,7 @@ import 'package:bit_connect/utils/constants/gpa_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:bit_connect/presentation/gpa/gpa_calculator.dart';
-import 'package:bit_connect/utils/constants/color_assets.dart';  
+import 'package:bit_connect/utils/constants/color_assets.dart';
 
 class GpaCalculatorScreen extends StatefulWidget {
   const GpaCalculatorScreen({super.key});
@@ -17,6 +17,12 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
     setState(() {
       courseData.remove(courseToRemove);
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    courseData.add({});
   }
 
   @override
@@ -68,6 +74,9 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                         SizedBox(width: 10),
                         Text(
                           'Add Course',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                          ),
                         )
                       ],
                     ),
@@ -77,7 +86,8 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
             ),
             const SizedBox(height: 40),
             Container(
-              padding : const EdgeInsets.symmetric(vertical: 8), // Added padding to the container (line 108-109
+              padding: const EdgeInsets.symmetric(
+                  vertical: 8), // Added padding to the container (line 108-109
               margin: const EdgeInsets.symmetric(horizontal: 5),
               width: double.infinity,
               decoration: BoxDecoration(
@@ -90,24 +100,35 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                           course['value'] == null || course['grade'] == null) ||
                       courseData.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                      SnackBar(
                         backgroundColor: Colors.white,
                         content: Container(
                           padding: const EdgeInsets.all(10),
-                          decoration : BoxDecoration(
-                            color : Colors.white,
-                            border : Border.all(color : Colors.red),
-                            borderRadius : BorderRadius.circular(10),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          child : const Row(children: [
-                            Icon(Icons.error, color: Colors.red,),
-                            SizedBox(width: 10,),
-                            Text('Please fill all the fields', style: TextStyle(color: Colors.red),),
-                          ],),
+                          child: const Row(
+                            children: [
+                              Icon(
+                                Icons.error,
+                                color: Colors.red,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Please fill all the fields',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontFamily: 'Poppins',
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         duration: const Duration(seconds: 3),
-                        
-              
                       ),
                     );
                   } else {
@@ -117,6 +138,9 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                         return AlertDialog(
                           title: const Text(
                             'Calculation Result',
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                            ),
                             textAlign: TextAlign.center,
                           ),
                           content: Column(
@@ -129,6 +153,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                               Text(
                                 'Your GPA is ${calculateGpa(courseData).toStringAsFixed(2)}',
                                 style: const TextStyle(
+                                  fontFamily: 'Poppins',
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -140,7 +165,12 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: const Text('OK'),
+                              child: const Text(
+                                'OK',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                ),
+                              ),
                             ),
                           ],
                         );
@@ -151,6 +181,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                 child: const Text(
                   'Calculate GPA',
                   style: TextStyle(
+                    fontFamily: 'Poppins',
                     fontSize: 18,
                     color: ColorAssets.white,
                   ),
@@ -198,7 +229,8 @@ class CourseInputRow extends StatelessWidget {
                         child: Container(
                           decoration: BoxDecoration(
                             border: Border(
-                              right: BorderSide(color: Colors.grey.shade400, width: 1),
+                              right: BorderSide(
+                                  color: Colors.grey.shade400, width: 1),
                             ),
                           ),
                           child: DropdownButtonFormField<String>(
@@ -251,8 +283,8 @@ class CourseInputRow extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           Container(
-            height : 40,
-            width : 40,
+            height: 40,
+            width: 40,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(width: 2, color: Colors.red),
@@ -261,7 +293,11 @@ class CourseInputRow extends StatelessWidget {
               onPressed: () {
                 onCourseRemoved();
               },
-              icon: const Icon(Icons.close, color: Colors.red,size: 20,),
+              icon: const Icon(
+                Icons.close,
+                color: Colors.red,
+                size: 20,
+              ),
             ),
           ),
         ],
