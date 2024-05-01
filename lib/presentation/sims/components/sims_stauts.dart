@@ -119,11 +119,9 @@ class _SIMSStatusState extends State<SIMSStatus> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return load();
           } else if (snapshot.hasError) {
-            print('Something went wrong, please try again!');
             return error(simsProvider.statusError);
           } else if (snapshot.hasData) {
             if (simsProvider.statusError.isNotEmpty) {
-              print("the error happens there, ");
               return error(simsProvider.statusError);
             } else if (snapshot.requireData.isNotEmpty) {
               final List<GeneralStatus> generalStatus = snapshot.requireData;

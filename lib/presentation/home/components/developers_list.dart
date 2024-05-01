@@ -112,7 +112,6 @@ class DevList extends StatelessWidget {
   }
 
   Widget devProfile(context, index, dev) {
-    print(dev);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
