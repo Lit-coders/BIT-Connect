@@ -79,7 +79,7 @@ You're good to go 😊
     src="https://avatars.githubusercontent.com/u/104998249?v=4" 
     height="100px" 
     width="100px" 
-    border-radius: 50% 
+    style="border-radius:50%"
   />
 </a>
 <a href="https://github.com/melat369">
