@@ -88,7 +88,7 @@ class _UserWelcomerState extends State<UserWelcomer> {
   Widget getAppBar(Map<String, dynamic>? data) {
     return Container(
       
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       width: getWidth(context),
       child: Row(
         children: [
