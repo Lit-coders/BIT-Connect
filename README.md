@@ -5,8 +5,10 @@ BiT Connect is an upcoming app designed exclusively for students at BDU. With a 
 - Access to BDU SIMS
 
 - Cafe menus
+
 - Indoor map services
-- Updates on recent events
+
+- Updates on recent events and news
 
 BiT Connect is your go-to app for navigating campus life at Bahir Dar University. Stay tuned as BiT Connect is currently in development and will be available on app stores soon.
 
