@@ -74,6 +74,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                         SizedBox(width: 10),
                         Text(
                           'Add Course',
+                          style: TextStyle(fontFamily: 'Poppins',),
                         )
                       ],
                     ),
@@ -121,6 +122,13 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                               ),
                             ],
                           ),
+                          child : const Row(children: [
+                            Icon(Icons.error, color: Colors.red,),
+                            SizedBox(width: 10,),
+                            Text('Please fill all the fields', style: TextStyle(color: Colors.red,
+                                  fontFamily: 'Poppins',
+                                ),),
+                          ],),
                         ),
                         duration: const Duration(seconds: 3),
                       ),
@@ -132,6 +140,9 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                         return AlertDialog(
                           title: const Text(
                             'Calculation Result',
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                            ),
                             textAlign: TextAlign.center,
                           ),
                           content: Column(
@@ -144,6 +155,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                               Text(
                                 'Your GPA is ${calculateGpa(courseData).toStringAsFixed(2)}',
                                 style: const TextStyle(
+                                  fontFamily: 'Poppins',
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -155,7 +167,9 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: const Text('OK'),
+                              child: const Text('OK',style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                ),),
                             ),
                           ],
                         );
@@ -166,6 +180,7 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                 child: const Text(
                   'Calculate GPA',
                   style: TextStyle(
+                    fontFamily: 'Poppins',
                     fontSize: 18,
                     color: ColorAssets.white,
                   ),

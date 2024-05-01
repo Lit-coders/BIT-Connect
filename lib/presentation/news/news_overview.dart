@@ -1,11 +1,12 @@
 import 'package:bit_connect/presentation/home/components/user_welcomer.dart';
-import 'package:bit_connect/presentation/news/components/news_list.dart';
 import 'package:bit_connect/presentation/news/components/news_slide.dart';
 import 'package:bit_connect/presentation/news/data/news_data.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:bit_connect/utils/constants/padding_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:bit_connect/presentation/news/components/news_list.dart';
+
 
 class NewsOverview extends StatefulWidget {
   const NewsOverview({super.key});
@@ -69,7 +70,7 @@ class _NewsOverviewState extends State<NewsOverview> {
                     ),
                   ),
                   Expanded(
-                    child: NewsList(newsList: newsList),
+                    child: NewsList(newsList: newsList,),
                   )
                 ],
               );

@@ -60,6 +60,7 @@ dependencies:
   webview_flutter: ^4.7.0
   fl_chart: ^0.67.0
   flutter_dotenv: ^5.1.0
+  url_launcher: ^6.2.6
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +87,7 @@ flutter:
   assets:
     - .env
     - assets/
+    - assets/devs/
     - assets/icons/
     - assets/stclubs/
     - assets/layers/
