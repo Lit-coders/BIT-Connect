@@ -271,7 +271,6 @@ class _BuildProfileState extends State<BuildProfile> {
       final Reference storageRef =
           FirebaseStorage.instance.ref().child("profile_pic/$uid.jpg");
       UploadTask uploadTask = storageRef.putFile(_ppPath!);
-
       await uploadTask.whenComplete(() => null);
       String ppUrl = await storageRef.getDownloadURL();
       return ppUrl;
