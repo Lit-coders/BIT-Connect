@@ -26,7 +26,7 @@ final List places = [
     ]
   },
   {
-    'category': 'dormitories',
+    'category': 'Dormitories',
     'places': [
       {
         'name': "Gafat Building: Male Dormitory",

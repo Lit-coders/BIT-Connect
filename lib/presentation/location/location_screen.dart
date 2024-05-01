@@ -40,6 +40,7 @@ class _LocationState extends State<Location> {
         child: Text(
           place['category'],
           style: const TextStyle(
+            fontFamily: 'Poppins',
             fontSize: 17,
             fontWeight: FontWeight.w500,
           ),
@@ -62,7 +63,7 @@ class _LocationState extends State<Location> {
             width: getWidth(context) - 40,
             height: 50,
             decoration: const BoxDecoration(
-              color: Color.fromARGB(25, 0, 0, 0),
+              color: Color.fromARGB(22, 147, 147, 147),
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
               ),
@@ -73,7 +74,8 @@ class _LocationState extends State<Location> {
                 Text(
                   "Search Places ...",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
+                    fontFamily: 'Poppins',
                     color: Colors.black54,
                   ),
                 ),
@@ -152,7 +154,7 @@ class _LocationState extends State<Location> {
                       ),
                     ),
                     Text(
-                      "On Map",
+                      "See On Map",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 17,
@@ -198,6 +200,7 @@ class _LocationState extends State<Location> {
                           const Text(
                             "Inside BiT",
                             style: TextStyle(
+                              fontFamily: 'Poppins',
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
                               color: Colors.blue,
@@ -226,11 +229,15 @@ class _LocationState extends State<Location> {
                                     color: ColorAssets.bduColor,
                                   ),
                                 ),
-                                Text(
-                                  "Open Map",
-                                  style: TextStyle(
-                                    color: ColorAssets.bduColor,
-                                    fontSize: 20,
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 6.0,horizontal: 3),
+                                  child: Text(
+                                    "Open Map",
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      color: ColorAssets.bduColor,
+                                      fontSize: 20,
+                                    ),
                                   ),
                                 ),
                               ],
