@@ -44,7 +44,7 @@ class _SIMSStatusState extends State<SIMSStatus> {
   Widget load() {
     return Align(
       child: Container(
-        color: Colors.blue.withOpacity(.3),
+        color: Colors.white,
         width: getWidth(context),
         height: getHeight(context),
         child: const Center(
@@ -65,7 +65,7 @@ class _SIMSStatusState extends State<SIMSStatus> {
           child: SizedBox(
             width: 22,
             height: 22,
-            child: Text(error),
+            child: Text(error.toString()),
           ),
         ),
       ),
@@ -75,6 +75,7 @@ class _SIMSStatusState extends State<SIMSStatus> {
   @override
   Widget build(BuildContext context) {
     fetchGeneralStatus();
+
     return Scaffold(
       body: Stack(
         children: [
@@ -86,10 +87,11 @@ class _SIMSStatusState extends State<SIMSStatus> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return load();
                 } else if (snapshot.hasError) {
-                  return error(snapshot.error);
+                  return error('something went wrong!');
                 } else if (snapshot.hasData) {
                   final List<GeneralStatus> generalStatus =
                       snapshot.requireData;
+                  print('num of status: ${generalStatus.length}');
                   return Column(
                     children: [
                       StatusTable(generalStatus: generalStatus),
