@@ -11,8 +11,10 @@ class NewsAge extends StatelessWidget {
       children: [
         Icon(
           Icons.timer,
+          size: 18,
           color: uploadTime == 'Just now' ? Colors.green : Colors.black38,
         ),
+        const SizedBox(width: 5),
         Text(
           uploadTime,
           style: TextStyle(
