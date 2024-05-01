@@ -72,7 +72,7 @@ You're good to go 😊
 
 ## Contributors👩‍💻👨‍💻 :
 
-
+<div align = "center">
 <a href="https://github.com/abkodes">
   <img 
     alt="Abiy's Top Languages" 
@@ -127,3 +127,4 @@ You're good to go 😊
     class="round-image" 
   />
 </a>
+</div>
