@@ -13,15 +13,19 @@ class LeftDrawer extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             decoration: const BoxDecoration(
-              color: ColorAssets.bduColor,
+              color: ColorAssets.white,
             ),
-            child: Container(
-              alignment: Alignment.centerLeft,
-              child: const Text(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('assets/logo.png'),
+
+                const Text(
                 'BiT Connect',
                 style: TextStyle(
                     color: Colors.white, fontSize: 24, fontFamily: 'Pacifico'),
-              ),
+                ),
+              ],
             ),
           ),
           ListTile(
@@ -74,6 +78,9 @@ class LeftDrawer extends StatelessWidget {
               // Implement action for item 2
             },
           ),
+
+          Expanded(child: Container()),
+
           Container(
             alignment: Alignment.center,
             child: SizedBox(
