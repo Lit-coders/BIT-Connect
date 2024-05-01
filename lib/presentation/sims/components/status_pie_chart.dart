@@ -14,28 +14,15 @@ class StatusPiChart extends StatefulWidget {
 }
 
 class _StatusPiChartState extends State<StatusPiChart> {
-  final List<double> gpa = [2.3, 3.5, 2.8, 3.7, 4.0, 1.87];
-  final List<String> time = [
-    '2021/22 I',
-    '2022/22 II',
-    '2022/23 I',
-    '2022/23 II',
-    '2023/24 I',
-    '2023/24 II',
-  ];
+  final List<double> gpa = [];
+  final List<String> time = [];
 
-  List<List<dynamic>> calcTotalCgpa() {
-    List<double> partGPA = [];
-    List<String> years = [];
-
-    for (var i = 0; i < gpa.length; i = i + 1) {
-      if (i % 2 == 0) {
-        partGPA.add((((gpa[i] + gpa[i + 1]) / 2)).round().toDouble());
-        years.add(time[i].split(" ")[0].toString());
-      }
+  void initializeStatus() {
+    final List<GeneralStatus> status = widget.generalStatus;
+    for (var i = 0; i < status.length; i++) {
+      gpa.add(status[i].cGpa);
+      time.add('${status[i].academicYear} ${status[i].semester}');
     }
-
-    return [partGPA, years];
   }
 
   List<PieChartSectionData> pieChartSection() {
@@ -87,6 +74,7 @@ class _StatusPiChartState extends State<StatusPiChart> {
 
   @override
   Widget build(BuildContext context) {
+    initializeStatus();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
       child: SingleChildScrollView(
