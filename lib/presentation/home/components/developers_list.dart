@@ -199,9 +199,9 @@ class DevList extends StatelessWidget {
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
         title: const Text(
-          'bit-connect',
-          style: TextStyle(fontSize: 13),
+          'BiT Connect',
         ),
+        centerTitle: true,
       ),
       body: Center(
         child: SingleChildScrollView(
