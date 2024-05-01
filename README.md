@@ -64,8 +64,8 @@ You're good to go 😊
 
 ## Images 📷📷 :
 
-<img src = "./images/splashscree.jpg">
-<img src = "./images/login.jpg">
-<img src = "./images/home.jpg">
-<img src = "./images/map.jpg">
-<img src = "./images/gpa.jpg">
+<a><img src = "./images/splashscree.jpg"></a>
+<a><img src = "./images/login.jpg"></a>
+<a><img src = "./images/home.jpg"></a>
+<a><img src = "./images/map.jpg"></a>
+<a><img src = "./images/gpa.jpg"></a>
