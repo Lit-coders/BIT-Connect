@@ -56,10 +56,15 @@ PreferredSize appBarChooser(int contentIdx, BuildContext context,
       preferredSize: Size(getWidth(context), 80),
       child: const LocationAppBar(),
     );
-  } else {
+  } else if (contentIdx == 3) {
     return PreferredSize(
       preferredSize: Size(getWidth(context), 50),
       child: customAppBar(context, scaffoldKey, "General Status"),
+    );
+  } else {
+    return PreferredSize(
+      preferredSize: Size(getWidth(context), 50),
+      child: customAppBar(context, scaffoldKey, ""),
     );
   }
 }
