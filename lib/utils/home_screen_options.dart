@@ -30,7 +30,7 @@ class HomePageOptions extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               child: Text(
                 name,
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                     color: ColorAssets.white),
