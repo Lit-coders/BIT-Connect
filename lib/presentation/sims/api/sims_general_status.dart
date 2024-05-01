@@ -17,17 +17,24 @@ Future<List<GeneralStatus>> fetchGeneralStatus() async {
         'Authorization': 'Bearer $token',
       },
     );
-    final Map<String, dynamic> body = jsonDecode(response.body);
+    final Map<String, dynamic> body =
+        jsonDecode(response.body) as Map<String, dynamic>;
+
     final int statusCode = response.statusCode;
 
     if (statusCode == 200) {
-      return generateModel(body['generalStatus']);
+      final List<Map<String, dynamic>> castedBody =
+          List.generate(body['generalStatus'].length, (index) {
+        return body['generalStatus'][index] as Map<String, dynamic>;
+      });
+
+      return generateModel(castedBody);
     } else if (body['error'].isNotEmpty) {
       if (body['error']['message'] == 'Unauthorized') {
         logout();
       }
     } else {
-      throw Exception(body['error']['message']);
+      throw Exception();
     }
 
     return [];
@@ -50,8 +57,8 @@ List<GeneralStatus> generateModel(List<Map<String, dynamic>> body) {
       batch: body[index]['year'],
       regDate: body[index]['registrationDate'],
       regCondition: body[index]['registrationCondition'],
-      sGpa: body[index]['sgpa'],
-      cGpa: body[index]['cgpa'],
+      sGpa: double.parse(body[index]['sgpa']),
+      cGpa: double.parse(body[index]['cgpa']),
       prevStatus: body[index]['prevStatus'],
       finalStatus: body[index]['finalStatus'],
     );
