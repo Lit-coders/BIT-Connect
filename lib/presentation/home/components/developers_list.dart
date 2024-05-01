@@ -7,7 +7,7 @@ class DevList extends StatelessWidget {
 
   Widget header(context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: title(context, 'Developers'),
     );
   }
@@ -137,9 +137,44 @@ class DevList extends StatelessWidget {
     );
   }
 
+  Widget yearOfDev(context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+      alignment: Alignment.bottomCenter,
+      child: Column(
+        children: [
+          Container(
+            width: getWidth(context),
+            height: 1,
+            color: Colors.black26,
+          ),
+          const Text(
+            '2016 E.C',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const Text(
+            '4th year software engineering students',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
+        title: const Text(
+          'bit-connect',
+          style: TextStyle(fontSize: 13),
+        ),
+      ),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -150,7 +185,8 @@ class DevList extends StatelessWidget {
                   children:
                       List.generate(6, (index) => devProfile(context, index)),
                 ),
-              )
+              ),
+              yearOfDev(context),
             ],
           ),
         ),
