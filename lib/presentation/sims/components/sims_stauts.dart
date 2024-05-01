@@ -14,7 +14,7 @@ class SIMSStatus extends StatefulWidget {
 }
 
 class _SIMSStatusState extends State<SIMSStatus> {
-  Widget profileCard(std) {
+  Widget profileCard(username) {
     return Align(
       alignment: Alignment.topRight,
       child: Container(
@@ -36,7 +36,7 @@ class _SIMSStatusState extends State<SIMSStatus> {
                 color: Colors.black38,
               )
             ]),
-        child: Text(std.fullName),
+        child: Text(username),
       ),
     );
   }
@@ -91,9 +91,9 @@ class _SIMSStatusState extends State<SIMSStatus> {
                 } else if (snapshot.hasData) {
                   final List<GeneralStatus> generalStatus =
                       snapshot.requireData;
-                  print('num of status: ${generalStatus.length}');
                   return Column(
                     children: [
+                      profileCard(generalStatus[0].fullName),
                       StatusTable(generalStatus: generalStatus),
                       StatusGraph(generalStatus: generalStatus),
                       StatusPiChart(generalStatus: generalStatus),
@@ -104,7 +104,6 @@ class _SIMSStatusState extends State<SIMSStatus> {
               },
             ),
           ),
-          // profileCard(simsProvider.loggedInStd)
         ],
       ),
     );
