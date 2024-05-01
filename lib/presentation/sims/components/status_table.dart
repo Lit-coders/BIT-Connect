@@ -56,7 +56,6 @@ class _StatusTableState extends State<StatusTable> {
   @override
   Widget build(BuildContext context) {
     final List<GeneralStatus> status = widget.generalStatus;
-    print('list of general status: ${status.length}');
     return Column(
       children: [
         title(context, 'Tabulated Academic Summary'),
