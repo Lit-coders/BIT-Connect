@@ -31,12 +31,12 @@ class NewsList extends StatelessWidget {
                   BoxShadow(
                     blurRadius: 30.0,
                     offset: Offset(-10, -10),
-                    color: Color.fromARGB(41, 201, 133, 163),
+                    color: Color.fromARGB(41, 198, 198, 198),
                   ),
                   BoxShadow(
                     blurRadius: 30.0,
                     offset: Offset(10, 10),
-                    color: Color.fromARGB(41, 153, 92, 119),
+                    color: Color.fromARGB(41, 198, 198, 198),
                   )
                 ]),
             margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
