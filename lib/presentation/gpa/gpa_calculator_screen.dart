@@ -74,7 +74,9 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                         SizedBox(width: 10),
                         Text(
                           'Add Course',
-                          style: TextStyle(fontFamily: 'Poppins',),
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                          ),
                         )
                       ],
                     ),
@@ -118,17 +120,13 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                               ),
                               Text(
                                 'Please fill all the fields',
-                                style: TextStyle(color: Colors.red),
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontFamily: 'Poppins',
+                                ),
                               ),
                             ],
                           ),
-                          child : const Row(children: [
-                            Icon(Icons.error, color: Colors.red,),
-                            SizedBox(width: 10,),
-                            Text('Please fill all the fields', style: TextStyle(color: Colors.red,
-                                  fontFamily: 'Poppins',
-                                ),),
-                          ],),
                         ),
                         duration: const Duration(seconds: 3),
                       ),
@@ -167,9 +165,12 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen> {
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: const Text('OK',style: TextStyle(
+                              child: const Text(
+                                'OK',
+                                style: TextStyle(
                                   fontFamily: 'Poppins',
-                                ),),
+                                ),
+                              ),
                             ),
                           ],
                         );
