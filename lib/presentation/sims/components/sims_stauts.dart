@@ -19,15 +19,30 @@ class _SIMSStatusState extends State<SIMSStatus> {
   bool _isRetrying = false;
   Widget profileCard(username) {
     return Align(
-      alignment: Alignment.topCenter,
+      alignment: Alignment.topLeft,
       child: Container(
         padding: const EdgeInsets.all(10),
-        margin: const EdgeInsets.only(right: 10),
+        margin: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
         decoration: BoxDecoration(
-          color: Colors.blue.withOpacity(0.4),
           borderRadius: BorderRadius.circular(10),
+          gradient: LinearGradient(
+            end: Alignment.centerRight,
+            begin: Alignment.centerLeft,
+            colors: [
+              Colors.blue.withOpacity(0.3),
+              Colors.blue.withOpacity(0.2),
+              Colors.blue.withOpacity(0.1),
+              Colors.blue.withOpacity(0),
+            ],
+          ),
         ),
-        child: Center(child: Text(username)),
+        child: Text(
+          username,
+          style: const TextStyle(
+            color: Colors.deepPurple,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
@@ -115,6 +130,7 @@ class _SIMSStatusState extends State<SIMSStatus> {
               return SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     profileCard(generalStatus[0].fullName),
                     StatusTable(generalStatus: generalStatus),
