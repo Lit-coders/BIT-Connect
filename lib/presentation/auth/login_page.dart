@@ -150,7 +150,8 @@ class _LoginState extends State<Login> {
                         onChange: (value) => clearError(),
                         controller: _passwordController,
                         width: getWidth(context),
-                        hintText: 'Enter Password',
+                        hintText: 'Enter Password' ,
+                        
                         isReadOnly: false,
                         isObscured: true,
                         hasObscure: true,
@@ -173,6 +174,7 @@ class _LoginState extends State<Login> {
                       child: Text(
                         'Login',
                         style: TextStyle(
+                          fontFamily: 'Poppins',
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -188,6 +190,7 @@ class _LoginState extends State<Login> {
                       const Text(
                         "Don't have an account?",
                         style: TextStyle(
+                          fontFamily: 'Poppins',
                           fontWeight: FontWeight.w400,
                           fontSize: 17,
                         ),
@@ -195,8 +198,9 @@ class _LoginState extends State<Login> {
                       TextButton(
                         onPressed: widget.toggleToSignUP,
                         child: const Text(
-                          "Sign UP",
+                          "Sign Up",
                           style: TextStyle(
+                            fontFamily: 'Poppins',
                             color: Color.fromARGB(255, 87, 172, 246),
                             decoration: TextDecoration.underline,
                             decorationColor: Color.fromARGB(255, 87, 172, 246),
