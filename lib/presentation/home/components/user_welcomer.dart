@@ -2,6 +2,7 @@ import 'package:bit_connect/searvices/helpers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class UserWelcomer extends StatefulWidget {
   const UserWelcomer({super.key});
@@ -12,6 +13,16 @@ class UserWelcomer extends StatefulWidget {
 
 class _UserWelcomerState extends State<UserWelcomer> {
   final _currentUser = FirebaseAuth.instance.currentUser;
+  String _getGreeting() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Good morning';
+    } else if (hour < 17) {
+      return 'Good afternoon';
+    } else {
+      return 'Good evening';
+    }
+  }
 
   Future<Map<String, dynamic>?> getUserData() async {
     try {
@@ -83,20 +94,22 @@ class _UserWelcomerState extends State<UserWelcomer> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Hi, ${data == null ? _currentUser!.email!.split('@')[0].split(RegExp(r'[a-z]{3}'))[1] : data['fName']}',
+                '${_getGreeting()}, ${data == null ? _currentUser!.email!.split('@')[0].split(RegExp(r'[a-z]{3}'))[1] : data['fName']}',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 22,
                 ),
               ),
+            
               const Text(
-                "What do you want to explore?",
+                "Feeling good today?",
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize:18 ,
+                  fontFamily: 'Poppins'
                 ),
               )
             ],
-          )
+          ),
         ],
       ),
     );
