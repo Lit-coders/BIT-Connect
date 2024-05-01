@@ -133,25 +133,32 @@ class TabContent extends StatelessWidget {
     return Center(
       child: ListView(children: [
         for (var meal in noOfMeal)
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(meal['value'] ?? "", style: const TextStyle(fontSize: 24)),
-              const SizedBox(height: 16),
-              Image.network(
-                meal['image'] ?? "",
-                height: 200,
-                width: 200,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return const Icon(
-                      Icons.error); // Placeholder for failed image
-                },
+          Container(
+            decoration:  BoxDecoration(
+              border: Border(
+                right: BorderSide(color: Colors.grey.shade400, width: 1),
               ),
-              const SizedBox(height: 16),
-              Text(meal['name'] ?? "", style: const TextStyle(fontSize: 18)),
-            ],
-          ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(meal['value'] ?? "", style: const TextStyle(fontSize: 24)),
+                const SizedBox(height: 16),
+                Image.network(
+                  meal['image'] ?? "",
+                  height: 200,
+                  width: 200,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(
+                        Icons.error); // Placeholder for failed image
+                  },
+                ),
+                const SizedBox(height: 16),
+                Text(meal['name'] ?? "", style: const TextStyle(fontSize: 18)),
+              ],
+            ),
+          )
       ]),
     );
   }
