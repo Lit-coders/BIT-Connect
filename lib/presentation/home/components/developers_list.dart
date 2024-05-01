@@ -112,7 +112,6 @@ class DevList extends StatelessWidget {
   }
 
   Widget devProfile(context, index, dev) {
-    print(dev);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -199,9 +198,9 @@ class DevList extends StatelessWidget {
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
         title: const Text(
-          'bit-connect',
-          style: TextStyle(fontSize: 13),
+          'BiT Connect',
         ),
+        centerTitle: true,
       ),
       body: Center(
         child: SingleChildScrollView(
