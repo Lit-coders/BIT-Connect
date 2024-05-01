@@ -2,6 +2,7 @@ import 'package:bit_connect/searvices/helpers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 class UserWelcomer extends StatefulWidget {
@@ -16,11 +17,11 @@ class _UserWelcomerState extends State<UserWelcomer> {
   String _getGreeting() {
     var hour = DateTime.now().hour;
     if (hour < 12) {
-      return 'Good morning';
+      return 'Good Morning';
     } else if (hour < 17) {
-      return 'Good afternoon';
+      return 'Good Afternoon';
     } else {
-      return 'Good evening';
+      return 'Good Evening';
     }
   }
 
@@ -87,7 +88,7 @@ class _UserWelcomerState extends State<UserWelcomer> {
   Widget getAppBar(Map<String, dynamic>? data) {
     return Container(
       
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       width: getWidth(context),
       child: Row(
         children: [
@@ -101,6 +102,7 @@ class _UserWelcomerState extends State<UserWelcomer> {
                   fontWeight: FontWeight.bold,
                   fontSize: 22,
                 ),
+                overflow: TextOverflow.clip,
               ),
             
               const Text(
