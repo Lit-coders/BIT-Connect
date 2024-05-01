@@ -30,7 +30,7 @@ class LocOverview extends StatelessWidget {
             child: Text(
               title,
               style: const TextStyle(
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w100,
                 fontSize: 16,
               ),
             ),
