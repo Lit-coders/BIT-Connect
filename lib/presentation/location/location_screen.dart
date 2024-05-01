@@ -152,7 +152,7 @@ class _LocationState extends State<Location> {
                       ),
                     ),
                     Text(
-                      "see on map",
+                      "On Map",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 17,
