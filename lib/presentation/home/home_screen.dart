@@ -3,8 +3,8 @@ import 'package:bit_connect/presentation/gpa/gpa_calculator_screen.dart';
 import 'package:bit_connect/presentation/home/components/left_drawer.dart';
 import 'package:bit_connect/presentation/location/location_screen.dart';
 import 'package:bit_connect/presentation/news/news_provider.dart';
-import 'package:bit_connect/presentation/sims/components/sims_login.dart';
 import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
+import 'package:bit_connect/presentation/sims/sims.dart';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
     const News(),
     const GpaCalculatorScreen(),
     const Location(),
-    const SIMSLogin(),
+    const SIMS(),
   ];
   int _contentIndex = 0;
 

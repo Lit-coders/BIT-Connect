@@ -5,10 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SIMSProvider extends ChangeNotifier {
   int _previousIndex = 0;
   bool _isLoginCanceled = false;
-  Student? student;
   bool _isUserLoggedInBefore = true;
-  bool _isLoading = false;
-  String _error = "";
+  bool _isStatusWithLogin = true;
+
+  Student? _loggedInStd;
 
   void setPreviousIndex(int index) {
     _previousIndex = index;
@@ -25,38 +25,57 @@ class SIMSProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setIsLoading(bool truthValue) {
-    _isLoading = truthValue;
+  void setIsStatusWithLogin(bool truthValue) {
+    _isStatusWithLogin = truthValue;
     notifyListeners();
   }
 
-  void setError(String newError) {
-    _error = newError;
+  void serLoggedInStd(Student student) {
+    _loggedInStd = student;
     notifyListeners();
   }
 
   int get previousIndex => _previousIndex;
   bool get isLoginCanceled => _isLoginCanceled;
   bool get isUserLoggedInBefore => _isUserLoggedInBefore;
-  bool get isLoading => _isLoading;
+  bool get isStatusWithLogin => _isStatusWithLogin;
+  Student? get loggedInStd => _loggedInStd;
 
   void cancelLogin() {
     _isLoginCanceled = true;
     notifyListeners();
   }
 
-  // manage Account
-  Future<void> login(username, password) async {
+  // save currently logged in account
+  Future<void> login(
+    username,
+    fullName,
+    password,
+    token,
+  ) async {
     try {
       SharedPreferences loginPref = await SharedPreferences.getInstance();
       loginPref.clear();
       loginPref.setString('simsUsername', username);
       loginPref.setString('simsPassword', password);
+      loginPref.setString('simsFullName', fullName);
+      loginPref.setString('simsToken', token);
+      initializeCurrentUser(loginPref);
       _isUserLoggedInBefore = true;
     } catch (e) {
       // let's hope the error will not happen next time
     } finally {
       notifyListeners();
     }
+  }
+
+  // retrieve currently logged in account
+  void initializeCurrentUser(SharedPreferences studentPre) {
+    final simsUsername = studentPre.getString('simsUsername');
+    final simsToken = studentPre.getString('simsToken');
+    final simsStdName = studentPre.getString('simsFullName');
+
+    _loggedInStd = Student(
+        username: simsUsername!, fullName: simsStdName!, token: simsToken!);
   }
 }
