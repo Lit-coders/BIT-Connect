@@ -192,7 +192,10 @@ class _LocationState extends State<Location> {
                 ),
                 child: Stack(
                   children: [
-                    searchBar(),
+                    Padding (
+                    padding : const EdgeInsets.only(top:10),
+                    child : searchBar(),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Row(
@@ -230,7 +233,7 @@ class _LocationState extends State<Location> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 6.0,horizontal: 3),
+                                  padding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 8.0),
                                   child: Text(
                                     "Open Map",
                                     style: TextStyle(

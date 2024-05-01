@@ -134,6 +134,7 @@ class QuickSearch {
                     contentPadding: EdgeInsets.symmetric(horizontal: 10),
                   ),
                 ),
+                const SizedBox(height: 10),
                 const Text('Search Results', style: TextStyle(
                     fontFamily: 'Poppins',
                   ),),
