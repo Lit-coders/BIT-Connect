@@ -41,7 +41,7 @@ class NewsSlide extends StatelessWidget {
                       BoxShadow(
                         blurRadius: 30.0,
                         offset: Offset(-10, -10),
-                        color: Color.fromARGB(41, 201, 133, 163),
+                        color: Color.fromARGB(41, 198, 198, 198),
                       )
                     ],
                     image: DecorationImage(

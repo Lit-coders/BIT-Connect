@@ -53,11 +53,11 @@ class _SignUpState extends State<SignUP> {
         _passwordController.text,
       );
     } on FirebaseAuthException catch (error) {
-      if (error.code == 'email-already-in-use') {
+      if (error.code == 'Email-already-in-use') {
         setState(() {
-          _signUpError = "The ID is already in use. Please sign in instead.";
+          _signUpError = "The ID is already in use. Please Sign In instead.";
         });
-      } else if (error.code == 'network-request-failed') {
+      } else if (error.code == 'Network-request-Failed') {
         ErrorSnackBar snackBar = ErrorSnackBar(
             content:
                 "You have lost connection. Please check your internet connection.");
@@ -87,7 +87,7 @@ class _SignUpState extends State<SignUP> {
 
   String? validateScannedId(value) {
     if (value == "") {
-      return "scan you id again please";
+      return "Scan your ID again, Please";
     } else {
       return null;
     }
@@ -96,9 +96,9 @@ class _SignUpState extends State<SignUP> {
   // validate password
   String? validatePassword(value) {
     if (value.isEmpty) {
-      return "password must not be empty!";
+      return "Password must not be empty!";
     } else if (value.length < 6) {
-      return "password length must be at least 6";
+      return "Password length must be at least 6";
     } else {
       return null;
     }
@@ -107,9 +107,9 @@ class _SignUpState extends State<SignUP> {
   // confirm password
   String? passwordConfirmationValidator(value) {
     if (value.isEmpty) {
-      return "please confirm you password!";
+      return "Please confirm you password!";
     } else if (_passwordController.text != value) {
-      return "please confirm password correctly!";
+      return "Please confirm password correctly!";
     } else {
       return null;
     }
@@ -121,7 +121,7 @@ class _SignUpState extends State<SignUP> {
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
         "#57ADF6",
-        "cancel",
+        "Cancel",
         true,
         ScanMode.BARCODE,
       );
@@ -274,6 +274,7 @@ class _SignUpState extends State<SignUP> {
                       child: Text(
                         'Sign Up',
                         style: TextStyle(
+                          fontFamily: 'Poppins',
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -289,6 +290,7 @@ class _SignUpState extends State<SignUP> {
                       const Text(
                         "Already have an account?",
                         style: TextStyle(
+                          fontFamily: 'Poppins',
                           fontWeight: FontWeight.w400,
                           fontSize: 17,
                         ),
@@ -296,8 +298,9 @@ class _SignUpState extends State<SignUP> {
                       TextButton(
                         onPressed: widget.toggleToLogin,
                         child: const Text(
-                          "login",
+                          "Login",
                           style: TextStyle(
+                            fontFamily: 'Poppins',
                             color: Color.fromARGB(255, 87, 172, 246),
                             decoration: TextDecoration.underline,
                             decorationColor: Color.fromARGB(255, 87, 172, 246),
