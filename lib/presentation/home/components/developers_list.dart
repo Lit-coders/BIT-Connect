@@ -1,4 +1,5 @@
 import 'package:bit_connect/presentation/sims/components/title.dart';
+import 'package:bit_connect/searvices/data/dev_profile.dart';
 import 'package:bit_connect/searvices/helpers.dart';
 import 'package:flutter/material.dart';
 
@@ -84,20 +85,21 @@ class DevList extends StatelessWidget {
     );
   }
 
-  Widget profileName() {
+  Widget profileName(devName, links) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          name('Abiy Shiferaw C.'),
+          name(devName),
           about(['abc.com', 'abc.com']),
         ],
       ),
     );
   }
 
-  Widget devProfile(context, index) {
+  Widget devProfile(context, index, dev) {
+    print(dev);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -124,12 +126,24 @@ class DevList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: index % 2 == 0
                 ? [
-                    profileImg('assets/devs/bdu.png'),
-                    profileName(),
+                    profileImg(dev['imgUrl']),
+                    profileName(
+                      dev['name'],
+                      [
+                        dev['linkedin'],
+                        dev['github'],
+                      ],
+                    ),
                   ]
                 : [
-                    profileName(),
-                    profileImg('assets/devs/bdu.png'),
+                    profileName(
+                      dev['name'],
+                      [
+                        dev['linkedin'],
+                        dev['github'],
+                      ],
+                    ),
+                    profileImg(dev['imgUrl']),
                   ],
           ),
         ),
@@ -167,6 +181,7 @@ class DevList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, dynamic>> devList = devLIst;
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
@@ -182,9 +197,10 @@ class DevList extends StatelessWidget {
               header(context),
               SingleChildScrollView(
                 child: Column(
-                  children:
-                      List.generate(6, (index) => devProfile(context, index)),
-                ),
+                    children: devList
+                        .map((dev) =>
+                            devProfile(context, devList.indexOf(dev), dev))
+                        .toList()),
               ),
               yearOfDev(context),
             ],
