@@ -1,24 +1,37 @@
-import 'dart:io';
 import 'package:bit_connect/utils/constants/color_assets.dart';
 import 'package:bit_connect/utils/constants/padding_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CafeMenu extends StatefulWidget {
   CafeMenu({super.key});
-  final List<String> tabTitle = ['M', "T", 'W', 'T', 'F', 'S', 'S'];
   @override
   State<CafeMenu> createState() => _CafeMenuState();
 }
 
 class _CafeMenuState extends State<CafeMenu> {
+  late List<Map<String, dynamic>> _menuList;
+  final List<String> tabTitle = ['M', "T", 'W', 'T', 'F', 'S', 'S'];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchMenu();
+  }
+
+  Future<void> _fetchMenu() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('cafe').get();
+    _menuList = querySnapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+    setState(() {
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
-        length: 7,
+    return DefaultTabController(
+        length: _menuList.length,
         child: Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -46,108 +59,19 @@ class _CafeMenuState extends State<CafeMenu> {
                 ),
               ),
             ],
-            bottom: const TabBar(
+            bottom:  TabBar(
               indicatorWeight: 10,
               isScrollable: true,
               indicatorColor: ColorAssets.secondaryYellow,
               tabs: [
+                for (var title in tabTitle)
                 Tab(
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      Text(
-                        'M',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: ColorAssets.bduColor,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Tab(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(
-                        'T',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: ColorAssets.bduColor,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Tab(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(
-                        'W',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: ColorAssets.bduColor,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Tab(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(
-                        'T',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: ColorAssets.bduColor,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Tab(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(
-                        'F',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: ColorAssets.bduColor,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Tab(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(
-                        'S',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: ColorAssets.bduColor,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Tab(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(
-                        'S',
-                        style: TextStyle(
+                       Text(
+                        title,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: ColorAssets.bduColor,
                           fontSize: 22,
@@ -171,206 +95,54 @@ class _CafeMenuState extends State<CafeMenu> {
           //   ],
           // ),
 
-          body: const TabBarView(
+          body:  TabBarView(
             children: [
-              // Contents of Tab 1
+              for (var menu in _menuList)
               TabContent(
-                title: 'Food 1',
-                image: 'assets/menu1.png',
-                name: 'Food Name 1',
-              ),
-              // Contents of Tab 2
-              TabContent(
-                title: 'Food 2',
-                image: 'assets/menu1.png',
-                name: 'Food Name 2',
-              ),
-              // Contents of Tab 3
-              TabContent(
-                title: 'Food 3',
-                image: 'assets/menu1.png',
-                name: 'Food Name 3',
-              ),
-              TabContent(
-                title: 'Food 3',
-                image: 'assets/menu1.png',
-                name: 'Food Name 3',
-              ),
-              TabContent(
-                title: 'Food 3',
-                image: 'assets/menu1.png',
-                name: 'Food Name 3',
-              ),
-              TabContent(
-                title: 'Food 3',
-                image: 'assets/menu1.png',
-                name: 'Food Name 3',
-              ),
-              TabContent(
-                title: 'Food 3',
-                image: 'assets/menu1.png',
-                name: 'Food Name 3',
+                breakfast: menu['breakfast'],
+                lunch: menu['lunch'],
+                dinner: menu['dinner'],
               ),
             ],
           ),
-          drawer: Drawer(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                DrawerHeader(
-                  decoration: const BoxDecoration(
-                    color: ColorAssets.bduColor,
-                  ),
-                  child: Container(
-                    alignment: Alignment.centerLeft,
-                    child: const Text(
-                      'BiT Connect',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontFamily: 'Pacifico',
-                      ),
-                    ),
-                  ),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.home),
-                  title: const Text(
-                    'Home',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  onTap: () {
-                    // Implement action for item 1
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.category_sharp),
-                  title: const Text(
-                    'Cafe',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  onTap: () {
-                    // Implement action for item 2
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.favorite),
-                  title: const Text(
-                    'Lounge',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  onTap: () {
-                    // Implement action for item 2
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.book_rounded),
-                  title: const Text(
-                    'Location',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  onTap: () {
-                    // Implement action for item 2
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.info_outlined),
-                  title: const Text(
-                    'Departments',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  onTap: () {
-                    // Implement action for item 2
-                  },
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    width: 100,
-                    child: ListTile(
-                      tileColor: ColorAssets.secondaryYellow,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      title: const Text(
-                        'Logout',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                        ),
-                      ),
-                      onTap: () {
-                        // Implement logout logic
-                        exit(0);
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
         ),
-      ),
-    );
+      );
   }
 }
 
 // }
 
 class TabContent extends StatelessWidget {
-  final String title;
-  final String image;
-  final String name;
+  // final String title;
+  // final String image;
+  // final String name;
+  final Map<String,String> breakfast;
+  final Map<String,String> lunch;
+  final Map<String,String> dinner;
+
 
   const TabContent({
     super.key,
-    required this.title,
-    required this.image,
-    required this.name,
+    required this.breakfast,
+    required this.lunch,
+    required this.dinner,
   });
 
   @override
   Widget build(BuildContext context) {
+  List<Map<String,String>> noOfMeal = [breakfast,lunch,dinner];
     return Center(
       child: ListView(children: [
+        for (var meal in noOfMeal) 
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(title, style: const TextStyle(fontSize: 24)),
+            Text(meal['title']!, style: const TextStyle(fontSize: 24)),
             const SizedBox(height: 16),
-            Image.asset(image,
+            Image.network(meal['image']!,
                 width: 380, height: 200), // Use your own image assets
             const SizedBox(height: 16),
-            Text(name, style: const TextStyle(fontSize: 18)),
-            Text(title, style: const TextStyle(fontSize: 24)),
-            const SizedBox(height: 16),
-            Image.asset(image,
-                width: 380, height: 200), // Use your own image assets
-            const SizedBox(height: 16),
-            Text(name, style: const TextStyle(fontSize: 18)),
-            Text(title, style: const TextStyle(fontSize: 24)),
-            const SizedBox(height: 16),
-            Image.asset(image,
-                width: 380, height: 200), // Use your own image assets
-            const SizedBox(height: 16),
-            Text(name, style: const TextStyle(fontSize: 18)),
+            Text(meal['name']!, style: const TextStyle(fontSize: 18)),
           ],
         ),
       ]),
