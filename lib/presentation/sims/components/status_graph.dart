@@ -15,13 +15,21 @@ class StatusGraph extends StatefulWidget {
 
 class _StatusGraphState extends State<StatusGraph> {
   final List<double> gpa = [];
+  final List<String> year = [];
   final List<String> time = [];
 
   void initializeStatus() {
     final List<GeneralStatus> status = widget.generalStatus;
+
+    String str1 = '';
+    String str2 = '';
+
     for (var i = 0; i < status.length; i++) {
       gpa.add(status[i].cGpa);
-      time.add('${status[i].academicYear} ${status[i].semester}');
+      year.add(status[i].academicYear);
+      str1 = year[i].split('/')[0].substring(2);
+      str2 = year[i].split('/')[1].substring(2);
+      time.add('$str1/$str2 ${status[i].semester}');
     }
   }
 
