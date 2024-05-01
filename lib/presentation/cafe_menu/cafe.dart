@@ -1,5 +1,4 @@
 import 'package:bit_connect/utils/constants/color_assets.dart';
-import 'package:bit_connect/utils/constants/padding_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -26,7 +25,7 @@ class _CafeMenuState extends State<CafeMenu> {
           .map((doc) => doc.data() as Map<String, dynamic>)
           .toList();
     } catch (e) {
-      print(e);
+      // Handle error
     }
   }
 
@@ -39,30 +38,25 @@ class _CafeMenuState extends State<CafeMenu> {
       child: Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
+          title: const Text("Cafe Menu",
+              style: TextStyle(
+                color: ColorAssets.bduColor,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              )),
+          centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: TextButton(
             onPressed: () {
-              scaffoldKey.currentState?.openDrawer();
+              Navigator.of(context).pop();
             },
-            child: Image.asset(
-              'assets/icons/menu.png',
-              height: PaddingConstant.forPersonIcon,
+            child: const Icon(
+              Icons.arrow_back,
               color: ColorAssets.bduColor,
+              size: 28,
             ),
           ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                // Handle person button press
-              },
-              icon: Image.asset(
-                'assets/icons/person.png',
-                height: PaddingConstant.forPersonIcon,
-                color: ColorAssets.bduColor,
-              ),
-            ),
-          ],
           bottom: TabBar(
             indicatorWeight: 10,
             isScrollable: true,

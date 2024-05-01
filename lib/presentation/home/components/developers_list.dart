@@ -118,15 +118,15 @@ class DevList extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(
+          boxShadow: [
+            const BoxShadow(
               offset: Offset(5, -5),
               color: Colors.white,
               blurRadius: 18,
             ),
             BoxShadow(
-              offset: Offset(5, 5),
-              color: Colors.black38,
+              offset: const Offset(5, 5),
+              color: Colors.blueGrey.withOpacity(0.5),
               blurRadius: 18,
             )
           ],
@@ -172,18 +172,20 @@ class DevList extends StatelessWidget {
           Container(
             width: getWidth(context),
             height: 1,
-            color: Colors.black26,
+            color: Colors.blueGrey,
           ),
           const Text(
             '2016 E.C',
             style: TextStyle(
               fontWeight: FontWeight.bold,
+              color: Colors.blueGrey
             ),
           ),
           const Text(
             '4th year software engineering students',
             style: TextStyle(
               fontWeight: FontWeight.bold,
+              color: Colors.blueGrey
             ),
           ),
         ],

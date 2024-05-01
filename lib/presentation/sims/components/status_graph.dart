@@ -5,6 +5,7 @@ import 'package:bit_connect/searvices/helpers.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class StatusGraph extends StatefulWidget {
   List<GeneralStatus> generalStatus;
   StatusGraph({super.key, required this.generalStatus});

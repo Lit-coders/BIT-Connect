@@ -1,10 +1,8 @@
 import 'dart:io';
 
-import 'package:bit_connect/presentation/home/home_screen.dart';
 import 'package:bit_connect/presentation/location/model/search_result.dart';
 import 'package:bit_connect/presentation/news/data/news_adaptor.dart';
 import 'package:bit_connect/presentation/news/model/news_model.dart';
-import 'package:bit_connect/presentation/onboarding/onboarding_screen.dart';
 import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
 import 'package:bit_connect/presentation/splash_screen.dart';
 import 'package:bit_connect/utils/load_env.dart';
@@ -61,11 +59,6 @@ class BitConnect extends StatelessWidget {
       ),
       title: "Bit-Connect",
       home: const SplashScreen(),
-      routes: {
-        '/home': (context) => const Home(),
-        '/onboarding': (context) => const Onboarding(),
-        // '/cafe': (context) => const Cafe(), //
-      },
     );
   }
 }

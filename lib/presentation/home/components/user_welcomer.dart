@@ -50,7 +50,6 @@ class _UserWelcomerState extends State<UserWelcomer> {
 
   Widget getPP(String ppUrl) {
     return Container(
-      
       width: 60,
       height: 60,
       margin: const EdgeInsets.only(right: 10),
@@ -85,7 +84,6 @@ class _UserWelcomerState extends State<UserWelcomer> {
 
   Widget getAppBar(Map<String, dynamic>? data) {
     return Container(
-      
       padding: const EdgeInsets.symmetric(vertical: 8),
       width: getWidth(context),
       child: Row(
@@ -102,12 +100,11 @@ class _UserWelcomerState extends State<UserWelcomer> {
                 ),
                 overflow: TextOverflow.clip,
               ),
-            
               const Text(
                 "Feeling good today?",
                 style: TextStyle(
-                  fontSize:18 ,
-                  fontFamily: 'Poppins'
+                  fontSize: 18,
+                  fontFamily: 'Poppins',
                 ),
               )
             ],
