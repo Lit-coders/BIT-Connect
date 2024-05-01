@@ -130,32 +130,65 @@ class TabContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> noOfMeal = [breakfast, lunch, dinner];
-    return Center(
+    return Container(
+      margin: const EdgeInsets.only(top: 40),
       child: ListView(children: [
         for (var meal in noOfMeal)
           Container(
-            decoration:  BoxDecoration(
-              border: Border(
-                right: BorderSide(color: Colors.grey.shade400, width: 1),
-              ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+                boxShadow: const [
+                  BoxShadow(
+                    blurRadius: 30.0,
+                    offset: Offset(-10, -10),
+                    color: Color.fromARGB(41, 201, 133, 163),
+                  ),
+                  BoxShadow(
+                    blurRadius: 30.0,
+                    offset: Offset(10, 10),
+                    color: Color.fromARGB(41, 153, 92, 119),
+                  )
+                ]),
+            margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(meal['value'] ?? "", style: const TextStyle(fontSize: 24)),
-                const SizedBox(height: 16),
-                Image.network(
-                  meal['image'] ?? "",
-                  height: 200,
-                  width: 200,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return const Icon(
-                        Icons.error); // Placeholder for failed image
-                  },
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.network(
+                    meal['image'] ?? "",
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Icon(
+                          Icons.error); // Placeholder for failed image
+                    },
+                  ),
                 ),
-                const SizedBox(height: 16),
-                Text(meal['name'] ?? "", style: const TextStyle(fontSize: 18)),
+                const Spacer(),
+                Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        meal['value'] ?? "",
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(meal['name'] ?? "",
+                          style: const TextStyle(
+                            fontSize: 18,
+                          )),
+                    ]),
+                const Spacer(),
               ],
             ),
           )
