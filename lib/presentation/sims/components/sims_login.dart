@@ -85,6 +85,7 @@ class _SIMSLoginState extends State<SIMSLogin> {
           ),
           Text(
             'Login',
+            style: TextStyle(fontFamily: 'Poppins', fontSize: 16),
           ),
           Expanded(
             child: Text(
@@ -121,7 +122,7 @@ class _SIMSLoginState extends State<SIMSLogin> {
               validator: usernameValidator,
               controller: _usernameController,
               width: getWidth(context) * 2 / 3,
-              hintText: 'username',
+              hintText: 'Username',
               isReadOnly: false,
               hasObscure: false,
               onChange: (value) {},
@@ -248,7 +249,7 @@ class _SIMSLoginState extends State<SIMSLogin> {
                               size: 18,
                             ),
                             Text(
-                              'try again',
+                              'Try Again',
                               style: TextStyle(
                                 fontSize: 15,
                               ),
@@ -271,7 +272,25 @@ class _SIMSLoginState extends State<SIMSLogin> {
                         simsProvider.cancelLogin();
                       }
                     },
-                    child: const Text('Cancel'),
+                    child: Container(
+                      
+                     decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: ColorAssets.bduColor,
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                           
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w900,
+                              color: ColorAssets.white,
+                              fontSize: 14),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],

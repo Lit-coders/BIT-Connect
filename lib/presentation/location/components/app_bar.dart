@@ -93,11 +93,18 @@ class _LocationAppBarState extends State<LocationAppBar> {
                   'Hi, ${data == null ? _currentUser!.email!.split('@')[0].split(RegExp(r'[a-z]{3}'))[1] : data['fName']}',
                   // 'Hi, 1308736',
                   style: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Poppins',
+                  ),
                 ),
                 const Text(
-                  "What do you want to exploare?",
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                  "What do you want to explore?",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontFamily: 'Poppins',
+                  ),
                 )
               ],
             )
