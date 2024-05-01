@@ -1,6 +1,8 @@
 class Student {
   String username;
-  String password;
+  String fullName;
+  String token;
 
-  Student({required this.username, required this.password});
+  Student(
+      {required this.username, required this.fullName, required this.token});
 }

@@ -1,71 +1,33 @@
+import 'package:bit_connect/presentation/sims/components/sims_login.dart';
+import 'package:bit_connect/presentation/sims/components/sims_stauts.dart';
+import 'package:bit_connect/presentation/sims/components/sims_webView.dart';
+import 'package:bit_connect/presentation/sims/helpers/sims_helpers.dart';
+import 'package:bit_connect/presentation/sims/provider/sims_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:provider/provider.dart';
 
 class SIMS extends StatefulWidget {
-  bool isWebView;
-
-  SIMS({super.key, required this.isWebView});
+  const SIMS({super.key});
 
   @override
   State<SIMS> createState() => _SIMSState();
 }
 
 class _SIMSState extends State<SIMS> {
-  late final WebViewController controller;
-
-  var loadingPercentage = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = WebViewController()
-      ..setNavigationDelegate(NavigationDelegate(
-        onPageStarted: (url) {
-          setState(() {
-            loadingPercentage = 0;
-          });
-        },
-        onProgress: (progress) {
-          setState(() {
-            loadingPercentage = progress;
-          });
-        },
-        onPageFinished: (url) {
-          setState(() {
-            loadingPercentage = 100;
-          });
-        },
-      ))
-      ..loadRequest(
-        Uri.parse('https://bdu.edu.et/'),
-      );
-  }
-
-  Widget bitWebView() {
-    return Stack(
-      children: [
-        WebViewWidget(
-          controller: controller,
-        ),
-        if (loadingPercentage < 100)
-          LinearProgressIndicator(
-            value: loadingPercentage / 100.0,
-          ),
-      ],
-    );
-  }
-
-  Widget userData() {
-    return const Center(
-      child: Text("User Data"),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: widget.isWebView ? bitWebView() : userData(),
+    return Consumer<SIMSProvider>(
+      builder: ((context, simsProvider, child) {
+        initializeLoginPreference(simsProvider);
+        if (simsProvider.isUserLoggedInBefore) {
+          return const SIMSStatus();
+        }
+        return Scaffold(
+          body: simsProvider.isStatusWithLogin
+              ? const SIMSLogin()
+              : const SIMSWebView(),
+        );
+      }),
     );
   }
 }
