@@ -193,7 +193,7 @@ class _LocationState extends State<Location> {
                 child: Stack(
                   children: [
                     Padding (
-                    padding : const EdgeInsets.only(top:10),
+                    padding : const EdgeInsets.only(top:25),
                     child : searchBar(),
                     ),
                     Padding(
