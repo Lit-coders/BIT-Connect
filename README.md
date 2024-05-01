@@ -80,7 +80,7 @@ You're good to go 😊
     src="https://avatars.githubusercontent.com/u/104998249?v=4" 
     height="100px" 
     width="100px" 
-    style="border-radius:50%"
+     style="-moz-border-radius: 70px; -webkit-border-radius: 70px; border-radius: 70px;"
   />
 </a>
 <a href="https://github.com/melat369">
