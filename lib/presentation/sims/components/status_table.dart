@@ -13,8 +13,8 @@ class StatusTable extends StatefulWidget {
 class _StatusTableState extends State<StatusTable> {
   final headers = [
     'Academic Year',
-    'Batch',
     'Semester',
+    'Batch',
     'Registration Date',
     'Reg Condition',
     'SGPA',
