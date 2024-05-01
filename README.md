@@ -11,7 +11,7 @@ BiT Connect is an upcoming app designed exclusively for students at BDU. With a 
 
 BiT Connect is your go-to app for navigating campus life at Bahir Dar University. Stay tuned as BiT Connect is currently in development and will be available on app stores soon.
 
-## To do 📑:
+## To do 📑: 
 
 - Getting Info about indoor lounges and outdoor food places
 - Class schedule with notification system
@@ -33,7 +33,7 @@ BiT Connect is your go-to app for navigating campus life at Bahir Dar University
 ## Project Setup ⚙️
 
 Want to add your project to the repo? We invite you to contribute.
-To start contributing, follow the below guidelines:
+To start contributing, follow the below guidelines: 
 
 **1.** Fork [this](https://github.com/Lit-coders/BIT-Connect) repository.
 
@@ -54,7 +54,6 @@ cd BiT-Connect
 ```
 flutter pub get
 ```
-
 **5.** Run the project:
 
 ```
@@ -128,6 +127,4 @@ You're good to go 😊
     class="round-image" 
   />
 </a>
-  <a href="url"><img src="https://desmond75.github.io/img/IMG_20171214_095012.jpg" height="auto" width="200" style="border-radius:50%"></a>
-
 </div>
