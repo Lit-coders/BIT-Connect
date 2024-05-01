@@ -10,22 +10,24 @@ class CafeMenu extends StatefulWidget {
 }
 
 class _CafeMenuState extends State<CafeMenu> {
-  late List<Map<String, dynamic>> _menuList;
+  List<Map<String, dynamic>> _menuList = [];
   final List<String> tabTitle = ['M', "T", 'W', 'T', 'F', 'S', 'S'];
 
   @override
   void initState() {
     super.initState();
-    _fetchMenu();
   }
 
   Future<void> _fetchMenu() async {
-    QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection('cafe').get();
-    _menuList = querySnapshot.docs
-        .map((doc) => doc.data() as Map<String, dynamic>)
-        .toList();
-    setState(() {});
+    try {
+      QuerySnapshot querySnapshot =
+          await FirebaseFirestore.instance.collection('cafe').get();
+      _menuList = querySnapshot.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -33,7 +35,7 @@ class _CafeMenuState extends State<CafeMenu> {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     return DefaultTabController(
-      length: _menuList.length,
+      length: tabTitle.length,
       child: Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
@@ -85,22 +87,33 @@ class _CafeMenuState extends State<CafeMenu> {
             ],
           ),
         ),
-        body: TabBarView(
-          children: [
-            for (var menu in _menuList)
-              TabContent(
-                breakfast: menu['breakfast'],
-                lunch: menu['lunch'],
-                dinner: menu['dinner'],
-              ),
-          ],
+        body: FutureBuilder(
+          future: _fetchMenu(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else {
+              return TabBarView(
+                children: [
+                  for (var menu in _menuList)
+                    TabContent(
+                      breakfast: menu['breakfast'],
+                      lunch: menu['lunch'],
+                      dinner: menu['dinner'],
+                    ),
+                ],
+              );
+            }
+          },
         ),
       ),
     );
   }
 }
-
-// }
 
 class TabContent extends StatelessWidget {
   final Map<String, dynamic> breakfast;
@@ -117,20 +130,68 @@ class TabContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> noOfMeal = [breakfast, lunch, dinner];
-    return Center(
+    return Container(
+      margin: const EdgeInsets.only(top: 40),
       child: ListView(children: [
         for (var meal in noOfMeal)
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(meal['title'] ?? " ", style: const TextStyle(fontSize: 24)),
-              const SizedBox(height: 16),
-              Image.network(meal['image'] ?? " ",
-                  width: 380, height: 200), // Use your own image assets
-              const SizedBox(height: 16),
-              Text(meal['name'] ?? " ", style: const TextStyle(fontSize: 18)),
-            ],
-          ),
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+                boxShadow: const [
+                  BoxShadow(
+                    blurRadius: 30.0,
+                    offset: Offset(-10, -10),
+                    color: Color.fromARGB(41, 201, 133, 163),
+                  ),
+                  BoxShadow(
+                    blurRadius: 30.0,
+                    offset: Offset(10, 10),
+                    color: Color.fromARGB(41, 153, 92, 119),
+                  )
+                ]),
+            margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.network(
+                    meal['image'] ?? "",
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Icon(
+                          Icons.error); // Placeholder for failed image
+                    },
+                  ),
+                ),
+                const Spacer(),
+                Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        meal['value'] ?? "",
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(meal['name'] ?? "",
+                          style: const TextStyle(
+                            fontSize: 18,
+                          )),
+                    ]),
+                const Spacer(),
+              ],
+            ),
+          )
       ]),
     );
   }

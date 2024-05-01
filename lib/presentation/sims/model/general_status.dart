@@ -8,6 +8,7 @@ class GeneralStatus {
   double cGpa;
   String prevStatus;
   String finalStatus;
+  String fullName;
 
   GeneralStatus({
     required this.academicYear,
@@ -19,5 +20,6 @@ class GeneralStatus {
     required this.cGpa,
     required this.prevStatus,
     required this.finalStatus,
+    required this.fullName,
   });
 }

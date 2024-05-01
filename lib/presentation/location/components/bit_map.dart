@@ -313,7 +313,9 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
                     onPressed: () => showNearest('Lounges'),
                     child: const Text(
                       "Nearest Lounges",
-                      style: TextStyle(fontSize: 17),
+                      style: TextStyle(fontSize: 17,
+                        fontFamily: 'Poppins',
+                      ),
                     ),
                   ),
                 ),
@@ -323,7 +325,9 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
                     onPressed: () => showNearest('dormitories'),
                     child: const Text(
                       "Nearest dormitories",
-                      style: TextStyle(fontSize: 17),
+                      style: TextStyle(fontSize: 17,
+                        fontFamily: 'Poppins',
+                      ),
                     ),
                   ),
                 ),
@@ -333,7 +337,9 @@ class _BitMapState extends State<BitMap> with SingleTickerProviderStateMixin {
                     onPressed: () => showNearest('Cafes'),
                     child: const Text(
                       "Nearest Cafes",
-                      style: TextStyle(fontSize: 17),
+                      style: TextStyle(fontSize: 17,
+                        fontFamily: 'Poppins',
+                      ),
                     ),
                   ),
                 ),

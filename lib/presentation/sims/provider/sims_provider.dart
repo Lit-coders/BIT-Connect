@@ -9,6 +9,7 @@ class SIMSProvider extends ChangeNotifier {
   bool _isStatusWithLogin = true;
 
   Student? _loggedInStd;
+  String _gStatusError = "";
 
   void setPreviousIndex(int index) {
     _previousIndex = index;
@@ -35,11 +36,17 @@ class SIMSProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setGStatusError(error) {
+    _gStatusError = error;
+    notifyListeners();
+  }
+
   int get previousIndex => _previousIndex;
   bool get isLoginCanceled => _isLoginCanceled;
   bool get isUserLoggedInBefore => _isUserLoggedInBefore;
   bool get isStatusWithLogin => _isStatusWithLogin;
   Student? get loggedInStd => _loggedInStd;
+  String get statusError => _gStatusError;
 
   void cancelLogin() {
     _isLoginCanceled = true;
