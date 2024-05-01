@@ -49,6 +49,10 @@ class _StatusTableState extends State<StatusTable> {
     );
   }
 
+  bool isLastCell(status, gStatus) {
+    return status.indexOf(gStatus) == status.length - 1;
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<GeneralStatus> status = widget.generalStatus;
@@ -73,15 +77,51 @@ class _StatusTableState extends State<StatusTable> {
                   .toList(),
               rows: status.map((gStatus) {
                 return DataRow(cells: [
-                  DataCell(Text(gStatus.academicYear)),
-                  DataCell(Text(gStatus.semester)),
-                  DataCell(Text(gStatus.batch)),
-                  DataCell(Text(gStatus.regDate)),
-                  DataCell(Text(gStatus.regCondition)),
-                  DataCell(Text(gStatus.sGpa.toString())),
-                  DataCell(Text(gStatus.cGpa.toString())),
-                  DataCell(Text(gStatus.prevStatus.toString())),
-                  DataCell(Text(gStatus.finalStatus.toString())),
+                  DataCell(th(
+                    gStatus.academicYear,
+                    false,
+                    isLastCell(status, gStatus),
+                  )),
+                  DataCell(th(
+                    gStatus.semester,
+                    false,
+                    isLastCell(status, gStatus),
+                  )),
+                  DataCell(th(
+                    gStatus.batch,
+                    false,
+                    isLastCell(status, gStatus),
+                  )),
+                  DataCell(th(
+                    gStatus.regDate,
+                    false,
+                    isLastCell(status, gStatus),
+                  )),
+                  DataCell(th(
+                    gStatus.regCondition,
+                    false,
+                    isLastCell(status, gStatus),
+                  )),
+                  DataCell(th(
+                    gStatus.sGpa.toString(),
+                    false,
+                    isLastCell(status, gStatus),
+                  )),
+                  DataCell(th(
+                    gStatus.cGpa.toString(),
+                    false,
+                    isLastCell(status, gStatus),
+                  )),
+                  DataCell(th(
+                    gStatus.prevStatus.toString(),
+                    false,
+                    isLastCell(status, gStatus),
+                  )),
+                  DataCell(th(
+                    gStatus.finalStatus.toString(),
+                    false,
+                    isLastCell(status, gStatus),
+                  )),
                 ]);
               }).toList(),
             ),
