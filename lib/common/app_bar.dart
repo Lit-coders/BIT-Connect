@@ -30,9 +30,11 @@ AppBar customAppBar(
           // Handle person button press
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => BuildProfile.personIcon()),
+            MaterialPageRoute(
+                builder: (context) => BuildProfile.personIcon(
+                      isFirstTime: false,
+                    )),
           );
-
         },
         icon: Image.asset(
           'assets/icons/person.png',
